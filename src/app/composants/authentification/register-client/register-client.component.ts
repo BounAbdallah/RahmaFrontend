@@ -32,6 +32,8 @@ export class RegisterClientComponent implements OnInit {
       telephone: ['', Validators.required],
       adress: ['', Validators.required],
       commune: ['', Validators.required],
+      date_de_naissance: ['', Validators.required],
+
     });
   }
 
