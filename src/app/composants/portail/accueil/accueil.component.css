@@ -773,7 +773,7 @@ border-radius: 100%;
 
 
 
-.contact-container {
+ .contact-container {
   display: flex;
 flex-direction: row;
   padding: 40px;
@@ -852,7 +852,13 @@ text-transform: lowercase;
 }
 
 .contact-info div {
-  width: 289.59px;
+  color: #737887;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 28px; /* 175% */
+  width: 380px;
   height: 128px;
   flex-shrink: 0;
   border-radius: 5px;
@@ -892,6 +898,7 @@ text-transform: uppercase;
   display: flex;
   gap: 20px;
 }
+
 
 
 
@@ -969,7 +976,7 @@ flex-shrink: 0;
 .contact-form input{
   display: inline-flex;
 height: 44px;
-width: 200px;
+width:300px;
 padding: 17.5px 45px 17.5px 25px;
 align-items: center;
 flex-shrink: 0;
@@ -980,11 +987,23 @@ background: var(--Blanc, #FFF);
 
 select{
   height: 44px;
-width: 200px;
+width: 300px;
+color: #737887;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 150% */
 }
 textarea{
-  width: 550px;
+  width: 300;
 height: 152px;
+color: #737887;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 150% */
 border: 1px solid #E0E0E0;
 
 }
@@ -1049,7 +1068,7 @@ margin-top: 100px;
 
 .cards-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 20px;
   flex-wrap: wrap;
 }
@@ -1059,7 +1078,10 @@ margin-top: 100px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 300px;
+
+  width: 390.66px;
+  height: 390px;
+
   transition: transform 0.3s;
 }
 
@@ -1079,15 +1101,21 @@ margin-top: 100px;
 }
 
 .card-content h3 {
-  color: #1E4C72;
-  font-size: 20px;
-  margin-bottom: 15px;
+  color: var(--BleuBase, #074C72);
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 34.01px; /* 141.708% */
 }
 
 .highlight {
-  color: var(--RougeBase, #B50302);
-;
-  font-weight: bold;
+  color: var(--BleuBase, #B50302);
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 34.01px;
 }
 
 .card-footer {
@@ -1297,3 +1325,44 @@ footer {
       margin-top: 20px;
   }
 }
+
+.footer-top{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.footer-text{
+  width: 568px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.footer-text p{
+
+  color: var(--BleuBase, #074C72);
+font-family: Montserrat;
+font-size: 50px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}.footer-text h2{
+
+  color: var(--RougeBase, #B50302);
+text-align: center;
+font-family: Montserrat;
+font-size: 50px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.footer-illustration img{
+  width: 599.655px;
+height: 484.1px;
+flex-shrink: 0;
+}
+

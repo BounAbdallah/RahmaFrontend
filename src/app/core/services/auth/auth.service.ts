@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
+import { apiUrl } from '../../apiUrl';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = apiUrl;
 
   private authSubject = new BehaviorSubject<string | null>(this.getToken());
 
@@ -20,6 +21,11 @@ export class AuthService {
 
   registerClient(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register/client`, userData);
+  }
+
+
+  registerLivreur(userData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register/livreur`, userData);
   }
 
   login(credentials: any): Observable<any> {

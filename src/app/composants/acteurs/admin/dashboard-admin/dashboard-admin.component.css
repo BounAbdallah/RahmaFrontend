@@ -1,0 +1,15 @@
+.dashboard-admin {
+  margin: 20px;
+}
+
+h1 {
+  color: #618062;
+}
+
+h2 {
+  color: #002603;
+}
+
+.error-message {
+  color: red;
+}

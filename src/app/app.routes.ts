@@ -3,6 +3,10 @@ import { AccueilComponent } from './composants/portail/accueil/accueil.component
 import { DetailLivraisonComponent } from './composants/portail/detail-livraison/detail-livraison.component';
 import { LoginComponent } from './composants/authentification/login/login.component';
 import { RegisterClientComponent } from './composants/authentification/register-client/register-client.component';
+import { RegisterLivreurComponent } from './composants/authentification/register-livreur/register-livreur.component';
+import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
+import { ColisComponent } from './composants/colis/colis/colis.component';
+import { DashboardComponent } from './composants/acteurs/client/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
@@ -37,4 +41,29 @@ export const routes: Routes = [
     path: 'registerClient',
     component: RegisterClientComponent
   }
+
+  ,
+
+  {
+    path: 'registerLivreur',
+    component: RegisterLivreurComponent
+  },
+
+  {
+    path: 'adminDashboard',
+    component: DashboardAdminComponent
+  },
+
+  {
+    path: 'MesColis',
+    component: ColisComponent
+  },
+
+  {
+    path: 'DashboardClient',
+    component: DashboardComponent
+  }
+
+
+
 ];

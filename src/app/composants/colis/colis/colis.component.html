@@ -1,0 +1,54 @@
+<!-- colis-list.component.html -->
+<div class="container">
+  <h2>Liste des Colis</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let colis of colisList">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ colis.titre }}</h5>
+          <p class="card-text"><strong>Statut:</strong> {{ colis.statut }}</p>
+          <p class="card-text"><strong>Poids:</strong> {{ colis.poids_kg }} kg</p>
+          <p class="card-text"><strong>Adresse Expéditeur:</strong> {{ colis.adresse_expediteur }}</p>
+          <p class="card-text"><strong>Adresse Destinataire:</strong> {{ colis.adresse_destinataire }}</p>
+          <p class="card-text"><strong>Contact Destinataire:</strong> {{ colis.contact_destinataire }}</p>
+          <p class="card-text"><strong>Contact Expéditeur:</strong> {{ colis.contact_expediteur }}</p>
+          <p class="card-text"><strong>Date d'Envoi:</strong> {{ colis.date_envoi | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Ajouter un nouveau Colis</h3>
+  <form (submit)="addColis()" class="mb-4">
+    <div class="form-group">
+      <input type="text" [(ngModel)]="newColis.titre" name="titre" class="form-control" placeholder="Titre" required />
+    </div>
+    <div class="form-group">
+      <input type="number" [(ngModel)]="newColis.poids_kg" name="poids_kg" class="form-control" placeholder="Poids (kg)" required />
+    </div>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="newColis.adresse_expediteur" name="adresse_expediteur" class="form-control" placeholder="Adresse Expéditeur" required />
+    </div>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="newColis.adresse_destinataire" name="adresse_destinataire" class="form-control" placeholder="Adresse Destinataire" required />
+    </div>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="newColis.contact_destinataire" name="contact_destinataire" class="form-control" placeholder="Contact Destinataire" required />
+    </div>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="newColis.contact_expediteur" name="contact_expediteur" class="form-control" placeholder="Contact Expéditeur" required />
+    </div>
+    <div class="form-group">
+      <input type="date" [(ngModel)]="newColis.date_envoi" name="date_envoi" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <select [(ngModel)]="newColis.statut" name="statut" class="form-control" required>
+        <option value="en attente">En attente</option>
+        <option value="en transit">En transit</option>
+        <option value="livré">Livré</option>
+        <option value="retourné">Retourné</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter Colis</button>
+  </form>
+</div>

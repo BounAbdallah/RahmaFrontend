@@ -1,0 +1,80 @@
+<div class="container mt-5">
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div *ngIf="dashboardData">
+    <h2 class="mb-4">Dashboard Information</h2>
+
+    <!-- Section pour les Utilisateurs -->
+    <div class="mb-4">
+      <h3>Utilisateurs</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Rôle</th>
+            <th>Date d'Inscription</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of dashboardData.users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.prenom }}</td>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.telephone }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.dateInscription | date:'short' }}</td> <!-- Format de la date -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section pour les Tarifs -->
+    <div class="mb-4">
+      <h3>Tarifs</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Sommes</th>
+            <th>Description</th>
+            <th>Zone de Livraison ID</th>
+            <th>Date de Modification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tarif of dashboardData.tarifs">
+            <td>{{ tarif.id }}</td>
+            <td>{{ tarif.sommes | currency:'EUR':'symbol' }}</td> <!-- Format du prix -->
+            <td>{{ tarif.description }}</td>
+            <td>{{ tarif.zone_livraison_id }}</td>
+            <td>{{ tarif.dateModification | date:'short' }}</td> <!-- Format de la date -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section pour d'autres données (par exemple, les statistiques) -->
+    <div class="mb-4">
+      <h3>D'autres Informations</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Statistique</th>
+            <th>Valeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stat of dashboardData.otherStats">
+            <td>{{ stat.name }}</td>
+            <td>{{ stat.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
