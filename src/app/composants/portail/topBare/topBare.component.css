@@ -1,6 +1,4 @@
-/* Importation de la police  */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
 body{
@@ -9,19 +7,24 @@ body{
   font-optical-sizing: auto;
   font-weight: auto;
   font-style: normal;
+  margin: 0%;
 
 }
 .top-bare{
   width: 100%;
   height: 75px;
+  margin-left: -30px;
   flex-shrink: 0;
   border-bottom: 2px solid rgba(7, 76, 114, 0.38);
-background: linear-gradient(0deg, rgba(7, 76, 114, 0.61) 0%, rgba(7, 76, 114, 0.61) 100%), rgba(255, 255, 255, 0.40);
+  background: linear-gradient(0deg, var(--BleuBase, #074C72) 0%, var(--BleuBase, #074C72) 100%), rgba(255, 255, 255, 0.40);
 margin: 0px;
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-evenly;
+position: fixed;
+z-index: 2;
+margin-top: -100px;
 }
 
 .link{
@@ -30,4 +33,35 @@ justify-content: space-evenly;
   align-items: center;
   justify-content: space-evenly;
   gap:40px
+}
+.link a{
+  color:  #FFF;
+text-align: center;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 45px; /* 250% */
+}
+.login-btn{
+  border-radius: 12px;
+background: #FFF;
+
+width: 206px;
+height: 48px;
+flex-shrink: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+}
+
+.login-btn a{
+  color: #000;
+text-align: center;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 45px; /* 250% */
 }

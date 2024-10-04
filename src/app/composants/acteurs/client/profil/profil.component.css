@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-body{
+.body{
 
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: auto;
   font-style: normal;
   margin: 0%;
+  background: red;
 
 }
 .top-bare{
@@ -22,9 +23,12 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-evenly;
-position: fixed;
-z-index: 2;
-margin-top: -100px;
+/* position: fixed; */
+
+}
+.top-bare .profil_photo{
+  width: 35px;
+  height: 35px;
 }
 
 .link{
@@ -66,10 +70,21 @@ font-weight: 600;
 line-height: 45px; /* 250% */
 }
 
+a{
+  text-decoration: none;
+}
 /* code du container body */
-
+.top-bare .login-btn img {
+  align-items: center;
+  justify-content: center;
+  align-items:center ;
+  text-align: center;
+  margin-top: 20px;
+  width: 35px;
+  height: 35px;
+}
 .body-content{
-  margin-top: 100px;
+  /* margin-top: 100px; */
   display: flex;
   /* flex-direction: row; */
   align-items: center;
@@ -132,7 +147,7 @@ margin-left: 20px;
 
 
 .container{
-  margin-top: -60px;
+  margin-top: 60px;
   padding-top: 50px;
   width: 745px;
 height: 590px;

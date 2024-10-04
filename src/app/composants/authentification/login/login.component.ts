@@ -36,7 +36,7 @@ export class LoginComponent {
           console.log('Réponse de l\'API:', response);
 
           // Rediriger directement vers la page d'accueil
-          this.router.navigate(['/ProfilClient']);
+          this.router.navigate(['/Gpdisponible']);
         },
         error: (error) => {
           // Gérer l'erreur

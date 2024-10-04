@@ -8,6 +8,7 @@ import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-ad
 import { ColisComponent } from './composants/colis/colis/colis.component';
 import { DashboardComponent } from './composants/acteurs/client/dashboard/dashboard.component';
 import { ProfilComponent } from './composants/acteurs/client/profil/profil.component';
+import { AnnonceGPComponent } from './composants/acteurs/client/annonce-gp/annonce-gp.component';
 
 export const routes: Routes = [
 
@@ -67,6 +68,11 @@ export const routes: Routes = [
   {
     path: 'ProfilClient',
     component: ProfilComponent
+  }
+  ,
+  {
+    path: 'Gpdisponible',
+    component: AnnonceGPComponent
   }
 
 
