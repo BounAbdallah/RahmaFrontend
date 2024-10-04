@@ -153,15 +153,21 @@ border-radius: 10px;
 background: rgba(183, 183, 183, 0.32);
 }
 
-.container form button{
+.container form .btn{
   width: 299px;
-height: 45px;
+  height: 45px;
   display: inline-flex;
-padding: 12px 45px 11px 59px;
-justify-content: flex-end;
-align-items: center;
-border-radius: 10px;
+  padding: 12px 45px 11px 59px;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 10px;
 background: var(--BleuBase, #074C72);
+color: var(--Blanc, #FFF);
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
 }
 .formulaire{
   display: flex;

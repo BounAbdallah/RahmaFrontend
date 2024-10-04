@@ -1,3 +1,4 @@
+
 <div class="top-bare">
 
   <div class="logo">
@@ -24,46 +25,47 @@
 </div>
 
 <div class="body-content">
-   <div class="profil_">
-     <div class="profil-photo_profil">
-      <img src="" alt="Photo de profil" class="rounded-circle mb-3" width="150" />
 
-      <h3></h3>
-      <p></p>
+      <!-- Profil utilisateur -->
+        <div class="profil_">
+          <div class="profil-photo_profil">
+              <img src="{{ userProfile.photo_profil }}" alt="Photo de profil" class="rounded-circle mb-3" width="150" />
+            <h3>{{ userProfile.email }}</h3>
+
+              <p>{{ userProfile.nom }}</p>
 
 
-     </div>
+            </div>
 
-   <!-- Profil utilisateur -->
-   <div class="profil-infos">
-           <h4></h4>
-           <h4></h4>
-           <p class="text-muted mb-1"></p>
-           <p class="text-muted mb-1"></p>
-           <p class="text-muted"></p>
-           <p class="text-muted"></p>
-       </div>
-     </div>
+          <div class="profil-infos">
+            <h4>Information</h4>
+            <h3>{{ userProfile.prenom }}</h3>
+            <p>{{ userProfile.nom }}</p>
+            <p>{{ userProfile.email }}</p>
+            <p>{{ userProfile.commuune }}</p>
+            <p>{{ userProfile.adresse }}</p>
+          </div>
+        </div>
+
 
   <div class="container">
 
-<h3>Paramètres du profil</h3>
+
     <!-- Formulaire de mise à jour du profil -->
     <div class="formulaire">
-      <form class="">
+      <form class="col-md-6" [formGroup]="profilForm" (ngSubmit)="onSubmit()">
         <div class="input">
+
         <div class="mb-3">
           <label for="prenom" class="form-label">Prénom:</label>
           <input id="prenom" class="form-control" formControlName="prenom" type="text" />
         </div>
 
-
-
         <div class="mb-3">
           <label for="nom" class="form-label">Nom:</label>
           <input id="nom" class="form-control" formControlName="nom" type="text" />
         </div>
-         </div>
+        </div>
         <div class="input">
 
         <div class="mb-3">
@@ -96,23 +98,25 @@
         </div>
 
         <div class="mb-3">
-          <label for="passwo  rd_confirmation" class="form-label">Confirmation du mot de passe:</label>
+          <label for="password_confirmation" class="form-label">Confirmation du nouveau mot de passe:</label>
           <input id="password_confirmation" class="form-control" formControlName="password_confirmation" type="password" />
         </div>
         </div>
         <div class="input">
 
-        <div class="mb-3">
-          <label for="photo_profil" class="form-label">Photo de profil:</label>
-          <input id="photo_profil" class="form-control" type="file"  />
+          <div class="mb-3">
+            <label for="photo_profil" class="form-label">Photo de profil:</label>
+            <input id="photo_profil" class="form-control" type="file" (change)="onFileChange($event)" />
+          </div>
+
+          <button type="submit" class="btn ">Mettre à jour le profil</button>
         </div>
 
-        <button type="submit" class="btn btn-primary">Mettre à jour le profil</button>
-        </div>
       </form>
     </div>
   </div>
-</div>
+
+
 
 
 

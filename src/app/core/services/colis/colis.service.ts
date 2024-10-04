@@ -53,7 +53,7 @@ export class ColisService {
 
   // Fonction pour obtenir les headers d'authentification
   private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('auth_token'); // Récupérez le token d'authentification
+    const token = localStorage.getItem('auth_token');
     if (token) {
       return new HttpHeaders().set('Authorization', `Bearer ${token}`);
     } else {

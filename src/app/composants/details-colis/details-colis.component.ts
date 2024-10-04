@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Colis } from '../../../core/services/colis/colis.model';
-import { ColisService } from '../../../core/services/colis/colis.service';
+import { Colis } from '../../core/services/colis/colis.model';
+import { ColisService } from '../../core/services/colis/colis.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';  // Importer SweetAlert2
 
 @Component({
-  selector: 'app-colis',
+  selector: 'app-details-colis',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
-  templateUrl: './colis.component.html',
-  styleUrls: ['./colis.component.css']
+  templateUrl: './details-colis.component.html',
+  styleUrl: './details-colis.component.css'
 })
-export class ColisComponent implements OnInit {
+export class DetailsColisComponent implements OnInit {
   colisList: Colis[] = [];
 
   // Initialisation avec statut par défaut à "en attente"
@@ -31,7 +31,7 @@ export class ColisComponent implements OnInit {
   editMode = false;
   editColisId: number | null = null;
 
-  constructor(private colisService: ColisService) {}
+  constructor(private ColisService: ColisService) {}
 
   ngOnInit(): void {
     this.getColis();
@@ -39,7 +39,7 @@ export class ColisComponent implements OnInit {
 
   // Récupérer la liste des colis
   getColis() {
-    this.colisService.getColis().subscribe((data) => {
+    this.ColisService.getColis().subscribe((data) => {
       this.colisList = data;
     });
   }
@@ -96,14 +96,14 @@ export class ColisComponent implements OnInit {
         // Créer ou mettre à jour le colis
         if (this.editMode && this.editColisId !== null) {
           this.newColis = { ...result.value, id: this.editColisId };  // Ajoutez l'ID pour la mise à jour
-          this.colisService.updateColis(this.editColisId, this.newColis).subscribe(() => {
+          this.ColisService.updateColis(this.editColisId, this.newColis).subscribe(() => {
             this.getColis();
             this.resetForm();
             Swal.fire('Succès', 'Colis mis à jour avec succès !', 'success');
           });
         } else {
           this.newColis = { ...result.value };  // Nouvelle valeur pour ajout
-          this.colisService.createColis(this.newColis).subscribe((colis) => {
+          this.ColisService.createColis(this.newColis).subscribe((colis) => {
             this.colisList.push(colis);
             this.resetForm();
             Swal.fire('Succès', 'Colis ajouté avec succès !', 'success');
@@ -140,7 +140,7 @@ export class ColisComponent implements OnInit {
       confirmButtonText: 'Oui, supprimer !'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.colisService.deleteColis(id).subscribe(() => {
+        this.ColisService.deleteColis(id).subscribe(() => {
           this.colisList = this.colisList.filter(c => c.id !== id);
           Swal.fire('Supprimé !', 'Le colis a été supprimé.', 'success');
         });
@@ -163,4 +163,5 @@ export class ColisComponent implements OnInit {
     this.editMode = false;
     this.editColisId = null;
   }
+
 }

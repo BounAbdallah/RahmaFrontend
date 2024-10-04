@@ -7,6 +7,7 @@ import { RegisterLivreurComponent } from './composants/authentification/register
 import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
 import { ColisComponent } from './composants/colis/colis/colis.component';
 import { DashboardComponent } from './composants/acteurs/client/dashboard/dashboard.component';
+import { ProfilComponent } from './composants/acteurs/client/profil/profil.component';
 
 export const routes: Routes = [
 
@@ -19,7 +20,7 @@ export const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'DetailsTeste',
+    redirectTo: 'accueil',
     pathMatch: 'full'
   },
   {
@@ -62,6 +63,10 @@ export const routes: Routes = [
   {
     path: 'DashboardClient',
     component: DashboardComponent
+  },
+  {
+    path: 'ProfilClient',
+    component: ProfilComponent
   }
 
 

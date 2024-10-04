@@ -5,13 +5,13 @@ import { RouterLink } from '@angular/router';
 import { ProfilService } from '../../../../core/services/profil.service';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-profil',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  templateUrl: './profil.component.html',
+  styleUrl: './profil.component.css'
 })
-export class DashboardComponent {
+export class ProfilComponent {
   profilForm: FormGroup;
   userProfile: any;
 
@@ -91,5 +91,4 @@ export class DashboardComponent {
       });
     }
   }
-
 }
