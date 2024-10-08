@@ -1,0 +1,65 @@
+/* Importation de la police  */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+body{
+
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: auto;
+  font-style: normal;
+  margin: 0%;
+
+}
+.top-bare{
+  width: 100%;
+  height: 75px;
+  margin-left: -30px;
+  flex-shrink: 0;
+  border-bottom: 2px solid rgba(7, 76, 114, 0.38);
+background: linear-gradient(0deg, rgba(7, 76, 114, 0.61) 0%, rgba(7, 76, 114, 0.61) 100%), rgba(255, 255, 255, 0.40);
+margin: 0px;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-evenly;
+}
+
+.link{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap:40px
+}
+.link a{
+  color:  #FFF;
+text-align: center;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 45px; /* 250% */
+}
+.login-btn{
+  border-radius: 12px;
+background: #FFF;
+
+width: 206px;
+height: 48px;
+flex-shrink: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+}
+
+.login-btn a{
+  color: #000;
+text-align: center;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 45px; /* 250% */
+}

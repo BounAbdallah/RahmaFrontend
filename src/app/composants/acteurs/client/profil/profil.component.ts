@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ProfilService } from '../../../../core/services/profil.service';
-import { TopBareComponent } from "../../../portail/topBare/topBare.component";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-profil',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, TopBareComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink,  NavbarComponent],
   templateUrl: './profil.component.html',
   styleUrl: './profil.component.css'
 })

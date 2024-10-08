@@ -1,0 +1,21 @@
+<div class="top-bare">
+
+  <div class="logo">
+    <img class="logo_" src="./../../../../assets/images/logos_icons/logoM2.png" alt="logo">
+  </div>
+
+  <div class="link">
+    <!-- Utilisation de routerLink pour la navigation -->
+    <a [routerLink]="'/navbar/accueil'" routerLinkActive="active">Accueil</a>
+    <a [routerLink]="'/navbar/accueil'" routerLinkActive="active">A propos</a>
+    <a [routerLink]="'/navbar/MesColis'" routerLinkActive="active">Mes Colis</a>
+    <a [routerLink]="'/navbar/Gpdisponible'" routerLinkActive="active">Gp disponible</a>
+  </div>
+
+  <div class="login-btn">
+    <!-- Lien vers le profil du client -->
+    <a [routerLink]="'/nabar/ProfilClient'">{{ userProfile.nom }}</a>
+    <img class="profil_photo" src="{{ userProfile.photo_profil }}" alt="Photo de profil" class="rounded-circle mb-3" width="150" />
+  </div>
+
+</div>

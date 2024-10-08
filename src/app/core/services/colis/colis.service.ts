@@ -1,9 +1,9 @@
-import { apiUrl } from './../../apiUrl';
-
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Colis } from './colis.model'; // Importez votre modèle Colis
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { apiUrl } from './../../apiUrl';
+import { Colis } from './colis.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,43 +15,41 @@ export class ColisService {
 
   // Obtenir la liste des colis
   getColis(): Observable<Colis[]> {
-    return this.http.get<Colis[]>(`${apiUrl}/colis`, { headers: this.getHeaders() });
+    return this.http.get<Colis[]>(`${apiUrl}/colis`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
   }
 
   // Créer un nouveau colis
   createColis(colis: Colis): Observable<Colis> {
-    return this.http.post<Colis>(`${apiUrl}/colis`, colis, {
-      headers: this.getHeaders(),
-    });
+    return this.http.post<Colis>(`${apiUrl}/colis`, colis, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
   }
 
-  // Obtenir les détails d'un colis spécifique
+  // Obtenir un colis par son ID
   getColisById(id: number): Observable<Colis> {
-    return this.http.get<Colis>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+    return this.http.get<Colis>(`${this.apiUrl}/colis/${id}`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
   }
 
   // Mettre à jour un colis
   updateColis(id: number, colis: Colis): Observable<Colis> {
-    return this.http.put<Colis>(`${apiUrl}/colis/${id}`, colis, {
-      headers: this.getHeaders(),
-    });
+    return this.http.put<Colis>(`${apiUrl}/colis/${id}`, colis, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
   }
 
   // Supprimer un colis
   deleteColis(id: number): Observable<void> {
-    return this.http.delete<void>(`${apiUrl}/colis/${id}`, {
-      headers: this.getHeaders(),
-    });
+    return this.http.delete<void>(`${apiUrl}/colis/${id}`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
   }
 
   // Supprimer définitivement un colis
   forceDeleteColis(id: number): Observable<void> {
-    return this.http.delete<void>(`${apiUrl}/colis/force-delete`, {
-      headers: this.getHeaders(),
-    });
+    return this.http.delete<void>(`${apiUrl}/colis/force-delete/${id}`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
   }
 
-  // Fonction pour obtenir les headers d'authentification
+  // Récupérer les headers d'authentification
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('auth_token');
     if (token) {
@@ -60,5 +58,11 @@ export class ColisService {
       console.error('Token non trouvé');
       return new HttpHeaders();
     }
+  }
+
+  // Gestion d'erreur
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('Erreur :', error);
+    return throwError(() => new Error('Erreur lors de l\'opération sur les colis'));
   }
 }

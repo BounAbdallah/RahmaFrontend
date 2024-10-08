@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { TopBareComponent } from '../topBare/topBare.component';
+import { NavbarComponent } from '../../acteurs/client/navbar/navbar.component';
 
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [TopBareComponent],
+  imports: [NavbarComponent],
   templateUrl: './accueil.component.html',
   styleUrl: './accueil.component.css'
 })

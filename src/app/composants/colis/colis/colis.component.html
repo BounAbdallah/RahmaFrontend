@@ -5,10 +5,10 @@
     <img src="./../../../../assets/images/logos_icons/logoM2.png" alt="logo">
   </div>
   <div class="link">
-    <a routerLink="accueil">Accueil</a>
-    <a routerLink="accueil">A propos</a>
-    <a routerLink="accueil">Services</a>
-    <a routerLink="accueil">Contact</a>
+    <a href="accueil">Accueil</a>
+    <a href="MesColis">Mes Colis</a>
+    <a href="ProfilClient">Profil</a>
+    <a href="Gpdisponible">Gpdisponible</a>
 
   </div>
   <div class="login-btn">
@@ -23,7 +23,7 @@
     </svg>
   </div>
 </div>
-
+<!-- <app-navbar></app-navbar> -->
 
 
 
@@ -72,21 +72,23 @@
 
 <div class="container">
 <div class="rechercheFilter">
-  <!-- <div class="col-md-12"> -->
-    <h2>Rechercher une région de destination </h2>
-    <div class="col-md-6 filter"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+
+
+    <!-- <div class="col-md-6 filter"> -->
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
       <mask id="mask0_754_21932" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
         <rect x="0.5" width="24" height="24" fill="#D9D9D9"/>
       </mask>
       <g mask="url(#mask0_754_21932)">
         <path d="M10.5 18V16H14.5V18H10.5ZM6.5 13V11H18.5V13H6.5ZM3.5 8V6H21.5V8H3.5Z" fill="#1C1B1F"/>
       </g>
-    </svg></div>
+    </svg> -->
+  <!-- </div> -->
 
 </div>
-  <div class="row">
-    <div class="col-md-4" *ngFor="let colis of colisList">
-      <div class="card mb-4">
+  <div class="colis-container">
+    <div class="colis-item-container" *ngFor="let colis of colisList">
+
         <div class="card-body">
           <h5 class="card-title">{{ colis.titre }}</h5>
           <p><strong>Statut:</strong> {{ colis.statut }}</p>
@@ -100,40 +102,41 @@
       </div>
     </div>
   </div>
-</div>
+  <div class="section-recherche">
 
-<div class="section-recherche">
+    <div class="notification">
+      <p>Notification</p>
+      <!-- icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <mask id="mask0_754_21657" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
+          <rect width="60" height="60" fill="#D9D9D9"/>
+        </mask>
+        <g mask="url(#mask0_754_21657)">
+          <path d="M10 47.5V42.5H15V25C15 21.5417 16.0417 18.4688 18.125 15.7812C20.2083 13.0938 22.9167 11.3333 26.25 10.5V8.75C26.25 7.70833 26.6146 6.82292 27.3438 6.09375C28.0729 5.36458 28.9583 5 30 5C31.0417 5 31.9271 5.36458 32.6562 6.09375C33.3854 6.82292 33.75 7.70833 33.75 8.75V10.5C37.0833 11.3333 39.7917 13.0938 41.875 15.7812C43.9583 18.4688 45 21.5417 45 25V42.5H50V47.5H10ZM30 55C28.625 55 27.4479 54.5104 26.4688 53.5312C25.4896 52.5521 25 51.375 25 50H35C35 51.375 34.5104 52.5521 33.5312 53.5312C32.5521 54.5104 31.375 55 30 55ZM20 42.5H40V25C40 22.25 39.0208 19.8958 37.0625 17.9375C35.1042 15.9792 32.75 15 30 15C27.25 15 24.8958 15.9792 22.9375 17.9375C20.9792 19.8958 20 22.25 20 25V42.5Z" fill="white"/>
+        </g>
+      </svg>
+      <!-- icon -->
 
-  <div class="notification">
-    <p>Notification</p>
-    <!-- icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-      <mask id="mask0_754_21657" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
-        <rect width="60" height="60" fill="#D9D9D9"/>
-      </mask>
-      <g mask="url(#mask0_754_21657)">
-        <path d="M10 47.5V42.5H15V25C15 21.5417 16.0417 18.4688 18.125 15.7812C20.2083 13.0938 22.9167 11.3333 26.25 10.5V8.75C26.25 7.70833 26.6146 6.82292 27.3438 6.09375C28.0729 5.36458 28.9583 5 30 5C31.0417 5 31.9271 5.36458 32.6562 6.09375C33.3854 6.82292 33.75 7.70833 33.75 8.75V10.5C37.0833 11.3333 39.7917 13.0938 41.875 15.7812C43.9583 18.4688 45 21.5417 45 25V42.5H50V47.5H10ZM30 55C28.625 55 27.4479 54.5104 26.4688 53.5312C25.4896 52.5521 25 51.375 25 50H35C35 51.375 34.5104 52.5521 33.5312 53.5312C32.5521 54.5104 31.375 55 30 55ZM20 42.5H40V25C40 22.25 39.0208 19.8958 37.0625 17.9375C35.1042 15.9792 32.75 15 30 15C27.25 15 24.8958 15.9792 22.9375 17.9375C20.9792 19.8958 20 22.25 20 25V42.5Z" fill="white"/>
-      </g>
-    </svg>
-    <!-- icon -->
-
-    <div class="compteur-notification">
-      <p>62</p>
+      <div class="compteur-notification">
+        <p>62</p>
+      </div>
+    </div>
+    <div class="recherche">
+      <input type="text" placeholder="Rechercher...">
+      <button >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <mask id="mask0_754_21649" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <rect width="24" height="24" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_754_21649)">
+              <path d="M19.6 21L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16C7.68333 16 6.14583 15.3708 4.8875 14.1125C3.62917 12.8542 3 11.3167 3 9.5C3 7.68333 3.62917 6.14583 4.8875 4.8875C6.14583 3.62917 7.68333 3 9.5 3C11.3167 3 12.8542 3.62917 14.1125 4.8875C15.3708 6.14583 16 7.68333 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L21 19.6L19.6 21ZM9.5 14C10.75 14 11.8125 13.5625 12.6875 12.6875C13.5625 11.8125 14 10.75 14 9.5C14 8.25 13.5625 7.1875 12.6875 6.3125C11.8125 5.4375 10.75 5 9.5 5C8.25 5 7.1875 5.4375 6.3125 6.3125C5.4375 7.1875 5 8.25 5 9.5C5 10.75 5.4375 11.8125 6.3125 12.6875C7.1875 13.5625 8.25 14 9.5 14Z" fill="#074C72"/>
+            </g>
+         </svg>
+       </button>
     </div>
   </div>
-  <div class="recherche">
-    <input type="text" placeholder="Rechercher...">
-    <button >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <mask id="mask0_754_21649" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-            <rect width="24" height="24" fill="#D9D9D9"/>
-          </mask>
-          <g mask="url(#mask0_754_21649)">
-            <path d="M19.6 21L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16C7.68333 16 6.14583 15.3708 4.8875 14.1125C3.62917 12.8542 3 11.3167 3 9.5C3 7.68333 3.62917 6.14583 4.8875 4.8875C6.14583 3.62917 7.68333 3 9.5 3C11.3167 3 12.8542 3.62917 14.1125 4.8875C15.3708 6.14583 16 7.68333 16 9.5C16 10.2333 15.8833 10.925 15.65 11.575C15.4167 12.225 15.1 12.8 14.7 13.3L21 19.6L19.6 21ZM9.5 14C10.75 14 11.8125 13.5625 12.6875 12.6875C13.5625 11.8125 14 10.75 14 9.5C14 8.25 13.5625 7.1875 12.6875 6.3125C11.8125 5.4375 10.75 5 9.5 5C8.25 5 7.1875 5.4375 6.3125 6.3125C5.4375 7.1875 5 8.25 5 9.5C5 10.75 5.4375 11.8125 6.3125 12.6875C7.1875 13.5625 8.25 14 9.5 14Z" fill="#074C72"/>
-          </g>
-       </svg>
-     </button>
-  </div>
 </div>
 
-</div>
+
+
+

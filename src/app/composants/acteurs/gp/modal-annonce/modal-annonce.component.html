@@ -1,0 +1,42 @@
+<div class="modal" [class.open]="isOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>{{ action }} Annonce</h2>
+    
+    <form (ngSubmit)="save()">
+      <label for="titre">Titre:</label>
+      <input type="text" id="titre" [(ngModel)]="annonceForm.titre" name="titre" required>
+      <div *ngIf="formErrors.titre" class="error">{{ formErrors.titre }}</div>
+
+      <label for="date_debut_reception_colis">Date de début:</label>
+      <input type="date" id="date_debut_reception_colis" [(ngModel)]="annonceForm.date_debut_reception_colis" name="date_debut_reception_colis" required>
+      <div *ngIf="formErrors.date_debut_reception_colis" class="error">{{ formErrors.date_debut_reception_colis }}</div>
+
+      <label for="date_fin_reception_colis">Date de fin:</label>
+      <input type="date" id="date_fin_reception_colis" [(ngModel)]="annonceForm.date_fin_reception_colis" name="date_fin_reception_colis" required>
+      <div *ngIf="formErrors.date_fin_reception_colis" class="error">{{ formErrors.date_fin_reception_colis }}</div>
+
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="annonceForm.description" name="description" required></textarea>
+      <div *ngIf="formErrors.description" class="error">{{ formErrors.description }}</div>
+
+      <label for="tarif">Tarif:</label>
+      <input type="number" id="tarif" [(ngModel)]="annonceForm.tarif" name="tarif" required>
+      <div *ngIf="formErrors.tarif" class="error">{{ formErrors.tarif }}</div>
+
+      <label for="condition">Conditions:</label>
+      <textarea id="condition" [(ngModel)]="annonceForm.condition" name="condition" required></textarea>
+      <div *ngIf="formErrors.condition" class="error">{{ formErrors.condition }}</div>
+
+      <label for="statut">Statut:</label>
+      <input type="text" id="statut" [(ngModel)]="annonceForm.statut" name="statut" required>
+      <div *ngIf="formErrors.statut" class="error">{{ formErrors.statut }}</div>
+
+      <label for="poids_kg">Poids (kg):</label>
+      <input type="number" id="poids_kg" [(ngModel)]="annonceForm.poids_kg" name="poids_kg" required>
+      <div *ngIf="formErrors.poids_kg" class="error">{{ formErrors.poids_kg }}</div>
+
+      <button type="submit">{{ action }}</button>
+    </form>
+  </div>
+</div>

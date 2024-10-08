@@ -1,0 +1,88 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1 1 45%; /* Affiche 2 champs par ligne (45% pour 2 champs avec un espace) */
+  margin-right: 20px; /* Ajoute un espace entre les colonnes */
+}
+
+.form-group:last-child {
+  margin-right: 0; /* Supprime l'espace après le dernier élément de chaque ligne */
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block; /* S'assure que le label s'affiche sur une nouvelle ligne */
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="file"],
+textarea {
+  width: 100%; /* Prend toute la largeur disponible */
+  padding: 10px; /* Ajoute un espacement interne */
+  border: 1px solid #ccc; /* Bordure légère */
+  border-radius: 4px; /* Coins arrondis */
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+  margin-top: 5px; /* Ajoute un espacement au-dessus des champs */
+  font-size: 14px; /* Taille de la police */
+}
+
+input[type="file"] {
+  padding: 3px; /* Ajuste le padding pour les inputs de type file */
+}
+
+textarea {
+  resize: vertical; /* Permet de redimensionner verticalement */
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 10px 20px; /* Espacement interne pour le bouton */
+  background-color: #007bff; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprime la bordure */
+  border-radius: 4px; /* Coins arrondis pour le bouton */
+  cursor: pointer; /* Change le curseur au survol */
+}
+
+button:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
+}
+
+
+.error-message {
+  color: rgb(133, 15, 15); /* Couleur du texte d'erreur */
+  font-size: 12px; /* Taille du texte */
+  margin-top: 5px; /* Espacement au-dessus du message */
+}

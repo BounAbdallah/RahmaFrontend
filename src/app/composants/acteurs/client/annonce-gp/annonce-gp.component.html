@@ -1,46 +1,37 @@
 
-
 <div class="top-bare">
 
   <div class="logo">
-    <img class="logo_" src="./../../../../assets/images/logos_icons/logoM2.png" alt="logo">
+    <img src="./../../../../assets/images/logos_icons/logoM2.png" alt="logo">
   </div>
   <div class="link">
-    <a routerLink="accueil">Accueil</a>
-    <a routerLink="accueil">A propos</a>
-    <a routerLink="accueil">Services</a>
-    <a routerLink="accueil">Contact</a>
+    <a href="accueil">Accueil</a>
+    <a href="MesColis">Mes Colis</a>
+    <a href="ProfilClient">Profil</a>
+    <a href="Gpdisponible">Gpdisponible</a>
 
   </div>
   <div class="login-btn">
-    <a href ="connexion">{{ userProfile.nom }}</a>
+    <a href ="ProfilClient">{{ userProfile.nom }}</a>
     <img class="profil_photo" src="{{ userProfile.photo_profil }}" alt="Photo de profil" class="rounded-circle mb-3" width="150" />
 
   </div>
 </div>
+<!-- <app-navbar></app-navbar> -->
 
 
-<h2>GP Disponible</h2>
+ <div class="titrePage">
+    <h1>Annonces GP Disponible</h1>
+  </div>
 
 <div class="body-content">
-<div class="col-md-4" *ngFor="let annonce of listAnnonceGp">
+
+
+<div class=" card-annonces-container" *ngFor="let annonce of listAnnonceGp">
 
   <div class="card-body">
 
-    <!-- <h5 class="card-title">{{ annonce.titre }}</h5>
-    <h5 class="card-title">{{ annonce.pays_provenance }}</h5>
-    <h5 class="card-title">{{ annonce.pays_destination }}</h5>
-    <img src="{{ annonce.photo_pays_voyage_provenance}}" alt="">
-    <img src="{{ annonce.photo_pays_voyage_destination}}" alt="">
-    <p class="card-text">{{ annonce.date_debut_reception_colis }}</p>
-    <p class="card-text">{{ annonce.date_fin_reception_colis }}</p>
-    <p class="card-text">{{ annonce.description }}</p>
-    <p class="card-text">{{ annonce.condition }}</p>
-    <p class="card-text">{{ annonce.poids_kg }}</p>
-  </div> -->
 
-<!-- </div>
-</div> -->
 
 
 <!-- <div class="card-section-annonces-gp" > -->
@@ -178,8 +169,15 @@
 
   <!-- btn reservation -->
 
-  <div class="btn-reservation-GP">
-    <a routerLink="accueil">Voir plus</a>
+
+    <div class="btn-reservation-GP" (click)="viewAnnonceDetails(annonce.id)">
+         <a href="annonce-details/{{annonce.id}}">Voir les details</a>
+</div>
   </div>
   </div>
+</div>
+
+
+
+
 </div>

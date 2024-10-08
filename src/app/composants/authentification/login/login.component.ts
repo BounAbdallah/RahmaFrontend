@@ -35,8 +35,18 @@ export class LoginComponent {
           // Débogage: Afficher la réponse de l'API
           console.log('Réponse de l\'API:', response);
 
-          // Rediriger directement vers la page d'accueil
-          this.router.navigate(['/Gpdisponible']);
+          // Récupérer le rôle de l'utilisateur
+          const userRole = response.role; // Assurez-vous que le rôle est bien renvoyé dans la réponse
+
+          // Redirection basée sur le rôle
+          if (userRole === 'GP') {
+            this.router.navigate(['/DashboardGP']);
+          } else if (userRole === 'Client') {
+            this.router.navigate(['/ProfilClient']);
+          } else {
+            // Rediriger vers une page par défaut ou une page d'erreur si le rôle n'est pas reconnu
+            this.router.navigate(['/accueil']);
+          }
         },
         error: (error) => {
           // Gérer l'erreur
@@ -48,6 +58,6 @@ export class LoginComponent {
 
   // Méthode pour revenir en arrière
   retour(): void {
-    this.router.navigate(['/portail']);
+    this.router.navigate(['/accueil']);
   }
 }

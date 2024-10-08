@@ -5,10 +5,10 @@
     <img src="./../../../../assets/images/logos_icons/logoM2.png" alt="logo">
   </div>
   <div class="link">
-    <a routerLink="accueil">Accueil</a>
-    <a routerLink="accueil">A propos</a>
-    <a routerLink="accueil">Services</a>
-    <a routerLink="accueil">Contact</a>
+    <a href="accueil">Accueil</a>
+    <a href="MesColis">Mes Colis</a>
+    <a href="ProfilClient">Profil</a>
+    <a href="Gpdisponible">Gpdisponible</a>
 
   </div>
   <div class="login-btn">
@@ -17,7 +17,7 @@
 
   </div>
 </div>
-
+<!-- <app-navbar></app-navbar> -->
 <div class="body-content">
 
       <!-- Profil utilisateur -->
@@ -36,8 +36,8 @@
             <h3>{{ userProfile.prenom }}</h3>
             <p>{{ userProfile.nom }}</p>
             <p>{{ userProfile.email }}</p>
-            <p>{{ userProfile.commuune }}</p>
-            <p>{{ userProfile.adresse }}</p>
+            <p>{{ userProfile.commune }}</p>
+            <p>{{ userProfile.adress }}</p>
           </div>
         </div>
 

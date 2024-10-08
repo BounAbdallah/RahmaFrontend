@@ -4,50 +4,46 @@ import { Annonce } from '../../../../core/services/annonces/annonce.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AccueilComponent } from "../../../portail/accueil/accueil.component";
-import { TopBareComponent } from "../../../portail/topBare/topBare.component";
 import { ProfilService } from '../../../../core/services/profil.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-annonce-gp',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink,  TopBareComponent],
+  imports: [CommonModule, NavbarComponent, ReactiveFormsModule, FormsModule, RouterLink],
   templateUrl: './annonce-gp.component.html',
-  styleUrl: './annonce-gp.component.css'
+  styleUrls: ['./annonce-gp.component.css'] // Corrected from styleUrl to styleUrls
 })
 export class AnnonceGPComponent {
- listAnnonceGp: Annonce[] = [];
- userProfile: any;
+  listAnnonceGp: Annonce[] = [];
+  userProfile: any;
+  detailsAnnonceGp: any;
 
- constructor(private GpAnnoncesService: GpAnnoncesService,
-  private profilService: ProfilService,
+  constructor(private GpAnnoncesService: GpAnnoncesService, private profilService: ProfilService) {}
 
- ) {}
+  ngOnInit(): void {
+    this.getAnnonceGp();
+    this.getProfil();
+  }
 
   getProfil(): void {
     this.profilService.afficherProfil().subscribe((data) => {
       this.userProfile = data;
-      // this.profilForm.patchValue({
-      //   prenom: data.prenom,
-      //   nom: data.nom,
-      //   email: data.email,
-      //   telephone: data.telephone,
-      //   adress: data.adress,
-      //   commune: data.commune,
-      // });
     });
   }
 
- ngOnInit(): void {
-  this.getAnnonceGp();
-  this.getProfil();
-
- }
- getAnnonceGp(){
-  this.GpAnnoncesService.getGpAnnonce().subscribe((data) => {
-    this.listAnnonceGp = data;
+  getAnnonceGp(): void {
+    this.GpAnnoncesService.getGpAnnonce().subscribe((data) => {
+      this.listAnnonceGp = data;
+    });
   }
 
-  );
- }
+  // This method can be triggered when an announcement is clicked
+  viewAnnonceDetails(id: number): void {
+    this.GpAnnoncesService.getAnnonceById(id).subscribe((data) => {
+      this.detailsAnnonceGp = data;
+      // Navigate to a detailed view component or open a modal with the details
+      // Example: this.router.navigate(['/annonce-details', id]);
+    });
+  }
 }

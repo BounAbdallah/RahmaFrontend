@@ -4,12 +4,13 @@ import { ColisService } from '../../../core/services/colis/colis.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import Swal from 'sweetalert2';  // Importer SweetAlert2
+import Swal from 'sweetalert2';
+import { NavbarComponent } from "../../acteurs/client/navbar/navbar.component";  // Importer SweetAlert2
 
 @Component({
   selector: 'app-colis',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, NavbarComponent],
   templateUrl: './colis.component.html',
   styleUrls: ['./colis.component.css']
 })

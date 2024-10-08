@@ -62,7 +62,9 @@ font-style: normal;
 font-weight: 600;
 line-height: 45px; /* 250% */
 }
-
+a{
+  text-decoration: none;
+}
 
 /* code de main-contenaire */
 
@@ -78,6 +80,7 @@ line-height: 45px; /* 250% */
   /* align-items: center; */
   justify-content: space-between;
   gap: 10px;
+  width: 100%;
 }
 
 .profil-section{
@@ -318,8 +321,9 @@ border: 2px solid var(--BleuBase, #074C72);
 background: var(--Blanc, #FFF);
 }
 .rechercheFilter{
+  margin-top: 40px;
   display: flex;
-width: 533px;
+width: 400px;
 height: 50px;
 padding: 10px 18px;
 align-items: center;
@@ -332,7 +336,8 @@ background: var(--Blanc, #FFF);
 line-height: 45px; /* 250% */
 }
 
-.text-cente h2{
+.rechercheFilter h2{
+  width: 400px;
   color: var(--BleuBase, #074C72);
 text-align: center;
 font-family: Montserrat;
@@ -340,4 +345,47 @@ font-size: 12px;
 font-style: normal;
 font-weight: 600;
 line-height: 45px; /* 250% */
+}
+
+.row{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 50px;
+  margin: 10px;
+  width: 100%;
+  height: 100%;
+
+}
+.colis-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* width: 100%;
+  height: 100%; */
+}
+.colis-item-container{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 50px;
+  margin: 10px;
+  width: 300px;
+height: 384px;
+}
+.card-body{
+  margin: 10px;
+  width: 300px;
+height: 340px;
+padding: 20px;
+flex-shrink: 0;
+border-radius: 4px;
+background: #F5F5F5;
+box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.10);
 }

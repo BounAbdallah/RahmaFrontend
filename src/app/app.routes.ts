@@ -9,6 +9,9 @@ import { ColisComponent } from './composants/colis/colis/colis.component';
 import { DashboardComponent } from './composants/acteurs/client/dashboard/dashboard.component';
 import { ProfilComponent } from './composants/acteurs/client/profil/profil.component';
 import { AnnonceGPComponent } from './composants/acteurs/client/annonce-gp/annonce-gp.component';
+import { NavbarComponent } from './composants/acteurs/client/navbar/navbar.component';
+import { DetailsAnnonceGPComponent } from './composants/acteurs/client/details-annonce-gp/details-annonce-gp.component';
+import { DashboardGPComponent } from './composants/acteurs/gp/dashboard-gp/dashboard-gp.component';
 
 export const routes: Routes = [
 
@@ -46,6 +49,9 @@ export const routes: Routes = [
 
   ,
 
+
+
+
   {
     path: 'registerLivreur',
     component: RegisterLivreurComponent
@@ -73,8 +79,29 @@ export const routes: Routes = [
   {
     path: 'Gpdisponible',
     component: AnnonceGPComponent
+  },
+
+  {
+    path: 'navbar',
+    component: NavbarComponent,
+    children: [
+      { path: 'accueil',component: AccueilComponent},
+      { path: 'ProfilClient', component: ProfilComponent },
+      { path: 'Gpdisponible', component: AnnonceGPComponent },
+      { path: 'MesColis', component: ColisComponent },
+
+      { path: '', redirectTo: 'Gpdisponible', pathMatch: 'full' }
+    ]
+  },
+
+  {
+    path: 'annonce-details/:id',
+    component: DetailsAnnonceGPComponent
   }
-
-
+,
+{
+  path: 'DashboardGP',
+  component: DashboardGPComponent
+}
 
 ];

@@ -1,5 +1,5 @@
 export interface Annonce {
-  id?: number; //
+  id: number; //
   titre?: string;
   pays_provenance?: string;
   pays_destination?: string;

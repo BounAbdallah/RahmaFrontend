@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body{
+
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: auto;
+  font-style: normal;
+  margin: 0%;
+
+}
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.sidebar {
+  margin-top: 140px;
+  margin-left: 30px;
+    width: 150px;
+    height: 60vh;
+    text-align: center;
+    position: fixed;
+    background-color: var(--BleuBase, #074C72);
+    border-radius: 12px;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.sidebar img{
+  width: 120px;
+  height: 34px;
+}
+
+.main-content {
+    width: 100%;
+    margin-top:110px;
+    margin-left: 180px;
+}
+
+.top-bar {
+  position: fixed;
+  width: 185vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #005f7f;
+    color: #fff;
+}
+
+.top-bar button {
+background: transparent;
+/* width: 30px; */
+/* height: 30px; */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.top-bar button:hover {
+  background: transparent;
+}
+
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.stat-box {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 8px;
+border: 3px solid var(--Jaunebase, #FF9F02);
+    text-align: center;
+    border-radius: 5px;
+    flex: 1;
+    margin: 0 10px;
+}
+
+.orders {
+    margin: 20px 0;
+}
+
+.orders h4 {
+    margin-bottom: 20px;
+}
+
+.order-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 308px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: start;
+}
+
+.card img {
+  width: 308px;
+  height: 143px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card h5 {
+    margin-top: 10px;
+    color: var(--BleuBase, #074C72);
+
+font-family: Montserrat;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.card p {
+  color: var(--BleuBase, #074C72);
+
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.card-body {
+padding: 20px;
+}
+
+.card .btn {
+  display: inline-flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+border: 1px solid var(--Jaunebase, #FF9F02);
+background: var(--Blanc, #FFF);
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.card .btn:hover {
+    background-color: #e0a800;
+}
+
+.planned-trips {
+    margin: 20px 0;
+}
+
+.trip-buttons {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.sidebar button{
+  background: transparent;
+  border: 0px;
+}
+
+.trip-button {
+  border-radius: 4px;
+  background: rgba(255, 159, 2, 0.41);
+    padding: 15px 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.trip-button.light {
+    background-color: #f0f0f0;
+}
+
+.trip-button.light:hover {
+    background-color: #ddd;
+}
+
+.trip-button:hover {
+    background-color: #e0a800;
+}
+
+/* @media (max-width: 768px) {
+    .stats, .order-cards, .trip-buttons {
+        flex-direction: column;
+    }
+
+    .stat-box, .card, .trip-button {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .order-cards .card {
+        width: 100%;
+    }
+} */
+
+
+
+
+
+.sidebar h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* @media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+  }
+
+  .sidebar {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+  }
+
+  .main-content {
+      width: 100%;
+  }
+} */
+
+
+

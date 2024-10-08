@@ -1,0 +1,96 @@
+<div class="modal" *ngIf="data?.annonce !== undefined">
+  <div class="modal-content">
+    <span class="close" (click)="close()">&times;</span>
+    <h2 *ngIf="data?.annonce">Modifier l'annonce</h2>
+    <h2 *ngIf="!data?.annonce">Nouvelle annonce</h2>
+    <form [formGroup]="annonceForm" (ngSubmit)="onSubmitAnnonce()">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="titre">Titre</label>
+          <input id="titre" formControlName="titre" required>
+          <div *ngIf="annonceForm.get('titre')?.invalid && (annonceForm.get('titre')?.touched || annonceForm.get('titre')?.dirty)" class="error-message">
+            <small>Le titre est requis.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pays_provenance">Pays d'origine</label>
+          <input id="pays_provenance" formControlName="pays_provenance" required>
+          <div *ngIf="annonceForm.get('pays_provenance')?.invalid && (annonceForm.get('pays_provenance')?.touched || annonceForm.get('pays_provenance')?.dirty)" class="error-message">
+            <small>Le pays d'origine est requis.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="photo_pays_voyage_provenance">Image du pays d'origine</label>
+          <input id="photo_pays_voyage_provenance" type="file" (change)="onFileChange($event, 'provenance')" accept="image/*">
+        </div>
+
+        <div class="form-group">
+          <label for="pays_destination">Pays de destination</label>
+          <input id="pays_destination" formControlName="pays_destination" required>
+          <div *ngIf="annonceForm.get('pays_destination')?.invalid && (annonceForm.get('pays_destination')?.touched || annonceForm.get('pays_destination')?.dirty)" class="error-message">
+            <small>Le pays de destination est requis.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="photo_pays_voyage_destination">Image du pays de destination</label>
+          <input id="photo_pays_voyage_destination" type="file" (change)="onFileChange($event, 'destination')" accept="image/*">
+        </div>
+
+        <div class="form-group">
+          <label for="date_debut_reception_colis">Date début réception colis</label>
+          <input id="date_debut_reception_colis" type="date" formControlName="date_debut_reception_colis" required>
+          <div *ngIf="annonceForm.get('date_debut_reception_colis')?.invalid && (annonceForm.get('date_debut_reception_colis')?.touched || annonceForm.get('date_debut_reception_colis')?.dirty)" class="error-message">
+            <small>La date de début est requise.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date_fin_reception_colis">Date fin réception colis</label>
+          <input id="date_fin_reception_colis" type="date" formControlName="date_fin_reception_colis" required>
+          <div *ngIf="annonceForm.get('date_fin_reception_colis')?.invalid && (annonceForm.get('date_fin_reception_colis')?.touched || annonceForm.get('date_fin_reception_colis')?.dirty)" class="error-message">
+            <small>La date de fin est requise.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description"></textarea>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="tarif">Tarif</label>
+          <input id="tarif" formControlName="tarif" type="number">
+        </div>
+
+        <div class="form-group">
+          <label for="condition">Condition</label>
+          <input id="condition" formControlName="condition">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="poids_kg">Poids (kg)</label>
+          <input id="poids_kg" formControlName="poids_kg" type="number">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="annonceForm.invalid">Soumettre</button>
+        <button type="button" (click)="close()">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>

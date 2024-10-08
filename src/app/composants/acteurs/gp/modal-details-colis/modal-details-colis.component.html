@@ -1,0 +1,30 @@
+<div class="modal" *ngIf="annonceId">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>Détails des colis pour l'annonce {{ annonceId }}</h2>
+
+    <h3>Détails de l'annonce</h3>
+    <p *ngIf="annonce?.titre">Titre : {{ annonce?.titre }}</p>
+    <p *ngIf="annonce?.description">Description : {{ annonce?.description }}</p>
+    <p *ngIf="annonce?.pays_provenance">Pays de provenance : {{ annonce?.pays_provenance }}</p>
+    <p *ngIf="annonce?.pays_destination">Pays de destination : {{ annonce?.pays_destination }}</p>
+    <p *ngIf="annonce?.condition">Condition : {{ annonce?.condition }}</p>
+    <p *ngIf="annonce?.poids_kg">Poids maximum : {{ annonce?.poids_kg }} kg</p>
+    <p *ngIf="annonce?.tarif">Tarif : {{ annonce?.tarif }} FCFA</p>
+    <p *ngIf="annonce?.date_debut_reception_colis">Date de début de réception : {{ annonce?.date_debut_reception_colis }}</p>
+    <p *ngIf="annonce?.date_fin_reception_colis">Date de fin de réception : {{ annonce?.date_fin_reception_colis }}</p>
+    <img *ngIf="annonce?.image" [src]="annonce?.image" alt="Image de l'annonce" style="width:120px; height: auto;">
+
+    <h3>Détails des réservations</h3>
+    <p>Nombre de réservations : {{ nombreReservations }}</p>
+    <!-- <ul *ngIf="reservationsDetails?.length > 0">
+      <li *ngFor="let reservation of reservationsDetails">
+        <p>ID de la réservation : {{ reservation.reservation_id }}</p>
+        <p>Nom de l'utilisateur : {{ reservation.utilisateur?.nom }}</p>
+        <p>Email : {{ reservation.utilisateur?.email }}</p>
+      </li>
+    </ul> -->
+
+    <p *ngIf="reservationsDetails?.length === 0">Aucune réservation trouvée pour cette annonce.</p>
+  </div>
+</div>
