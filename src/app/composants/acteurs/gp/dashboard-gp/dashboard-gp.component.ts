@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { AnnonceFormModalComponent } from '../annonce-form-modal/annonce-form-modal.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { GpReservationComponent } from '../gp-reservation/gp-reservation.component';
+import { ProfilService } from '../../../../core/services/profil.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-dashboard-gp',
@@ -39,9 +42,20 @@ export class DashboardGPComponent implements OnInit {
   nombreReservations: number = 0; // Pour stocker le nombre de réservations
   reservationsDetails: any[] = []; // Pour stocker les détails des réservations
   isModalVisible: boolean = false;
-
+userProfile: any;
+  profilForm: any;
+  filteredAnnonces: any = [];
+  searchQuery: string = '';
+  selectedDate: string = '';  // Date sélectionnée par l'utilisateur
+  selectedMonth: string = '';  // Mois sélectionné par l'utilisateur
+  trips: any[] = [];  // Liste des annonces récupérées
+  filteredTrips: any[] = [];  // Annonces filtrées par date ou mois
+  annoncesPerPage: number = 3;  // Nombre d'annonces à afficher par page
+  currentPage: number = 1;  // Page actuelle
+  totalPages: number = 1;  // Nombre total de pages
   constructor(private gpDashboardService: GpDashboardService,
      private authService: AuthService,
+     private profilService: ProfilService,
      private router: Router,
       public dialog: Dialog) {}
 
@@ -66,12 +80,44 @@ export class DashboardGPComponent implements OnInit {
     this.gpDashboardService.affichageAnnonces().subscribe({
       next: (data) => {
         this.annonces = data;
+        this.filteredAnnonces = data;
+         // Calculer le nombre total de pages
+         this.totalPages = Math.ceil(this.annonces.length / this.annoncesPerPage);
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des annonces :', error);
       }
     });
   }
+// Fonction pour changer de page
+changePage(page: number) {
+  if (page >= 1 && page <= this.totalPages) {
+    this.currentPage = page;
+  }
+}
+
+// Fonction pour récupérer les annonces de la page actuelle
+getPaginatedAnnonces() {
+  const startIndex = (this.currentPage - 1) * this.annoncesPerPage;
+  return this.annonces.slice(startIndex, startIndex + this.annoncesPerPage);
+}
+  // barre de recherche
+
+  // Méthode pour filtrer les annonces en fonction de la recherche
+  filterAnnonces() {
+    if (this.searchQuery) {
+      this.filteredAnnonces = this.annonces.filter((annonce: any) =>
+        annonce.titre.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.filteredAnnonces = this.annonces; // Réinitialiser si pas de recherche
+    }
+  }
+
+  // Filtre par date
+
+
+
 
   getReservations() {
     this.gpDashboardService.affichageReservations().subscribe({
@@ -232,7 +278,20 @@ export class DashboardGPComponent implements OnInit {
 }
 
 
+getProfil(): void {
+  this.profilService.afficherProfil().subscribe((data) => {
+    this.userProfile = data;
+    this.profilForm.patchValue({
+      prenom: data.prenom,
+      nom: data.nom,
+      email: data.email,
+      telephone: data.telephone,
+      adress: data.adress,
+      commune: data.commune,
+    });
+  });
 
+}
 
 //  Déconnexion
   logout(): void {

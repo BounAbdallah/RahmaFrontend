@@ -42,7 +42,7 @@ export class LoginComponent {
           if (userRole === 'GP') {
             this.router.navigate(['/reservationGp']);
           } else if (userRole === 'Client') {
-            this.router.navigate(['/ProfilClient']);
+            this.router.navigate(['/DashboardClient']);
           } else {
             // Rediriger vers une page par défaut ou une page d'erreur si le rôle n'est pas reconnu
             this.router.navigate(['/accueil']);

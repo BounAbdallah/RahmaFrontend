@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
-import { NavbarComponent } from "../../acteurs/client/navbar/navbar.component";  // Importer SweetAlert2
+import { NavbarComponent } from "../../acteurs/client/navbar/navbar.component";
 
 @Component({
   selector: 'app-colis',
@@ -16,8 +16,12 @@ import { NavbarComponent } from "../../acteurs/client/navbar/navbar.component"; 
 })
 export class ColisComponent implements OnInit {
   colisList: Colis[] = [];
+  searchTerm: string = '';
+  paginatedColis: Colis[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 0;
 
-  // Initialisation avec statut par défaut à "en attente"
   newColis: Colis = {
     titre: '',
     poids_kg: 0,
@@ -26,7 +30,7 @@ export class ColisComponent implements OnInit {
     contact_destinataire: '',
     contact_expediteur: '',
     date_envoi: '',
-    statut: 'En attente', // Valeur par défaut pour le statut
+    statut: 'En attente',
   };
 
   editMode = false;
@@ -38,16 +42,15 @@ export class ColisComponent implements OnInit {
     this.getColis();
   }
 
-  // Récupérer la liste des colis
   getColis() {
     this.colisService.getColis().subscribe((data) => {
       this.colisList = data;
+      this.totalPages = Math.ceil(this.colisList.length / this.itemsPerPage);
+      this.updatePaginatedColis();
     });
   }
 
-  // Ouvrir le formulaire d'ajout dans un pop-up
   openColisForm() {
-    // Créer un contenu HTML pour le formulaire avec des valeurs préremplies si en mode édition
     const htmlContent = `
       <form id="colisForm">
         <input type="text" id="titre" class="swal2-input" placeholder="Titre" required value="${this.editMode ? this.newColis.titre : ''}">
@@ -57,7 +60,7 @@ export class ColisComponent implements OnInit {
         <input type="text" id="contact_destinataire" class="swal2-input" placeholder="Contact Destinataire" required value="${this.editMode ? this.newColis.contact_destinataire : ''}">
         <input type="text" id="contact_expediteur" class="swal2-input" placeholder="Contact Expéditeur" required value="${this.editMode ? this.newColis.contact_expediteur : ''}">
         <input type="date" id="date_envoi" class="swal2-input" required value="${this.editMode ? this.newColis.date_envoi : ''}">
-        <input type="hidden" id="statut" value="en attente"> <!-- Valeur par défaut cachée -->
+        <input type="hidden" id="statut" value="en attente">
       </form>
     `;
 
@@ -67,7 +70,6 @@ export class ColisComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: this.editMode ? 'Mettre à jour' : 'Ajouter',
       preConfirm: () => {
-        // Récupérer les valeurs du formulaire
         const titre = (<HTMLInputElement>document.getElementById('titre')).value;
         const poids_kg = parseFloat((<HTMLInputElement>document.getElementById('poids_kg')).value);
         const adresse_expediteur = (<HTMLInputElement>document.getElementById('adresse_expediteur')).value;
@@ -76,7 +78,6 @@ export class ColisComponent implements OnInit {
         const contact_expediteur = (<HTMLInputElement>document.getElementById('contact_expediteur')).value;
         const date_envoi = (<HTMLInputElement>document.getElementById('date_envoi')).value;
 
-        // Vérification de la validité
         if (!titre || !poids_kg || !adresse_expediteur || !adresse_destinataire || !contact_destinataire || !contact_expediteur || !date_envoi) {
           Swal.showValidationMessage('Veuillez remplir tous les champs');
         }
@@ -89,21 +90,20 @@ export class ColisComponent implements OnInit {
           contact_destinataire,
           contact_expediteur,
           date_envoi,
-          statut: 'en attente' // Ajout de la valeur par défaut pour le statut
+          statut: 'en attente'
         };
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        // Créer ou mettre à jour le colis
         if (this.editMode && this.editColisId !== null) {
-          this.newColis = { ...result.value, id: this.editColisId };  // Ajoutez l'ID pour la mise à jour
+          this.newColis = { ...result.value, id: this.editColisId };
           this.colisService.updateColis(this.editColisId, this.newColis).subscribe(() => {
             this.getColis();
             this.resetForm();
             Swal.fire('Succès', 'Colis mis à jour avec succès !', 'success');
           });
         } else {
-          this.newColis = { ...result.value };  // Nouvelle valeur pour ajout
+          this.newColis = { ...result.value };
           this.colisService.createColis(this.newColis).subscribe((colis) => {
             this.colisList.push(colis);
             this.resetForm();
@@ -114,23 +114,19 @@ export class ColisComponent implements OnInit {
     });
   }
 
-
-  // Modifier un colis
   editColis(colis: Colis) {
     this.newColis = { ...colis };
     this.editColisId = colis.id || null;
     this.editMode = true;
-    this.openColisForm();  // Ouvrir le formulaire avec les données du colis à modifier
+    this.openColisForm();
   }
 
-  // Supprimer un colis
   deleteColis(id: number | undefined) {
     if (id === undefined) {
       console.error('Cannot delete a colis without a valid ID.');
       return;
     }
 
-    // Confirmation avant suppression
     Swal.fire({
       title: 'Êtes-vous sûr ?',
       text: "Vous ne pourrez pas annuler cette action !",
@@ -143,13 +139,13 @@ export class ColisComponent implements OnInit {
       if (result.isConfirmed) {
         this.colisService.deleteColis(id).subscribe(() => {
           this.colisList = this.colisList.filter(c => c.id !== id);
+          this.updatePaginatedColis(); // Mettre à jour les colis paginés après la suppression
           Swal.fire('Supprimé !', 'Le colis a été supprimé.', 'success');
         });
       }
     });
   }
 
-  // Réinitialiser le formulaire
   resetForm() {
     this.newColis = {
       titre: '',
@@ -159,9 +155,39 @@ export class ColisComponent implements OnInit {
       contact_destinataire: '',
       contact_expediteur: '',
       date_envoi: '',
-      statut: 'en attente', // Assurez-vous que le statut est toujours initialisé ici
+      statut: 'en attente',
     };
     this.editMode = false;
     this.editColisId = null;
+  }
+
+  updatePaginatedColis() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedColis = this.colisList.slice(start, end);
+  }
+
+  filterColis() {
+    const filteredColis = this.colisList.filter(colis =>
+      colis.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      colis.adresse_expediteur.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    this.totalPages = Math.ceil(filteredColis.length / this.itemsPerPage);
+    this.currentPage = 1; // Réinitialiser à la première page
+    this.paginatedColis = filteredColis.slice(0, this.itemsPerPage);
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedColis();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedColis();
+    }
   }
 }

@@ -42,8 +42,7 @@ export class AnnonceGPComponent {
   viewAnnonceDetails(id: number): void {
     this.GpAnnoncesService.getAnnonceById(id).subscribe((data) => {
       this.detailsAnnonceGp = data;
-      // Navigate to a detailed view component or open a modal with the details
-      // Example: this.router.navigate(['/annonce-details', id]);
+
     });
   }
 }

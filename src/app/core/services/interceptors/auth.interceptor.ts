@@ -3,7 +3,12 @@ import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  const token = localStorage.getItem("auth_token");
+  let token = null;
+
+  // Vérifier si l'application s'exécute dans un navigateur avant d'accéder à localStorage
+  if (typeof window !== 'undefined' && window.localStorage) {
+    token = localStorage.getItem("auth_token");
+  }
 
   // Si pas de token, passer à la requête suivante sans modification
   if (!token) {

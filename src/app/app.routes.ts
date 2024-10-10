@@ -14,7 +14,7 @@ import { NavbarComponent } from './composants/acteurs/client/navbar/navbar.compo
 import { DetailsAnnonceGPComponent } from './composants/acteurs/client/details-annonce-gp/details-annonce-gp.component';
 import { DashboardGPComponent } from './composants/acteurs/gp/dashboard-gp/dashboard-gp.component';
 import { GpReservationComponent } from './composants/acteurs/gp/gp-reservation/gp-reservation.component';
-
+import { RoleGuard } from './core/guards/role.guard';
 export const routes: Routes = [
 
 
@@ -61,12 +61,16 @@ export const routes: Routes = [
 
   {
     path: 'MesColis',
-    component: ColisComponent
+    component: ColisComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'Client' }
   },
 
   {
     path: 'DashboardClient',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'Client' }
   },
   {
     path: 'ProfilClient',
@@ -75,7 +79,9 @@ export const routes: Routes = [
   ,
   {
     path: 'Gpdisponible',
-    component: AnnonceGPComponent
+    component: AnnonceGPComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'Client' }
   },
 
   {
@@ -94,16 +100,19 @@ export const routes: Routes = [
   {
     path: 'annonce-details/:id',
     component: DetailsAnnonceGPComponent
-  }
-,
+  },
 {
-  path: 'DashboardGP',
-  component: DashboardGPComponent
+path: 'DashboardGP',
+component: DashboardGPComponent,
+canActivate: [RoleGuard],
+data: { role: 'GP' }
 },
 
 {
   path: 'reservationGp',
-  component: GpReservationComponent
+  component: GpReservationComponent,
+  canActivate: [RoleGuard],
+  data: { role: 'GP' }
 },
 
 ];

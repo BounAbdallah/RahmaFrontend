@@ -24,10 +24,12 @@ export class GpAnnoncesService {
   }
 
   // Obtenir une annonce spécifique par son ID
-  getAnnonceById(id: number): Observable<Annonce> {
-    return this.http.get<Annonce>(`${this.apiUrl}/detailsAnnoceGP/${id}`, { headers: this.getHeaders() })
+  getAnnonceById(id: number): Observable<Annonce[]> {
+    return this.http.get<Annonce[]>(`${this.apiUrl}/detailsAnnoceGP/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
+
+
 
   // Récupérer les headers avec le token d'authentification
   private getHeaders(): HttpHeaders {

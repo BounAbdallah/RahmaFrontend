@@ -1,34 +1,72 @@
-<div class="titrePage">
-  <h1>Annonces GP Disponible</h1>
+
+
+
+
+
+<div class="top-bare">
+
+  <div class="logo">
+    <img src="./../../../../assets/images/logos_icons/logoM2.png" alt="logo">
+  </div>
+  <div class="link">
+    <a href="accueil">Accueil</a>
+    <a href="MesColis">Mes Colis</a>
+    <a href="ProfilClient">Mes réservation</a>
+    <a href="Gpdisponible">GP disponible</a>
+
+  </div>
+  <div class="login-btn">
+    <a href ="ProfilClient">Profil</a>
+    <img class="profil_photo" src="" alt="Photo de profil" class="rounded-circle mb-3" width="150" />
+
+  </div>
 </div>
+<!-- <app-navbar></app-navbar> -->
+
+
+
 
 <div class="body-content">
-  <div class="card-annonces-container" *ngIf="annonce"> <!-- Added *ngIf to ensure annonce exists -->
-    <div class="card-body">
-      <div class="card-annonce-item">
-        <div class="image-section">
-          <img src="{{ annonce.photo_pays_voyage_provenance }}" alt="Photo de provenance">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <!-- SVG content here -->
-          </svg>
-          <img src="{{ annonce.photo_pays_voyage_destination }}" alt="Photo de destination">
-        </div>
 
-        <div class="destination-titre">
-          <h3>{{ annonce.pays_provenance }}</h3>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-            <!-- SVG content here -->
-          </svg>
-          <h3>{{ annonce.pays_destination }}</h3>
-        </div>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <img
+        src="./../../../../../assets/images/images_/immageAnnonceGP.png"
+          alt="Image de l'annonce"
+          class="img-fluid rounded shadow large-image"
+        />
 
-        <div class="date-voyage">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <!-- SVG content here -->
-          </svg>
-          <!-- Additional content for date can be added here -->
-        </div>
+      </div>
+
+      <div class="col-md-6">
+        <!-- <h1 class="display-4">{{ annonceDetails.titre }}</h1> -->
+        <p class="lead">{{ annonceDetails.description }}</p>
+        <p><strong>Pays de provenance:</strong> {{ annonceDetails.pays_provenance }}</p>
+        <p><strong>Pays de destination:</strong> {{ annonceDetails.pays_destination }}</p>
+        <p><strong>Condition:</strong> {{ annonceDetails.condition }}</p>
+        <p><strong>Tarif:</strong> {{ annonceDetails.tarif }} FCFA</p>
+        <p><strong>Poids:</strong> {{ annonceDetails.poids_kg }} kg</p>
+        <!-- <p><strong>Date de début de réception:</strong> {{ annonceDetails.date_debut_reception_colis | date:'short' }}</p>
+        <p><strong>Date de fin de réception:</strong> {{ annonceDetails.date_fin_reception_colis | date:'short' }}</p>
+        <p><strong>Créateur ID:</strong> {{ annonceDetails.createur }}</p> -->
+        <p><strong>Statut:</strong> {{ annonceDetails.statut }}</p>
+        <!-- <p><strong>Date de création:</strong> {{ annonceDetails.created_at | date:'short' }}</p>
+        <p><strong>Date de mise à jour:</strong> {{ annonceDetails.updated_at | date:'short' }}</p> -->
+<div class="btnAction">
+  <button class="btn btn-primary btn-lg mt-3" (click)="openColisForm()">Réserver maintenant</button>
+
+<button class="btn btnRetour btn-primary btn-lg mt-3">
+  <a href="Gpdisponible">Retour</a>
+</button>
+
+</div>
       </div>
     </div>
   </div>
+
 </div>
+
+
+
+
