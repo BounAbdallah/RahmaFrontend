@@ -1,3 +1,4 @@
+
 import { Routes } from '@angular/router';
 import { AccueilComponent } from './composants/portail/accueil/accueil.component';
 import { DetailLivraisonComponent } from './composants/portail/detail-livraison/detail-livraison.component';
@@ -12,6 +13,7 @@ import { AnnonceGPComponent } from './composants/acteurs/client/annonce-gp/annon
 import { NavbarComponent } from './composants/acteurs/client/navbar/navbar.component';
 import { DetailsAnnonceGPComponent } from './composants/acteurs/client/details-annonce-gp/details-annonce-gp.component';
 import { DashboardGPComponent } from './composants/acteurs/gp/dashboard-gp/dashboard-gp.component';
+import { GpReservationComponent } from './composants/acteurs/gp/gp-reservation/gp-reservation.component';
 
 export const routes: Routes = [
 
@@ -46,12 +48,7 @@ export const routes: Routes = [
     path: 'registerClient',
     component: RegisterClientComponent
   }
-
   ,
-
-
-
-
   {
     path: 'registerLivreur',
     component: RegisterLivreurComponent
@@ -102,6 +99,11 @@ export const routes: Routes = [
 {
   path: 'DashboardGP',
   component: DashboardGPComponent
-}
+},
+
+{
+  path: 'reservationGp',
+  component: GpReservationComponent
+},
 
 ];

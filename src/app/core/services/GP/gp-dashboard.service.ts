@@ -32,6 +32,7 @@ export class GpDashboardService {
     return this.http.get(url).pipe(catchError(this.handleError));
   }
 
+
   // Ajouter une annonce
   createAnnonce(annonceData: any): Observable<any> {
     const url = `${this.apiUrl}/gp/annonces`;
@@ -49,6 +50,17 @@ export class GpDashboardService {
     const url = `${this.apiUrl}/gp/annonces/${annonceId}/archive`;
     return this.http.delete(url).pipe(catchError(this.handleError));
   }
+  changerStatutReservation(reservationId: number | undefined, status: string): Observable<any> {
+    const url = `${this.apiUrl}/reservation/${reservationId}/changer-statut`; // Assurez-vous que reservationId est correctement formaté
+    return this.http.patch(url, { status }).pipe( // Changez ici de put à patch
+        catchError((error) => {
+            console.error('Erreur lors de la mise à jour du statut :', error);
+            throw error;
+        })
+    );
+}
+
+
 
   // Supprimer une annonce
   deleteAnnonce(annonceId: number): Observable<any> {

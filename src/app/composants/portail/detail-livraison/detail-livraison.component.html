@@ -1,208 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Détails livraison local - Rahma Delivery</title>
 
-    <title>Tableau de bord</title>
 </head>
-
 <body>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <a href="#" class="logo">
-
-            <div class="logo-name"><img src="./../../../../assets/images/logos_icons/logoM2.png" alt=""></div>
-        </a>
-        <ul class="side-menu">
-            <li><a href="#"><i class='bx bxs-dashboard'></i>Accueil</a></li>
-            <li><a href="#"><i class='bx bx-store-alt'></i>Livraisons</a></li>
-            <li class="active"><a href="#"><i class='bx bx-analyse'></i>Statistiques</a></li>
-            <li><a href="#"><i class='bx bx-message-square-dots'></i>Reservations</a></li>
-            <li><a href="#"><i class='bx bx-group'></i>Utilisateurs</a></li>
-            <li><a href="#"><i class='bx bx-cog'></i>Revenus</a></li>
-        </ul>
-        <ul class="side-menu">
-            <li>
-                <a href="#" class="logout">
-                    <i class='bx bx-log-out-circle'></i>
-                    Deconnexion
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Sidebar -->
-
-    <!-- Main Content -->
-    <div class="content">
-        <!-- Navbar -->
-        <nav>
-            <i class='bx bx-menu'></i>
-            <form action="#">
-                <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button class="search-btn" type="submit"><i class='bx bx-search'></i></button>
-                </div>
-            </form>
-            <input type="checkbox" id="theme-toggle" hidden>
-            <label for="theme-toggle" class="theme-toggle"></label>
-            <a href="#" class="notif">
-                <i class='bx bx-bell'></i>
-                <span class="count">12</span>
-            </a>
-            <a href="#" class="profile">
-                <img src="images/logo.png">
-            </a>
-        </nav>
-
-        <!-- End of Navbar -->
-
-        <main>
-            <div class="header">
-                <div class="left">
-                    <h1>Tableau de bord</h1>
-                    <!-- <ul class="breadcrumb">
-                        <li><a href="#">
-                                Analytics
-                            </a></li>
-                        /
-                        <li><a href="#" class="active">Shop</a></li>
-                    </ul> -->
-                </div>
-                <!-- <a href="#" class="report">
-                    <i class='bx bx-cloud-download'></i>
-                    <span>Download CSV</span>
-                </a> -->
-            </div>
-
-            <!-- Insights -->
-            <ul class="insights">
-                <li>
-                    <i class='bx bx-calendar-check'></i>
-                    <span class="info">
-                        <h3>
-                            1,074
-                        </h3>
-                        <p>Annonces</p>
-                    </span>
-                </li>
-                <li><i class='bx bx-show-alt'></i>
-                    <span class="info">
-                        <h3>
-                            3,944
-                        </h3>
-                        <p>Utilisateurs</p>
-                    </span>
-                </li>
-                <li><i class='bx bx-line-chart'></i>
-                    <span class="info">
-                        <h3>
-                            265
-                        </h3>
-                        <p>Livraisons effectuées</p>
-                    </span>
-                </li>
-                <li><i class='bx bx-dollar-circle'></i>
-                    <span class="info">
-                        <h3>
-                            FCFA 503498
-                        </h3>
-                        <p>Encaisser</p>
-                    </span>
-                </li>
-            </ul>
-            <!-- End of Insights -->
-
-            <div class="bottom-data">
-                <div class="orders">
-                    <div class="header">
-                        <i class='bx bx-receipt'></i>
-                        <h3>Recent Orders</h3>
-                        <i class='bx bx-filter'></i>
-                        <i class='bx bx-search'></i>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Order Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img src="images/profile-1.jpg">
-                                    <p>John Doe</p>
-                                </td>
-                                <td>14-08-2023</td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="images/profile-1.jpg">
-                                    <p>John Doe</p>
-                                </td>
-                                <td>14-08-2023</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="images/profile-1.jpg">
-                                    <p>John Doe</p>
-                                </td>
-                                <td>14-08-2023</td>
-                                <td><span class="status process">Processing</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Reminders -->
-                <div class="reminders">
-                    <div class="header">
-                        <i class='bx bx-note'></i>
-                        <h3>Remiders</h3>
-                        <i class='bx bx-filter'></i>
-                        <i class='bx bx-plus'></i>
-                    </div>
-                    <ul class="task-list">
-                        <li class="completed">
-                            <div class="task-title">
-                                <i class='bx bx-check-circle'></i>
-                                <p>Start Our Meeting</p>
-                            </div>
-                            <i class='bx bx-dots-vertical-rounded'></i>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">Rahma Delivery</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Accueil</a>
                         </li>
-                        <li class="completed">
-                            <div class="task-title">
-                                <i class='bx bx-check-circle'></i>
-                                <p>Analyse Our Site</p>
-                            </div>
-                            <i class='bx bx-dots-vertical-rounded'></i>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">À propos</a>
                         </li>
-                        <li class="not-completed">
-                            <div class="task-title">
-                                <i class='bx bx-x-circle'></i>
-                                <p>Play Footbal</p>
-                            </div>
-                            <i class='bx bx-dots-vertical-rounded'></i>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
                         </li>
                     </ul>
                 </div>
-
-                <!-- End of Reminders-->
-
+                <button class="btn btn-outline-light">Connexion</button>
             </div>
+        </nav>
+    </header>
 
-        </main>
-
+    <div class="hero">
+        <h1>Détails livraison local</h1>
     </div>
 
-    <script src="index.js"></script>
-</body>
+    <div class="container service-section">
+        <h2>Service de livraison local</h2>
+        <p>
+            Le service de livraison local de Rahma Delivery, appelé livraison à moto, est une solution rapide et fiable pour les livraisons sur Dakar. Les livreurs à moto desservent différentes zones de la région de Dakar, garantissant une prise en charge efficace des colis et repas tout en respectant les délais.
+        </p>
+        <p>
+            Que ce soit pour la livraison de colis personnels ou de repas provenant de restaurants locaux, Rahma Delivery assure une couverture complète de la région grâce à son réseau de livreurs bien formés et équipés pour naviguer rapidement dans les zones urbaines.
+        </p>
 
+        <h3>Comment ça se passe !</h3>
+        <ul>
+            <li>Se connecter sur la plateforme</li>
+            <li>Sélectionner le service de livraison</li>
+            <li>Sélectionner la zone de livraison</li>
+            <li>Entrer les informations du colis à livrer</li>
+            <li>Envoyer la demande de livraison</li>
+        </ul>
+
+        <h3>Pour plus d’infos</h3>
+        <div class="contact-info">
+            <p>Email: <a href="mailto:inforahmadelivery.com">inforahmadelivery.com</a></p>
+            <p>Service client: 786047303</p>
+            <p>Adresse: Dakar, Medina rue 5 x 3</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Rahma Delivery. Tous droits réservés.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

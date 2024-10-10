@@ -9,6 +9,9 @@ import { Annonce } from './annonce.model';
   providedIn: 'root'
 })
 export class GpAnnoncesService {
+  getReservationsForAnnonce(annonceId: number) {
+    throw new Error('Method not implemented.');
+  }
 
   private apiUrl = apiUrl;
 
@@ -37,6 +40,20 @@ export class GpAnnoncesService {
     }
   }
 
+
+  affichageReservations(): Observable<any> {
+    const url = `${this.apiUrl}/gp/mes-reservations`;
+    return this.http.get(url).pipe(
+      catchError((error: any) => {
+        console.error('Erreur dans l\'appel API : ', error);
+        throw error;
+      })
+    );
+  }
+  affichageColisPourAnnonce(annonceId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/detailsColisPourAnnonce/${annonceId}`)
+      .pipe(catchError(this.handleError));
+  }
   // Gestion d'erreur
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('Une erreur est survenue : ', error);

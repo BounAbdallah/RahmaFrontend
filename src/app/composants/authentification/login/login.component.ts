@@ -40,7 +40,7 @@ export class LoginComponent {
 
           // Redirection basée sur le rôle
           if (userRole === 'GP') {
-            this.router.navigate(['/DashboardGP']);
+            this.router.navigate(['/reservationGp']);
           } else if (userRole === 'Client') {
             this.router.navigate(['/ProfilClient']);
           } else {

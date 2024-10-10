@@ -14,12 +14,23 @@
                 Commandes</a>
               </li>
             <button (click)="openAnnonceFormModal()">
-              <img src="./../../../../../assets/images/logos_icons/colis.svg" alt="">
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="23" height="19" viewBox="0 0 23 19" fill="none">
+                <path d="M20 0.75H2.5C1.83696 0.75 1.20107 0.955775 0.732233 1.32206C0.263392 1.68834 0 2.18512 0 2.70312V16.375C0 16.893 0.263392 17.3898 0.732233 17.7561C1.20107 18.1223 1.83696 18.3281 2.5 18.3281H20C21.375 18.3281 22.5 17.4492 22.5 16.375V2.70312C22.5 1.62891 21.375 0.75 20 0.75ZM16.25 10.5156H12.5V13.4453C12.5 13.9824 11.9375 14.4219 11.25 14.4219C10.5625 14.4219 10 13.9824 10 13.4453V10.5156H6.25C5.5625 10.5156 5 10.0762 5 9.53906C5 9.00195 5.5625 8.5625 6.25 8.5625H10V5.63281C10 5.0957 10.5625 4.65625 11.25 4.65625C11.9375 4.65625 12.5 5.0957 12.5 5.63281V8.5625H16.25C16.9375 8.5625 17.5 9.00195 17.5 9.53906C17.5 10.0762 16.9375 10.5156 16.25 10.5156Z" fill="#F8F8F8"/>
+              </svg> -->
               Ajouter une Annonce
 
             </button>
 
-              <li><a href="#">Voyages</a></li>
+              <li><a href="/reservationGp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+                  <mask id="mask0_1287_139" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="44" height="44">
+                    <rect width="44" height="44" fill="#D9D9D9"/>
+                  </mask>
+                  <g mask="url(#mask0_1287_139)">
+                    <path d="M33.9167 34.4667V29.3334H32.0833V35.2L36.025 39.1417L37.3083 37.8584L33.9167 34.4667ZM22 7.33335L11.1375 13.6125L22 19.8917L32.8625 13.6125L22 7.33335ZM5.5 29.2875V14.7125C5.5 14.0403 5.66042 13.4292 5.98125 12.8792C6.30208 12.3292 6.75278 11.8861 7.33333 11.55L20.1667 4.17085C20.4722 4.01808 20.7701 3.89585 21.0604 3.80419C21.3507 3.71252 21.6639 3.66669 22 3.66669C22.3361 3.66669 22.6569 3.71252 22.9625 3.80419C23.2681 3.89585 23.5583 4.01808 23.8333 4.17085L36.6667 11.55C37.2472 11.8861 37.6979 12.3292 38.0188 12.8792C38.3396 13.4292 38.5 14.0403 38.5 14.7125V22H34.8333V16.6834L21.9542 24.1084L9.16667 16.6834V29.2417L20.1667 35.6125V39.8292L7.33333 32.45C6.75278 32.1139 6.30208 31.6709 5.98125 31.1209C5.66042 30.5709 5.5 29.9597 5.5 29.2875ZM33 44C30.4639 44 28.3021 43.1063 26.5146 41.3188C24.7271 39.5313 23.8333 37.3695 23.8333 34.8334C23.8333 32.2972 24.7271 30.1354 26.5146 28.3479C28.3021 26.5604 30.4639 25.6667 33 25.6667C35.5361 25.6667 37.6979 26.5604 39.4854 28.3479C41.2729 30.1354 42.1667 32.2972 42.1667 34.8334C42.1667 37.3695 41.2729 39.5313 39.4854 41.3188C37.6979 43.1063 35.5361 44 33 44Z" fill="white"/>
+                  </g>
+                </svg>
+                Mes reservations</a></li>
               <li><a href="#">Paramètres</a></li>
           </ul>
       </aside>
@@ -73,20 +84,78 @@
 
 
 
-                <h4>Mes annonces récentes</h4>
-                <div class="order-cards">
-                  <div class="card" *ngFor="let annonce of annonces.reverse().slice(0, 3)">
-                    <img [src]="annonce.photo_pays_voyage_provenance" alt="Paris">
-                    <div class="card-body">
-                      <h5>{{ annonce.pays_destination }} le <span>{{ annonce.date_fin_reception_colis |date:'dd/MM/yyyy' }}</span></h5>
-                      <p>{{ annonce.poids_kg_restant }} kg restant</p>
-                      <button class="btn" (click)="voirDetailsAnnonce(annonce.id)">Voir les détails</button>
-                    </div>
+              <h4>Mes annonces récentes</h4>
+              <div class="order-cards">
+                <div class="card" *ngFor="let annonce of annonces ">
+                  <img [src]="annonce.photo_pays_voyage_provenance" alt="Image de provenance">
+                  <div class="card-body">
+                    <h5>{{ annonce.pays_destination }} le <span>{{ annonce.date_fin_reception_colis | date:'dd/MM/yyyy' }}</span></h5>
+                    <p>{{ annonce.poids_kg_restant }} kg restant</p>
+                    <button class="btn" (click)="showAnnonces(annonce.id)">Voir les détails</button>
                   </div>
                 </div>
+              </div>
 
-                <!-- Modale pour afficher les détails des colis -->
-                <app-modal-details-colis [annonceId]="selectedAnnonceId"></app-modal-details-colis>
+              <!-- Modal pour afficher les détails des colis -->
+              <div class="modal" *ngIf="isModalVisible ">
+                <div class="modal-content">
+                  <span class="close" (click)="closeModal()">&times;</span>
+
+
+                  <h2>Détails de l'annonce</h2>
+                  <div *ngIf="annonce">
+                    <h3>Détails de l'annonce</h3>
+                    <p><strong>Titre:</strong> {{ annonce.titre }}</p>
+                    <p><strong>Description:</strong> {{ annonce.description }}</p>
+                    <p><strong>Pays de provenance:</strong> {{ annonce.pays_provenance }}</p>
+                    <p><strong>Pays de destination:</strong> {{ annonce.pays_destination }}</p>
+                    <img *ngIf="annonce.photo_pays_voyage_provenance" [src]="annonce.photo_pays_voyage_provenance" alt="Pays de provenance" style="width: 120px;">
+                    <img *ngIf="annonce.photo_pays_voyage_destination" [src]="annonce.photo_pays_voyage_destination" alt="Pays de destination" style="width: 120px;">
+                    <p><strong>Poids (kg):</strong> {{ annonce.poids_kg }}</p>
+                    <p><strong>Tarif:</strong> {{ annonce.tarif }}</p>
+                    <p><strong>Statut:</strong> {{ annonce.statut }}</p>
+                    <p><strong>Conditions:</strong> {{ annonce.condition }}</p>
+                  </div>
+
+                  <h3>Nombre de Réservations: {{ nombreReservations }}</h3>
+
+                  <h3>Détails des Réservations</h3>
+                  <table *ngIf="reservationsDetails && reservationsDetails.length > 0" border="1" cellspacing="0" cellpadding="10">
+                    <thead>
+                      <tr>
+
+                        <th>Nom Utilisateur</th>
+                        <th>Email Utilisateur</th>
+                        <th>Téléphone Utilisateur</th>
+                        <th>Status</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let reservation of reservationsDetails">
+
+                        <td>{{ reservation.reservation_id.user.nom }}</td>
+                        <td>{{ reservation.reservation_id.user.email }}</td>
+                        <td>{{ reservation.reservation_id.user.telephone }}</td>
+
+                        <td>
+                          <select name="status" (change)="changerStatutReservation(reservation?.reservation_id.id, $event)">
+                            <option value="en attente" [selected]="reservation?.reservation_id?.status === 'en attente'">En attente</option>
+                            <option value="confirmée" [selected]="reservation?.reservation_id?.status === 'confirmée'">Confirmée</option>
+                            <option value="annulée" [selected]="reservation?.reservation_id?.status === 'annulée'">Annulée</option>
+                          </select>
+
+
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+
+                <!-- <app-modal-details-colis [annonceId]="selectedAnnonceId"></app-modal-details-colis> -->
             </div>
 
             <!-- Derniers voyages planifiés -->

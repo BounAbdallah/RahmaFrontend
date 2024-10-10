@@ -26,6 +26,8 @@ export class ModalAnnonceComponent {
   };
   formErrors: any = {}; // Pour stocker les erreurs de validation
   isOpen: boolean = false; // Pour contrôler l'affichage du modal
+  isModalVisible: boolean = false;
+
 
   constructor(private gpDashboardService: GpDashboardService) {}
 
@@ -87,7 +89,7 @@ export class ModalAnnonceComponent {
     this.isOpen = true;
   }
 
-  closeModal() {
-    this.isOpen = false;
+  closeModal(): void {
+    this.isModalVisible = false;
   }
 }
