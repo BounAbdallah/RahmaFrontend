@@ -1,254 +1,204 @@
-
-
-body{
-
+/* Styles généraux */
+body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: auto;
   font-style: normal;
-  margin: 0%;
-
-
-
-}
-.top-bare{
-  width: 100%;
-  height: 75px;
-  /* margin-left: -30px; */
-  flex-shrink: 0;
-  border-bottom: 2px solid rgba(7, 76, 114, 0.38);
-  background: linear-gradient(0deg, var(--BleuBase, #074C72) 0%, var(--BleuBase, #074C72) 100%), rgba(255, 255, 255, 0.40);
-/* margin: 0px; */
-display: flex;
-margin-top: -100px;
-flex-direction: row;
-align-items: center;
-justify-content: space-evenly;
-position: fixed;
-
-}
-.top-bare .login-btn img {
-  align-items: center;
-  justify-content: center;
-  align-items:center ;
-  text-align: center;
-  margin-top: 20px;
-  width: 35px;
-  height: 35px;
+  margin: 0;
 }
 
-.link{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  gap:40px
-}
-.link a{
-  color:  #FFF;
-text-align: center;
-font-family: Montserrat;
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: 45px; /* 250% */
-}
-.login-btn{
-  border-radius: 12px;
-background: #FFF;
 
-width: 206px;
-height: 48px;
-flex-shrink: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 12px;
-}
-
-.login-btn a{
-  color: #000;
-text-align: center;
-font-family: Montserrat;
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: 45px; /* 250% */
-}
-
-a{
+a {
   text-decoration: none;
 }
-.body-content{
-  margin-left: 80px;
+
+/* Contenu principal */
+.body-content {
+  /* margin-left: 80px; */
   margin-top: 130px;
   display: flex;
-  flex-direction: row;
-
-  text-align: center;
-  align-items: center;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-gap: 40px;
-padding-bottom: 50px;
+  gap: 40px;
+  padding-bottom: 50px;
 }
 
-a{
-  text-decoration: none;
-
-}
-
-
-
-.card-annonce-item{
+/* Carte d'annonce */
+.card-annonce-item {
   width: 384px;
-height: 380px;
-flex-shrink: 0;
-border-radius: 4px;
-background: #F5F5F5;
-box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.10);
-}
-
-
-.image-section{
-  width: 364px;
-  height: 145px;
+  height:80%;
   flex-shrink: 0;
   border-radius: 4px;
-background: var(--Blanc, #FFF);
-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-margin-left: 10px;
-margin-right: 10px;
-margin-top: -10px;
-display:flex ;
-flex-direction: row;
-justify-content: space-evenly;
-text-align: center;
-align-items: center;
+  background: #F5F5F5;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.10);
+  margin-bottom: 20px;
+  padding: 10px;
+  margin: 10px;
 }
 
-.image-section img{
+/* Section image */
+.image-section {
+  width: 364px;
+  height: 145px;
+  border-radius: 4px;
+  background: var(--Blanc, #FFF);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  /* margin: 0 10px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -30px;
+}
+.estination-titre{
+  margin-top: 10px;
+}
+.image-section .imagevoyage {
   width: 120px;
   height: 120px;
+  background-image: url('./../../../../../assets/images/logos_icons/DepartBG.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content:center;
+  text-align: center;
+  align-items: center;
+  color: #F5F5F5;
+  font-size: 20px;
 }
 
-.destination-titre{
+.image-section .imagevoyagearrivage {
+  width: 120px;
+  height: 120px;
+  background-image: url('./../../../../../assets/images/logos_icons/ArriveeBG.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content:center;
+  text-align: center;
+  align-items: center;
+  color: #F5F5F5;
+  font-size: 20px;
+}
+
+/* Informations */
+.destination-titre,
+.date-voyage,
+.prix,
+.adresse {
   display: flex;
   flex-direction: row;
-  text-align: center;
-  margin-top:20px ;
   align-items: center;
+  margin-left: 10px;
   gap: 10px;
-  margin-left: 10px;
   color: var(--BleuBase, #074C72);
-text-align: center;
-font-family: Montserrat;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: 45px; /* 281.25% */
+  font-family: Montserrat;
+  font-size: 13px;
+  font-weight: 600;
+}
+.date-voyage p{
+  margin-top: 20px;
 }
 
-.date-voyage{
-  display:flex;
-flex-direction: row;
-/* align-items: center;
-text-align: center; */
-margin-top: 10px;
-margin-left: 10px;
-/* margin-top: -px; */
-gap: 10px;
-
-color: var(--BleuBase, #074C72);
-text-align: center;
-font-family: Montserrat;
-font-size: 13px;
-font-style: normal;
-font-weight: 600;
-line-height: 12px; /* 92.308% */
+.prix p{
+  margin-top: 20px;
 }
-.prix{
+
+/* Bouton de réservation */
+.btn-reservation-GP {
   display: flex;
-  flex-direction: row;
-  /* text-align: center;
-  align-items: center; */
-  margin-left: 10px;
-  justify-content: start;
-margin-top: 02px;
-gap: 10px;
-
-color: var(--BleuBase, #074C72);
-text-align: center;
-font-family: Montserrat;
-font-size: 13px;
-font-style: normal;
-font-weight: 600;
-line-height: 12px; /* 92.308% */
-}
-.devis-argaent, p{
-  margin-top: 8px;
-}
-.adresse{
-  display: flex;
-  flex-direction: row;
-  text-align: center;
+  width: 190px;
+  padding: 10px;
+  justify-content: center;
   align-items: center;
-  margin-left: 10px;
-/* margin-top: -9px; */
-gap: 10px;
-
-color: var(--BleuBase, #074C72);
-text-align: center;
-font-family: Montserrat;
-font-size: 13px;
-font-style: normal;
-font-weight: 600;
-line-height: 12px; /* 92.308% */
+  border-radius: 4px;
+  background: var(--RougeBase, #B50302);
+  margin: 12px auto 22px auto;
 }
 
-.btn-reservation-GP{
-  display: flex;
-width: 190px;
-padding: 10px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-border-radius: 4px;
-background: var(--RougeBase, #B50302);
-margin-left: 97px;
-margin-right: 97px;
-margin-top: 12px;
-bottom: 22px;
-}
-.btn-reservation-GP a{
+.btn-reservation-GP a {
   color: var(--Blanc, #FFF);
-text-align: center;
-font-family: Montserrat;
-font-size: 12px;
-font-style: normal;
-font-weight: 600;
-line-height: 12px; /* 100% */
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.titrePage{
+/* Titre de la page */
+.titrePage {
   margin-top: 100px;
   width: 817px;
-height: 100px;
-flex-shrink: 0;
-border-radius: 8px;
-/* background: var(--BleuBase, #074C72); */
-color: #010101;
-border-bottom: 2px solid #074C72;
-display: flex;
-text-align: center;
-justify-content: center;
-align-items: center;
-margin-left:20%;
+  height: 100px;
+  border-radius: 8px;
+  color: #010101;
+  border-bottom: 2px solid #074C72;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Montserrat;
+  font-size: 22px;
+  font-weight: 600;
+}
 
-font-family: Montserrat;
-font-size: 22px;
-font-style: normal;
-font-weight: 600;
-line-height: 16px; /* 72.727% */
+/* Styles responsives */
+@media (max-width: 768px) {
+  .top-bare {
+      flex-direction: column;
+      height: auto;
+      padding: 10px 0;
+  }
+
+  .link {
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  .body-content {
+      margin-left: 0;
+      margin-top: 100px;
+
+  }
+
+  .card-annonce-item {
+      width: 90%;
+  }
+
+  .image-section {
+      width: 100%;
+  }
+
+  .titrePage {
+      width: 100%;
+      font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bare {
+      padding: 5px;
+  }
+
+  .login-btn {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .body-content {
+      margin: 0;
+      padding: 10px;
+  }
+
+  .card-annonce-item {
+      width: 100%;
+  }
+
+  .btn-reservation-GP {
+      width: 100%;
+  }
+
+  .titrePage {
+      font-size: 16px;
+  }
 }

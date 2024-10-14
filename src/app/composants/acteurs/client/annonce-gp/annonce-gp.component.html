@@ -1,28 +1,4 @@
 
-<div class="top-bare">
-
-  <div class="logo">
-    <img src="./../../../../assets/images/logos_icons/logoM2.png" alt="logo">
-  </div>
-  <div class="link">
-    <a href="accueil">Accueil</a>
-    <a href="MesColis">Mes Colis</a>
-    <a href="ProfilClient">Profil</a>
-    <a href="Gpdisponible">GP disponible</a>
-
-  </div>
-  <div class="login-btn">
-    <a href ="ProfilClient">{{ userProfile.nom }}</a>
-    <img class="profil_photo" src="{{ userProfile.photo_profil }}" alt="Photo de profil" class="rounded-circle mb-3" width="150" />
-
-  </div>
-</div>
-<!-- <app-navbar></app-navbar> -->
-
-
- <div class="titrePage">
-    <h1>Annonces GP Disponible</h1>
-  </div>
 
 <div class="body-content">
 
@@ -37,7 +13,7 @@
 <!-- <div class="card-section-annonces-gp" > -->
 <div class="card-annonce-item">
   <div class="image-section">
-    <img src="{{ annonce.photo_pays_voyage_provenance}}" alt="">
+  <div class="imagevoyage">{{ annonce.pays_provenance}}</div>
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
       <mask id="mask0_919_827" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
         <rect width="40" height="40" fill="#D9D9D9"/>
@@ -47,7 +23,7 @@
       </g>
     </svg>
 
-    <img src="{{ annonce.photo_pays_voyage_destination}}" alt="">
+    <div class="imagevoyagearrivage">{{ annonce.pays_destination}}</div>
 
   </div>
   <!-- code titre card -->
@@ -99,7 +75,7 @@
 
   <!-- date decolage -->
 
-  <!-- <p>{{ annonce.date_fin_reception_colis}}</p> -->
+  <p>{{ annonce.date_fin_reception_colis}}</p>
 
   </div>
 

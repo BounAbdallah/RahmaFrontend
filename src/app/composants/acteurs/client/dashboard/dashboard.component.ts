@@ -1,22 +1,31 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { ProfilService } from '../../../../core/services/profil.service';
+import { NotificationService } from '../../../../core/services/notification.service';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
+import { ColisComponent } from '../../../colis/colis/colis.component';
+import { AnnonceGPComponent } from '../annonce-gp/annonce-gp.component';
+import { ProfilComponent } from '../profil/profil.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, ProfilComponent, ColisComponent, AnnonceGPComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css'] // Ensure it's 'styleUrls'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   profilForm: FormGroup;
   userProfile: any;
+  notifications: string[] = []; // Array to store notifications
+  authService: any;
+  router: any;
 
   constructor(
     private profilService: ProfilService,
+    private notificationService: NotificationService,
     private formBuilder: FormBuilder
   ) {
     this.profilForm = this.formBuilder.group({
@@ -27,46 +36,52 @@ export class DashboardComponent {
       address: [''],
       commune: [''],
       password: [''],
-      password_confirmation: [''], // Ajout du champ de confirmation
+      password_confirmation: [''], // Password confirmation field
       photo_profil: [''],
     });
   }
 
   ngOnInit(): void {
     this.getProfil();
+    this.getNotifications(); // Fetch notifications on init
   }
 
-  // Récupérer les informations du profil
+  // Retrieve user profile
   getProfil(): void {
     this.profilService.afficherProfil().subscribe((data) => {
       this.userProfile = data;
-      this.profilForm.patchValue({
-        prenom: data.prenom,
-        nom: data.nom,
-        email: data.email,
-        telephone: data.telephone,
-        adress: data.adress,
-        commune: data.commune,
-      });
+      if (data.photo_profil) {
+        this.userProfile.photo_profil = `http://127.0.0.1:8000/storage/${data.photo_profil}`;
+      }
+      this.profilForm.patchValue(data); // Use patchValue to simplify
     });
   }
 
-  // Envoyer les modifications du profil
+  // Retrieve notifications
+  getNotifications(): void {
+    this.notificationService.getNotifications().subscribe(
+      (data) => {
+        this.notifications = data; // Assuming the response is an array of notifications
+      },
+      (error) => {
+        console.error('Failed to fetch notifications:', error);
+      }
+    );
+  }
+
+  // Submit profile updates
   onSubmit(): void {
-    // Validation des mots de passe
     if (this.profilForm.get('password')?.value !== this.profilForm.get('password_confirmation')?.value) {
-      console.error('Les mots de passe ne correspondent pas');
+      console.error('Passwords do not match');
+      this.notifications.push('⚠️ Les mots de passe ne correspondent pas.');
       return;
     }
 
     const formData = new FormData();
-
-    // Ajouter les valeurs du formulaire à formData
     Object.keys(this.profilForm.controls).forEach((key) => {
       formData.append(key, this.profilForm.get(key)?.value);
     });
 
-    // Si un fichier d'image a été sélectionné
     const photoProfil = this.profilForm.get('photo_profil')?.value;
     if (photoProfil) {
       formData.append('photo_profil', photoProfil);
@@ -74,15 +89,17 @@ export class DashboardComponent {
 
     this.profilService.modifierProfil(formData).subscribe(
       (response) => {
-        console.log('Profil mis à jour avec succès', response);
+        console.log('Profile updated successfully', response);
+        this.notifications.push('✅ Votre profil a été mis à jour avec succès.');
       },
       (error) => {
-        console.error('Erreur lors de la mise à jour du profil', error);
+        console.error('Error updating profile', error);
+        this.notifications.push('❌ Erreur lors de la mise à jour du profil.');
       }
     );
   }
 
-  // Gestion de l'image de profil à partir d'un input type file
+  // Handle file input for profile picture
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -92,4 +109,16 @@ export class DashboardComponent {
     }
   }
 
+  onLogout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.notifications.push('🔓 Vous avez été déconnecté.');
+        this.router.navigate(['/connexion']);
+      },
+      error: (error: any) => {
+        console.error('Logout error', error);
+        this.notifications.push('❌ Une erreur est survenue lors de la déconnexion. Veuillez réessayer.');
+      }
+    });
+  }
 }

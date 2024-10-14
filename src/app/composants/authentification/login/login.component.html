@@ -1,38 +1,41 @@
 <div class="form-container">
-<div class="texte-welcome">
-  <h2>Bienvenue chez <span>Rahma Delivery</span></h2>
-</div>
-
-
-<div class="body">
-  <div class="logo">
-    <img src="./../../../../assets/images/logos_icons/logorouge.png" alt="">
-  </div>
-  <form (ngSubmit)="connexion()" [formGroup]="loginForm" class="register-form">
-  <!-- Informations de Connexion -->
-<h3>Entrez vos coordonné de connexion</h3>
-
-  <div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" formControlName="email" class="form-control" placeholder="Entrez votre Email" required />
-    </div>
-
-    <div class="form-group">
-      <label for="password">Mot de passe</label>
-      <input type="password" id="password" formControlName="password" class="form-control" placeholder="Entrez votre mot de passe" required />
-    </div>
-
-    <button type="submit" class="btn-connect" [disabled]="!loginForm.valid">Connexion</button>
-
-    <div class="createCompte">
-      <p>Pas de comptes ? <a href="registerClient"> <span>Créer un maintenant</span></a></p>
-    </div>
-
+  <div class="texte-welcome">
+    <h2>Bienvenue chez <span>Rahma Delivery</span></h2>
   </div>
 
-</form>
+  <div class="body">
+    <div class="logo">
+      <img src="./../../../../assets/images/logos_icons/logorouge.png" alt="">
+    </div>
+    <form (ngSubmit)="connexion()" [formGroup]="loginForm" class="register-form">
+      <!-- Informations de Connexion -->
+      <h3>Entrez vos coordonnés de connexion</h3>
 
-</div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Entrez votre Email" required />
+        <!-- Message d'erreur pour l'email -->
+        <div *ngIf="isFieldInvalid('email')" class="error-message">
+          <small *ngIf="getFieldError('email', 'required')">L'email est requis.</small>
+          <small *ngIf="getFieldError('email', 'email')">L'email n'est pas valide.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Entrez votre mot de passe" required />
+        <!-- Message d'erreur pour le mot de passe -->
+        <div *ngIf="isFieldInvalid('password')" class="error-message">
+          <small *ngIf="getFieldError('password', 'required')">Le mot de passe est requis.</small>
+          <small *ngIf="getFieldError('password', 'minlength')">Le mot de passe doit contenir au moins 8 caractères.</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-connect" [disabled]="!loginForm.valid">Connexion</button>
+
+      <div class="createCompte">
+        <p>Pas de comptes ? <a [routerLink]="['/registerClient']"> <span>Créer un maintenant</span></a></p>
+      </div>
+    </form>
+  </div>
 </div>

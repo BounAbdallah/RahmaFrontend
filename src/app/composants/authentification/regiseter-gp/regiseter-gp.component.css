@@ -1,5 +1,16 @@
 
 
+.register-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 130vw;
+
+}
+
+
 body{
 
   font-family: "Montserrat", sans-serif;
@@ -21,7 +32,7 @@ overflow: hidden;
   flex-direction: column;
   justify-content: center;
 overflow: hidden;
-height:100vh;
+height: 110vh;
 
 
 
@@ -52,7 +63,7 @@ line-height: normal;
 .body{
 
   width: 100%;
-  height:100vh;
+  height:50rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -62,8 +73,9 @@ line-height: normal;
 }
 
 form{
-  width: 677px;
-height: 500px;
+  width: 1282px;
+  height: 680px;
+  flex-shrink: 0;
 border-radius: 8px;
 background: var(--Blanc, #FFF);
 box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
@@ -109,33 +121,38 @@ font-weight: 300;
 line-height: normal;
 }
 
-.btn-connect{
+.register-container .btn-connect{
   display: flex;
-width: 255px;
-height: 52px;
-padding: 10px 0px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-flex-shrink: 0;
-border-radius: 10px;
+  width: 255px;
+  height: 52px;
+  padding: 10px 0px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 10px;
 background: var(--BleuBase, #074C72);
 color: var(--Blanc, #FFF);
 text-align: center;
-
+margin-top: 50px;
 /* Body/Medium/Medium */
 font-family: Montserrat;
 font-size: 14px;
 font-style: normal;
 font-weight: 500;
 line-height: 20px; /* 142.857% */
-margin-top: 30px;
-/* margin-left: 25%; */
 }
 
-.createCompte{
-  margin-top: 40px;
+.btn-connect{
+  margin-top: -65px;
 }
+.createCompte{
+
+   margin-top: -40px;
+   border-top: 1px solid #000;
+   padding-top: 10px;
+  }
+
 
 .createCompte p{
   color: var(--RougeBase, #B50302);

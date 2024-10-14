@@ -15,57 +15,33 @@ import { DetailsAnnonceGPComponent } from './composants/acteurs/client/details-a
 import { DashboardGPComponent } from './composants/acteurs/gp/dashboard-gp/dashboard-gp.component';
 import { GpReservationComponent } from './composants/acteurs/gp/gp-reservation/gp-reservation.component';
 import { RoleGuard } from './core/guards/role.guard';
+import { RegiseterGPComponent } from './composants/authentification/regiseter-gp/regiseter-gp.component';
+
 export const routes: Routes = [
+  // Redirection par défaut
+  { path: '', redirectTo: 'accueil', pathMatch: 'full' },
 
+  // Routes publiques
+  { path: 'accueil', component: AccueilComponent },
+  { path: 'DetailsTeste', component: DetailLivraisonComponent },
+  { path: 'connexion', component: LoginComponent },
+  { path: 'registerClient', component: RegisterClientComponent },
+  { path: 'registerLivreur', component: RegisterLivreurComponent },
+  { path: 'registerGp', component: RegiseterGPComponent },
 
-
-
-
-  // Route principale pour le portail et les autre pages lier au portail.
-
-
-  {
-    path: '',
-    redirectTo: 'accueil',
-    pathMatch: 'full'
-  },
-  {
-    path: 'accueil',
-    component: AccueilComponent
-  },
-  {
-    path: 'DetailsTeste',
-    component: DetailLivraisonComponent
-  },
-
-
-  {
-    path: 'connexion',
-    component: LoginComponent
-  },
-
-  {
-    path: 'registerClient',
-    component: RegisterClientComponent
-  }
-  ,
-  {
-    path: 'registerLivreur',
-    component: RegisterLivreurComponent
-  },
-
+  // Routes protégées
   {
     path: 'adminDashboard',
-    component: DashboardAdminComponent
+    component: DashboardAdminComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'Admin' }
   },
-
   {
     path: 'MesColis',
     component: ColisComponent,
     canActivate: [RoleGuard],
     data: { role: 'Client' }
   },
-
   {
     path: 'DashboardClient',
     component: DashboardComponent,
@@ -74,45 +50,32 @@ export const routes: Routes = [
   },
   {
     path: 'ProfilClient',
-    component: ProfilComponent
-  }
-  ,
+    component: ProfilComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'Client' }
+  },
   {
     path: 'Gpdisponible',
     component: AnnonceGPComponent,
     canActivate: [RoleGuard],
     data: { role: 'Client' }
   },
-
   {
-    path: 'navbar',
-    component: NavbarComponent,
-    children: [
-      { path: 'accueil',component: AccueilComponent},
-      { path: 'ProfilClient', component: ProfilComponent },
-      { path: 'Gpdisponible', component: AnnonceGPComponent },
-      { path: 'MesColis', component: ColisComponent },
-
-      { path: '', redirectTo: 'Gpdisponible', pathMatch: 'full' }
-    ]
+    path: 'DashboardGP',
+    component: DashboardGPComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'GP' }
   },
-
+  {
+    path: 'reservationGp',
+    component: GpReservationComponent,
+    canActivate: [RoleGuard],
+    data: { role: 'GP' }
+  },
   {
     path: 'annonce-details/:id',
     component: DetailsAnnonceGPComponent
   },
-{
-path: 'DashboardGP',
-component: DashboardGPComponent,
-canActivate: [RoleGuard],
-data: { role: 'GP' }
-},
-
-{
-  path: 'reservationGp',
-  component: GpReservationComponent,
-  canActivate: [RoleGuard],
-  data: { role: 'GP' }
-},
-
+  // Route par défaut si aucune correspondance
+  { path: '**', redirectTo: 'accueil' }
 ];

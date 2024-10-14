@@ -1,0 +1,38 @@
+<div class="tab-pane fade" id="livraison" role="tabpanel" aria-labelledby="livraison-tab">
+  <div class="custom-card">
+      <h5>Mes Livraisons</h5>
+      <div class="table-responsive">
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Titre</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col">Poids</th>
+                  <th scope="col">Expéditeur</th>
+                  <th scope="col">Destinataire</th>
+                  <th scope="col">Date d'Envoi</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let colis of paginatedColis">
+                  <td>
+                    <img src="{{ colis.image_1 }}" alt="Image de colis" style="width: 100px; height: auto;">
+                  </td>
+                  <td>{{ colis.titre }}</td>
+                  <td>{{ colis.statut }}</td>
+                  <td>{{ colis.poids_kg }}</td>
+                  <td>{{ colis.adresse_expediteur }}</td>
+                  <td>{{ colis.adresse_destinataire }}</td>
+                  <td>{{ colis.date_envoi | date: 'dd/MM/yyyy' }}</td>
+                  <td>
+                    <button (click)="editColis(colis)" class="btn ">Modifier</button>
+                    <button (click)="deleteColis(colis.id)" class="btn btnSupp ">Supprimer</button>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

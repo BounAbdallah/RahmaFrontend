@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -29,35 +30,61 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
-          // Stocker les informations de l'utilisateur dans le stockage local
+          // Afficher une alerte de succès avec SweetAlert2
+          Swal.fire({
+            icon: 'success',
+            title: 'Connexion réussie',
+            text: 'Vous êtes maintenant connecté!',
+            timer: 1500,
+            showConfirmButton: false
+          });
+
           localStorage.setItem('currentUser', JSON.stringify(response));
-
-          // Débogage: Afficher la réponse de l'API
-          console.log('Réponse de l\'API:', response);
-
-          // Récupérer le rôle de l'utilisateur
-          const userRole = response.role; // Assurez-vous que le rôle est bien renvoyé dans la réponse
+          const userRole = response.role;
 
           // Redirection basée sur le rôle
           if (userRole === 'GP') {
-            this.router.navigate(['/reservationGp']);
+            this.router.navigate(['/DashboardGP']);
           } else if (userRole === 'Client') {
             this.router.navigate(['/DashboardClient']);
           } else {
-            // Rediriger vers une page par défaut ou une page d'erreur si le rôle n'est pas reconnu
             this.router.navigate(['/accueil']);
           }
         },
         error: (error) => {
-          // Gérer l'erreur
+          // Afficher une alerte d'erreur avec SweetAlert2
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: 'Email ou mot de passe incorrect',
+            confirmButtonText: 'Réessayer'
+          });
+
           console.error('Erreur lors de la connexion', error);
         }
+      });
+    } else {
+      // Alerte si le formulaire est invalide
+      Swal.fire({
+        icon: 'warning',
+        title: 'Formulaire invalide',
+        text: 'Veuillez remplir tous les champs correctement.',
+        confirmButtonText: 'OK'
       });
     }
   }
 
-  // Méthode pour revenir en arrière
   retour(): void {
     this.router.navigate(['/accueil']);
+  }
+
+  isFieldInvalid(field: string): boolean {
+    const control = this.loginForm.get(field);
+    return control?.invalid && (control?.dirty || control?.touched) || false;
+  }
+
+  getFieldError(field: string, errorType: string): boolean {
+    const control = this.loginForm.get(field);
+    return control?.hasError(errorType) && (control?.dirty || control?.touched) || false;
   }
 }

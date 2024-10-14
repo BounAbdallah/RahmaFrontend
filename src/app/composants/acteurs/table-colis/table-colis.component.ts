@@ -1,52 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { Colis } from '../../../core/services/colis/colis.model';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth/auth.service';
 import { ColisService } from '../../../core/services/colis/colis.service';
+import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
 
-import Swal from 'sweetalert2';
-import { NavbarComponent } from "../../acteurs/client/navbar/navbar.component";
-import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
-  selector: 'app-colis',
+  selector: 'app-table-colis',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, NavbarComponent],
-  templateUrl: './colis.component.html',
-  styleUrls: ['./colis.component.css']
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
+  templateUrl: './table-colis.component.html',
+  styleUrl: './table-colis.component.css'
 })
-export class ColisComponent implements OnInit {
-  colisList: Colis[] = [];
-  searchTerm: string = '';
-  paginatedColis: Colis[] = [];
-  currentPage: number = 1;
-  itemsPerPage: number = 5;
-  totalPages: number = 0;
+export class TableColisComponent {
 
-  newColis: Colis = {
-    titre: '',
-    poids_kg: 0,
-    image_1:'',
-    adresse_expediteur: '',
-    adresse_destinataire: '',
-    contact_destinataire: '',
-    contact_expediteur: '',
-    date_envoi: '',
-    statut: 'En attente',
-  };
+
+  colisList: Colis[] = [];
+  totalPages: number = 0;
+  currentPage: number =1;
+  itemsPerPage: number= 5;
+  paginatedColis: Colis[] = [];
 
   editMode = false;
   editColisId: number | null = null;
+  newColis: any;
 
   constructor(private colisService: ColisService,
     private authService: AuthService,
     private router: Router
   ) {}
 
+
   ngOnInit(): void {
     this.getColis();
   }
+
+
 
   getColis() {
     this.colisService.getColis().subscribe((data) => {
@@ -55,13 +47,17 @@ export class ColisComponent implements OnInit {
       this.updatePaginatedColis();
     });
   }
+  updatePaginatedColis() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedColis = this.colisList.slice(start, end);
+  }
 
   openColisForm() {
     const htmlContent = `
       <form id="colisForm">
         <input type="text" id="titre" class="swal2-input" placeholder="Titre" required value="${this.editMode ? this.newColis.titre : ''}">
         <input type="number" id="poids_kg" class="swal2-input" placeholder="Poids (kg)" required value="${this.editMode ? this.newColis.poids_kg : ''}">
-        <input type="file" id="image_1" class="swal2-input"" required value="${this.editMode ? this.newColis.image_1 : ''}">
         <input type="text" id="adresse_expediteur" class="swal2-input" placeholder="Adresse Expéditeur" required value="${this.editMode ? this.newColis.adresse_expediteur : ''}">
         <input type="text" id="adresse_destinataire" class="swal2-input" placeholder="Adresse Destinataire" required value="${this.editMode ? this.newColis.adresse_destinataire : ''}">
         <input type="text" id="contact_destinataire" class="swal2-input" placeholder="Contact Destinataire" required value="${this.editMode ? this.newColis.contact_destinataire : ''}">
@@ -79,7 +75,6 @@ export class ColisComponent implements OnInit {
       preConfirm: () => {
         const titre = (<HTMLInputElement>document.getElementById('titre')).value;
         const poids_kg = parseFloat((<HTMLInputElement>document.getElementById('poids_kg')).value);
-        const image_1 = parseFloat((<HTMLInputElement>document.getElementById('image_1')).value);
         const adresse_expediteur = (<HTMLInputElement>document.getElementById('adresse_expediteur')).value;
         const adresse_destinataire = (<HTMLInputElement>document.getElementById('adresse_destinataire')).value;
         const contact_destinataire = (<HTMLInputElement>document.getElementById('contact_destinataire')).value;
@@ -168,28 +163,6 @@ export class ColisComponent implements OnInit {
     this.editMode = false;
     this.editColisId = null;
   }
-
-  updatePaginatedColis() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    this.paginatedColis = this.colisList.slice(start, end);
-  }
-
-  filterColis() {
-    const filteredColis = this.colisList.filter(colis =>
-      colis.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      colis.adresse_expediteur.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-    this.totalPages = Math.ceil(filteredColis.length / this.itemsPerPage);
-    this.currentPage = 1; // Réinitialiser à la première page
-    this.paginatedColis = filteredColis.slice(0, this.itemsPerPage);
-  }
-
-  getImageUrl(imagePath: string | undefined): string {
-    return imagePath ? `http://127.0.0.1:8000/storage/${imagePath}` : 'assets/default-image.jpg';
-  }
-
-
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -204,24 +177,6 @@ export class ColisComponent implements OnInit {
     }
   }
 
-  onLogout() {
-    this.authService.logout().subscribe({
-      next: () => {
-        // Déconnexion réussie
-        Swal.fire({
-          title: 'Déconnexion réussie',
-          text: 'Vous avez été déconnecté.',
-          icon: 'success',
-          timer: 2000,
-          showConfirmButton: false
-        }).then(() => {
-          this.router.navigate(['/login']); // Redirige vers la page de connexion
-        });
-      },
-      error: (error) => {
-        // Gérer les erreurs de déconnexion ici
-        console.error('Erreur lors de la déconnexion :', error);
-      }
-    });
-  }
+
+
 }

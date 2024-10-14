@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProfilService } from '../../../../core/services/profil.service';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { AuthService } from '../../../../core/services/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profil',
@@ -18,7 +20,10 @@ export class ProfilComponent {
 
   constructor(
     private profilService: ProfilService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+
   ) {
     this.profilForm = this.formBuilder.group({
       prenom: [''],
@@ -41,16 +46,23 @@ export class ProfilComponent {
   getProfil(): void {
     this.profilService.afficherProfil().subscribe((data) => {
       this.userProfile = data;
+
+      if (data.photo_profil) {
+        this.userProfile.photo_profil = `http://127.0.0.1:8000/storage/${data.photo_profil}`;
+      }
+
       this.profilForm.patchValue({
         prenom: data.prenom,
         nom: data.nom,
         email: data.email,
         telephone: data.telephone,
-        adress: data.adress,
+        address: data.adress,
         commune: data.commune,
+        photo_profil: data.photo_profil // Cette valeur est déjà mise à jour
       });
     });
-  }
+}
+
 
   // Envoyer les modifications du profil
   onSubmit(): void {
@@ -91,5 +103,32 @@ export class ProfilComponent {
         photo_profil: file,
       });
     }
+  }
+  onLogout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        // Déconnexion réussie
+        Swal.fire({
+          title: 'Déconnexion réussie',
+          text: 'Vous avez été déconnecté.',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          // Redirige vers la page de connexion
+          this.router.navigate(['/connexion']);
+        });
+      },
+      error: (error: any) => {
+        console.error('Erreur lors de la déconnexion', error);
+        Swal.fire({
+          title: 'Erreur',
+          text: 'Une erreur est survenue lors de la déconnexion. Veuillez réessayer.',
+          icon: 'error',
+          timer: 3000,
+          showConfirmButton: false
+        });
+      }
+    });
   }
 }

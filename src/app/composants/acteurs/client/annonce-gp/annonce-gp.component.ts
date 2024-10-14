@@ -18,6 +18,11 @@ export class AnnonceGPComponent {
   listAnnonceGp: Annonce[] = [];
   userProfile: any;
   detailsAnnonceGp: any;
+  searchCountry: string = '';
+searchDate: string = '';
+pays_provenance?: string;  // Utilisation de '?' pour indiquer que c'est optionnel
+pays_destination?: string;  // Utilisation de '?' pour indiquer que c'est optionnel
+date_disponibilite?: string;
 
   constructor(private GpAnnoncesService: GpAnnoncesService, private profilService: ProfilService) {}
 
@@ -44,5 +49,20 @@ export class AnnonceGPComponent {
       this.detailsAnnonceGp = data;
 
     });
+  }
+  onSearch() {
+    const filteredAnnonces = this.listAnnonceGp.filter(annonce => {
+      const isCountryMatch =
+        (annonce.pays_provenance && annonce.pays_provenance.toLowerCase().includes(this.searchCountry.toLowerCase())) ||
+        (annonce.pays_destination && annonce.pays_destination.toLowerCase().includes(this.searchCountry.toLowerCase()));
+
+      const isDateMatch =
+        annonce.date_fin_reception_colis &&
+        new Date(annonce.date_fin_reception_colis).toDateString() === new Date(this.searchDate).toDateString();
+
+      return isCountryMatch && isDateMatch;
+    });
+
+    this.listAnnonceGp = filteredAnnonces;
   }
 }

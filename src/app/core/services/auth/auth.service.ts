@@ -23,6 +23,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register/client`, userData).pipe(catchError(this.handleError));
   }
 
+
+  registerGp(userData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register/gp`, userData).pipe(catchError(this.handleError));
+  }
   // Enregistrement livreur
   registerLivreur(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register/livreur`, userData).pipe(catchError(this.handleError));
