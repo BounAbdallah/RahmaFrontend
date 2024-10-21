@@ -1,4 +1,29 @@
 
+<!-- Barre de recherche stylisée -->
+<!-- Barre de recherche stylisée -->
+<input
+  type="text"
+  [(ngModel)]="searchQuery"
+  (input)="filterAnnonces()"
+  placeholder="Rechercher une annonce..."
+/>
+
+<!-- Liste des annonces filtrées (affichée uniquement si une recherche est effectuée) -->
+<div *ngIf="searchQuery && searchQuery.trim().length > 0">
+  <div *ngFor="let annonce of filteredAnnonces" class="annonce-card">
+    <h3>{{ annonce.titre }}</h3>
+    <p>{{ annonce.description }}</p>
+    <p>Pays de provenance: {{ annonce.pays_provenance_voyage }}</p>
+    <p>Région de provenance: {{ annonce.region_provenance_voyage }}</p>
+    <p>Pays de destination: {{ annonce.pays_destination_voyage }}</p>
+    <p>Région de destination: {{ annonce.region_destination_voyage }}</p>
+    <p>Date prévue: {{ annonce.date_prevue_voyage | date }}</p>
+    <div class="btn-reservation-GP">
+      <a href="annonce-details/{{annonce.id}}">Voir les détails</a>
+    </div>
+  </div>
+</div>
+
 
 <div class="body-content">
 
@@ -13,7 +38,7 @@
 <!-- <div class="card-section-annonces-gp" > -->
 <div class="card-annonce-item">
   <div class="image-section">
-  <div class="imagevoyage">{{ annonce.pays_provenance}}</div>
+  <div class="imagevoyage">{{ annonce.pays_provenance_voyage}}</div>
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
       <mask id="mask0_919_827" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
         <rect width="40" height="40" fill="#D9D9D9"/>
@@ -23,13 +48,13 @@
       </g>
     </svg>
 
-    <div class="imagevoyagearrivage">{{ annonce.pays_destination}}</div>
+    <div class="imagevoyagearrivage">{{ annonce.pays_destination_voyage}}</div>
 
   </div>
   <!-- code titre card -->
   <div class="destination-titre">
     <!-- pays provenance -->
-    <h3>{{ annonce.pays_provenance}}</h3>
+    <h3>{{ annonce.pays_provenance_voyage}}</h3>
   <!-- icone destionation -->
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
     <mask id="mask0_919_832" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
@@ -42,7 +67,7 @@
   <!-- fin icone destionation  -->
 
   <!-- pays destination -->
-  <h3>{{ annonce.pays_destination}}</h3>
+  <h3>{{ annonce.pays_destination_voyage}}</h3>
 
   </div>
   <!-- code section date -->
@@ -98,7 +123,7 @@
     </div>
     <!-- valeur prix -->
 
-    <p>{{ annonce.tarif}}</p>
+    <p>{{ annonce.prix_par_kg}}</p>
 
   <!-- icon Kg -->
   <div class="iconKg">

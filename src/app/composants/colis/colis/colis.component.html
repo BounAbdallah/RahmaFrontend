@@ -19,13 +19,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let colis of paginatedColis" [ngClass]="{'table-success': colis.statut === 'Livré', 'table-warning': colis.statut === 'En cours', 'table-danger': colis.statut === 'Annulé'}">
+        <tr *ngFor="let colis of paginatedColis" [ngClass]="{'table-success': colis.statut === 'livré', 'table-warning': colis.statut === 'en transit', 'table-danger': colis.statut === 'retourné'}">
           <td>
             <img [src]="getImageUrl(colis.image_1)" alt="Image de colis" class="img-thumbnail" style="width: 80px; height: auto;">
           </td>
           <td>{{ colis.titre }}</td>
           <td>
-            <span class="badge" [ngClass]="{'bg-success': colis.statut === 'Livré', 'bg-warning': colis.statut === 'En cours', 'bg-danger': colis.statut === 'Annulé'}">
+            <span class="badge" [ngClass]="{'bg-success': colis.statut === 'livré', 'bg-warning': colis.statut === 'en attente', 'bg-danger': colis.statut === 'retourné'}">
               {{ colis.statut }}
             </span>
           </td>

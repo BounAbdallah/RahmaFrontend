@@ -31,11 +31,25 @@ export class GpDashboardService {
     const url = `${this.apiUrl}/gp/colis/annonce/${annonceId}`;
     return this.http.get(url).pipe(catchError(this.handleError));
   }
+// Dans gp-dashboard.service.ts
+affichageColisDetails(colisId: number): Observable<any> {
+  const url = `${this.apiUrl}/gp/colis/${colisId}`;
+  return this.http.get(url).pipe(catchError(this.handleError));
+}
 
+
+affichageReservationDetails(annonceId: number): Observable<any> {
+  const url = `${this.apiUrl}/annonces/${annonceId}`;
+  return this.http.get(url).pipe(catchError(this.handleError));
+}
+affichageListeColis(colisId: number): Observable<any> {
+  const url = `${this.apiUrl}/gp/${colisId}/colis/`;
+  return this.http.get(url).pipe(catchError(this.handleError));
+}
 
   // Ajouter une annonce
   createAnnonce(annonceData: any): Observable<any> {
-    const url = `${this.apiUrl}/gp/annonces`;
+    const url = `${this.apiUrl}/CreationAnnonces`;
     return this.http.post(url, annonceData).pipe(catchError(this.handleError));
   }
 

@@ -65,11 +65,11 @@ export class GpReservationComponent implements OnInit {
 
     // Appeler le service pour changer le statut
     this.gpDashboardService.changerStatutReservation(reservationId, selectedValue).subscribe({
-        next: (response) => {
+        next: (response: any) => {
             console.log('Statut de la réservation mis à jour :', response);
             this.getReservations(); // Actualiser la liste des réservations
         },
-        error: (error) => {
+        error: (error: any) => {
             console.error('Erreur lors de la mise à jour du statut :', error);
         }
     });

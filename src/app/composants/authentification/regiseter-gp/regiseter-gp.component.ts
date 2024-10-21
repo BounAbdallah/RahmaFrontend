@@ -34,9 +34,7 @@ export class RegiseterGPComponent {
       telephone: ['', [Validators.required, Validators.minLength(9)]],
       adress: ['', [Validators.required, Validators.minLength(6)]],
       commune: ['', [Validators.required, Validators.minLength(6)]],
-      pays_de_voyage: ['', [Validators.required, Validators.minLength(6)]],
-      region_de_voyage: ['', [Validators.required, Validators.minLength(6)]],
-      prix_kg: ['', [Validators.required, Validators.minLength(1)]],
+
       date_de_naissance: ['', Validators.required],
     });
   }
@@ -46,16 +44,16 @@ export class RegiseterGPComponent {
   onRegister() {
     if (this.registerForm.valid) {
       const formData = new FormData();
-  
+
       Object.keys(this.registerForm.controls).forEach(key => {
         formData.append(key, this.registerForm.get(key)?.value);
       });
-  
+
       this.authService.registerGp(formData).subscribe({
         next: (response: any) => {
           console.log('Inscription réussie', response);
           this.registerForm.reset();
-  
+
           Swal.fire({
             title: 'Inscription réussie !',
             text: 'Vous pouvez maintenant vous connecter.',

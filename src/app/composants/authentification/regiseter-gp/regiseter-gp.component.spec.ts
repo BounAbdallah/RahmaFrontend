@@ -11,7 +11,7 @@ describe('RegiseterGPComponent', () => {
       imports: [RegiseterGPComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(RegiseterGPComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -4,7 +4,6 @@ import { ProfilService } from '../../../../core/services/profil.service';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
 import { ColisComponent } from '../../../colis/colis/colis.component';
 import { AnnonceGPComponent } from '../annonce-gp/annonce-gp.component';
 import { ProfilComponent } from '../profil/profil.component';
@@ -14,12 +13,13 @@ import { ProfilComponent } from '../profil/profil.component';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, ProfilComponent, ColisComponent, AnnonceGPComponent],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'] // Ensure it's 'styleUrls'
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   profilForm: FormGroup;
   userProfile: any;
   notifications: string[] = []; // Array to store notifications
+  activities: any[] = []; // Array to store activities
   authService: any;
   router: any;
 
@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getProfil();
     this.getNotifications(); // Fetch notifications on init
+    this.loadActivitiesFromLocalStorage(); // Load activities from local storage
   }
 
   // Retrieve user profile
@@ -67,6 +68,12 @@ export class DashboardComponent implements OnInit {
         console.error('Failed to fetch notifications:', error);
       }
     );
+  }
+
+  // Load activities from local storage
+  loadActivitiesFromLocalStorage(): void {
+    const activitiesFromStorage = localStorage.getItem('last_activities');
+    this.activities = activitiesFromStorage ? JSON.parse(activitiesFromStorage) : []; // Load activities or initialize empty array
   }
 
   // Submit profile updates
@@ -112,12 +119,14 @@ export class DashboardComponent implements OnInit {
   onLogout() {
     this.authService.logout().subscribe({
       next: () => {
-        this.notifications.push('🔓 Vous avez été déconnecté.');
-        this.router.navigate(['/connexion']);
+        // Déconnexion réussie
+        alert('Déconnexion réussie. Vous avez été déconnecté.');
+        this.router.navigate(['/connexion']); // Redirige vers la page de connexion
       },
       error: (error: any) => {
-        console.error('Logout error', error);
-        this.notifications.push('❌ Une erreur est survenue lors de la déconnexion. Veuillez réessayer.');
+        // Gérer les erreurs de déconnexion ici
+        console.error('Erreur lors de la déconnexion :', error);
+        alert('Une erreur est survenue lors de la déconnexion. Veuillez réessayer.');
       }
     });
   }

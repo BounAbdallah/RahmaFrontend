@@ -4,7 +4,6 @@ import { GpDashboardService } from '../../../../core/services/GP/gp-dashboard.se
 import { SideBareGPComponent } from '../side-bare-gp/side-bare-gp.component';
 import { CommonModule } from '@angular/common';
 import { ModalDetailsColisComponent } from '../modal-details-colis/modal-details-colis.component';
-import { log } from 'console';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AnnonceFormModalComponent } from '../annonce-form-modal/annonce-form-modal.component';
@@ -17,7 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 @Component({
   selector: 'app-dashboard-gp',
   standalone: true,
-  imports: [SideBareGPComponent,GpReservationComponent, CommonModule,FormsModule, ModalDetailsColisComponent],
+  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent],
   templateUrl: './dashboard-gp.component.html',
   styleUrls: ['./dashboard-gp.component.css']
 })
@@ -42,27 +41,30 @@ export class DashboardGPComponent implements OnInit {
   nombreReservations: number = 0; // Pour stocker le nombre de réservations
   reservationsDetails: any[] = []; // Pour stocker les détails des réservations
   isModalVisible: boolean = false;
-userProfile: any;
+  userProfile: any;
   profilForm: any;
   filteredAnnonces: any = [];
   searchQuery: string = '';
-  selectedDate: string = '';  // Date sélectionnée par l'utilisateur
-  selectedMonth: string = '';  // Mois sélectionné par l'utilisateur
-  trips: any[] = [];  // Liste des annonces récupérées
-  filteredTrips: any[] = [];  // Annonces filtrées par date ou mois
-  annoncesPerPage: number = 3;  // Nombre d'annonces à afficher par page
-  currentPage: number = 1;  // Page actuelle
-  totalPages: number = 1;  // Nombre total de pages
+  selectedDate: string = '';
+  selectedMonth: string = '';
+  trips: any[] = [];
+  filteredTrips: any[] = [];
+  annoncesPerPage: number = 3;
+  currentPage: number = 1;
+  totalPages: number = 5;
+
   constructor(private gpDashboardService: GpDashboardService,
-     private authService: AuthService,
-     private profilService: ProfilService,
-     private router: Router,
-      public dialog: Dialog) {}
+              private authService: AuthService,
+              private profilService: ProfilService,
+              private router: Router,
+              public dialog: Dialog) {}
 
   ngOnInit(): void {
     this.getStatistiques();
     this.getAnnonces();
-    this.getReservations();
+    if (this.annonceId) {
+      this.getReservations(this.annonceId); // Appelle getReservations avec l'annonceId
+    }
   }
 
   getStatistiques() {
@@ -81,27 +83,27 @@ userProfile: any;
       next: (data) => {
         this.annonces = data;
         this.filteredAnnonces = data;
-         // Calculer le nombre total de pages
-         this.totalPages = Math.ceil(this.annonces.length / this.annoncesPerPage);
+        // Calculer le nombre total de pages
+        this.totalPages = Math.ceil(this.annonces.length / this.annoncesPerPage);
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des annonces :', error);
       }
     });
   }
-// Fonction pour changer de page
-changePage(page: number) {
-  if (page >= 1 && page <= this.totalPages) {
-    this.currentPage = page;
-  }
-}
 
-// Fonction pour récupérer les annonces de la page actuelle
-getPaginatedAnnonces() {
-  const startIndex = (this.currentPage - 1) * this.annoncesPerPage;
-  return this.annonces.slice(startIndex, startIndex + this.annoncesPerPage);
-}
-  // barre de recherche
+  // Fonction pour changer de page
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  // Fonction pour récupérer les annonces de la page actuelle
+  getPaginatedAnnonces() {
+    const startIndex = (this.currentPage - 1) * this.annoncesPerPage;
+    return this.annonces.slice(startIndex, startIndex + this.annoncesPerPage);
+  }
 
   // Méthode pour filtrer les annonces en fonction de la recherche
   filterAnnonces() {
@@ -114,15 +116,10 @@ getPaginatedAnnonces() {
     }
   }
 
-  // Filtre par date
-
-
-
-
-  getReservations() {
-    this.gpDashboardService.affichageReservations().subscribe({
+  getReservations(annonceId: number) {
+    this.gpDashboardService.affichageReservationDetails(annonceId).subscribe({
       next: (data) => {
-        this.reservations = data;
+        this.reservations = data; // Récupération des réservations pour l'annonce donnée
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des réservations :', error);
@@ -156,7 +153,6 @@ getPaginatedAnnonces() {
       });
     }
   }
-  // reservation detail
 
   showAnnonces(annonceId: number) {
     // Appel API pour obtenir les détails de l'annonce et des réservations
@@ -168,8 +164,6 @@ getPaginatedAnnonces() {
         this.isModalVisible = true; // Affiche la modale
         console.log(this.annonce);
         console.log(this.reservationsDetails);
-
-
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des détails des colis :', error);
@@ -233,6 +227,26 @@ getPaginatedAnnonces() {
       }
     });
   }
+
+  changerStatutReservation(reservationId: number | undefined, event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value; // Récupérer la valeur sélectionnée
+
+    // Vérifier si reservationId est défini
+    if (!reservationId) {
+      console.error('ID de réservation invalide');
+      return; // Sortir si l'ID est invalide
+    }
+
+    // Appeler le service pour changer le statut
+    this.gpDashboardService.changerStatutReservation(reservationId, selectedValue).subscribe({
+      next: () => {
+        this.getReservations(this.selectedAnnonceId!); // Rafraîchir les réservations
+      },
+      error: (error) => {
+        console.error('Erreur lors du changement de statut :', error);
+      }
+    });
+  }
   openAnnonceFormModal(annonce?: any): void {
     const dialogRef = this.dialog.open(AnnonceFormModalComponent, {
       data: annonce ? { annonce } : null,
@@ -248,52 +262,7 @@ getPaginatedAnnonces() {
         }
       }
     });
-
   }
-
-  closeModal() {
-    this.annonceId = null;
-  }
-
-
-  changerStatutReservation(reservationId: number | undefined, event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement).value; // Récupérer la valeur sélectionnée
-
-    // Vérifier si reservationId est défini
-    if (!reservationId) {
-        console.error('ID de réservation invalide');
-        return; // Sortir si l'ID est invalide
-    }
-
-    // Appeler le service pour changer le statut
-    this.gpDashboardService.changerStatutReservation(reservationId, selectedValue).subscribe({
-        next: (response) => {
-            console.log('Statut de la réservation mis à jour :', response);
-            this.getReservations(); // Actualiser la liste des réservations
-        },
-        error: (error) => {
-            console.error('Erreur lors de la mise à jour du statut :', error);
-        }
-    });
-}
-
-
-getProfil(): void {
-  this.profilService.afficherProfil().subscribe((data) => {
-    this.userProfile = data;
-    this.profilForm.patchValue({
-      prenom: data.prenom,
-      nom: data.nom,
-      email: data.email,
-      telephone: data.telephone,
-      adress: data.adress,
-      commune: data.commune,
-    });
-  });
-
-}
-
-//  Déconnexion
   logout(): void {
     this.authService.logout().subscribe({
       next: () => {
@@ -304,5 +273,8 @@ getProfil(): void {
         console.error('Erreur lors de la déconnexion :', error);
       }
     })
+  }
+  closeModal() {
+    this.annonceId = null;
   }
 }

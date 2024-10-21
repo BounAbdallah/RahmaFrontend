@@ -1,139 +1,121 @@
-<header class="header d-flex justify-content-center align-items-center">
-  <div class="logo d-flex align-items-center me-4">
-      <img src="./../../../../../assets/images/logos_icons/logoM2.png" alt="Logo" class="header-logo">
-      <!-- Icône de Notification -->
-      <img src="./../../../../../assets/images/logos_icons/notifications.png" alt="Icône de notification" style="width: 30px; height: auto; margin-left: 10px;">
-  </div>
-  <div class="info-user d-flex align-items-center">
-      <span class="me-3"> {{ userProfile.prenom }} {{ userProfile.nom }} </span>
-      <div class="user-info d-flex align-items-center">
-        <div class="nav-item" role="profil">
-          <img class="nav-link" id="profil-tab" data-bs-toggle="tab" data-bs-target="#profil" type="button" role="tab" aria-controls="profil" aria-selected="false" src="{{ userProfile.photo_profil }}" alt="Photo de profil">
-        </div>
-        <button class="btn btn-danger btn-sm" (click)="onLogout()">Déconnexion</button>
+<div class="container-fluid">
+  <header class="header d-flex justify-content-between align-items-center p-3">
+      <div class="logo d-flex align-items-center">
+          <img src="./../../../../../assets/images/logos_icons/logoM2.png" alt="Logo" class="header-logo">
       </div>
-  </div>
-</header>
-
-<div class="container mt-5">
-  <h2 class="text-center mb-4">Dashboard de Rahma Delivery</h2>
-
-  <!-- Tabs for Navigation -->
-  <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
-      <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Vue d'ensemble</button>
-      </li>
-      <li class="nav-item" role="presentation">
-          <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button" role="tab" aria-controls="notifications" aria-selected="false">Notifications</button>
-      </li>
-      <li class="nav-item" role="presentation">
-          <button class="nav-link" id="activity-tab" data-bs-toggle="tab" data-bs-target="#activity" type="button" role="tab" aria-controls="activity" aria-selected="false">Activité Récente</button>
-      </li>
-      <li class="nav-item" role="presentation">
-          <button class="nav-link" id="livraison-tab" data-bs-toggle="tab" data-bs-target="#livraison" type="button" role="tab" aria-controls="livraison" aria-selected="false">Mes colis</button>
-      </li>
-      <li class="nav-item" role="profil">
-        <button class="nav-link" id="profil-tab" data-bs-toggle="tab" data-bs-target="#profil" type="button" role="tab" aria-controls="profil" aria-selected="false">Mon profil</button>
-    </li>
-    <li class="nav-item" role="GP">
-      <button class="nav-link" id="GP-tab" data-bs-toggle="tab" data-bs-target="#GP" type="button" role="tab" aria-controls="GP" aria-selected="false">GP disponible </button>
-  </li>
-  </ul>
-
-  <!-- Tab Content -->
-  <div class="tab-content mt-3" id="dashboardTabsContent">
-      <!-- Overview Tab -->
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <div class="row">
-              <div class="col-md-3">
-                  <div class="custom-card text-center">
-                      <h5>Colis Traités</h5>
-                      <h2>150</h2>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="custom-card text-center">
-                      <h5>Réservations Actives</h5>
-                      <h2>25</h2>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="custom-card text-center">
-                      <h5>Livraisons en Cours</h5>
-                      <h2>10</h2>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="custom-card text-center">
-                      <h5>Utilisateurs Inscrits</h5>
-                      <h2>200</h2>
-                  </div>
-              </div>
-          </div>
-
-          <div class="chart-container mt-4">
-              <canvas id="barChart"></canvas>
-          </div>
+      <div class="info-user d-flex align-items-center">
+          <span class="me-3">{{ userProfile.prenom }} {{ userProfile.nom }}</span>
+          <img class="nav-link" id="profil-tab" data-bs-toggle="tab" data-bs-target="#profil" alt="Photo de profil" src="{{ userProfile.photo_profil }}">
+          <button class="btn btn-danger btn-sm ms-2" (click)="onLogout()">Déconnexion</button>
       </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+  </header>
 
-      <!-- Notifications Tab -->
-      <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
-        <div class="custom-card">
-            <h5>Notifications</h5>
-            <ul class="list-unstyled">
-                <li *ngFor="let notification of notifications">{{ notification }}</li>
-            </ul>
-            <button class="btn btn-custom">Voir toutes les notifications</button>
-        </div>
-    </div>
+  <div class="row">
+      <nav class="sidebar">
+          <ul class="nav flex-column">
+              <li class="nav-item">
+                  <button class="nav-link active" id="GP-tab" data-bs-toggle="pill" data-bs-target="#GP" type="button">
+                      <i class="fas fa-chart-line"></i>
+                      <span class="nav-text">GP disponible</span>
+                  </button>
+              </li>
+              <li class="nav-item">
+                  <button class="nav-link" id="notifications-tab" data-bs-toggle="pill" data-bs-target="#notifications" type="button">
+                      <i class="fas fa-bell"></i>
+                      <span class="nav-text">Notifications</span>
+                  </button>
+              </li>
+              <li class="nav-item">
+                  <button class="nav-link" id="activity-tab" data-bs-toggle="pill" data-bs-target="#activity" type="button">
+                      <i class="fas fa-history"></i>
+                      <span class="nav-text">Activité Récente</span>
+                  </button>
+              </li>
+              <li class="nav-item">
+                  <button class="nav-link" id="livraison-tab" data-bs-toggle="pill" data-bs-target="#livraison" type="button">
+                      <i class="fas fa-truck"></i>
+                      <span class="nav-text">Mes colis</span>
+                  </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" id="activity-tab" data-bs-toggle="pill" data-bs-target="#historique" type="button">
+                    <i class="fas fa-history"></i>
+                    <span class="nav-text">Mon historique</span>
+                </button>
+            </li>
+              <li class="nav-item">
+                  <button class="nav-link" id="profil-tab" data-bs-toggle="pill" data-bs-target="#profil" type="button">
+                      <i class="fas fa-user"></i>
+                      <span class="nav-text">Mon profil</span>
+                  </button>
+              </li>
+          </ul>
+      </nav>
 
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+          <h2 class="mb-4">Dashboard Admin de Rahma Delivery</h2>
 
-      <!-- Livraison Tab -->
-      <div class="tab-pane fade" id="livraison" role="tabpanel" aria-labelledby="livraison-tab">
-          <div class="custom-card">
-              <h5>Mes Colis</h5>
-              <div class="table-responsive">
-                <app-colis></app-colis>
-              </div>
-          </div>
-      </div>
-            <!-- Livraison Tab -->
-            <div class="tab-pane fade" id="GP" role="tabpanel" aria-labelledby="GP-tab">
-              <div class="custom-card">
-                  <h5>GP disponible </h5>
-                  <div class="table-responsive">
-                    <app-annonce-gp></app-annonce-gp>
+          <div class="tab-content" id="dashboardTabsContent">
+              <div class="tab-pane fade show active" id="GP" role="tabpanel" aria-labelledby="GP-tab">
+                  <div class="custom-card">
+                      <h5>GP disponible</h5>
+                      <div class="table-responsive">
+                          <app-annonce-gp></app-annonce-gp>
+                      </div>
                   </div>
               </div>
-          </div>
 
-          <!-- Profil Tab -->
-          <div class="tab-pane fade" id="profil" role="tabpanel" aria-labelledby="profil-tab">
-            <div class="custom-card">
-                <h5>Mon Profil</h5>
-                <div class="table-responsive">
+              <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+                <div class="custom-card">
+                  <h5>Notifications</h5>
+                  <ul class="list-unstyled">
+                      <li *ngFor="let notification of notifications">{{ notification }}</li>
+                  </ul>
 
-                  <app-profil> </app-profil>
+              </div>
+              </div>
+
+              <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+                  <div class="custom-card">
+                      <h5>Activités Récentes</h5>
+                      <li *ngFor="let activity of activities">
+                        {{ activity.action }} - {{ activity.created_at | date:'short' }}
+                      </li>
+
+                  </div>
+              </div>
+
+              <div class="tab-pane fade" id="livraison" role="tabpanel" aria-labelledby="livraison-tab">
+                  <div class="custom-card">
+                      <h5>Mes Colis</h5>
+                      <div class="table-responsive">
+                          <app-colis></app-colis>
+                      </div>
+                  </div>
+              </div>
+
+
+              <div class="tab-pane fade" id="historique" role="tabpanel" aria-labelledby="historique-tab">
+                <div class="custom-card">
+                    <h5>Mon  Historique</h5>
+                    <li>
+                      historique
+                    </li>
 
                 </div>
             </div>
-        </div>
-
-      <!-- Recent Activity Tab -->
-      <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
-          <div class="custom-card">
-              <h5>Activités Récentes</h5>
-              <ul class="list-unstyled">
-                  <li>📦 Colis #1234 créé - <span class="text-muted">Il y a 2 heures</span></li>
-                  <li>📅 Réservation #5678 effectuée - <span class="text-muted">Il y a 1 jour</span></li>
-                  <li>🚚 Livraison #91011 en cours - <span class="text-muted">Il y a 3 jours</span></li>
-                  <li>🔔 Notification de paiement - <span class="text-muted">Il y a 5 jours</span></li>
-                  <li>📦 Colis #1122 annulé - <span class="text-muted">Il y a 6 jours</span></li>
-              </ul>
-              <button class="btn btn-custom">Voir toute l'activité</button>
+              <div class="tab-pane fade" id="profil" role="tabpanel" aria-labelledby="profil-tab">
+                  <div class="custom-card">
+                      <h5>Mon Profil</h5>
+                      <div class="table-responsive">
+                          <app-profil></app-profil>
+                      </div>
+                  </div>
+              </div>
           </div>
-      </div>
+      </main>
   </div>
-
-
 </div>

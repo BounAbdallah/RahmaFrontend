@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 import Swal from 'sweetalert2';
-import { NavbarComponent } from "../../acteurs/client/navbar/navbar.component";
+import { NavbarComponent } from '../../acteurs/client/navbar/navbar.component';
 import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
@@ -27,19 +27,22 @@ export class ColisComponent implements OnInit {
   newColis: Colis = {
     titre: '',
     poids_kg: 0,
-    image_1:'',
+    image_1: '',
     adresse_expediteur: '',
     adresse_destinataire: '',
     contact_destinataire: '',
     contact_expediteur: '',
     date_envoi: '',
-    statut: 'En attente',
+    statut: 'en attente',
+    etat: 'archivé',
+    user_id: 0
   };
 
   editMode = false;
   editColisId: number | null = null;
 
-  constructor(private colisService: ColisService,
+  constructor(
+    private colisService: ColisService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -61,13 +64,13 @@ export class ColisComponent implements OnInit {
       <form id="colisForm">
         <input type="text" id="titre" class="swal2-input" placeholder="Titre" required value="${this.editMode ? this.newColis.titre : ''}">
         <input type="number" id="poids_kg" class="swal2-input" placeholder="Poids (kg)" required value="${this.editMode ? this.newColis.poids_kg : ''}">
-        <input type="file" id="image_1" class="swal2-input"" required value="${this.editMode ? this.newColis.image_1 : ''}">
+        <input type="file" id="image_1" class="swal2-input" required>
         <input type="text" id="adresse_expediteur" class="swal2-input" placeholder="Adresse Expéditeur" required value="${this.editMode ? this.newColis.adresse_expediteur : ''}">
         <input type="text" id="adresse_destinataire" class="swal2-input" placeholder="Adresse Destinataire" required value="${this.editMode ? this.newColis.adresse_destinataire : ''}">
         <input type="text" id="contact_destinataire" class="swal2-input" placeholder="Contact Destinataire" required value="${this.editMode ? this.newColis.contact_destinataire : ''}">
         <input type="text" id="contact_expediteur" class="swal2-input" placeholder="Contact Expéditeur" required value="${this.editMode ? this.newColis.contact_expediteur : ''}">
         <input type="date" id="date_envoi" class="swal2-input" required value="${this.editMode ? this.newColis.date_envoi : ''}">
-        <input type="hidden" id="statut" value="en attente">
+        <input type="hidden" id="statut" value="En attente">
       </form>
     `;
 
@@ -79,7 +82,7 @@ export class ColisComponent implements OnInit {
       preConfirm: () => {
         const titre = (<HTMLInputElement>document.getElementById('titre')).value;
         const poids_kg = parseFloat((<HTMLInputElement>document.getElementById('poids_kg')).value);
-        const image_1 = parseFloat((<HTMLInputElement>document.getElementById('image_1')).value);
+        const image_1 = (<HTMLInputElement>document.getElementById('image_1')).files?.[0]?.name || '';
         const adresse_expediteur = (<HTMLInputElement>document.getElementById('adresse_expediteur')).value;
         const adresse_destinataire = (<HTMLInputElement>document.getElementById('adresse_destinataire')).value;
         const contact_destinataire = (<HTMLInputElement>document.getElementById('contact_destinataire')).value;
@@ -93,12 +96,13 @@ export class ColisComponent implements OnInit {
         return {
           titre,
           poids_kg,
+          image_1,
           adresse_expediteur,
           adresse_destinataire,
           contact_destinataire,
           contact_expediteur,
           date_envoi,
-          statut: 'en attente'
+          statut: 'En attente'
         };
       }
     }).then((result) => {
@@ -147,7 +151,7 @@ export class ColisComponent implements OnInit {
       if (result.isConfirmed) {
         this.colisService.deleteColis(id).subscribe(() => {
           this.colisList = this.colisList.filter(c => c.id !== id);
-          this.updatePaginatedColis(); // Mettre à jour les colis paginés après la suppression
+          this.updatePaginatedColis();
           Swal.fire('Supprimé !', 'Le colis a été supprimé.', 'success');
         });
       }
@@ -158,12 +162,15 @@ export class ColisComponent implements OnInit {
     this.newColis = {
       titre: '',
       poids_kg: 0,
+      image_1: '',
       adresse_expediteur: '',
       adresse_destinataire: '',
       contact_destinataire: '',
       contact_expediteur: '',
       date_envoi: '',
       statut: 'en attente',
+      etat: 'archivé',
+      user_id: 0
     };
     this.editMode = false;
     this.editColisId = null;
@@ -181,14 +188,13 @@ export class ColisComponent implements OnInit {
       colis.adresse_expediteur.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     this.totalPages = Math.ceil(filteredColis.length / this.itemsPerPage);
-    this.currentPage = 1; // Réinitialiser à la première page
+    this.currentPage = 1;
     this.paginatedColis = filteredColis.slice(0, this.itemsPerPage);
   }
 
   getImageUrl(imagePath: string | undefined): string {
     return imagePath ? `http://127.0.0.1:8000/storage/${imagePath}` : 'assets/default-image.jpg';
   }
-
 
   previousPage() {
     if (this.currentPage > 1) {
@@ -207,20 +213,12 @@ export class ColisComponent implements OnInit {
   onLogout() {
     this.authService.logout().subscribe({
       next: () => {
-        // Déconnexion réussie
-        Swal.fire({
-          title: 'Déconnexion réussie',
-          text: 'Vous avez été déconnecté.',
-          icon: 'success',
-          timer: 2000,
-          showConfirmButton: false
-        }).then(() => {
-          this.router.navigate(['/login']); // Redirige vers la page de connexion
-        });
+        alert('Déconnexion réussie. Vous avez été déconnecté.');
+        this.router.navigate(['/connexion']);
       },
       error: (error) => {
-        // Gérer les erreurs de déconnexion ici
         console.error('Erreur lors de la déconnexion :', error);
+        alert('Une erreur est survenue lors de la déconnexion.');
       }
     });
   }

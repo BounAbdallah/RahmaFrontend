@@ -5,7 +5,7 @@
   <div class="body">
     <div class="register-container">
       <form (ngSubmit)="onRegister()" [formGroup]="registerForm" class="register-form">
-        
+
         <div class="row">
           <div class="form-group col-12 col-md-6">
             <label for="nom">Nom</label>
@@ -82,31 +82,10 @@
               {{ getErrorMessage('commune') }}
             </div>
           </div>
-          <div class="form-group col-12 col-md-6">
-            <label for="pays_de_voyage">Pays de Voyage</label>
-            <input type="text" id="pays_de_voyage" formControlName="pays_de_voyage" class="form-control" placeholder="Entrez votre pays de voyage" required />
-            <div *ngIf="isFieldInvalid('pays_de_voyage')" class="error-message">
-              {{ getErrorMessage('pays_de_voyage') }}
-            </div>
-          </div>
+     
         </div>
 
-        <div class="row">
-          <div class="form-group col-12 col-md-6">
-            <label for="region_de_voyage">Région de Voyage</label>
-            <input type="text" id="region_de_voyage" formControlName="region_de_voyage" class="form-control" placeholder="Entrez votre région de voyage" required />
-            <div *ngIf="isFieldInvalid('region_de_voyage')" class="error-message">
-              {{ getErrorMessage('region_de_voyage') }}
-            </div>
-          </div>
-          <div class="form-group col-12 col-md-6">
-            <label for="prix_kg">Prix par Kg</label>
-            <input type="number" id="prix_kg" formControlName="prix_kg" class="form-control" placeholder="Entrez le prix par kg" required />
-            <div *ngIf="isFieldInvalid('prix_kg')" class="error-message">
-              {{ getErrorMessage('prix_kg') }}
-            </div>
-          </div>
-        </div>
+
 
 
         <button type="submit" class="btn-connect" [disabled]="!registerForm.valid">Inscription</button>

@@ -1,44 +1,28 @@
-<div class="modal" *ngIf="annonce">
+<div class="modal" *ngIf="isColisModalVisible">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">&times;</span>
+    <h3>Détails de l'annonce</h3>
+    <p><strong>Titre:</strong> {{ annonce.titre }}</p>
+    <p><strong>Description:</strong> {{ annonce.description }}</p>
+    <p><strong>Pays de provenance:</strong> {{ annonce.pays_provenance }}</p>
+    <p><strong>Pays de destination:</strong> {{ annonce.pays_destination }}</p>
+    <img *ngIf="annonce.photo_pays_voyage_provenance" [src]="annonce.photo_pays_voyage_provenance" alt="Pays de provenance" style="width: 120px;">
+    <img *ngIf="annonce.photo_pays_voyage_destination" [src]="annonce.photo_pays_voyage_destination" alt="Pays de destination" style="width: 120px;">
+    <p><strong>Poids (kg):</strong> {{ annonce.poids_kg }}</p>
+    <p><strong>Tarif:</strong> {{ annonce.tarif }}</p>
+    <p><strong>Statut:</strong> {{ annonce.statut }}</p>
+    <p><strong>Conditions:</strong> {{ annonce.condition }}</p>
+  </div>
+</div>
 
-    <h2>Détails de l'annonce {{ annonce }}</h2>
-    <div *ngIf="annonce">
-      <h3>Détails de l'annonce</h3>
-      <p><strong>Titre:</strong> {{ annonce.titre }}</p>
-      <p><strong>Description:</strong> {{ annonce.description }}</p>
-      <p><strong>Pays de provenance:</strong> {{ annonce.pays_provenance }}</p>
-      <p><strong>Pays de destination:</strong> {{ annonce.pays_destination }}</p>
-      <img *ngIf="annonce.photo_pays_voyage_provenance" [src]="annonce.photo_pays_voyage_provenance" alt="Pays de provenance" style="width: 120px;">
-      <img *ngIf="annonce.photo_pays_voyage_destination" [src]="annonce.photo_pays_voyage_destination" alt="Pays de destination" style="width: 120px;">
-      <p><strong>Poids (kg):</strong> {{ annonce.poids_kg }}</p>
-      <p><strong>Tarif:</strong> {{ annonce.tarif }}</p>
-      <p><strong>Statut:</strong> {{ annonce.statut }}</p>
-      <p><strong>Conditions:</strong> {{ annonce.condition }}</p>
-    </div>
-
-    <h3>Nombre de Réservations: {{ nombreReservations }}</h3>
-
-    <h3>Détails des Réservations</h3>
-    <table *ngIf="reservationsDetails && reservationsDetails.length > 0" border="1" cellspacing="0" cellpadding="10">
-      <thead>
-        <tr>
-          <th>ID Réservation</th>
-          <th>Nom Utilisateur</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let reservation of reservationsDetails">
-          <td>{{ reservation.id }}</td>
-          <td>{{ reservation.reservation.user.prenom }} {{ reservation.reservation.user.nom }}</td>
-          <td>{{ reservation.reservation.status }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div *ngIf="reservationsDetails && reservationsDetails.length === 0">
-      <p>Aucune réservation disponible pour cette annonce.</p>
-    </div>
+<!-- Modal pour afficher les détails du colis -->
+<div class="modal" *ngIf="isColisModalVisible">
+  <div class="modal-content">
+    <span class="close" (click)="closeColisModal()">&times;</span>
+    <h3>Détails du Colis</h3>
+    <p><strong>Titre:</strong> {{ colisDetails.titre }}</p>
+    <p><strong>Poids (kg):</strong> {{ colisDetails.poids_kg }}</p>
+    <p><strong>Description:</strong> {{ colisDetails.description }}</p>
+    <!-- Ajoutez d'autres détails selon votre modèle de données -->
   </div>
 </div>

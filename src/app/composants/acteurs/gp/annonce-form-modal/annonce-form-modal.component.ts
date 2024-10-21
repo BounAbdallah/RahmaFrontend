@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Country, State } from 'country-state-city';
+import { GpDashboardService } from '../../../../core/services/GP/gp-dashboard.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { Annonce } from '../../../../core/services/annonces/annonce.model';
 
 @Component({
   selector: 'app-annonce-form-modal',
@@ -11,56 +11,116 @@ import { Annonce } from '../../../../core/services/annonces/annonce.model';
   templateUrl: './annonce-form-modal.component.html',
   styleUrls: ['./annonce-form-modal.component.css']
 })
-export class AnnonceFormModalComponent {
+export class AnnonceFormModalComponent implements OnInit {
+  @Input() data: any; // Remplacez par le type approprié
   annonceForm: FormGroup;
+  countries: any[] = [];
+  regionsProvenance: any[] = []; // Régions pour le pays de provenance
+  regionsDestination: any[] = []; // Régions pour le pays de destination
+  currentStep: number = 1; // Étape actuelle du formulaire
 
-  constructor(
-    public dialogRef: DialogRef<AnnonceFormModalComponent>,
-    @Inject(DIALOG_DATA) public data: { annonce?: Annonce },
-    private fb: FormBuilder
-  ) {
+  constructor(private fb: FormBuilder, private annonceGpService: GpDashboardService) {
     this.annonceForm = this.fb.group({
-      id: [data?.annonce?.id || 0],
-      titre: [data?.annonce?.titre || '', Validators.required],
-      pays_provenance: [data?.annonce?.pays_provenance || '', Validators.required],
-      photo_pays_voyage_provenance: [data?.annonce?.photo_pays_voyage_provenance || ''], // Champ image pour le pays d'origine
-      pays_destination: [data?.annonce?.pays_destination || '', Validators.required],
-      photo_pays_voyage_destination: [data?.annonce?.photo_pays_voyage_destination || ''], // Champ image pour le pays de destination
-      date_debut_reception_colis: [data?.annonce?.date_debut_reception_colis || null, Validators.required],
-      date_fin_reception_colis: [data?.annonce?.date_fin_reception_colis || null, Validators.required],
-      description: [data?.annonce?.description || ''],
-      tarif: [data?.annonce?.tarif || ''],
-      condition: [data?.annonce?.condition || ''],
-      statut: [data?.annonce?.statut || 'active'],
-      poids_kg: [data?.annonce?.poids_kg || '']
+      titre: ['', Validators.required],
+      date_debut_reception_colis: ['', Validators.required],
+      date_fin_reception_colis: ['', Validators.required],
+      description: [''],
+      condition: ['', Validators.required],
+      statut: ['active', Validators.required],
+      poids_kg: ['', [Validators.required, Validators.min(0)]],
+      prix_par_kg: ['', [Validators.required, Validators.min(0)]],
+      pays_provenance_voyage: ['', Validators.required],
+      region_provenance_voyage: [''],
+      pays_destination_voyage: ['', Validators.required],
+      region_destination_voyage: [''],
+      date_prevue_voyage: ['', Validators.required],
+      heure_prevue_voyage: ['', Validators.required],
+      heure_debut_reception_colis: ['', Validators.required],
+      heure_fin_reception_colis: ['', Validators.required],
     });
   }
-  onFileChange(event: Event, type: 'provenance' | 'destination'): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const reader = new FileReader();
 
-      reader.onload = (e: any) => {
-        if (type === 'provenance') {
-          this.annonceForm.patchValue({ photo_pays_voyage_provenance: e.target.result });
-        } else {
-          this.annonceForm.patchValue({ photo_pays_voyage_destination: e.target.result });
-        }
-      };
-      reader.readAsDataURL(file); // Lecture du fichier pour l'aperçu
+  ngOnInit(): void {
+    this.countries = Country.getAllCountries();
+    if (this.data?.annonce) {
+      this.annonceForm.patchValue(this.data.annonce);
+      this.setDateFields();
     }
   }
 
-  onSubmitAnnonce() {
+  nextStep(): void {
+    if (this.currentStep === 1 && this.annonceForm.get(['titre', 'date_debut_reception_colis', 'date_fin_reception_colis', 'condition', 'poids_kg', 'prix_par_kg'])?.valid) {
+      this.currentStep = 2; // Passer à la deuxième étape
+    }
+  }
+
+  previousStep(): void {
+    if (this.currentStep === 2) {
+      this.currentStep = 1; // Retourner à la première étape
+    }
+  }
+
+  onSubmitAnnonce(): void {
     if (this.annonceForm.valid) {
-      this.dialogRef.close(this.annonceForm.value);
+      // Formater les heures avant de les envoyer à l'API
+      const formattedAnnonce = {
+        ...this.annonceForm.value,
+        heure_prevue_voyage: this.formatTime(this.annonceForm.value.heure_prevue_voyage),
+        heure_debut_reception_colis: this.formatTime(this.annonceForm.value.heure_debut_reception_colis),
+        heure_fin_reception_colis: this.formatTime(this.annonceForm.value.heure_fin_reception_colis),
+      };
+
+      this.annonceGpService.createAnnonce(formattedAnnonce).subscribe(
+        (response: any) => {
+          console.log('Annonce créée avec succès:', response);
+          // Logique pour fermer la modal ou rediriger l'utilisateur
+        },
+        (error: any) => {
+          console.error('Erreur lors de la création de l\'annonce:', error);
+          // Afficher un message d'erreur à l'utilisateur
+        }
+      );
     } else {
-      alert('Veuillez remplir tous les champs obligatoires.');
+      console.log('Formulaire invalide');
     }
   }
 
-  close() {
-    this.dialogRef.close();
+  private formatTime(time: string): string {
+    const date = new Date(`1970-01-01T${time}`);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}:00`;
+  }
+
+  setDateFields(): void {
+    const currentDate = new Date().toISOString().split('T')[0];
+    const dateDebut = this.annonceForm.get('date_debut_reception_colis');
+    const dateFin = this.annonceForm.get('date_fin_reception_colis');
+
+    if (!dateDebut?.value) {
+      dateDebut?.setValue(currentDate);
+    }
+    if (!dateFin?.value) {
+      dateFin?.setValue(currentDate);
+    }
+  }
+
+  onCountryChange(isProvenance: boolean): void {
+    const countryCode = isProvenance
+      ? this.annonceForm.get('pays_provenance_voyage')?.value
+      : this.annonceForm.get('pays_destination_voyage')?.value;
+
+    if (countryCode) {
+      const regions = State.getStatesOfCountry(countryCode);
+      if (isProvenance) {
+        this.regionsProvenance = regions; // Mettre à jour les régions de provenance
+      } else {
+        this.regionsDestination = regions; // Mettre à jour les régions de destination
+      }
+    }
+  }
+
+  close(): void {
+    console.log('Modal fermée');
   }
 }

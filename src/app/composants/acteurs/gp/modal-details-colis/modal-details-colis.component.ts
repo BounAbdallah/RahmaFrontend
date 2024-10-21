@@ -14,6 +14,8 @@ export class ModalDetailsColisComponent implements OnInit {
   annonce: any = {};
   nombreReservations: number = 0;
   reservationsDetails: any[] = [];
+  colisDetails: any = {};
+  isColisModalVisible: boolean = false;
 
   constructor(private gpDashboardService: GpDashboardService) {}
 
@@ -23,41 +25,38 @@ export class ModalDetailsColisComponent implements OnInit {
     }
   }
 
-  // Récupère les détails de l'annonce et des réservations
-  // getColisDetails(annonceId: number) {
-  //   this.gpDashboardService.affichageColisPourAnnonce(annonceId).subscribe({
-  //     next: (data) => {
-  //       this.annonce = data.annonce; // Stocke les informations de l'annonce
-  //       console.log('Annonce:', this.annonce);
-  //       this.reservationsDetails = data.reservations_details; // Stocke les détails des réservations
-  //     },
-  //     error: (error) => {
-  //       console.error('Error retrieving package details:', error);
-  //     }
-  //   });
-  // }
   showAnnonces(annonceId: number) {
-    // this.selectedAnnonceId = this.selectedAnnonceId === annonceId ? null : annonceId;
-    console.log('Annonce ID:', this.annonceId);
-    if (this.annonceId) {
-      this.gpDashboardService.affichageColisPourAnnonce(annonceId).subscribe({
-        next: (data) => {
-          this.annonce = data.annonce; // Assigner l'annonce
-          this.nombreReservations = data.nombre_reservations; // Assigner le nombre de réservations
-          this.reservationsDetails = data.reservations_details; // Assigner les détails des réservations
-
-          console.log('Détails de l\'annonce:', this.annonce);
-          console.log('Nombre de réservations:', this.nombreReservations);
-          console.log('Détails des réservations:', this.reservationsDetails);
-        },
-        error: (error) => {
-          console.error('Erreur lors de la récupération des détails :', error);
-        }
-      });
-    }
+    this.gpDashboardService.affichageReservationDetails(annonceId).subscribe({
+      next: (data) => {
+        this.annonce = data.annonce;
+        this.nombreReservations = data.nombre_reservations;
+        this.reservationsDetails = data.reservations_details;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des détails :', error);
+      }
+    });
   }
-  // Méthode pour fermer la modal
+
+  showColisDetails(colisId: number) {
+    this.gpDashboardService.affichageColisDetails(colisId).subscribe({
+      next: (data) => {
+        this.colisDetails = data;
+        this.isColisModalVisible = true;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des détails du colis:', error);
+      }
+    });
+  }
+
+  closeColisModal() {
+    this.isColisModalVisible = false;
+    this.colisDetails = {};
+  }
+
   closeModal() {
-    this.annonceId = null; // Réinitialisation de l'ID d'annonce
+    this. annonce = null;
+    this.annonceId = null;
   }
 }

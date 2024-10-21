@@ -39,12 +39,13 @@ export class LoginComponent {
             showConfirmButton: false
           });
 
-          localStorage.setItem('currentUser', JSON.stringify(response));
+          localStorage.setItem('currentUser ', JSON.stringify(response));
+          // this.addActivity('Connexion réussie'); // Appeler la méthode pour ajouter l'activité
           const userRole = response.role;
 
           // Redirection basée sur le rôle
           if (userRole === 'GP') {
-            this.router.navigate(['/DashboardGP']);
+            this.router.navigate(['/dashboardGP']);
           } else if (userRole === 'Client') {
             this.router.navigate(['/DashboardClient']);
           } else {
@@ -73,6 +74,24 @@ export class LoginComponent {
       });
     }
   }
+
+  // addActivity(action: string): void {
+  //   const currentActivities = JSON.parse(localStorage.getItem('last_activities')) || [];
+
+  //   // Ajouter la nouvelle activité
+  //   const newActivity = {
+  //     action: action,
+  //     created_at: new Date().toISOString(), // Date actuelle
+  //   };
+
+  //   // Limiter à 5 activités
+  //   if (currentActivities.length >= 5) {
+  //     currentActivities.shift(); // Supprimer la plus ancienne activité
+  //   }
+
+  //   currentActivities.push(newActivity);
+  //   localStorage.setItem('last_activities', JSON.stringify(currentActivities)); // Mettre à jour le local storage
+  // }
 
   retour(): void {
     this.router.navigate(['/accueil']);

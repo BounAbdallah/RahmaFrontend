@@ -1,72 +1,75 @@
-
-
-
-
-
-<div class="top-bare">
-
-  <div class="logo">
-    <img src="./../../../../assets/images/logos_icons/logoM2.png" alt="logo">
+<div class="product-details-container">
+  <div *ngIf="!annonceDetails" class="loading-container">
+    <div class="spinner"></div>
+    <p>Chargement des détails de l'annonce...</p>
   </div>
-  <div class="link">
-    <a href="accueil">Accueil</a>
-    <a href="MesColis">Mes Colis</a>
-    <a href="ProfilClient">Mes réservation</a>
-    <a href="Gpdisponible">GP disponible</a>
 
-  </div>
-  <div class="login-btn">
-    <a href ="ProfilClient">Profil</a>
-    <img class="profil_photo" src="" alt="Photo de profil" class="rounded-circle mb-3" width="150" />
+  <div class="product-details" *ngIf="annonceDetails">
+    <div class="imagevoyagearrivage">
+      {{ annonceDetails.pays_destination}}          <--->
+    </div>
 
-  </div>
-</div>
-<!-- <app-navbar></app-navbar> -->
+    <div class="product-info">
+      <h1 class="product-title">{{ annonceDetails.titre }}</h1>
+      <p class="product-description">{{ annonceDetails.description }}</p>
 
-
-
-
-<div class="body-content">
-
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6">
-        <img
-        src="./../../../../../assets/images/images_/immageAnnonceGP.png"
-          alt="Image de l'annonce"
-          class="img-fluid rounded shadow large-image"
-        />
-
+      <div class="product-meta">
+        <div class="meta-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{ annonceDetails.pays_provenance }} ...----> {{ annonceDetails.pays_destination }}</span>
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Voyage prevu pour </span>
+          <span>{{ annonceDetails.date_prevue_voyage | date:'shortDate' }}</span>
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-clock"></i>
+          <span> à :</span>
+          <span>{{ annonceDetails.heure_prevue_voyage || 'Non spécifié' }}</span>
+        </div>
       </div>
 
-      <div class="col-md-6">
-        <!-- <h1 class="display-4">{{ annonceDetails.titre }}</h1> -->
-        <p class="lead">{{ annonceDetails.description }}</p>
-        <p><strong>Pays de provenance:</strong> {{ annonceDetails.pays_provenance }}</p>
-        <p><strong>Pays de destination:</strong> {{ annonceDetails.pays_destination }}</p>
-        <p><strong>Condition:</strong> {{ annonceDetails.condition }}</p>
-        <p><strong>Tarif:</strong> {{ annonceDetails.tarif }} FCFA</p>
-        <p><strong>Poids:</strong> {{ annonceDetails.poids_kg }} kg</p>
-        <!-- <p><strong>Date de début de réception:</strong> {{ annonceDetails.date_debut_reception_colis | date:'short' }}</p>
-        <p><strong>Date de fin de réception:</strong> {{ annonceDetails.date_fin_reception_colis | date:'short' }}</p>
-        <p><strong>Créateur ID:</strong> {{ annonceDetails.createur }}</p> -->
-        <p><strong>Statut:</strong> {{ annonceDetails.statut }}</p>
-        <!-- <p><strong>Date de création:</strong> {{ annonceDetails.created_at | date:'short' }}</p>
-        <p><strong>Date de mise à jour:</strong> {{ annonceDetails.updated_at | date:'short' }}</p> -->
-<div class="btnAction">
-  <button class="btn btn-primary btn-lg mt-3" (click)="openColisForm()">Réserver maintenant</button>
+      <div class="product-details-grid">
+        <div class="detail-item">
+          <span class="detail-label">Dans la région de :</span>
+          <span class="detail-value">{{ annonceDetails.region_provenance_voyage || 'Non spécifié' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Dans la région de :</span>
+          <span class="detail-value">{{ annonceDetails.region_destination_voyage || 'Non spécifié' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Début de réception des colis</span>
+          <span class="detail-value">{{ annonceDetails.date_debut_reception_colis | date:'short' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Fin de réception des colis</span>
+          <span class="detail-value">{{ annonceDetails.date_fin_reception_colis | date:'short' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Condition</span>
+          <span class="detail-value">{{ annonceDetails.condition }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Tarif : </span>
+          <span class="detail-value highlight">{{ annonceDetails.prix_par_kg }} FCFA par kg</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Poids maximum : </span>
+          <span class="detail-value">{{ annonceDetails.poids_kg }} kg</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Statut : </span>
+          <span class="detail-value status-badge">{{ annonceDetails.statut }}</span>
+        </div>
+      </div>
 
-<button class="btn btnRetour btn-primary btn-lg mt-3">
-  <a href="Gpdisponible">Retour</a>
-</button>
+      <div class="btnAction mt-4">
+         <a href="DashboardClient" class="btn btn-secondary btn-lg">Retour</a>
+        <button class="btn btn-primary btn-lg me-3" (click)="openColisForm()">Réserver maintenant</button>
 
-</div>
       </div>
     </div>
   </div>
-
 </div>
-
-
-
-

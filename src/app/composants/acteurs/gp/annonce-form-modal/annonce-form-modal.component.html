@@ -1,96 +1,113 @@
-<div class="modal" *ngIf="data?.annonce !== undefined">
-  <div class="modal-content">
-    <span class="close" (click)="close()">&times;</span>
-    <h2 *ngIf="data?.annonce">Modifier l'annonce</h2>
-    <h2 *ngIf="!data?.annonce">Nouvelle annonce</h2>
-    <form [formGroup]="annonceForm" (ngSubmit)="onSubmitAnnonce()">
+<div class="modal" *ngIf="data?.annonce !== undefined" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <span *ngIf="data?.annonce">Modifier l'annonce</span>
+          <span *ngIf="!data?.annonce">Nouvelle annonce</span>
+        </h5>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="annonceForm" (ngSubmit)="onSubmitAnnonce()">
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="titre">Titre</label>
-          <input id="titre" formControlName="titre" required>
-          <div *ngIf="annonceForm.get('titre')?.invalid && (annonceForm.get('titre')?.touched || annonceForm.get('titre')?.dirty)" class="error-message">
-            <small>Le titre est requis.</small>
+          <!-- Titre -->
+          <div class="form-group">
+            <label for="titre">Titre</label>
+            <input type="text" class="form-control" id="titre" formControlName="titre" required>
+            <div *ngIf="annonceForm.get('titre')?.invalid && (annonceForm.get('titre')?.touched || annonceForm.get('titre')?.dirty)" class="text-danger">
+              <small>Le titre est requis.</small>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="pays_provenance">Pays d'origine</label>
-          <input id="pays_provenance" formControlName="pays_provenance" required>
-          <div *ngIf="annonceForm.get('pays_provenance')?.invalid && (annonceForm.get('pays_provenance')?.touched || annonceForm.get('pays_provenance')?.dirty)" class="error-message">
-            <small>Le pays d'origine est requis.</small>
+          <!-- Date début et fin réception colis -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="date_debut_reception_colis">Date début réception colis</label>
+              <input type="date" class="form-control" id="date_debut_reception_colis" formControlName="date_debut_reception_colis" required>
+              <div *ngIf="annonceForm.get('date_debut_reception_colis')?.invalid && (annonceForm.get('date_debut_reception_colis')?.touched || annonceForm.get('date_debut_reception_colis')?.dirty)" class="text-danger">
+                <small>La date de début est requise.</small>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="date_fin_reception_colis">Date fin réception colis</label>
+              <input type="date" class="form-control" id="date_fin_reception_colis" formControlName="date_fin_reception_colis" required>
+              <div *ngIf="annonceForm.get('date_fin_reception_colis')?.invalid && (annonceForm.get('date_fin_reception_colis')?.touched || annonceForm.get('date_fin_reception_colis')?.dirty)" class="text-danger">
+                <small>La date de fin est requise.</small>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="photo_pays_voyage_provenance">Image du pays d'origine</label>
-          <input id="photo_pays_voyage_provenance" type="file" (change)="onFileChange($event, 'provenance')" accept="image/*">
-        </div>
-
-        <div class="form-group">
-          <label for="pays_destination">Pays de destination</label>
-          <input id="pays_destination" formControlName="pays_destination" required>
-          <div *ngIf="annonceForm.get('pays_destination')?.invalid && (annonceForm.get('pays_destination')?.touched || annonceForm.get('pays_destination')?.dirty)" class="error-message">
-            <small>Le pays de destination est requis.</small>
+          <!-- Description -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
           </div>
-        </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="photo_pays_voyage_destination">Image du pays de destination</label>
-          <input id="photo_pays_voyage_destination" type="file" (change)="onFileChange($event, 'destination')" accept="image/*">
-        </div>
-
-        <div class="form-group">
-          <label for="date_debut_reception_colis">Date début réception colis</label>
-          <input id="date_debut_reception_colis" type="date" formControlName="date_debut_reception_colis" required>
-          <div *ngIf="annonceForm.get('date_debut_reception_colis')?.invalid && (annonceForm.get('date_debut_reception_colis')?.touched || annonceForm.get('date_debut_reception_colis')?.dirty)" class="error-message">
-            <small>La date de début est requise.</small>
+          <!-- Condition and Statut -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="condition">Condition</label>
+              <input type="text" class="form-control" id="condition" formControlName="condition" required>
+              <div *ngIf="annonceForm.get('condition')?.invalid && (annonceForm.get('condition')?.touched || annonceForm.get('condition')?.dirty)" class="text-danger">
+                <small>La condition est requise.</small>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="statut">Statut</label>
+              <select class="form-control" id="statut" formControlName="statut" required>
+                <option value="active">Actif</option>
+                <option value="expirée">Inactif</option>
+              </select>
+              <div *ngIf="annonceForm.get('statut')?.invalid && (annonceForm.get('statut')?.touched || annonceForm.get('statut')?.dirty)" class="text-danger">
+                <small>Le statut est requis.</small>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="date_fin_reception_colis">Date fin réception colis</label>
-          <input id="date_fin_reception_colis" type="date" formControlName="date_fin_reception_colis" required>
-          <div *ngIf="annonceForm.get('date_fin_reception_colis')?.invalid && (annonceForm.get('date_fin_reception_colis')?.touched || annonceForm.get('date_fin_reception_colis')?.dirty)" class="error-message">
-            <small>La date de fin est requise.</small>
+          <!-- Poids and Prix -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="poids_kg">Poids (kg)</label>
+              <input type="number" class="form-control" id="poids_kg" formControlName="poids_kg" required>
+              <div *ngIf="annonceForm.get('poids_kg')?.invalid && (annonceForm.get('poids_kg')?.touched || annonceForm.get('poids_kg')?.dirty)" class="text-danger">
+                <small>Le poids est requis et doit être un nombre.</small>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="prix_par_kg">Prix par kg</label>
+              <input type="number" class="form-control" id="prix_par_kg" formControlName="prix_par_kg" required>
+              <div *ngIf="annonceForm.get('prix_par_kg')?.invalid && (annonceForm.get('prix_par_kg')?.touched || annonceForm.get('prix_par_kg')?.dirty)" class="text-danger">
+                <small>Le prix par kg est requis et doit être un nombre.</small>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" formControlName="description"></textarea>
-        </div>
+          <!-- Country and Region -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="pays_provenance_voyage">Pays provenance voyage</label>
+              <select class="form-control" id="pays_provenance_voyage" formControlName="pays_provenance_voyage" (change)="onCountryChange(true)">
+                <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="region_provenance_voyage">Région provenance voyage</label>
+              <select class="form-control" id="region_provenance_voyage" formControlName="region_provenance_voyage">
+                <option *ngFor="let region of regionsProvenance" [value]="region.isoCode">{{ region.name }}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-group text-right">
+            <button type="submit" class="btn btn-primary" [disabled]="annonceForm.invalid">Soumettre</button>
+          </div>
+
+        </form>
       </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="tarif">Tarif</label>
-          <input id="tarif" formControlName="tarif" type="number">
-        </div>
-
-        <div class="form-group">
-          <label for="condition">Condition</label>
-          <input id="condition" formControlName="condition">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="poids_kg">Poids (kg)</label>
-          <input id="poids_kg" formControlName="poids_kg" type="number">
-        </div>
-      </div>
-
-      <div class="form-actions">
-        <button type="submit" [disabled]="annonceForm.invalid">Soumettre</button>
-        <button type="button" (click)="close()">Annuler</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

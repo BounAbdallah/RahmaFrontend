@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule, DatePipe } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GpAnnoncesService } from '../../../../core/services/annonces/gp-annonces.service';
 import { ColisService } from '../../../../core/services/colis/colis.service';
 import { Annonce } from '../../../../core/services/annonces/annonce.model';
 import { Colis } from '../../../../core/services/colis/colis.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ReservationService } from '../../../../core/services/reservations/reservation.service';
 import { ProfilService } from '../../../../core/services/profil.service';
 
 @Component({
   selector: 'app-details-annonce-gp',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, DatePipe],
   templateUrl: './details-annonce-gp.component.html',
   styleUrls: ['./details-annonce-gp.component.css']
 })
 export class DetailsAnnonceGPComponent implements OnInit {
   annonceId!: number;
-  annonceDetails!: Annonce;
+  annonceDetails: Annonce | null = null;
   userProfile: any;
-  colisForm!: FormGroup; // Déclaration du formulaire
+  colisForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,20 +29,20 @@ export class DetailsAnnonceGPComponent implements OnInit {
     private profilService: ProfilService,
     private colisService: ColisService,
     private reservationService: ReservationService,
-    private fb: FormBuilder // Injection de FormBuilder
+    private fb: FormBuilder
   ) {
-    this.initializeForm(); // Initialisation du formulaire
+    this.initializeForm();
   }
 
   ngOnInit(): void {
     this.annonceId = +this.route.snapshot.paramMap.get('id')!;
     this.getAnnonceDetails();
-    // this.getUserProfile(); // Charger les informations de l'utilisateur
   }
 
   initializeForm(): void {
     this.colisForm = this.fb.group({
       titre: ['', Validators.required],
+      image_1: ['', Validators.required],
       poids_kg: ['', [Validators.required, Validators.min(1)]],
       adresse_expediteur: ['', Validators.required],
       adresse_destinataire: ['', Validators.required],
@@ -50,10 +53,12 @@ export class DetailsAnnonceGPComponent implements OnInit {
   }
 
   getAnnonceDetails(): void {
+    console.log('Fetching annonce details for ID:', this.annonceId);
     this.annoncesService.getAnnonceById(this.annonceId).subscribe(
-      (data: Annonce[]) => {
-        if (data.length > 0) {
-          this.annonceDetails = data[0]; // Extraire le premier objet de l'array
+      (data: any) => {
+        console.log('Received data:', data);
+        if (data) {
+          this.annonceDetails = data;
           console.log('Détails de l\'annonce:', this.annonceDetails);
         } else {
           console.error('Aucune annonce trouvée.');
@@ -66,22 +71,21 @@ export class DetailsAnnonceGPComponent implements OnInit {
   }
 
   openColisForm() {
-    // Créer le popup pour le formulaire de création de colis
     Swal.fire({
       title: 'Créer un nouveau Colis',
       html: this.getFormHtml(),
       showCancelButton: true,
       confirmButtonText: 'Créer Colis',
       preConfirm: () => {
-        if (this.colisForm.valid) {
-          return this.colisForm.value; // Retourner les données du formulaire si valide
+        const formValues = this.extractFormValues();
+        if (this.validateFormValues(formValues)) {
+          return formValues;
         } else {
           Swal.showValidationMessage('Veuillez remplir tous les champs requis.');
         }
       }
-    }).then((result) => {
+    }).then ((result) => {
       if (result.isConfirmed) {
-        // Créer le colis
         this.createColis(result.value);
       }
     });
@@ -90,20 +94,42 @@ export class DetailsAnnonceGPComponent implements OnInit {
   getFormHtml(): string {
     return `
       <form id="colisForm">
-        <input type="text" id="titre" class="swal2-input" placeholder="Titre" style="width: 100%; padding: 12px; border: 1px solid #074C72; border-radius: 5px; background-color: #D9D9D9;" required>
-        <input type="number" id="poids_kg" class="swal2-input" placeholder="Poids (kg)" style="width: 100%; padding: 12px; border: 1px solid #074C72; border-radius: 5px; background-color: #D9D9D9;" required>
-        <input type="text" id="adresse_expediteur" class="swal2-input" placeholder="Adresse Expéditeur" style="width: 100%; padding: 12px; border: 1px solid #074C72; border-radius: 5px; background-color: #D9D9D9;" required>
-        <input type="text" id="adresse_destinataire" class="swal2-input" placeholder="Adresse Destinataire" style="width: 100%; padding: 12px; border: 1px solid #074C72; border-radius: 5px; background-color: #D9D9D9;" required>
-        <input type="text" id="contact_destinataire" class="swal2-input" placeholder="Contact Destinataire" style="width: 100%; padding: 12px; border: 1px solid #074C72; border-radius: 5px; background-color: #D9D9D9;" required>
-        <input type="text" id="contact_expediteur" class="swal2-input" placeholder="Contact Expéditeur" style="width: 100%; padding: 12px; border: 1px solid #074C72; border-radius: 5px; background-color: #D9D9D9;" required>
-        <input type="date" id="date_envoi" class="swal2-input" style="width: 100%; padding: 12px; border: 1px solid #074C72; border-radius: 5px; background-color: #D9D9D9;" required>
+        <input type="text" id="titre" class="swal2-input" placeholder="Titre" required>
+        <input type="file" id="image_1" class="swal2-input" required>
+        <input type="number" id="poids_kg" class="swal2-input" placeholder="Poids (kg)" required>
+        <input type="text" id="adresse_expediteur" class="swal2-input" placeholder="Adresse Expéditeur" required>
+        <input type="text" id="adresse_destinataire" class="swal2-input" placeholder="Adresse Destinataire" required>
+        <input type="text" id="contact_destinataire" class="swal2-input" placeholder="Contact Destinataire" required>
+        <input type="text" id="contact_expediteur" class="swal2-input" placeholder="Contact Expéditeur" required>
+        <input type="date" id="date_envoi" class="swal2-input" required>
       </form>
     `;
   }
 
+  extractFormValues(): any {
+    return {
+      titre: (document.getElementById('titre') as HTMLInputElement).value,
+      image_1: (document.getElementById('image_1') as HTMLInputElement).value,
+      poids_kg: (document.getElementById('poids_kg') as HTMLInputElement).value,
+      adresse_expediteur: (document.getElementById('adresse_expediteur') as HTMLInputElement).value,
+      adresse_destinataire: (document.getElementById('adresse_destinataire') as HTMLInputElement).value,
+      contact_destinataire: (document.getElementById('contact_destinataire') as HTMLInputElement).value,
+      contact_expediteur: (document.getElementById('contact_expediteur') as HTMLInputElement).value,
+      date_envoi: (document.getElementById('date_envoi') as HTMLInputElement).value
+    };
+  }
+
+  validateFormValues(values: any): boolean {
+    return Object.values(values).every(value => value !== '');
+  }
 
   createColis(colisData: Colis) {
-    this.colisService.createColis(colisData).subscribe(
+    const dataToSend: Colis = {
+      ...colisData,
+      statut: 'en attente' // Assurez-vous que cela correspond à une des valeurs acceptées
+    };
+
+    this.colisService.createColis(dataToSend).subscribe(
       (colis: Colis) => {
         Swal.fire('Succès', 'Le colis a été créé avec succès', 'success');
         if (colis.id !== undefined) {
@@ -118,11 +144,12 @@ export class DetailsAnnonceGPComponent implements OnInit {
     );
   }
 
+
   createReservation(colisId: number) {
     const reservationData = {
       annonce_id: this.annonceId,
       colis_id: colisId,
-      date_reservation: new Date().toISOString().slice(0, 10),  // Date actuelle
+      date_reservation: new Date().toISOString().slice(0, 10),
       status: 'en attente'
     };
 
