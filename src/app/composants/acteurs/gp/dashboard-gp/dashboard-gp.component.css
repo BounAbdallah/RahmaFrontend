@@ -1,43 +1,41 @@
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-
-body{
-
+body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: auto;
   font-style: normal;
   margin: 0%;
-
 }
 
-.titreRecherche{
+.titreRecherche {
   width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 80px;
   margin-top: 20px;
-  gap:200px
+  gap: 180px;
+  margin-left: 100px;
 }
-.titreRecherche h4{
+
+.titreRecherche h4 {
   margin-left: -230px;
 }
-.search-bar input{
+
+.search-bar input {
   margin-left: 200px;
   width: 340px;
   height: 40px;
   padding: 6px;
   border-radius: 8px;
-border: 2px solid var(--BleuBase, #074C72);
+  border: 2px solid var(--BleuBase, #074C72);
 }
+
 .container {
   display: flex;
   flex-wrap: nowrap;
@@ -45,128 +43,166 @@ border: 2px solid var(--BleuBase, #074C72);
 
 .sidebar {
   margin-top: 140px;
-  margin-left: 30px;
-    width: 150px;
-    height: 60vh;
-    text-align: center;
-    position: fixed;
-    background-color: var(--BleuBase, #074C72);
-    border-radius: 12px;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-sizing: border-box;
-    text-align: center;
+  width: 250px;
+  height: 70vh;
+  text-align: center;
+  position: fixed;
+  background-color: var(--BleuBase, #074C72);
+  border-radius: 12px;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  gap: 30px;
 }
-.sidebar img{
+
+.sidebar ul {
+  gap: 20px;
+}
+
+.sidebar img {
   width: 120px;
-  height: 34px;
+}
+
+.fa-bell {
+  background: #FF9F02;
+  border-radius: 12px;
+}
+
+.fa-sign-out-alt {
+  background: transparent;
+}
+
+.logoutbtn {
+  background: #074C72;
+  color: #FFF;
+}
+
+.top-bar button {
+  margin: 20px;
+  border: 0px;
+  border-radius: 12px;
 }
 
 .main-content {
-    width: 100%;
-    margin-top:110px;
-    margin-left: 180px;
+  flex-grow: 1;
+  margin-top: 110px;
+  margin-left: 260px;
+  padding: 20px;
+}
+
+li a {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-right: 20px;
+  color: #FFF;
+  width: 100%;
+  margin-top: 30px;
 }
 
 .top-bar {
   position: fixed;
   width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #005f7f;
-    color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #005f7f;
+  color: #fff;
+  z-index: 10;
+  /* margin-left: -15px; */
 }
-
-.top-bar button {
-background: transparent;
-/* width: 30px; */
-/* height: 30px; */
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-.top-bar button:hover {
-  background: transparent;
-}
-
 
 .stats {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+a {
+  text-decoration: none;
+}
+
+.fas {
+  width: 50px;
+  height: 50px;
+}
+
+i {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--Blanc, #FFF);
+  flex-direction: row;
 }
 
 .stat-box {
-    background-color: transparent;
-    padding: 20px;
-    border-radius: 8px;
-border: 3px solid var(--Jaunebase, #FF9F02);
-    text-align: center;
-    border-radius: 5px;
-    flex: 1;
-    margin: 0 10px;
+  padding: 20px;
+  border: 3px solid var(--Jaunebase, #FF9F02);
+  text-align: center;
+  border-radius: 5px;
+  flex: 1 1 30%;
+  margin: 10px;
 }
 
 .orders {
-    margin: 20px 0;
+  margin: 20px 0;
+}
+.orders{
+  margin-left: 40px;
 }
 
 .orders h4 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .order-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    width: 308px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: start;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  width: 308px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: start;
 }
 
 .card img {
   width: 308px;
   height: 143px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .card h5 {
-    margin-top: 10px;
-    color: var(--BleuBase, #074C72);
-
-font-family: Montserrat;
-font-size: 20px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+  margin-top: 10px;
+  color: var(--BleuBase, #074C72);
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .card p {
   color: var(--BleuBase, #074C72);
-
   font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
+
 .card-body {
-padding: 20px;
+  padding: 20px;
 }
 
 .card .btn {
@@ -176,29 +212,31 @@ padding: 20px;
   align-items: center;
   gap: 10px;
   border-radius: 4px;
-border: 1px solid var(--Jaunebase, #FF9F02);
-background: var(--Blanc, #FFF);
-    margin: 10px 0;
-    cursor: pointer;
+  border: 1px solid var(--Jaunebase, #FF9F02);
+  background: var(--Blanc, #FFF);
+  margin: 10px 0;
+  cursor: pointer;
 }
 
 .card .btn:hover {
-    background-color: #e0a800;
+  background-color: #e0a800;
 }
 
 .planned-trips {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .trip-buttons {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
-.sidebar button{
+
+.sidebar button {
   background: transparent;
   border: 0px;
 }
+
 a:hover {
   color: var(--RougeBase, #B50302);
 }
@@ -206,43 +244,24 @@ a:hover {
 .trip-button {
   border-radius: 4px;
   background: rgba(255, 159, 2, 0.41);
-    padding: 15px 20px;
-    border: none;
-    margin: 10px;
-    cursor: pointer;
-    text-align: center;
+  padding: 15px 20px;
+  border: none;
+  margin: 10px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .trip-button.light {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 .trip-button.light:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 .trip-button:hover {
-    background-color: #e0a800;
+  background-color: #e0a800;
 }
-
-/* @media (max-width: 768px) {
-    .stats, .order-cards, .trip-buttons {
-        flex-direction: column;
-    }
-
-    .stat-box, .card, .trip-button {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .order-cards .card {
-        width: 100%;
-    }
-} */
-
-
-
-
 
 .sidebar h3 {
   font-size: 18px;
@@ -271,23 +290,6 @@ a:hover {
   flex-grow: 1;
   padding: 20px;
 }
-
-/* @media (max-width: 768px) {
-  .container {
-      flex-direction: column;
-  }
-
-  .sidebar {
-      width: 100%;
-      height: auto;
-      margin-bottom: 20px;
-  }
-
-  .main-content {
-      width: 100%;
-  }
-} */
-
 
 .modal {
   display: flex;
@@ -378,11 +380,7 @@ a:hover {
   }
 }
 
-
-
-/* pagination */
-
-
+/* Pagination */
 .pagination {
   display: flex;
   justify-content: center;
@@ -402,7 +400,7 @@ a:hover {
 }
 
 .pagination .btn:hover {
-  background-color: #074C72; /* Légèrement plus foncé au hover */
+  background-color: #005f7f; /* Légèrement plus foncé au hover */
 }
 
 .pagination .btn:disabled {
@@ -414,3 +412,29 @@ a:hover {
   font-size: 16px;
   font-weight: bold;
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px; /* Réduire la largeur de la sidebar sur mobile */
+  }
+
+  .main-content {
+    margin-left: 220px; /* Ajuster la marge de la zone principale */
+  }
+
+  .card {
+    width: 100%; /* Les cartes occuperont toute la largeur sur mobile */
+  }
+
+  .titreRecherche {
+    flex-direction: column; /* Les éléments s'empilent sur mobile */
+    align-items: center; /* Centrer les éléments */
+  }
+
+  .search-bar input {
+    width: 90%; /* Réduire la largeur de la barre de recherche sur mobile */
+    margin-left: 0; /* Supprimer la marge */
+  }
+}
+
