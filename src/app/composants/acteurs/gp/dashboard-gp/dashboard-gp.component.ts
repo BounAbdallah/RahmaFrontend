@@ -22,7 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 })
 export class DashboardGPComponent implements OnInit {
   @Input() annonceId: number | null = null;
-
+  isSidebarOpen = false;
   statistiques: any;
   annonces: any = [];
   reservations: any;
@@ -77,7 +77,9 @@ export class DashboardGPComponent implements OnInit {
       }
     });
   }
-
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
   getAnnonces() {
     this.gpDashboardService.affichageAnnonces().subscribe({
       next: (data) => {

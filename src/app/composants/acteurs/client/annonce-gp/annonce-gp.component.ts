@@ -40,20 +40,20 @@ export class AnnonceGPComponent {
     });
   }
 
-  filterAnnonces(): void {
-    const query = this.searchQuery.toLowerCase();
+  // filterAnnonces(): void {
+  //   const query = this.searchQuery.toLowerCase();
 
-    this.filteredAnnonces = this.listAnnonceGp.filter((annonce) => {
-      // Vérifie si le texte de recherche correspond à l'un des champs
-      return (
-        annonce.titre.toLowerCase().includes(query) ||
-        annonce.description.toLowerCase().includes(query) ||
-        (annonce.pays_provenance_voyage && annonce.pays_provenance_voyage.toLowerCase().includes(query)) ||
-        (annonce.region_provenance_voyage && annonce.region_provenance_voyage.toLowerCase().includes(query)) ||
-        (annonce.pays_destination_voyage && annonce.pays_destination_voyage.toLowerCase().includes(query)) ||
-        (annonce.region_destination_voyage && annonce.region_destination_voyage.toLowerCase().includes(query)) ||
-        (annonce.date_prevue_voyage && new Date(annonce.date_prevue_voyage).toDateString().toLowerCase().includes(query))
-      );
-    });
-  }
+  //   this.filteredAnnonces = this.listAnnonceGp.filter((annonce) => {
+  //     // Vérifie si le texte de recherche correspond à l'un des champs
+  //     return (
+  //       annonce.titre.toLowerCase().includes(query) ||
+  //       annonce.description.toLowerCase().includes(query) ||
+  //       (annonce.pays_provenance_voyage && annonce.pays_provenance_voyage.toLowerCase().includes(query)) ||
+  //       (annonce.region_provenance_voyage && annonce.region_provenance_voyage.toLowerCase().includes(query)) ||
+  //       (annonce.pays_destination_voyage && annonce.pays_destination_voyage.toLowerCase().includes(query)) ||
+  //       (annonce.region_destination_voyage && annonce.region_destination_voyage.toLowerCase().includes(query)) ||
+  //       (annonce.date_prevue_voyage && new Date(annonce.date_prevue_voyage).toDateString().toLowerCase().includes(query))
+  //     );
+  //   });
+  // }
 }
