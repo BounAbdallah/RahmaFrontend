@@ -9,9 +9,7 @@ import { Annonce } from './annonce.model';
   providedIn: 'root'
 })
 export class GpAnnoncesService {
-  getReservationsForAnnonce(annonceId: number) {
-    throw new Error('Method not implemented.');
-  }
+ 
 
   private apiUrl = apiUrl;
 
