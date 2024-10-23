@@ -44,7 +44,7 @@ body {
 .sidebar {
   margin-top: 140px;
   width: 250px;
-  height: 70vh;
+  height: 80vh;
   text-align: center;
   position: fixed;
   background-color: var(--BleuBase, #074C72);
@@ -88,7 +88,7 @@ body {
 .main-content {
   flex-grow: 1;
   margin-top: 110px;
-  margin-left: 260px;
+  margin-left: 140px;
   padding: 20px;
 }
 
@@ -100,6 +100,12 @@ li a {
   color: #FFF;
   width: 100%;
   margin-top: 30px;
+}
+li{
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
 }
 
 .top-bar {
@@ -150,7 +156,7 @@ i {
 }
 
 .orders {
-  margin: 20px 0;
+  margin: 20px;
 }
 .orders{
   margin-left: 40px;
@@ -162,21 +168,21 @@ i {
 
 .order-cards {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
 .card {
   background-color: #fff;
   border: 1px solid #ddd;
-  width: 308px;
+  width: 240px;
   border-radius: 5px;
   margin-bottom: 20px;
   text-align: start;
 }
 
 .card img {
-  width: 308px;
+  width: 240px;
   height: 143px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -438,3 +444,46 @@ a:hover {
   }
 }
 
+/* .sidebar { */
+  /* Styles pour la sidebar */
+/* } */
+
+.tab-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tab-list li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: left;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 10px 15px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.tab-list li.active {
+  /* background: #f0f0f0; Couleur de fond pour l'onglet actif */
+  font-weight: bold;
+  background: #B50302;
+  color: #FFF;
+}
+
+/* Styles pour le contenu */
+.tab-content {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-left: 130px;
+  border-radius: 4px;
+}
+#mesAnnonces{
+  margin-top: 40px;
+  margin-left: 0px;
+}
+#mesAnnonces .orders{
+  margin: 0px;
+}

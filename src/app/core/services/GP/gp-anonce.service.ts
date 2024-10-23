@@ -18,6 +18,11 @@ export class GpAnnonceService {
     return this.http.get(url).pipe(catchError(this.handleError));
   }
 
+    // Créer une nouvelle annonce
+    createAnnonce(annonceData: any): Observable<any> {
+      const url = `${this.apiUrl}/gp-annonces`;
+      return this.http.post(url, annonceData).pipe(catchError(this.handleError));
+    }
   // Restaurer une annonce
   restoreAnnonce(id: number): Observable<any> {
     const url = `${this.apiUrl}/gp-annonces/restore/${id}`;

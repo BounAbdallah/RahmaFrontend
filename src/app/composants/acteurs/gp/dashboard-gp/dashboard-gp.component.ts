@@ -14,6 +14,8 @@ import { ProfilService } from '../../../../core/services/profil.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { StatistiquesComponent } from "../foncBase/statistiques/statistiques.component";
+import { ProfilComponent } from "../../client/profil/profil.component";
+import { ReservationAnnonceComponent } from "../foncBase/reservation-annonce/reservation-annonce.component";
 
 
 
@@ -22,7 +24,7 @@ import { StatistiquesComponent } from "../foncBase/statistiques/statistiques.com
 @Component({
   selector: 'app-dashboard-gp',
   standalone: true,
-  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent],
+  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent],
   templateUrl: './dashboard-gp.component.html',
   styleUrls: ['./dashboard-gp.component.css']
 })
@@ -58,6 +60,8 @@ userProfile: any;
   annoncesPerPage: number = 3;  // Nombre d'annonces à afficher par page
   currentPage: number = 1;  // Page actuelle
   totalPages: number = 1;  // Nombre total de pages
+  activeTab: string = 'dashboard';
+
   constructor(private gpDashboardService: GpDashboardService,
      private authService: AuthService,
      private profilService: ProfilService,
@@ -69,7 +73,9 @@ userProfile: any;
     this.getAnnonces();
     this.getReservations();
   }
-
+  setActiveTab(tab: string) {
+    this.activeTab = tab;
+  }
   getStatistiques() {
     this.gpDashboardService.affichageStatistiques().subscribe({
       next: (data) => {

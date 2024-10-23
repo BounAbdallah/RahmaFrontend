@@ -1,10 +1,38 @@
-.chart-container {
-  width: 50%;
-  height: 400px;
-  margin-bottom: 20px;
+body {
+  background-color: #f4f7fa; /* Couleur de fond du tableau de bord */
+  font-family: 'Arial', sans-serif; /* Police pour le tableau de bord */
 }
-.diagramme-content
-{
+
+.diagrammes {
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap; /* Permet aux diagrammes de passer à la ligne sur des écrans plus petits */
+  justify-content: space-between; /* Espace égal entre les diagrammes */
+  padding: 20px; /* Ajoute de l'espace autour du conteneur */
+}
+
+.chart-card {
+  flex: 1 1 45%; /* Chaque carte prendra 45% de la largeur, avec flexibilité */
+  max-width: 600px; /* Largeur maximum pour les cartes */
+  margin: 15px; /* Espacement entre les cartes */
+  border-radius: 10px; /* Coins arrondis */
+  background-color: #ffffff; /* Couleur de fond blanche pour les cartes */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre douce pour le relief */
+  padding: 20px; /* Espacement intérieur */
+  transition: transform 0.2s; /* Transition douce pour l'effet de survol */
+}
+
+.chart-card:hover {
+  transform: translateY(-5px); /* Légère élévation lors du survol */
+}
+
+.chart-title {
+  font-size: 1.5em; /* Taille de police pour le titre */
+  margin-bottom: 15px; /* Espace en dessous du titre */
+  color: #333; /* Couleur du texte */
+  text-align: center; /* Centrer le titre */
+}
+
+canvas {
+  width: 100% !important; /* Remplit le conteneur */
+  height: auto; /* Hauteur automatique pour maintenir le ratio */
 }

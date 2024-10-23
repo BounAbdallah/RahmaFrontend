@@ -1,0 +1,25 @@
+<div class="reservations-container">
+  <h2>Réservations pour l'annonce ID: {{ id }}</h2>
+  <table mat-table [dataSource]="reservations" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="date_reservation">
+      <th mat-header-cell *matHeaderCellDef>Date de Réservation</th>
+      <td mat-cell *matCellDef="let reservation">{{ reservation.date_reservation ? (reservation.date_reservation | date) : 'Non défini' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Statut</th>
+      <td mat-cell *matCellDef="let reservation">{{ reservation.status }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="colis">
+      <th mat-header-cell *matHeaderCellDef>Colis</th>
+      <td mat-cell *matCellDef="let reservation">
+        <button mat-button (click)="openColisDetails(reservation.colis)">Voir Détails</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['date_reservation', 'status', 'colis']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['date_reservation', 'status', 'colis']"></tr>
+  </table>
+</div>
