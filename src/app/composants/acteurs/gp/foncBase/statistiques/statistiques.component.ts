@@ -187,7 +187,7 @@ export class StatistiquesComponent implements OnInit {
 
   getExplanationForDay(day: string): string {
     // Remplacez ce contenu par la logique pour obtenir une explication
-    return `Explication pour ${day}: [Ajoutez ici les détails pertinents]`;
+    return `Explication pour ${day}: `;
   }
 
   updateWeeklyEvolutionCharts(data: any): void {
@@ -243,7 +243,7 @@ export class StatistiquesComponent implements OnInit {
   }
 
   getWeeklyExplanation(): string {
-    return 'Explication des statistiques hebdomadaires: [Ajoutez ici les détails pertinents]';
+    return 'Explication des statistiques hebdomadaires: ';
   }
 
   updateMonthlyEvolutionCharts(data: any): void {
@@ -289,7 +289,7 @@ export class StatistiquesComponent implements OnInit {
   }
 
   getMonthlyExplanation(): string {
-    return 'Explication des statistiques mensuelles: [Ajoutez ici les détails pertinents]';
+    return 'Explication des statistiques mensuelles: ';
   }
 
   destroyCharts(): void {

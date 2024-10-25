@@ -121,72 +121,66 @@
 
 
                   <!-- Modal pour afficher les détails des colis -->
-                  <div class="modal" *ngIf="isModalVisible ">
-                    <div class="modal-content">
-                      <span class="close" (click)="closeModal()">&times;</span>
+<div class="modal" *ngIf="isModalVisible">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
 
+    <div *ngIf="annonce">
+      <h3>Détails de l'annonce</h3>
+      <p><strong>Titre:</strong> {{ annonce.titre }}</p>
+      <p><strong>Description:</strong> {{ annonce.description }}</p>
+      <p><strong>Pays de provenance:</strong> {{ annonce.pays_provenance }}</p>
+      <p><strong>Pays de destination:</strong> {{ annonce.pays_destination }}</p>
+      <p><strong>Date de début de réception des colis:</strong> {{ annonce.date_debut_reception_colis | date:'short' }}</p>
+      <p><strong>Date de fin de réception des colis:</strong> {{ annonce.date_fin_reception_colis | date:'short' }}</p>
+      <img *ngIf="annonce.photo_pays_voyage_provenance" [src]="annonce.photo_pays_voyage_provenance" alt="Pays de provenance" style="width: 120px;">
+      <img *ngIf="annonce.photo_pays_voyage_destination" [src]="annonce.photo_pays_voyage_destination" alt="Pays de destination" style="width: 120px;">
+      <p><strong>Poids (kg):</strong> {{ annonce.poids_kg }} Kg</p>
+      <p><strong>Poids (kg) restants :</strong> {{ annonce.available_weight }} Kg</p>
+      <p><strong>Tarif:</strong> {{ annonce.prix_par_kg }} Fcfa</p>
+      <p><strong>Statut:</strong> {{ annonce.statut }}</p>
+      <p><strong>Conditions:</strong> {{ annonce.condition }}</p>
+    </div>
 
+    <h3>Nombre de Réservations: {{ annonce.reservations.length }}</h3>
 
-                      <div *ngIf="annonce">
-                        <h3>Détails de l'annonce</h3>
-                        <p><strong>Titre:</strong> {{ annonce.titre }}</p>
-                        <p><strong>Description:</strong> {{ annonce.description }}</p>
-                        <p><strong>Pays de provenance:</strong> {{ annonce.pays_provenance }}</p>
-                        <p><strong>Pays de destination:</strong> {{ annonce.pays_destination }}</p>
-                        <img *ngIf="annonce.photo_pays_voyage_provenance" [src]="annonce.photo_pays_voyage_provenance" alt="Pays de provenance" style="width: 120px;">
-                        <img *ngIf="annonce.photo_pays_voyage_destination" [src]="annonce.photo_pays_voyage_destination" alt="Pays de destination" style="width: 120px;">
-                        <p><strong>Poids (kg):</strong> {{ annonce.poids_kg }}</p>
-                        <p><strong>Tarif:</strong> {{ annonce.tarif }}</p>
-                        <p><strong>Statut:</strong> {{ annonce.statut }}</p>
-                        <p><strong>Conditions:</strong> {{ annonce.condition }}</p>
-                      </div>
+    <h3>Détails des Réservations</h3>
+    <table *ngIf="annonce.reservations && annonce.reservations.length > 0" border="1" cellspacing="0" cellpadding="10">
+      <thead>
+        <tr>
+          <th>Nom Utilisateur</th>
+          <th>Email Utilisateur</th>
+          <th>Téléphone Utilisateur</th>
+          <th>Colis</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of annonce.reservations">
+          <td>{{ reservation.user.nom }} {{ reservation.user.prenom }}</td>
+          <td>{{ reservation.user.email }}</td>
+          <td>{{ reservation.user.telephone }}</td>
+          <td>{{ reservation.colis.titre }} ({{ reservation.colis.poids_kg }} kg)</td>
+          <td>
+            <select (change)="changerStatutReservation(reservation.id, $event)">
+              <option value="en attente" [selected]="reservation.status === 'en attente'">En attente</option>
+              <option value="confirmée" [selected]="reservation.status === 'confirmée'">Confirmée</option>
+              <option value="annulée" [selected]="reservation.status === 'annulée'">Annulée</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-                      <h3>Nombre de Réservations: {{ nombreReservations }}</h3>
-
-                      <h3>Détails des Réservations</h3>
-                      <table *ngIf="reservationsDetails && reservationsDetails.length > 0" border="1" cellspacing="0" cellpadding="10">
-                        <thead>
-                          <tr>
-
-                            <th>Nom Utilisateur</th>
-                            <th>Email Utilisateur</th>
-                            <th>Téléphone Utilisateur</th>
-                            <th>Colis</th>
-                            <th>Status</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let reservation of reservationsDetails">
-
-                            <td>{{ reservation.reservation_id.user.nom }}</td>
-                            <td>{{ reservation.reservation_id.user.email }}</td>
-                            <td>{{ reservation.reservation_id.user.telephone }}</td>
-                            <td>{{ reservation.reservation_id.colis_id }}</td>
-
-
-                            <td>
-                              <select name="status" (change)="changerStatutReservation(reservation?.reservation_id.id, $event)">
-                                <option value="en attente" [selected]="reservation?.reservation_id?.status === 'en attente'">En attente</option>
-                                <option value="confirmée" [selected]="reservation?.reservation_id?.status === 'confirmée'">Confirmée</option>
-                                <option value="annulée" [selected]="reservation?.reservation_id?.status === 'annulée'">Annulée</option>
-                              </select>
-
-
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                    </div>
-                  </div>
                 </div>
               </div>
           </ng-container>
 
           <ng-container *ngIf="activeTab === 'ajouterAnnonce'">
               <h2>Ajouter une Annonce</h2>
-              <app-annonce-form-modal></app-annonce-form-modal>
+            <app-annonce-form></app-annonce-form>
           </ng-container>
 
           <ng-container *ngIf="activeTab === 'reservations'">
@@ -201,13 +195,14 @@
 
           <ng-container *ngIf="activeTab === 'statistiques'">
               <h2>Statistiques</h2>
-              <app-statistiques></app-statistiques>
+              <app-annonce-list></app-annonce-list>
+
           </ng-container>
 
           <ng-container *ngIf="activeTab === 'clients'">
               <h2>Mes Clients</h2>
-              <!-- Ajoutez ici le contenu pour les clients -->
-          </ng-container>
+            <app-annonce-list></app-annonce-list>
+            </ng-container>
       </div>
   </div>
 </div>

@@ -28,7 +28,7 @@ export class GpDashboardService {
   }
 
   affichageColisPourAnnonce(annonceId: number): Observable<any> {
-    const url = `${this.apiUrl}/gp/colis/annonce/${annonceId}`;
+    const url = `${this.apiUrl}/annonces/${annonceId}`;
     return this.http.get(url).pipe(catchError(this.handleError));
   }
 

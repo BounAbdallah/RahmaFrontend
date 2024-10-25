@@ -22,20 +22,6 @@ export class ModalDetailsColisComponent implements OnInit {
       this.showAnnonces(this.annonceId);
     }
   }
-
-  // Récupère les détails de l'annonce et des réservations
-  // getColisDetails(annonceId: number) {
-  //   this.gpDashboardService.affichageColisPourAnnonce(annonceId).subscribe({
-  //     next: (data) => {
-  //       this.annonce = data.annonce; // Stocke les informations de l'annonce
-  //       console.log('Annonce:', this.annonce);
-  //       this.reservationsDetails = data.reservations_details; // Stocke les détails des réservations
-  //     },
-  //     error: (error) => {
-  //       console.error('Error retrieving package details:', error);
-  //     }
-  //   });
-  // }
   showAnnonces(annonceId: number) {
     // this.selectedAnnonceId = this.selectedAnnonceId === annonceId ? null : annonceId;
     console.log('Annonce ID:', this.annonceId);

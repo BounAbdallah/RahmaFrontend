@@ -1,0 +1,11 @@
+<div *ngIf="isLoading">Chargement...</div>
+<div *ngIf="annonceDetails">
+  <h5>{{ annonceDetails.titre }}</h5>
+  <p><strong>Description :</strong> {{ annonceDetails.description }}</p>
+  <p><strong>Pays de provenance :</strong> {{ annonceDetails.pays_provenance }}</p>
+  <p><strong>Pays de destination :</strong> {{ annonceDetails.pays_destination }}</p>
+  <p><strong>Date de début :</strong> {{ annonceDetails.date_debut_reception_colis | date }}</p>
+  <p><strong>Date de fin :</strong> {{ annonceDetails.date_fin_reception_colis | date }}</p>
+  <p><strong>Statut :</strong> {{ annonceDetails.statut }}</p>
+  <!-- Ajoutez d'autres détails nécessaires ici -->
+</div>

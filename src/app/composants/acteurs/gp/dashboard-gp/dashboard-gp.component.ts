@@ -16,6 +16,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { StatistiquesComponent } from "../foncBase/statistiques/statistiques.component";
 import { ProfilComponent } from "../../client/profil/profil.component";
 import { ReservationAnnonceComponent } from "../foncBase/reservation-annonce/reservation-annonce.component";
+import { AnnonceListComponent } from "../foncBase/annonce-list/annonce-list.component";
+import { AnnonceFormComponent } from "../foncBase/annonce-form/annonce-form.component";
 
 
 
@@ -24,7 +26,7 @@ import { ReservationAnnonceComponent } from "../foncBase/reservation-annonce/res
 @Component({
   selector: 'app-dashboard-gp',
   standalone: true,
-  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent],
+  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent],
   templateUrl: './dashboard-gp.component.html',
   styleUrls: ['./dashboard-gp.component.css']
 })
@@ -71,7 +73,7 @@ userProfile: any;
   ngOnInit(): void {
     this.getStatistiques();
     this.getAnnonces();
-    this.getReservations();
+    // this.getReservations();
   }
   setActiveTab(tab: string) {
     this.activeTab = tab;
@@ -170,23 +172,19 @@ getPaginatedAnnonces() {
   // reservation detail
 
   showAnnonces(annonceId: number) {
-    // Appel API pour obtenir les détails de l'annonce et des réservations
     this.gpDashboardService.affichageColisPourAnnonce(annonceId).subscribe({
-      next: (data) => {
-        this.annonce = data.annonce; // Affecte l'annonce à la variable
-        this.nombreReservations = data.nombre_reservations; // Affecte le nombre de réservations
-        this.reservationsDetails = data.reservations_details; // Affecte les détails des réservations
-        this.isModalVisible = true; // Affiche la modale
-        console.log(this.annonce);
-        console.log(this.reservationsDetails);
-
-
-      },
-      error: (error) => {
-        console.error('Erreur lors de la récupération des détails des colis :', error);
-      }
+        next: (data) => {
+            this.annonce = data;
+            console.log('Détails des colis pour annonce :', this.annonce);
+            this.isModalVisible = true;
+        },
+        error: (error) => {
+            console.error('Erreur lors de la récupération des détails des colis :', error);
+        }
     });
-  }
+}
+
+
 
   // Sélectionner une annonce à modifier
   modifierAnnonce(annonce: any) {
@@ -263,8 +261,10 @@ getPaginatedAnnonces() {
   }
 
   closeModal() {
-    this.annonceId = null;
-  }
+    this.isModalVisible = false;
+    this.annonce = null; // Réinitialisez également l'annonce si nécessaire
+}
+
 
 
   changerStatutReservation(reservationId: number | undefined, event: Event) {
