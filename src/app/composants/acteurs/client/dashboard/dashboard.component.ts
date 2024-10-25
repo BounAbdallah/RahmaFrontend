@@ -7,11 +7,12 @@ import { RouterLink } from '@angular/router';
 import { ColisComponent } from '../../../colis/colis/colis.component';
 import { AnnonceGPComponent } from '../annonce-gp/annonce-gp.component';
 import { ProfilComponent } from '../profil/profil.component';
+import { NotificationsComponent } from "../../notifications/notifications.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, ProfilComponent, ColisComponent, AnnonceGPComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, ProfilComponent, ColisComponent, AnnonceGPComponent, NotificationsComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
@@ -43,7 +44,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProfil();
-    this.getNotifications(); // Fetch notifications on init
+    // this.getNotifications(); // Fetch notifications on init
     this.loadActivitiesFromLocalStorage(); // Load activities from local storage
   }
 
@@ -58,17 +59,17 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // Retrieve notifications
-  getNotifications(): void {
-    this.notificationService.getNotifications().subscribe(
-      (data) => {
-        this.notifications = data; // Assuming the response is an array of notifications
-      },
-      (error) => {
-        console.error('Failed to fetch notifications:', error);
-      }
-    );
-  }
+  // // Retrieve notifications
+  // getNotifications(): void {
+  //   this.notificationService.getNotifications().subscribe(
+  //     (data) => {
+  //       this.notifications = data; // Assuming the response is an array of notifications
+  //     },
+  //     (error) => {
+  //       console.error('Failed to fetch notifications:', error);
+  //     }
+  //   );
+  // }
 
   // Load activities from local storage
   loadActivitiesFromLocalStorage(): void {
