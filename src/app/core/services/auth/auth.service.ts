@@ -44,20 +44,24 @@ export class AuthService {
   }
 
   // Déconnexion
-  logout(): Observable<any> {
-    const token = this.getToken();
-    if (!token) {
-      return throwError(() => new Error('No token available for logout.'));
-    }
-
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get(`${this.apiUrl}/logout`, { headers }).pipe(
-      map(() => {
-        this.clearSession();
-      }),
-      catchError(this.handleError)
-    );
+// Déconnexion
+logout(): Observable<any> {
+  const token = this.getToken();
+  if (!token) {
+    return throwError(() => new Error('No token available for logout.'));
   }
+
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get(`${this.apiUrl}/logout`, { headers }).pipe(
+    map(() => {
+      this.clearSession(); // Supprimez le token après déconnexion
+      return { message: 'Déconnexion réussie' };
+    }),
+    catchError(this.handleError)
+  );
+}
+
+
 
   // Obtenir les détails de l'utilisateur
   getUserDetails(): Observable<any> {

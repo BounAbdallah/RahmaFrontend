@@ -16,7 +16,11 @@ import { DashboardGPComponent } from './composants/acteurs/gp/dashboard-gp/dashb
 import { GpReservationComponent } from './composants/acteurs/gp/gp-reservation/gp-reservation.component';
 import { RoleGuard } from './core/guards/role.guard';
 import { RegiseterGPComponent } from './composants/authentification/regiseter-gp/regiseter-gp.component';
+
 import { AnnonceFormModalComponent } from './composants/acteurs/gp/annonce-form-modal/annonce-form-modal.component';
+
+// import { StatistiquesComponent } from './composants/acteurs/gp/foncBase/statistiques/statistiques.component';
+
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -43,6 +47,7 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     data: { role: 'Client' }
   },
+
   {
     path: 'DashboardClient',
     component: DashboardComponent,
@@ -78,6 +83,12 @@ export const routes: Routes = [
   {
     path: 'annonce-details/:id',
     component: DetailsAnnonceGPComponent
+  },
+
+  {
+    path: 'statistiques',
+    component: StatistiquesComponent,
+
   },
   // Route par défaut si aucune correspondance
   { path: '**', redirectTo: 'accueil' }

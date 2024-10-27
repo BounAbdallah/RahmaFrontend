@@ -1,0 +1,12 @@
+<h2>Détails du Colis</h2>
+<p>Titre: {{ data.titre }}</p>
+<p>Poids: {{ data.poids_kg }} kg</p>
+<p>Adresse Expéditeur: {{ data.adresse_expediteur }}</p>
+<p>Adresse Destinataire: {{ data.adresse_destinataire }}</p>
+<p>Contact Expéditeur: {{ data.contact_expediteur }}</p>
+<p>Contact Destinataire: {{ data.contact_destinataire }}</p>
+<p>Date d'Envoi: {{ data.date_envoi | date }}</p>
+<p>Date de Réception: {{ data.date_reception | date }}</p>
+<p>Statut: {{ data.statut }}</p>
+<p>Description: {{ data.description }}</p>
+<button mat-button (click)="close()">Fermer</button>

@@ -1,0 +1,64 @@
+<div class="container my-5">
+  <h2 class="text-center mb-4">Liste des Annonces</h2>
+
+  <!-- Barre de recherche -->
+  <div class="mb-4">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Rechercher par titre ou description"
+      [(ngModel)]="searchTerm"
+      (input)="filterAnnonces()"
+    />
+  </div>
+
+  <div class="row">
+    <div *ngFor="let annonce of paginatedAnnonces" class="col-md-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ annonce.titre }}</h5>
+          <p class="card-text"><strong>Description :</strong> {{ annonce.description }}</p>
+          <p class="card-text"><strong>Date de début :</strong> {{ annonce.date_debut_reception_colis | date }}</p>
+          <p class="card-text"><strong>Date de fin :</strong> {{ annonce.date_fin_reception_colis | date }}</p>
+          <p class="card-text">
+            <strong>Statut :</strong>
+            <span class="badge" [ngClass]="{'bg-success': annonce.statut === 'active', 'bg-danger': annonce.statut === 'expirée'}">
+              {{ annonce.statut }}
+            </span>
+          </p>
+          <button type="button" class="btn btn-primary" (click)="openModal(annonce.id)">
+            Voir Détails
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal personnalisé -->
+  <div class="custom-modal" *ngIf="isModalOpen">
+    <div class="custom-modal-content">
+      <span class="close-button" (click)="closeModal()">&times;</span>
+      <h5>Détails de l'annonce</h5>
+      <app-details-annonce [annonceId]="selectedAnnonceId"></app-details-annonce>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [class.active]="i + 1 === currentPage">
+        <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

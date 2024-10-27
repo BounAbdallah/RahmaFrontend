@@ -1,0 +1,44 @@
+/* Styles for the announcement container */
+.annonces {
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background for contrast */
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Title styles */
+.annonces h2 {
+  color: #333; /* Dark color for the title */
+  font-size: 2rem;
+  margin-bottom: 20px; /* Spacing below the title */
+}
+
+/* Styles for individual announcement cards */
+.card {
+  transition: transform 0.2s; /* Smooth scaling on hover */
+}
+
+.card:hover {
+  transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+.card-title {
+  font-size: 1.5rem; /* Larger font size for the title */
+  color: #1E4C72; /* Custom color for title */
+}
+
+.card-text {
+  font-size: 1rem; /* Standard font size for text */
+  color: #555; /* Slightly lighter text color for readability */
+}
+
+.badge {
+  font-size: 0.9rem; /* Smaller font size for badges */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 20px; /* More space between cards on smaller screens */
+  }
+}

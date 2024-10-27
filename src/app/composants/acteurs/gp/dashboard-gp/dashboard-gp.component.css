@@ -2,8 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
 body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -13,6 +17,7 @@ body {
 }
 
 .titreRecherche {
+.titreRecherche {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -21,11 +26,17 @@ body {
   margin-top: 20px;
   gap: 180px;
   margin-left: 100px;
+  gap: 180px;
+  margin-left: 100px;
 }
+
+.titreRecherche h4 {
 
 .titreRecherche h4 {
   margin-left: -230px;
 }
+
+.search-bar input {
 
 .search-bar input {
   margin-left: 200px;
@@ -34,7 +45,9 @@ body {
   padding: 6px;
   border-radius: 8px;
   border: 2px solid var(--BleuBase, #074C72);
+  border: 2px solid var(--BleuBase, #074C72);
 }
+
 
 .container {
   display: flex;
@@ -62,7 +75,29 @@ body {
 }
 
 .sidebar img {
+
+.sidebar img {
   width: 120px;
+}
+
+.fa-bell {
+  background: #FF9F02;
+  border-radius: 12px;
+}
+
+.fa-sign-out-alt {
+  background: transparent;
+}
+
+.logoutbtn {
+  background: #074C72;
+  color: #FFF;
+}
+
+.top-bar button {
+  margin: 20px;
+  border: 0px;
+  border-radius: 12px;
 }
 
 .fa-bell {
@@ -124,13 +159,42 @@ li a {
 
 a {
   text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #005f7f;
+  color: #fff;
+  z-index: 10;
+  /* margin-left: -15px; */
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+a {
+  text-decoration: none;
 }
 
 .fas {
   width: 50px;
   height: 50px;
+.fas {
+  width: 50px;
+  height: 50px;
 }
 
+i {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--Blanc, #FFF);
+  flex-direction: row;
 i {
   font-size: 20px;
   display: flex;
@@ -147,6 +211,12 @@ i {
   border-radius: 5px;
   flex: 1 1 30%;
   margin: 10px;
+  padding: 20px;
+  border: 3px solid var(--Jaunebase, #FF9F02);
+  text-align: center;
+  border-radius: 5px;
+  flex: 1 1 30%;
+  margin: 10px;
 }
 
 .orders {
@@ -157,6 +227,7 @@ i {
 }
 
 .orders h4 {
+  margin-bottom: 20px;
   margin-bottom: 20px;
 }
 
@@ -176,13 +247,22 @@ i {
 }
 
 .card img {
-  width: 308px;
+  width: 240px;
   height: 143px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
 .card h5 {
+  margin-top: 10px;
+  color: var(--BleuBase, #074C72);
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
   margin-top: 10px;
   color: var(--BleuBase, #074C72);
   font-family: Montserrat;
@@ -201,7 +281,9 @@ i {
   line-height: normal;
 }
 
+
 .card-body {
+  padding: 20px;
   padding: 20px;
 }
 
@@ -216,13 +298,19 @@ i {
   background: var(--Blanc, #FFF);
   margin: 10px 0;
   cursor: pointer;
+  border: 1px solid var(--Jaunebase, #FF9F02);
+  background: var(--Blanc, #FFF);
+  margin: 10px 0;
+  cursor: pointer;
 }
 
 .card .btn:hover {
   background-color: #e0a800;
+  background-color: #e0a800;
 }
 
 .planned-trips {
+  margin: 20px 0;
   margin: 20px 0;
 }
 
@@ -230,12 +318,18 @@ i {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
+
+.sidebar button {
 
 .sidebar button {
   background: transparent;
   border: 0px;
 }
+
 
 a:hover {
   color: var(--RougeBase, #B50302);
@@ -249,17 +343,25 @@ a:hover {
   margin: 10px;
   cursor: pointer;
   text-align: center;
+  padding: 15px 20px;
+  border: none;
+  margin: 10px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .trip-button.light {
+  background-color: #f0f0f0;
   background-color: #f0f0f0;
 }
 
 .trip-button.light:hover {
   background-color: #ddd;
+  background-color: #ddd;
 }
 
 .trip-button:hover {
+  background-color: #e0a800;
   background-color: #e0a800;
 }
 
@@ -295,8 +397,9 @@ a:hover {
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0;
+  top: 30px;
   left: 0;
+  bottom: 120px;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
@@ -434,6 +537,7 @@ a:hover {
 }
 
 .pagination .btn:hover {
+  background-color: #005f7f; /* Légèrement plus foncé au hover */
   background-color: #005f7f; /* Légèrement plus foncé au hover */
 }
 
