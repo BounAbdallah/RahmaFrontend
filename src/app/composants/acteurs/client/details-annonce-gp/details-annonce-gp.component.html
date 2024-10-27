@@ -6,7 +6,7 @@
 
   <div class="product-details" *ngIf="annonceDetails">
     <div class="imagevoyagearrivage">
-      {{ annonceDetails.pays_destination}}          <--->
+      {{ annonceDetails.pays_destination_voyage}}          <----> {{annonceDetails.pays_provenance_voyage}}
     </div>
 
     <div class="product-info">
@@ -21,23 +21,23 @@
         <div class="meta-item">
           <i class="fas fa-calendar-alt"></i>
           <span>Voyage prevu pour </span>
-          <!-- <span>{{ annonceDetails.date_prevue_voyage | date:'shortDate' }}</span> -->
+          <span>{{ annonceDetails.date_prevue_voyage | date:'shortDate' }}</span>
         </div>
         <div class="meta-item">
           <i class="fas fa-clock"></i>
           <span> à :</span>
-          <!-- <span>{{ annonceDetails.heure_prevue_voyage || 'Non spécifié' }}</span> -->
+          <span>{{ annonceDetails.heure_prevue_voyage || 'Non spécifié' }}</span>
         </div>
       </div>
 
       <div class="product-details-grid">
         <div class="detail-item">
           <span class="detail-label">Dans la région de :</span>
-          <!-- <span class="detail-value">{{ annonceDetails.region_provenance_voyage || 'Non spécifié' }}</span> -->
+          <span class="detail-value">{{ annonceDetails.region_provenance_voyage || 'Non spécifié' }}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Dans la région de :</span>
-          <!-- <span class="detail-value">{{ annonceDetails.region_destination_voyage || 'Non spécifié' }}</span> -->
+          <span class="detail-value">{{ annonceDetails.region_destination_voyage || 'Non spécifié' }}</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Début de réception des colis</span>
@@ -56,8 +56,8 @@
           <span class="detail-value highlight">{{ annonceDetails.prix_par_kg }} FCFA par kg</span>
         </div>
         <div class="detail-item">
-          <span class="detail-label">Poids maximum : </span>
-          <span class="detail-value">{{ annonceDetails.poids_kg }} kg</span>
+          <span class="detail-label">Poids disponible : </span>
+          <span class="detail-value">{{ annonceDetails.available_weight }} kg</span>
         </div>
         <div class="detail-item">
           <span class="detail-label">Statut : </span>

@@ -115,6 +115,9 @@ body {
 .btnAction {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
 }
 
 .btn {
@@ -122,16 +125,26 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  align-items: center;
 }
 
 .btn-primary {
   background-color: #FF9F02; /* Couleur principale */
   color: white;
+  text-align: center;
+  align-items: center;
 }
 
 .btn-secondary {
-  background-color: #B50302; /* Couleur d'accent */
-  color: white;
+  color: #B50302; /* Couleur d'accent */
+  border: 1px solid #B50302;
+  text-align: center;
+  align-items: center;
+  height: auto;
+  margin-top: 26px;
+  background: transparent;
+
 }
 
 .btn:hover {
@@ -152,4 +165,7 @@ body {
   align-items: center;
   color: #F5F5F5;
   font-size: 20px;
+}
+.invalid-feedback{
+  color:#B50302;
 }

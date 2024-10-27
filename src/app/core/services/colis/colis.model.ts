@@ -9,7 +9,7 @@ export interface Colis {
   adresse_destinataire: string; // Requis
   contact_destinataire: string; // Requis
   contact_expediteur: string; // Requis
-  date_envoi: string; // Requis, peut être géré comme Date si nécessaire
+  date_envoi?: string; // Requis, peut être géré comme Date si nécessaire
   date_reception?: string; // Optionnel, ajouté pour correspondre à la base
   statut: 'en transit' | 'livré' | 'en attente' | 'retourné'; // Requis, correspond aux valeurs de l'énumération
   etat: 'archivé' | 'desarchivé' | 'en cours'; // Requis, avec 'en cours' par défaut

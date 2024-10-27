@@ -15,7 +15,7 @@
           <th scope="col">Expéditeur</th>
           <th scope="col">Destinataire</th>
           <th scope="col">Date d'Envoi</th>
-          <th scope="col" class="text-center">Actions</th>
+          <!-- <th scope="col" class="text-center">Actions</th> -->
         </tr>
       </thead>
       <tbody>
@@ -33,7 +33,7 @@
           <td>{{ colis.adresse_expediteur }}</td>
           <td>{{ colis.adresse_destinataire }}</td>
           <td>{{ colis.date_envoi | date: 'dd/MM/yyyy' }}</td>
-          <td class="text-center">
+          <!-- <td class="text-center">
             <div class="btn-group" role="group">
               <button (click)="editColis(colis)" class="btn btn-outline-primary btn-sm">
                 <i class="fas fa-edit"></i> Modifier
@@ -42,7 +42,7 @@
                 <i class="fas fa-trash-alt"></i> Supprimer
               </button>
             </div>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>

@@ -20,7 +20,6 @@ import { ProfilService } from '../../../../core/services/profil.service';
 export class DetailsAnnonceGPComponent implements OnInit {
   annonceId!: number;
   annonceDetails: Annonce | null = null;
-  userProfile: any;
   colisForm!: FormGroup;
 
   constructor(
@@ -46,20 +45,17 @@ export class DetailsAnnonceGPComponent implements OnInit {
       poids_kg: ['', [Validators.required, Validators.min(1)]],
       adresse_expediteur: ['', Validators.required],
       adresse_destinataire: ['', Validators.required],
-      contact_destinataire: ['', Validators.required],
-      contact_expediteur: ['', Validators.required],
-      date_envoi: ['', Validators.required]
+      contact_destinataire: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]], // Only numbers
+      contact_expediteur: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]], // Only numbers
+      date_envoi: ['']
     });
   }
 
   getAnnonceDetails(): void {
-    console.log('Fetching annonce details for ID:', this.annonceId);
     this.annoncesService.getAnnonceById(this.annonceId).subscribe(
       (data: any) => {
-        console.log('Received data:', data);
         if (data) {
           this.annonceDetails = data;
-          console.log('Détails de l\'annonce:', this.annonceDetails);
         } else {
           console.error('Aucune annonce trouvée.');
         }
@@ -74,8 +70,9 @@ export class DetailsAnnonceGPComponent implements OnInit {
     Swal.fire({
       title: 'Créer un nouveau Colis',
       html: this.getFormHtml(),
-      showCancelButton: true,
       confirmButtonText: 'Créer Colis',
+      showCancelButton: true,
+
       preConfirm: () => {
         const formValues = this.extractFormValues();
         if (this.validateFormValues(formValues)) {
@@ -84,7 +81,7 @@ export class DetailsAnnonceGPComponent implements OnInit {
           Swal.showValidationMessage('Veuillez remplir tous les champs requis.');
         }
       }
-    }).then ((result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
         this.createColis(result.value);
       }
@@ -93,16 +90,41 @@ export class DetailsAnnonceGPComponent implements OnInit {
 
   getFormHtml(): string {
     return `
-      <form id="colisForm">
-        <input type="text" id="titre" class="swal2-input" placeholder="Titre" required>
-        <input type="file" id="image_1" class="swal2-input" required>
-        <input type="number" id="poids_kg" class="swal2-input" placeholder="Poids (kg)" required>
-        <input type="text" id="adresse_expediteur" class="swal2-input" placeholder="Adresse Expéditeur" required>
-        <input type="text" id="adresse_destinataire" class="swal2-input" placeholder="Adresse Destinataire" required>
-        <input type="text" id="contact_destinataire" class="swal2-input" placeholder="Contact Destinataire" required>
-        <input type="text" id="contact_expediteur" class="swal2-input" placeholder="Contact Expéditeur" required>
-        <input type="date" id="date_envoi" class="swal2-input" required>
-      </form>
+      <div class="form-group">
+        <label for="titre">Titre</label>
+        <input type="text" id="titre" class="form-control" placeholder="Titre" required>
+        <div class="invalid-feedback" style="display: none;">Veuillez entrer un titre.</div>
+      </div>
+      <div class="form-group">
+        <label for="image_1">Image</label>
+        <input type="file" id="image_1" class="form-control" required>
+        <div class="invalid-feedback" style="display: none;">Veuillez sélectionner une image.</div>
+      </div>
+      <div class="form-group">
+        <label for="poids_kg">Poids (kg)</label>
+        <input type="number" id="poids_kg" class="form-control" placeholder="Poids (kg)" required>
+        <div class="invalid-feedback" style="display: none;">Veuillez entrer un poids valide.</div>
+      </div>
+      <div class="form-group">
+        <label for="adresse_expediteur">Adresse Expéditeur</label>
+        <input type="text" id="adresse_expediteur" class="form-control" placeholder="Adresse Expéditeur" required>
+        <div class="invalid-feedback" style="display: none;">Veuillez entrer l'adresse de l'expéditeur.</div>
+      </div>
+      <div class="form-group">
+        <label for="adresse_destinataire">Adresse Destinataire</label>
+        <input type="text" id="adresse_destinataire" class="form-control" placeholder="Adresse Destinataire" required>
+        <div class="invalid-feedback" style="display: none;">Veuillez entrer l'adresse du destinataire.</div>
+      </div>
+      <div class="form-group">
+        <label for="contact_destinataire">Contact Destinataire</label>
+        <input type="text" id="contact_destinataire" class="form-control" placeholder="Contact Destinataire" required>
+        <div class="invalid-feedback" style="display: none;">Veuillez entrer un contact valide.</div>
+      </div>
+      <div class="form-group">
+        <label for="contact_expediteur">Contact Expéditeur</label>
+        <input type="text" id="contact_expediteur" class="form-control" placeholder="Contact Expéditeur" required>
+        <div class="invalid-feedback" style="display: none;">Veuillez entrer un contact valide.</div>
+      </div>
     `;
   }
 
@@ -115,7 +137,6 @@ export class DetailsAnnonceGPComponent implements OnInit {
       adresse_destinataire: (document.getElementById('adresse_destinataire') as HTMLInputElement).value,
       contact_destinataire: (document.getElementById('contact_destinataire') as HTMLInputElement).value,
       contact_expediteur: (document.getElementById('contact_expediteur') as HTMLInputElement).value,
-      date_envoi: (document.getElementById('date_envoi') as HTMLInputElement).value
     };
   }
 
@@ -124,9 +145,12 @@ export class DetailsAnnonceGPComponent implements OnInit {
   }
 
   createColis(colisData: Colis) {
+    if (!colisData.date_envoi) {
+      colisData.date_envoi = new Date().toISOString().slice(0, 10);
+    }
     const dataToSend: Colis = {
       ...colisData,
-      statut: 'en attente' // Assurez-vous que cela correspond à une des valeurs acceptées
+      statut: 'en attente'
     };
 
     this.colisService.createColis(dataToSend).subscribe(
@@ -144,7 +168,6 @@ export class DetailsAnnonceGPComponent implements OnInit {
     );
   }
 
-
   createReservation(colisId: number) {
     const reservationData = {
       annonce_id: this.annonceId,
@@ -154,10 +177,10 @@ export class DetailsAnnonceGPComponent implements OnInit {
     };
 
     this.reservationService.createReservation(reservationData).subscribe(
-      (reservation) => {
+      () => {
         Swal.fire('Succès', 'La réservation a été créée avec succès', 'success');
       },
-      (error) => {
+      () => {
         Swal.fire('Erreur', 'Échec de la création de la réservation', 'error');
       }
     );
