@@ -19,7 +19,7 @@ import { RegiseterGPComponent } from './composants/authentification/regiseter-gp
 
 import { AnnonceFormModalComponent } from './composants/acteurs/gp/annonce-form-modal/annonce-form-modal.component';
 
-// import { StatistiquesComponent } from './composants/acteurs/gp/foncBase/statistiques/statistiques.component';
+import { StatistiquesComponent } from './composants/acteurs/gp/foncBase/statistiques/statistiques.component';
 
 
 export const routes: Routes = [

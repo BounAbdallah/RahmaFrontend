@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-body {
+
 body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -16,7 +16,7 @@ body {
   margin: 0%;
 }
 
-.titreRecherche {
+
 .titreRecherche {
   width: 100%;
   display: flex;
@@ -30,13 +30,13 @@ body {
   margin-left: 100px;
 }
 
-.titreRecherche h4 {
+
 
 .titreRecherche h4 {
   margin-left: -230px;
 }
 
-.search-bar input {
+
 
 .search-bar input {
   margin-left: 200px;
@@ -74,7 +74,7 @@ body {
   gap: 20px;
 }
 
-.sidebar img {
+
 
 .sidebar img {
   width: 120px;
@@ -194,7 +194,7 @@ i {
   justify-content: center;
   align-items: center;
   color: var(--Blanc, #FFF);
-  flex-direction: row;
+  flex-direction: row;}
 i {
   font-size: 20px;
   display: flex;
@@ -323,7 +323,7 @@ i {
   flex-wrap: wrap;
 }
 
-.sidebar button {
+
 
 .sidebar button {
   background: transparent;
@@ -764,4 +764,5 @@ a:hover {
   background-color: #444;
 }
 
+}
 }
