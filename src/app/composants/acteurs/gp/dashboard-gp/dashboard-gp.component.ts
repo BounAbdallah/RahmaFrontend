@@ -18,6 +18,8 @@ import { ProfilComponent } from "../../client/profil/profil.component";
 import { ReservationAnnonceComponent } from "../foncBase/reservation-annonce/reservation-annonce.component";
 import { AnnonceListComponent } from "../foncBase/annonce-list/annonce-list.component";
 import { AnnonceFormComponent } from "../foncBase/annonce-form/annonce-form.component";
+import { NotificationsComponent } from '../../notifications/notifications.component';
+
 
 
 
@@ -26,7 +28,7 @@ import { AnnonceFormComponent } from "../foncBase/annonce-form/annonce-form.comp
 @Component({
   selector: 'app-dashboard-gp',
   standalone: true,
-  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent],
+  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent, NotificationsComponent],
   templateUrl: './dashboard-gp.component.html',
   styleUrls: ['./dashboard-gp.component.css']
 })
@@ -62,6 +64,7 @@ userProfile: any;
   annoncesPerPage: number = 3;  // Nombre d'annonces à afficher par page
   currentPage: number = 1;  // Page actuelle
   totalPages: number = 1;  // Nombre total de pages
+  isMenuOpen = false;
   activeTab: string = 'dashboard';
 
   constructor(private gpDashboardService: GpDashboardService,
@@ -127,7 +130,16 @@ getPaginatedAnnonces() {
     }
   }
 
-  // Filtre par date
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen; // Inverser l'état du menu
+  }
+
+
+  setActiveTabe(tab: string) {
+    // Logique pour définir l'onglet actif
+    this.activeTab = tab;
+    this.isMenuOpen = false; // Fermer le menu après avoir cliqué sur un onglet
+  }
 
 
 

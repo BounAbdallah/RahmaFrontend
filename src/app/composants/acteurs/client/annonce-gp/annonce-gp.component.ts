@@ -19,6 +19,7 @@ export class AnnonceGPComponent {
   filteredAnnonces: Annonce[] = [];
   userProfile: any;
 
+  searchTerm: string = '';
 
   constructor(private gpAnnoncesService: GpAnnoncesService, private profilService: ProfilService) {}
 
@@ -28,17 +29,46 @@ export class AnnonceGPComponent {
   }
 
   getProfil(): void {
-    this.profilService.afficherProfil().subscribe((data) => {
-      this.userProfile = data;
+    this.profilService.afficherProfil().subscribe({
+      next: (data) => {
+        this.userProfile = data;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération du profil :', err);
+      }
     });
   }
 
   getAnnonceGp(): void {
-    this.gpAnnoncesService.getGpAnnonce().subscribe((data) => {
-      this.listAnnonceGp = data;
-      this.filteredAnnonces = data; // Afficher toutes les annonces initialement
+    this.gpAnnoncesService.getGpAnnonce().subscribe({
+      next: (data) => {
+        if (data) {
+          this.listAnnonceGp = data;
+          this.filteredAnnonces = data; // Afficher toutes les annonces initialement
+        }
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération des annonces :', err);
+      }
     });
   }
 
+  // Méthode pour filtrer les annonces
+  filterAnnonces(): void {
+    const searchTermLower = this.searchTerm.toLowerCase();
 
+    this.filteredAnnonces = this.listAnnonceGp.filter((annonce) => {
+      return (
+        (annonce.pays_provenance_voyage && annonce.pays_provenance_voyage.toLowerCase().includes(searchTermLower)) ||
+        (annonce.region_provenance_voyage && annonce.region_provenance_voyage.toLowerCase().includes(searchTermLower)) ||
+        (annonce.pays_destination_voyage && annonce.pays_destination_voyage.toLowerCase().includes(searchTermLower)) ||
+        (annonce.region_destination_voyage && annonce.region_destination_voyage.toLowerCase().includes(searchTermLower)) ||
+        (annonce.date_prevue_voyage && new Date(annonce.date_prevue_voyage).toLocaleDateString().includes(searchTermLower)) ||
+        (annonce.heure_prevue_voyage && annonce.heure_prevue_voyage.includes(searchTermLower)) ||
+        (annonce.heure_debut_reception_colis && annonce.heure_debut_reception_colis.includes(searchTermLower)) ||
+        (annonce.heure_fin_reception_colis && annonce.heure_fin_reception_colis.includes(searchTermLower)) ||
+        (annonce.prix_par_kg && annonce.prix_par_kg.toString().includes(searchTermLower))
+      );
+    });
+  }
 }

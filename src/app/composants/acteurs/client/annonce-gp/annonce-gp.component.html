@@ -1,5 +1,18 @@
+
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="filterAnnonces()"
+    placeholder="Rechercher une annonce"
+  />
+</div>
 <div class="body-content">
+
 <div class=" card-annonces-container" *ngFor="let annonce of listAnnonceGp">
+
+  <div *ngIf="filteredAnnonces.length > 0; else noResultsTemplate">
+
   <div class="card-body">
 <!-- <div class="card-section-annonces-gp" > -->
 <div class="card-annonce-item">
@@ -33,7 +46,7 @@
   <!-- fin icone destionation  -->
 
   <!-- pays destination -->
-  <h3>{{ annonce.pays_destination}}</h3>
+  <h3>{{ annonce.pays_destination_voyage}}</h3>
 
   </div>
   <!-- code section date -->
@@ -143,8 +156,13 @@
   </div>
   </div>
 </div>
-
+<ng-template #noResultsTemplate>
+  <p>Aucune annonce trouvée pour votre recherche.</p>
+</ng-template>
+</div>
 
 
 
 </div>
+
+

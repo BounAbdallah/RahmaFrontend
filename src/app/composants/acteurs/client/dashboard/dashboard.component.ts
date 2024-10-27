@@ -3,11 +3,14 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { ProfilService } from '../../../../core/services/profil.service';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ColisComponent } from '../../../colis/colis/colis.component';
 import { AnnonceGPComponent } from '../annonce-gp/annonce-gp.component';
 import { ProfilComponent } from '../profil/profil.component';
 import { NotificationsComponent } from "../../notifications/notifications.component";
+import { AuthService } from '../../../../core/services/auth/auth.service';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -22,12 +25,15 @@ export class DashboardComponent implements OnInit {
   notifications: string[] = []; // Array to store notifications
   activities: any[] = []; // Array to store activities
   authService: any;
-  router: any;
+
 
   constructor(
     private profilService: ProfilService,
     private notificationService: NotificationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private autheService: AuthService,
+    private router: Router,
+
   ) {
     this.profilForm = this.formBuilder.group({
       prenom: [''],
@@ -117,18 +123,15 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  onLogout() {
-    this.authService.logout().subscribe({
+  logout(): void {
+    this.autheService.logout().subscribe({
       next: () => {
-        // Déconnexion réussie
-        alert('Déconnexion réussie. Vous avez été déconnecté.');
-        this.router.navigate(['/connexion']); // Redirige vers la page de connexion
+        console.log('Déconnexion réussie');
+        this.router.navigate(['/connexion']);
       },
       error: (error: any) => {
-        // Gérer les erreurs de déconnexion ici
         console.error('Erreur lors de la déconnexion :', error);
-        alert('Une erreur est survenue lors de la déconnexion. Veuillez réessayer.');
       }
-    });
+    })
   }
 }

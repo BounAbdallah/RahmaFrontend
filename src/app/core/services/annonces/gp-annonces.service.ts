@@ -9,7 +9,7 @@ import { Annonce } from './annonce.model';
   providedIn: 'root'
 })
 export class GpAnnoncesService {
- 
+
 
   private apiUrl = apiUrl;
 

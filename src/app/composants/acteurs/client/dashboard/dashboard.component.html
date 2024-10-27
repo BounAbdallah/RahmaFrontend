@@ -6,8 +6,9 @@
       <div class="info-user d-flex align-items-center">
           <span class="me-3">{{ userProfile.prenom }} {{ userProfile.nom }}</span>
           <img class="nav-link" id="profil-tab" data-bs-toggle="tab" data-bs-target="#profil" alt="Photo de profil" src="{{ userProfile.photo_profil }}">
-          <button class="btn btn-danger btn-sm ms-2" (click)="onLogout()">Déconnexion</button>
-      </div>
+          <button class="logoutbtn" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>

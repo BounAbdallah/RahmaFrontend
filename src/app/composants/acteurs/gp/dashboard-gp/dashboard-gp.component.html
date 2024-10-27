@@ -18,9 +18,9 @@
               <i class="fas fa-plus-square"></i>
               Ajouter une Annonce
           </li>
-          <li [class.active]="activeTab === 'reservations'" (click)="setActiveTab('reservations')">
-              <i class="fas fa-calendar-check"></i>
-              Mes réservations
+          <li [class.active]="activeTab === 'notifications'" (click)="setActiveTab('reservations')">
+              <i class="fas fas-not  fa-bell"></i>
+              Notifications
           </li>
           <li [class.active]="activeTab === 'parametres'" (click)="setActiveTab('parametres')">
               <i class="fas fa-cog"></i>
@@ -135,7 +135,7 @@
       <p><strong>Date de fin de réception des colis:</strong> {{ annonce.date_fin_reception_colis | date:'short' }}</p>
       <img *ngIf="annonce.photo_pays_voyage_provenance" [src]="annonce.photo_pays_voyage_provenance" alt="Pays de provenance" style="width: 120px;">
       <img *ngIf="annonce.photo_pays_voyage_destination" [src]="annonce.photo_pays_voyage_destination" alt="Pays de destination" style="width: 120px;">
-      <p><strong>Poids (kg):</strong> {{ annonce.poids_kg }} Kg</p>
+      <p><strong>Poids (kg) a emporter:</strong> {{ annonce.poids_kg }} Kg</p>
       <p><strong>Poids (kg) restants :</strong> {{ annonce.available_weight }} Kg</p>
       <p><strong>Tarif:</strong> {{ annonce.prix_par_kg }} Fcfa</p>
       <p><strong>Statut:</strong> {{ annonce.statut }}</p>
@@ -183,9 +183,9 @@
             <app-annonce-form></app-annonce-form>
           </ng-container>
 
-          <ng-container *ngIf="activeTab === 'reservations'">
-              <h2>Mes Réservations</h2>
-            <app-reservation-annonce></app-reservation-annonce>
+          <ng-container *ngIf="activeTab === 'notifications'">
+              <h2>Notifications</h2>
+<app-notifications></app-notifications>
          </ng-container>
 
           <ng-container *ngIf="activeTab === 'parametres'">
