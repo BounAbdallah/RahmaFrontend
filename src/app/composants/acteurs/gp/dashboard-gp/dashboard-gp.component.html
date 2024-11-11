@@ -30,7 +30,7 @@
               <i class="fas fa-chart-line"></i>
               Statistiques
           </li>
-        
+
       </ul>
   </aside>
 
@@ -120,9 +120,11 @@
                   <!-- Modal pour afficher les détails des colis -->
 <div class="modal" *ngIf="isModalVisible">
   <div class="modal-content">
-    <span class="close" (click)="closeModal()">&times;</span>
+    <span class="close" (click)="closeModal()">Fermer</span>
 
     <div *ngIf="annonce">
+    <span class="close" (click)="closeModal()">Fermer</span>
+
       <h3>Détails de l'annonce</h3>
       <p><strong>Titre:</strong> {{ annonce.titre }}</p>
       <p><strong>Description:</strong> {{ annonce.description }}</p>
@@ -138,6 +140,17 @@
       <p><strong>Statut:</strong> {{ annonce.statut }}</p>
       <p><strong>Conditions:</strong> {{ annonce.condition }}</p>
     </div>
+    <p><strong>Poids (kg) a emporter:</strong> {{ annonce.poids_kg }} Kg</p>   <p>
+      <strong> Poids enregistré :</strong>
+       {{ (annonce.poids_kg - annonce.available_weight)  }}
+     </p>
+     <p><strong>Poids (kg) restants :</strong> {{ annonce.available_weight }} Kg</p>
+     <p><strong>Tarif:</strong> {{ annonce.prix_par_kg }} Fcfa</p>
+     <p><strong>Statut:</strong> {{ annonce.statut }}</p>
+     <p>
+     <strong>Somme généré sur cette annoncee :</strong>
+       {{ (annonce.poids_kg - annonce.available_weight) * annonce.prix_par_kg | currency:'FCFA':'symbol' }}
+     </p>
 
     <h3>Nombre de Réservations: {{ annonce.reservations.length }}</h3>
 
@@ -169,7 +182,10 @@
         <td> <a href="colis-details/{{reservation.colis.id}}">Voir les details</a></td>
         </tr>
       </tbody>
+
     </table>
+
+
   </div>
 </div>
 

@@ -46,7 +46,8 @@ export class DashboardGPComponent implements OnInit {
     description: '',
     tarif: 0,
     statut: 'active',
-    poids_kg: 0
+    poids_kg: 0,
+    // somme_gagne: number =
   };
 
   annonce: any = null; // Initialisation à null pour éviter les erreurs d'accès

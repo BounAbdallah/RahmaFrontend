@@ -34,7 +34,7 @@ export class DetailsColisClientComponent implements OnInit {
 
   getAnnonceDetails(): void {
     console.log('Appel à getAnnonceDetails');
-    const colisId = 14; // Remplacez ceci par l'ID du colis que vous souhaitez récupérer
+    const colisId = this.annonceId;
     console.log('ID du colis:', colisId); // Affiche l'ID du colis
     this.getColisDetails(colisId);
   }

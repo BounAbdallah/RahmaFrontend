@@ -328,6 +328,7 @@ a:hover {
   max-width: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+  padding-top:690px;
 }
 
 .close {
@@ -336,7 +337,7 @@ a:hover {
   right: 20px;
   font-size: 30px;
   cursor: pointer;
-  color: #555;
+  color: #c60f0f;
 }
 
 .modal-content h2,
@@ -510,4 +511,15 @@ app-notifications{
 }
 #mesAnnonces .orders{
   margin: 0px;
+}
+
+
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #c60f0f;
 }
