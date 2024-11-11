@@ -24,31 +24,45 @@ export class RegisterClientComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
+    // Initialisation du formulaire avec les validations
     this.registerForm = this.fb.group({
       prenom: ['', Validators.required],
       nom: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', Validators.required],
       telephone: ['', Validators.required],
       adress: ['', Validators.required],
       commune: ['', Validators.required],
+      nationalite: ['', Validators.required],
       date_de_naissance: ['', Validators.required],
-
-    });
+    }, { validators: this.passwordsMatchValidator }); // Ajout du validateur de mot de passe
   }
 
   ngOnInit(): void {
-    // Votre logique d'initialisation
+    // Logique d'initialisation si nécessaire
   }
 
-  onRegister() {
+  // Validateur pour vérifier si les mots de passe correspondent
+  private passwordsMatchValidator(form: FormGroup): { [key: string]: boolean } | null {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    if (password !== confirmPassword) {
+      return { 'passwordMismatch': true };
+    }
+    return null;
+  }
+
+  // Méthode pour gérer l'inscription
+  onRegister(): void {
     if (this.registerForm.valid) {
       const formData = new FormData();
-
+      // Ajouter les données du formulaire au formData
       Object.keys(this.registerForm.controls).forEach(key => {
         formData.append(key, this.registerForm.get(key)?.value);
       });
 
+      // Appel au service d'authentification pour l'inscription
       this.authService.registerClient(formData).subscribe({
         next: (response) => {
           console.log('Inscription réussie', response);
@@ -59,7 +73,7 @@ export class RegisterClientComponent implements OnInit {
             timer: 3000,
             showConfirmButton: false
           }).then(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login']); // Redirige vers la page de connexion
           });
         },
         error: (error) => {
@@ -74,6 +88,7 @@ export class RegisterClientComponent implements OnInit {
         }
       });
     } else {
+      // Afficher une alerte si le formulaire est invalide
       Swal.fire({
         title: 'Champs obligatoires',
         text: 'Veuillez remplir tous les champs obligatoires.',

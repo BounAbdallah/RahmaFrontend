@@ -15,9 +15,9 @@ export class AnnonceFormModalComponent implements OnInit {
   @Input() data: any; // Remplacez par le type approprié
   annonceForm: FormGroup;
   countries: any[] = [];
-  regionsProvenance: any[] = []; // Régions pour le pays de provenance
-  regionsDestination: any[] = []; // Régions pour le pays de destination
-  currentStep: number = 1; // Étape actuelle du formulaire
+  regionsProvenance: any[] = [];
+  regionsDestination: any[] = [];
+  currentStep: number = 1;
 
   constructor(private fb: FormBuilder, private annonceGpService: GpDashboardService) {
     this.annonceForm = this.fb.group({
@@ -41,7 +41,10 @@ export class AnnonceFormModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.countries = Country.getAllCountries();
+    this.countries = Country.getAllCountries().map(country => ({
+      name: country.name,
+      isoCode: country.isoCode
+    }));
     if (this.data?.annonce) {
       this.annonceForm.patchValue(this.data.annonce);
       this.setDateFields();
@@ -50,19 +53,18 @@ export class AnnonceFormModalComponent implements OnInit {
 
   nextStep(): void {
     if (this.currentStep === 1 && this.annonceForm.get(['titre', 'date_debut_reception_colis', 'date_fin_reception_colis', 'condition', 'poids_kg', 'prix_par_kg'])?.valid) {
-      this.currentStep = 2; // Passer à la deuxième étape
+      this.currentStep = 2;
     }
   }
 
   previousStep(): void {
     if (this.currentStep === 2) {
-      this.currentStep = 1; // Retourner à la première étape
+      this.currentStep = 1;
     }
   }
 
   onSubmitAnnonce(): void {
     if (this.annonceForm.valid) {
-      // Formater les heures avant de les envoyer à l'API
       const formattedAnnonce = {
         ...this.annonceForm.value,
         heure_prevue_voyage: this.formatTime(this.annonceForm.value.heure_prevue_voyage),
@@ -73,11 +75,9 @@ export class AnnonceFormModalComponent implements OnInit {
       this.annonceGpService.createAnnonce(formattedAnnonce).subscribe(
         (response: any) => {
           console.log('Annonce créée avec succès:', response);
-          // Logique pour fermer la modal ou rediriger l'utilisateur
         },
         (error: any) => {
           console.error('Erreur lors de la création de l\'annonce:', error);
-          // Afficher un message d'erreur à l'utilisateur
         }
       );
     } else {
@@ -87,35 +87,33 @@ export class AnnonceFormModalComponent implements OnInit {
 
   private formatTime(time: string): string {
     const date = new Date(`1970-01-01T${time}`);
-    const hours = date.getHours().toString().padStart(2, '0');
+    let hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}:00`;
+    const period = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes} ${period}`;
   }
 
   setDateFields(): void {
     const currentDate = new Date().toISOString().split('T')[0];
-    const dateDebut = this.annonceForm.get('date_debut_reception_colis');
-    const dateFin = this.annonceForm.get('date_fin_reception_colis');
-
-    if (!dateDebut?.value) {
-      dateDebut?.setValue(currentDate);
-    }
-    if (!dateFin?.value) {
-      dateFin?.setValue(currentDate);
-    }
+    this.annonceForm.get('date_debut_reception_colis')?.setValue(currentDate);
+    this.annonceForm.get('date_fin_reception_colis')?.setValue(currentDate);
   }
 
   onCountryChange(isProvenance: boolean): void {
-    const countryCode = isProvenance
+    const selectedCountry = isProvenance
       ? this.annonceForm.get('pays_provenance_voyage')?.value
       : this.annonceForm.get('pays_destination_voyage')?.value;
 
-    if (countryCode) {
-      const regions = State.getStatesOfCountry(countryCode);
-      if (isProvenance) {
-        this.regionsProvenance = regions; // Mettre à jour les régions de provenance
-      } else {
-        this.regionsDestination = regions; // Mettre à jour les régions de destination
+    if (selectedCountry) {
+      const country = this.countries.find(c => c.name === selectedCountry);
+      if (country) {
+        const regions = State.getStatesOfCountry(country.isoCode).map(state => state.name);
+        if (isProvenance) {
+          this.regionsProvenance = regions;
+        } else {
+          this.regionsDestination = regions;
+        }
       }
     }
   }

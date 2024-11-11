@@ -1,50 +1,62 @@
 <div class="container mt-5">
-  <div class="d-flex justify-content-between mb-4">
-    <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="filterColis()" placeholder="Rechercher un colis">
-
+  <div class="d-flex justify-content-center justify-content-md-between mb-4">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="filterColis()"
+      placeholder="Rechercher un colis"
+      class="form-control w-75 w-md-50 rounded-pill px-4 shadow-sm border-0 search-input"
+    />
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-hover table-striped align-middle">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">Image</th>
-          <th scope="col">Titre</th>
-          <th scope="col">Statut</th>
-          <th scope="col">Poids (kg)</th>
-          <th scope="col">Expéditeur</th>
-          <th scope="col">Destinataire</th>
-          <th scope="col">Date d'Envoi</th>
-          <!-- <th scope="col" class="text-center">Actions</th> -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let colis of paginatedColis" [ngClass]="{'table-success': colis.statut === 'livré', 'table-warning': colis.statut === 'en transit', 'table-danger': colis.statut === 'retourné'}">
-          <td>
-            <img [src]="getImageUrl(colis.image_1)" alt="Image de colis" class="img-thumbnail" style="width: 80px; height: auto;">
-          </td>
-          <td>{{ colis.titre }}</td>
-          <td>
-            <span class="badge" [ngClass]="{'bg-success': colis.statut === 'livré', 'bg-warning': colis.statut === 'en attente', 'bg-danger': colis.statut === 'retourné'}">
-              {{ colis.statut }}
-            </span>
-          </td>
-          <td>{{ colis.poids_kg }}</td>
-          <td>{{ colis.adresse_expediteur }}</td>
-          <td>{{ colis.adresse_destinataire }}</td>
-          <td>{{ colis.date_envoi | date: 'dd/MM/yyyy' }}</td>
-          <!-- <td class="text-center">
-            <div class="btn-group" role="group">
-              <button (click)="editColis(colis)" class="btn btn-outline-primary btn-sm">
-                <i class="fas fa-edit"></i> Modifier
-              </button>
-              <button (click)="deleteColis(colis.id)" class="btn btn-outline-danger btn-sm">
-                <i class="fas fa-trash-alt"></i> Supprimer
-              </button>
-            </div>
-          </td> -->
-        </tr>
-      </tbody>
-    </table>
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4" *ngFor="let colis of paginatedColis">
+      <div
+        class="card h-100 overflow-hidden shadow border-0 transform-on-hover position-relative"
+        [ngClass]="{
+          'border-success': colis.statut === 'livré',
+          'border-warning': colis.statut === 'en transit',
+          'border-danger': colis.statut === 'retourné'
+        }"
+      >
+        <img
+          src="./../../../../assets/images/images_/colisImage.png"
+          alt="Image de colis"
+          class="card-img-top img-fluid"
+          style="height: 220px; object-fit: cover; filter: brightness(0.9); transition: transform 0.5s ease;"
+        />
+        <div
+          class="badge position-absolute top-0 start-0 m-3 py-2 px-3 shadow status-badge"
+          [ngClass]="{
+            'bg-gradient-success': colis.statut === 'livré',
+            'bg-gradient-warning': colis.statut === 'en transit',
+            'bg-gradient-danger': colis.statut === 'retourné'
+          }"
+        >
+          <i class="bi"
+             [ngClass]="{
+               'bi-check-circle-fill': colis.statut === 'livré',
+               'bi-truck': colis.statut === 'en transit',
+               'bi-x-circle-fill': colis.statut === 'retourné'
+             }"
+          ></i>
+          {{ colis.statut }}
+        </div>
+
+        <div class="card-body text-center p-4 bg-light-gradient">
+          <h5 class="card-title fw-bold mb-2 text-primary">{{ colis.titre }}</h5>
+          <p class="text-muted small mb-3">{{ colis.description }}</p>
+          <div class="d-flex justify-content-around mb-3 text-muted small fw-bold">
+            <span><i class="bi bi-weight"></i> {{ colis.poids_kg }} kg</span>
+            <span><i class="bi bi-geo-alt"></i> {{ colis.adresse_expediteur }}</span>
+          </div>
+          <p class="card-text text-muted"><i class="bi bi-calendar"></i> {{ colis.date_envoi | date: 'dd/MM/yyyy' }}</p>
+        </div>
+
+        <div class="card-footer text-center border-0 py-3">
+          <button class="btn btn-primary btn-sm rounded-pill mx-2 shadow-sm btn-hover">Détails</button>
+          <button class="btn btn-outline-secondary btn-sm rounded-pill shadow-sm btn-hover">Modifier</button>
+        </div>
+      </div>
+    </div>
   </div>
-</div>

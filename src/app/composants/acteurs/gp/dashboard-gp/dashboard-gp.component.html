@@ -30,10 +30,7 @@
               <i class="fas fa-chart-line"></i>
               Statistiques
           </li>
-          <li [class.active]="activeTab === 'clients'" (click)="setActiveTab('clients')">
-              <i class="fas fa-users"></i>
-              Mes clients
-          </li>
+        
       </ul>
   </aside>
 
@@ -79,8 +76,8 @@
                     </div>
                     <div class="stat-box">
                         <p>Nombre de colis </p>
-                        <h3>{{ statistiques?.nombre_colis }}</h3>
-                        <p>Réservations totales : 342</p>
+                        <h3>{{ statistiques?.nombre_reservations }}</h3>
+
                     </div>
                 </div>
 
@@ -103,7 +100,7 @@
                   </div> -->
                   <div class="order-cards">
                     <div class="card" *ngFor="let annonce of getPaginatedAnnonces()">
-                      <img [src]="annonce.photo_pays_voyage_provenance" alt="Image de provenance">
+                      <img src="./../../../../../assets/images/images_/immageAnnonceGP.png" alt="Image de provenance">
                       <div class="card-body">
                         <h5>{{ annonce.pays_destination }} le <span>{{ annonce.date_fin_reception_colis | date:'dd/MM/yyyy' }}</span></h5>
                         <p>{{ annonce.poids_kg }} kg pour cet annonce</p>
@@ -153,6 +150,7 @@
           <th>Téléphone Utilisateur</th>
           <th>Colis</th>
           <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -168,6 +166,7 @@
               <option value="annulée" [selected]="reservation.status === 'annulée'">Annulée</option>
             </select>
           </td>
+        <td> <a href="colis-details/{{reservation.colis.id}}">Voir les details</a></td>
         </tr>
       </tbody>
     </table>
@@ -195,14 +194,11 @@
 
           <ng-container *ngIf="activeTab === 'statistiques'">
               <h2>Statistiques</h2>
-              <app-annonce-list></app-annonce-list>
+
 
           </ng-container>
 
-          <ng-container *ngIf="activeTab === 'clients'">
-              <h2>Mes Clients</h2>
-            <app-annonce-list></app-annonce-list>
-            </ng-container>
+
       </div>
   </div>
 </div>

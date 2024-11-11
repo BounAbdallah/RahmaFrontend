@@ -9,7 +9,7 @@
 </div>
 <div class="body-content">
 
-<div class=" card-annonces-container" *ngFor="let annonce of listAnnonceGp">
+  <div class="card-annonces-container" *ngFor="let annonce of listAnnonceGp.slice().reverse()">
 
   <div *ngIf="filteredAnnonces.length > 0; else noResultsTemplate">
 
@@ -156,8 +156,9 @@
   </div>
   </div>
 </div>
+<!-- Template to display when no results are available -->
 <ng-template #noResultsTemplate>
-  <p>Aucune annonce trouvée pour votre recherche.</p>
+  <p class="no-results-message">Aucune annonce disponible</p>
 </ng-template>
 </div>
 

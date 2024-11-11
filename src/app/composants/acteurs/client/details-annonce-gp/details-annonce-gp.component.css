@@ -169,3 +169,26 @@ body {
 .invalid-feedback{
   color:#B50302;
 }
+
+.imagevoyagearrivage span{
+  /* background: #ffffff94; */
+  border-radius: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+font-size: 30px;
+font-family:Montserrat;
+margin: 20px;
+}
+.depart{
+  color:#FF9F02;
+  background:rgb(23, 141, 10) ;
+}
+.arriver{
+  color:rgb(23, 141, 10);
+  background:#FF9F02 ;
+
+}
+.product-meta{
+  gap: 30px;
+  flex-direction: column;
+}

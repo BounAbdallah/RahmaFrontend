@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../core/services/auth/auth.service';
@@ -18,6 +18,7 @@ export class RegiseterGPComponent {
     required: 'Ce champ est obligatoire.',
     email: 'Veuillez entrer une adresse email valide.',
     minlength: 'Le champ doit comporter au moins {minlength} caractères.',
+    passwordMismatch: 'Les mots de passe ne correspondent pas.'
   };
 
   constructor(
@@ -31,15 +32,22 @@ export class RegiseterGPComponent {
       cni: ['', [Validators.required, Validators.minLength(13)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
       telephone: ['', [Validators.required, Validators.minLength(9)]],
-      adress: ['', [Validators.required, Validators.minLength(6)]],
-      commune: ['', [Validators.required, Validators.minLength(6)]],
-
+      adress: ['', [Validators.required, Validators.minLength(3)]],
+      commune: ['', [Validators.required, Validators.minLength(3)]],
+      nationalite: ['', [Validators.required]],
       date_de_naissance: ['', Validators.required],
-    });
+    }, { validators: this.passwordsMatchValidator });
   }
 
   ngOnInit(): void {}
+
+  passwordsMatchValidator(group: AbstractControl): { [key: string]: boolean } | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
 
   onRegister() {
     if (this.registerForm.valid) {
@@ -99,8 +107,13 @@ export class RegiseterGPComponent {
       if (errorKey === 'minlength') {
         return errorMsg.replace('{minlength}', control.errors['minlength'].requiredLength);
       }
+      // Check for custom error messages like password mismatch
+      if (errorKey === 'passwordMismatch') {
+        return 'Les mots de passe ne correspondent pas.';
+      }
       return errorMsg;
     }
     return null;
   }
+
 }

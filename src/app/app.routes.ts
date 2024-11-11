@@ -20,6 +20,9 @@ import { RegiseterGPComponent } from './composants/authentification/regiseter-gp
 import { AnnonceFormModalComponent } from './composants/acteurs/gp/annonce-form-modal/annonce-form-modal.component';
 
 import { StatistiquesComponent } from './composants/acteurs/gp/foncBase/statistiques/statistiques.component';
+import { DetailLivraisonGpComponent } from './composants/portail/detail-livraison-gp/detail-livraison-gp.component';
+import { ColisDetailsComponent } from './composants/acteurs/gp/foncBase/colis-details/colis-details.component';
+import { DetailsColisClientComponent } from './composants/acteurs/gp/details-colis-client/details-colis-client.component';
 
 
 export const routes: Routes = [
@@ -38,33 +41,33 @@ export const routes: Routes = [
   {
     path: 'adminDashboard',
     component: DashboardAdminComponent,
-    canActivate: [RoleGuard],
-    data: { role: 'Admin' }
+    // canActivate: [RoleGuard],
+    // data: { role: 'Admin' }
   },
   {
     path: 'MesColis',
     component: ColisComponent,
-    canActivate: [RoleGuard],
-    data: { role: 'Client' }
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
   },
 
   {
     path: 'DashboardClient',
     component: DashboardComponent,
-    canActivate: [RoleGuard],
-    data: { role: 'Client' }
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
   },
   {
     path: 'ProfilClient',
     component: ProfilComponent,
-    canActivate: [RoleGuard],
-    data: { role: 'Client' }
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
   },
   {
     path: 'Gpdisponible',
     component: AnnonceGPComponent,
-    canActivate: [RoleGuard],
-    data: { role: 'Client' }
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
   },
   {
     path: 'dashboardGP',
@@ -75,8 +78,8 @@ export const routes: Routes = [
   {
     path: 'reservationGp',
     component: GpReservationComponent,
-    canActivate: [RoleGuard],
-    data: { role: 'GP' }
+    // canActivate: [RoleGuard],
+    // data: { role: 'GP' }
   },
 
 
@@ -86,8 +89,18 @@ export const routes: Routes = [
   },
 
   {
+    path: 'colis-details/:id',
+    component: DetailsColisClientComponent
+  },
+
+  {
     path: 'statistiques',
     component: StatistiquesComponent,
+
+  },
+  {
+    path: 'detailSeviceGp',
+    component: DetailLivraisonGpComponent,
 
   },
   // Route par défaut si aucune correspondance

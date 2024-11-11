@@ -6,7 +6,8 @@
 
   <div class="product-details" *ngIf="annonceDetails">
     <div class="imagevoyagearrivage">
-      {{ annonceDetails.pays_destination_voyage}}          <----> {{annonceDetails.pays_provenance_voyage}}
+     <span class="depart">{{ annonceDetails.pays_destination_voyage}}</span>      <i class="fas fa-arrow-right"></i> 
+      <span class="arriver">{{annonceDetails.pays_provenance_voyage}}</span>
     </div>
 
     <div class="product-info">
@@ -15,9 +16,9 @@
 
       <div class="product-meta">
         <div class="meta-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>{{ annonceDetails.pays_provenance }} ...----> {{ annonceDetails.pays_destination }}</span>
-        </div>
+          <i class="fas fa-map-marker-alt"></i> 
+          <span>Je quitte {{ annonceDetails.pays_provenance_voyage }} dans la region de {{ annonceDetails.region_provenance_voyage }} pour  {{ annonceDetails.pays_destination_voyage }} dans la region de {{ annonceDetails.region_destination_voyage }}</span>
+        </div> 
         <div class="meta-item">
           <i class="fas fa-calendar-alt"></i>
           <span>Voyage prevu pour </span>

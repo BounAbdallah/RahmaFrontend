@@ -14,145 +14,51 @@
         <form [formGroup]="annonceForm" (ngSubmit)="onSubmitAnnonce()">
           <div class="container">
             <div class="row">
-              <!-- Titre -->
-              <div class="col-md-6 mb-3">
-                <label for="titre" class="form-label">Titre *</label>
-                <input type="text" id="titre" formControlName="titre" class="form-control" placeholder="Titre" />
-                <div *ngIf="annonceForm.get('titre')?.invalid && annonceForm.get('titre')?.touched" class="text-danger">
-                  Le titre est requis.
-                </div>
-              </div>
-
-              <!-- Date de début réception des colis -->
-              <div class="col-md-6 mb-3">
-                <label for="date_debut_reception_colis" class="form-label">Date de début de réception des colis *</label>
-                <input type="date" id="date_debut_reception_colis" formControlName="date_debut_reception_colis" class="form-control" />
-                <div *ngIf="annonceForm.get('date_debut_reception_colis')?.invalid && annonceForm.get('date_debut_reception_colis')?.touched" class="text-danger">
-                  La date de début de réception est requise.
-                </div>
-              </div>
-
-              <!-- Date de fin réception des colis -->
-              <div class="col-md-6 mb-3">
-                <label for="date_fin_reception_colis" class="form-label">Date de fin de réception des colis *</label>
-                <input type="date" id="date_fin_reception_colis" formControlName="date_fin_reception_colis" class="form-control" />
-                <div *ngIf="annonceForm.get('date_fin_reception_colis')?.invalid && annonceForm.get('date_fin_reception_colis')?.touched" class="text-danger">
-                  La date de fin de réception est requise.
-                </div>
-              </div>
-
-              <!-- Description -->
-              <div class="col-md-12 mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea id="description" formControlName="description" class="form-control" rows="3" placeholder="Description"></textarea>
-              </div>
-
-              <!-- Condition -->
-              <div class="col-md-6 mb-3">
-                <label for="condition" class="form-label">Condition *</label>
-                <input type="text" id="condition" formControlName="condition" class="form-control" placeholder="Condition" />
-                <div *ngIf="annonceForm.get('condition')?.invalid && annonceForm.get('condition')?.touched" class="text-danger">
-                  La condition est requise.
-                </div>
-              </div>
-
-              <!-- Statut -->
-              <div class="col-md-6 mb-3">
-                <label for="statut" class="form-label">Statut *</label>
-                <select id="statut" formControlName="statut" class="form-select">
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                </select>
-              </div>
-
-              <!-- Poids (kg) -->
-              <div class="col-md-6 mb-3">
-                <label for="poids_kg" class="form-label">Poids (kg) *</label>
-                <input type="number" id="poids_kg" formControlName="poids_kg" class="form-control" placeholder="Poids en kg" />
-                <div *ngIf="annonceForm.get('poids_kg')?.invalid && annonceForm.get('poids_kg')?.touched" class="text-danger">
-                  Le poids doit être supérieur ou égal à 0.
-                </div>
-              </div>
-
-              <!-- Prix par kg -->
-              <div class="col-md-6 mb-3">
-                <label for="prix_par_kg" class="form-label">Prix par kg *</label>
-                <input type="number" id="prix_par_kg" formControlName="prix_par_kg" class="form-control" placeholder="Prix par kg" />
-                <div *ngIf="annonceForm.get('prix_par_kg')?.invalid && annonceForm.get('prix_par_kg')?.touched" class="text-danger">
-                  Le prix par kg doit être supérieur ou égal à 0.
-                </div>
-              </div>
+              <!-- Autres champs du formulaire -->
 
               <!-- Pays de provenance du voyage -->
               <div class="col-md-6 mb-3">
                 <label for="pays_provenance_voyage" class="form-label">Pays de provenance *</label>
-                <input type="text" id="pays_provenance_voyage" formControlName="pays_provenance_voyage" class="form-control" placeholder="Pays de provenance" />
-                <div *ngIf="annonceForm.get('pays_provenance_voyage')?.invalid && annonceForm.get('pays_provenance_voyage')?.touched" class="text-danger">
-                  Le pays de provenance est requis.
-                </div>
+                <select id="pays_provenance_voyage" formControlName="pays_provenance_voyage" class="form-select" (change)="onCountryChange(true)">
+                  <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+                </select>
               </div>
 
               <!-- Région de provenance du voyage -->
               <div class="col-md-6 mb-3">
                 <label for="region_provenance_voyage" class="form-label">Région de provenance</label>
-                <input type="text" id="region_provenance_voyage" formControlName="region_provenance_voyage" class="form-control" placeholder="Région de provenance" />
+                <select id="region_provenance_voyage" formControlName="region_provenance_voyage" class="form-select">
+                  <option *ngFor="let region of regionsProvenance" [value]="region">{{ region }}</option>
+                </select>
               </div>
 
               <!-- Pays de destination du voyage -->
               <div class="col-md-6 mb-3">
                 <label for="pays_destination_voyage" class="form-label">Pays de destination *</label>
-                <input type="text" id="pays_destination_voyage" formControlName="pays_destination_voyage" class="form-control" placeholder="Pays de destination" />
-                <div *ngIf="annonceForm.get('pays_destination_voyage')?.invalid && annonceForm.get('pays_destination_voyage')?.touched" class="text-danger">
-                  Le pays de destination est requis.
-                </div>
+                <select id="pays_destination_voyage" formControlName="pays_destination_voyage" class="form-select" (change)="onCountryChange(false)">
+                  <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+                </select>
               </div>
 
               <!-- Région de destination du voyage -->
               <div class="col-md-6 mb-3">
                 <label for="region_destination_voyage" class="form-label">Région de destination</label>
-                <input type="text" id="region_destination_voyage" formControlName="region_destination_voyage" class="form-control" placeholder="Région de destination" />
+                <select id="region_destination_voyage" formControlName="region_destination_voyage" class="form-select">
+                  <option *ngFor="let region of regionsDestination" [value]="region">{{ region }}</option>
+                </select>
               </div>
 
-              <!-- Date prévue du voyage -->
+              <!-- Heure prévue de voyage -->
               <div class="col-md-6 mb-3">
-                <label for="date_prevue_voyage" class="form-label">Date prévue du voyage *</label>
-                <input type="date" id="date_prevue_voyage" formControlName="date_prevue_voyage" class="form-control" />
-                <div *ngIf="annonceForm.get('date_prevue_voyage')?.invalid && annonceForm.get('date_prevue_voyage')?.touched" class="text-danger">
-                  La date prévue du voyage est requise.
-                </div>
-              </div>
-
-              <!-- Heure prévue du voyage -->
-              <div class="col-md-6 mb-3">
-                <label for="heure_prevue_voyage" class="form-label">Heure prévue du voyage *</label>
+                <label for="heure_prevue_voyage" class="form-label">Heure prévue de voyage *</label>
                 <input type="time" id="heure_prevue_voyage" formControlName="heure_prevue_voyage" class="form-control" />
-                <div *ngIf="annonceForm.get('heure_prevue_voyage')?.invalid && annonceForm.get('heure_prevue_voyage')?.touched" class="text-danger">
-                  L'heure prévue du voyage est requise.
-                </div>
               </div>
 
-              <!-- Heure de début de réception des colis -->
-              <div class="col-md-6 mb-3">
-                <label for="heure_debut_reception_colis" class="form-label">Heure de début de réception des colis *</label>
-                <input type="time" id="heure_debut_reception_colis" formControlName="heure_debut_reception_colis" class="form-control" />
-                <div *ngIf="annonceForm.get('heure_debut_reception_colis')?.invalid && annonceForm.get('heure_debut_reception_colis')?.touched" class="text-danger">
-                  L'heure de début de réception est requise.
-                </div>
-              </div>
-
-              <!-- Heure de fin de réception des colis -->
-              <div class="col-md-6 mb-3">
-                <label for="heure_fin_reception_colis" class="form-label">Heure de fin de réception des colis *</label>
-                <input type="time" id="heure_fin_reception_colis" formControlName="heure_fin_reception_colis" class="form-control" />
-                <div *ngIf="annonceForm.get('heure_fin_reception_colis')?.invalid && annonceForm.get('heure_fin_reception_colis')?.touched" class="text-danger">
-                  L'heure de fin de réception est requise.
-                </div>
+              <!-- Soumettre -->
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Soumettre</button>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" [disabled]="annonceForm.invalid">Sauvegarder</button>
-            <button type="button" class="btn btn-secondary" (click)="close()">Annuler</button>
           </div>
         </form>
       </div>

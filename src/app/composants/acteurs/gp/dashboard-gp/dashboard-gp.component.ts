@@ -67,7 +67,8 @@ userProfile: any;
   isMenuOpen = false;
   activeTab: string = 'dashboard';
 
-  constructor(private gpDashboardService: GpDashboardService,
+  constructor(
+    private gpDashboardService: GpDashboardService,
      private authService: AuthService,
      private profilService: ProfilService,
      private router: Router,

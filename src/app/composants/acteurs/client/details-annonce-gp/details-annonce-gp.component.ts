@@ -56,6 +56,22 @@ export class DetailsAnnonceGPComponent implements OnInit {
       (data: any) => {
         if (data) {
           this.annonceDetails = data;
+
+          // Check if annonceDetails is not null before setting validators
+          if (this.annonceDetails && this.annonceDetails.available_weight) {
+            this.colisForm.get('poids_kg')?.setValidators([
+              Validators.required,
+              Validators.min(1),
+              Validators.max(this.annonceDetails.available_weight)
+            ]);
+          } else {
+            // Handle the case where annonceDetails is null or available_weight is not set
+            console.error('Les détails de l\'annonce ne contiennent pas de poids disponible.');
+            this.colisForm.get('poids_kg')?.setValidators([Validators.required, Validators.min(1)]);
+          }
+
+          // Re-evaluate validation
+          this.colisForm.get('poids_kg')?.updateValueAndValidity();
         } else {
           console.error('Aucune annonce trouvée.');
         }
@@ -64,7 +80,8 @@ export class DetailsAnnonceGPComponent implements OnInit {
         console.error('Erreur lors de la récupération des détails de l\'annonce', error);
       }
     );
-  }
+}
+
 
   openColisForm() {
     Swal.fire({
@@ -72,13 +89,14 @@ export class DetailsAnnonceGPComponent implements OnInit {
       html: this.getFormHtml(),
       confirmButtonText: 'Créer Colis',
       showCancelButton: true,
+      cancelButtonText: 'Annuler',
 
       preConfirm: () => {
         const formValues = this.extractFormValues();
         if (this.validateFormValues(formValues)) {
           return formValues;
         } else {
-          Swal.showValidationMessage('Veuillez remplir tous les champs requis.');
+          Swal.showValidationMessage('Veuillez remplir tous les champs requis et vérifier le poids.');
         }
       }
     }).then((result) => {
@@ -132,7 +150,7 @@ export class DetailsAnnonceGPComponent implements OnInit {
     return {
       titre: (document.getElementById('titre') as HTMLInputElement).value,
       image_1: (document.getElementById('image_1') as HTMLInputElement).value,
-      poids_kg: (document.getElementById('poids_kg') as HTMLInputElement).value,
+      poids_kg: +((document.getElementById('poids_kg') as HTMLInputElement).value), // Convert to number
       adresse_expediteur: (document.getElementById('adresse_expediteur') as HTMLInputElement).value,
       adresse_destinataire: (document.getElementById('adresse_destinataire') as HTMLInputElement).value,
       contact_destinataire: (document.getElementById('contact_destinataire') as HTMLInputElement).value,
@@ -141,7 +159,8 @@ export class DetailsAnnonceGPComponent implements OnInit {
   }
 
   validateFormValues(values: any): boolean {
-    return Object.values(values).every(value => value !== '');
+    const poidsValid = values.poids_kg > 0 && values.poids_kg <= (this.annonceDetails ? this.annonceDetails.available_weight : 0);
+    return Object.values(values).every(value => value !== '') && poidsValid;
   }
 
   createColis(colisData: Colis) {

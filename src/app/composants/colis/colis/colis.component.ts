@@ -27,7 +27,6 @@ export class ColisComponent implements OnInit {
   newColis: Colis = {
     titre: '',
     poids_kg: 0,
-    image_1: '',
     adresse_expediteur: '',
     adresse_destinataire: '',
     contact_destinataire: '',
@@ -64,7 +63,6 @@ export class ColisComponent implements OnInit {
       <form id="colisForm">
         <input type="text" id="titre" class="swal2-input" placeholder="Titre" required value="${this.editMode ? this.newColis.titre : ''}">
         <input type="number" id="poids_kg" class="swal2-input" placeholder="Poids (kg)" required value="${this.editMode ? this.newColis.poids_kg : ''}">
-        <input type="file" id="image_1" class="swal2-input" required>
         <input type="text" id="adresse_expediteur" class="swal2-input" placeholder="Adresse Expéditeur" required value="${this.editMode ? this.newColis.adresse_expediteur : ''}">
         <input type="text" id="adresse_destinataire" class="swal2-input" placeholder="Adresse Destinataire" required value="${this.editMode ? this.newColis.adresse_destinataire : ''}">
         <input type="text" id="contact_destinataire" class="swal2-input" placeholder="Contact Destinataire" required value="${this.editMode ? this.newColis.contact_destinataire : ''}">
@@ -78,11 +76,11 @@ export class ColisComponent implements OnInit {
       title: this.editMode ? 'Modifier un Colis' : 'Ajouter un Colis',
       html: htmlContent,
       showCancelButton: true,
+      cancelButtonText: 'Annuler',
       confirmButtonText: this.editMode ? 'Mettre à jour' : 'Ajouter',
       preConfirm: () => {
         const titre = (<HTMLInputElement>document.getElementById('titre')).value;
         const poids_kg = parseFloat((<HTMLInputElement>document.getElementById('poids_kg')).value);
-        const image_1 = (<HTMLInputElement>document.getElementById('image_1')).files?.[0]?.name || '';
         const adresse_expediteur = (<HTMLInputElement>document.getElementById('adresse_expediteur')).value;
         const adresse_destinataire = (<HTMLInputElement>document.getElementById('adresse_destinataire')).value;
         const contact_destinataire = (<HTMLInputElement>document.getElementById('contact_destinataire')).value;
@@ -96,7 +94,6 @@ export class ColisComponent implements OnInit {
         return {
           titre,
           poids_kg,
-          image_1,
           adresse_expediteur,
           adresse_destinataire,
           contact_destinataire,
@@ -146,6 +143,7 @@ export class ColisComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
       confirmButtonText: 'Oui, supprimer !'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -162,7 +160,6 @@ export class ColisComponent implements OnInit {
     this.newColis = {
       titre: '',
       poids_kg: 0,
-      image_1: '',
       adresse_expediteur: '',
       adresse_destinataire: '',
       contact_destinataire: '',
@@ -192,10 +189,6 @@ export class ColisComponent implements OnInit {
     this.paginatedColis = filteredColis.slice(0, this.itemsPerPage);
   }
 
-  getImageUrl(imagePath: string | undefined): string {
-    return imagePath ? `http://127.0.0.1:8000/storage/${imagePath}` : 'assets/default-image.jpg';
-  }
-
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -209,6 +202,7 @@ export class ColisComponent implements OnInit {
       this.updatePaginatedColis();
     }
   }
+
 
   onLogout() {
     this.authService.logout().subscribe({

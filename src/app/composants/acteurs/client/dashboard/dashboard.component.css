@@ -104,7 +104,11 @@ body {
 .navbar-toggler {
   display: none;
 }
+#dashboardTabsContent{
+  margin-left: -20px;
+  margin-top: 40px;
 
+}
 
 @media (max-width: 768px) {
   .header {

@@ -274,7 +274,7 @@ body {
   gap: 10px;
 }
 
-.card-body {
+/* .card-body {
   margin: 10px;
   width: 300px;
   height: 340px;
@@ -348,4 +348,68 @@ td .btnSupp {
 
 .top-bare {
   margin-bottom: 20px;
+} */
+
+/* Entrée de recherche stylisée */
+.search-input {
+  transition: box-shadow 0.3s ease;
+}
+.search-input:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Effet de transformation de carte */
+.transform-on-hover {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 12px;
+}
+.transform-on-hover:hover {
+  transform: scale(1.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Image de la carte avec effet de zoom */
+.card-img-top:hover {
+  transform: scale(1.1);
+  filter: brightness(1);
+}
+
+/* Badge d'état avec animation et dégradé */
+.bg-gradient-success {
+  background: linear-gradient(45deg, #4caf50, #66bb6a);
+}
+.bg-gradient-warning {
+  background: linear-gradient(45deg, #ffa726, #ffb74d);
+}
+.bg-gradient-danger {
+  background: linear-gradient(45deg, #e57373, #ef5350);
+}
+.status-badge {
+  border-radius: 20px;
+  animation: badge-pulse 1.5s infinite;
+}
+@keyframes badge-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+/* Dégradé léger pour le fond de la carte */
+.bg-light-gradient {
+  background: linear-gradient(135deg, #fafafa, #e0f7fa);
+  border-radius: 0 0 12px 12px;
+}
+
+/* Effets de bouton */
+.btn-hover {
+  transition: all 0.3s ease;
+}
+.btn-hover:hover {
+  background-color: #007bff !important;
+  color: #fff !important;
 }
