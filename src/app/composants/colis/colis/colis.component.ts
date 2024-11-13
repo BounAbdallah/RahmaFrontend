@@ -8,6 +8,8 @@ import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NavbarComponent } from '../../acteurs/client/navbar/navbar.component';
 import { AuthService } from '../../../core/services/auth/auth.service';
+import { GpDashboardService } from '../../../core/services/GP/gp-dashboard.service';
+
 
 @Component({
   selector: 'app-colis',
@@ -23,6 +25,10 @@ export class ColisComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 0;
+  reservations: any;
+  annonce: any = null;
+  annonces: any = [];
+
 
   newColis: Colis = {
     titre: '',
@@ -34,7 +40,8 @@ export class ColisComponent implements OnInit {
     date_envoi: '',
     statut: 'en attente',
     etat: 'archivé',
-    user_id: 0
+    user_id: 0,
+
   };
 
   editMode = false;
@@ -43,7 +50,9 @@ export class ColisComponent implements OnInit {
   constructor(
     private colisService: ColisService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private gpDashboardService: GpDashboardService,
+
   ) {}
 
   ngOnInit(): void {
@@ -136,6 +145,7 @@ export class ColisComponent implements OnInit {
       return;
     }
 
+
     Swal.fire({
       title: 'Êtes-vous sûr ?',
       text: "Vous ne pourrez pas annuler cette action !",
@@ -152,6 +162,31 @@ export class ColisComponent implements OnInit {
           this.updatePaginatedColis();
           Swal.fire('Supprimé !', 'Le colis a été supprimé.', 'success');
         });
+      }
+    });
+  }
+
+  getReservations() {
+    this.gpDashboardService.affichageReservations().subscribe({
+      next: (data) => {
+        this.reservations = data;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des réservations :', error);
+      }
+    });
+  }
+
+  getAnnonces() {
+    this.gpDashboardService.affichageAnnonces().subscribe({
+      next: (data) => {
+        this.annonces = data;
+
+         // Calculer le nombre total de pages
+
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des annonces :', error);
       }
     });
   }

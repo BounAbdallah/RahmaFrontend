@@ -52,10 +52,12 @@
           </div>
           <p class="card-text text-muted"><i class="bi bi-calendar"></i> {{ colis.date_envoi | date: 'dd/MM/yyyy' }}</p>
         </div>
+        <!-- <div *ngFor="let reservation of annonce.reservations" class="col-md-4 mb-4"> -->
 
         <div class="card-footer text-center border-0 py-3">
+
           <button class="btn btn-primary btn-sm rounded-pill mx-2 shadow-sm btn-hover">Détails</button>
-          <button class="btn btn-outline-secondary btn-sm rounded-pill shadow-sm btn-hover">Modifier</button>
+          <!-- <a href="colis-details/{{reservation.colis.id}}">details de mon colis</a> -->
         </div>
       </div>
     </div>

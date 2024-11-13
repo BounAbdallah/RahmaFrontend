@@ -23,6 +23,7 @@ import { StatistiquesComponent } from './composants/acteurs/gp/foncBase/statisti
 import { DetailLivraisonGpComponent } from './composants/portail/detail-livraison-gp/detail-livraison-gp.component';
 import { ColisDetailsComponent } from './composants/acteurs/gp/foncBase/colis-details/colis-details.component';
 import { DetailsColisClientComponent } from './composants/acteurs/gp/details-colis-client/details-colis-client.component';
+import { ClientDetailsColisComponent } from './composants/acteurs/client/client-details-colis/client-details-colis.component';
 
 
 export const routes: Routes = [
@@ -91,6 +92,10 @@ export const routes: Routes = [
   {
     path: 'colis-details/:id',
     component: DetailsColisClientComponent
+  },
+  {
+    path: 'mon-colis/:id',
+    component: ClientDetailsColisComponent
   },
 
   {

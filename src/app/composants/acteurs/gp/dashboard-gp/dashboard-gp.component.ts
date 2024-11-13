@@ -24,11 +24,10 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 
 
 
-
 @Component({
   selector: 'app-dashboard-gp',
   standalone: true,
-  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent, NotificationsComponent],
+  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent,NotificationsComponent],
   templateUrl: './dashboard-gp.component.html',
   styleUrls: ['./dashboard-gp.component.css']
 })
@@ -47,7 +46,7 @@ export class DashboardGPComponent implements OnInit {
     tarif: 0,
     statut: 'active',
     poids_kg: 0,
-    // somme_gagne: number =
+
   };
 
   annonce: any = null; // Initialisation à null pour éviter les erreurs d'accès
@@ -279,7 +278,11 @@ getPaginatedAnnonces() {
     this.annonce = null; // Réinitialisez également l'annonce si nécessaire
 }
 
+isOpenMenu: boolean = false;
 
+Menutoggle() {
+  this.isMenuOpen = !this.isMenuOpen;
+}
 
   changerStatutReservation(reservationId: number | undefined, event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value; // Récupérer la valeur sélectionnée

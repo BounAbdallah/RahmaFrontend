@@ -1,0 +1,151 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.product-details-container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #074C72;
+  margin-bottom: 15px;
+}
+
+/* Separator */
+.separator {
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  margin: 20px 0;
+}
+
+/* Reservations Table */
+.reservations-section {
+  padding: 20px 0;
+}
+
+.reservations-table td {
+  padding: 8px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Product Details */
+.product-info {
+  padding: 10px 0;
+}
+
+.product-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #074C72;
+  margin-bottom: 5px;
+}
+
+.product-meta {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Meta Data */
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  color: #555;
+}
+
+.meta-item i {
+  margin-right: 5px;
+}
+
+/* Product Details Grid */
+.product-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.detail-item {
+  background: #f1f1f1;
+  padding: 12px;
+  border-radius: 5px;
+}
+
+.detail-label {
+  font-weight: bold;
+}
+
+.highlight {
+  color: #B50302;
+  font-weight: bold;
+}
+
+/* Images */
+.product-images {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.main-image img,
+.secondary-image img {
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.main-image img:hover,
+.secondary-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Buttons */
+.btnAction {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #FF9F02;
+  color: white;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #B50302;
+  border: 2px solid #B50302;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  opacity: 0.85;
+}

@@ -1,0 +1,79 @@
+<div class="product-details-container" *ngIf="colisDetails">
+  <!-- Header with title and ID -->
+  <h1 class="product-title">{{ colisDetails.titre }}</h1>
+  <p class="product-meta">ID de l'annonce : {{ colisDetails.id }}</p>
+
+  <!-- Separator -->
+  <hr class="separator">
+
+  <!-- Table for reservations linked to the colis, if any -->
+  <div class="reservations-section" *ngIf="reservations && reservations.length">
+    <h3 class="section-title">Réservations</h3>
+    <table class="reservations-table">
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ reservation.colis.titre }} ({{ reservation.colis.poids_kg }} kg)</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Separator -->
+  <hr class="separator">
+
+  <!-- Complete details of the colis -->
+  <div class="product-info">
+    <h2 class="section-title">Détails du Colis</h2>
+    <div class="product-details-grid">
+      <div class="detail-item">
+        <span class="detail-label">Titre :</span> {{ colisDetails.titre }}
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">ID :</span> {{ colisDetails.id }}
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Description :</span> {{ colisDetails.description }}
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Poids :</span> {{ colisDetails.poids_kg }} kg
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Adresse Expéditeur :</span> {{ colisDetails.adresse_expediteur }}
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Adresse Destinataire :</span> {{ colisDetails.adresse_destinataire }}
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Contact Expéditeur :</span> {{ colisDetails.contact_expediteur }}
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Contact Destinataire :</span> {{ colisDetails.contact_destinataire }}
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Date d'envoi :</span> {{ colisDetails.date_envoi | date:'short' }}
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">État :</span> <span class="highlight">{{ colisDetails.etat }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Statut :</span> <span class="highlight">{{ colisDetails.statut }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Separator -->
+  <hr class="separator">
+
+  <!-- Images if available -->
+  <div class="product-images">
+
+    <div class="main-image" *ngIf="colisDetails.image_1">
+      <img [src]="colisDetails.image_1" alt="Image 1 du colis">
+    </div>
+    <div class="secondary-image" *ngIf="colisDetails.image_2">
+      <img [src]="colisDetails.image_2" alt="Image 2 du colis">
+    </div>
+    <div class="secondary-image" *ngIf="colisDetails.image_3">
+      <img [src]="colisDetails.image_3" alt="Image 3 du colis">
+    </div>
+  </div>
+  <a href="DashboardClient" class="btn btn-secondary btn-lg">Retour</a>
+</div>
