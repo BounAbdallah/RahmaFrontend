@@ -45,6 +45,8 @@
                 <button class="nav-link" id="activity-tab" data-bs-toggle="pill" data-bs-target="#historique" type="button">
                     <i class="fas fa-history"></i>
                     <span class="nav-text">Mon historique</span>
+
+
                 </button>
             </li>
               <li class="nav-item">
@@ -71,7 +73,7 @@
 
               <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
                 <div class="custom-card">
-                  <h5>Notifications</h5>
+
                   <app-notifications></app-notifications>
 
               </div>
@@ -79,10 +81,11 @@
 
               <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
                   <div class="custom-card">
-                      <h5>Activités Récentes</h5>
-                      <li *ngFor="let activity of activities">
-                        {{ activity.action }} - {{ activity.created_at | date:'short' }}
-                      </li>
+
+<app-activity-log></app-activity-log>
+
+
+
 
                   </div>
               </div>
@@ -100,9 +103,8 @@
               <div class="tab-pane fade" id="historique" role="tabpanel" aria-labelledby="historique-tab">
                 <div class="custom-card">
                     <h5>Mon  Historique</h5>
-                    <li>
-                      historique
-                    </li>
+                    <app-historique-coolis></app-historique-coolis>
+
 
                 </div>
             </div>

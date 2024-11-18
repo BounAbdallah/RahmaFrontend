@@ -19,6 +19,10 @@ import { ReservationAnnonceComponent } from "../foncBase/reservation-annonce/res
 import { AnnonceListComponent } from "../foncBase/annonce-list/annonce-list.component";
 import { AnnonceFormComponent } from "../foncBase/annonce-form/annonce-form.component";
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { ActivityLogComponent } from '../../activity-log/activity-log.component';
+import { RevenuTotalComponent } from "../../revenu-total/revenu-total.component";
+import { PoidsEnregistrerComponent } from '../../poids-enregistrer/poids-enregistrer.component';
+import { StatReservationComponent } from '../../stat-reservation/stat-reservation.component';
 
 
 
@@ -27,7 +31,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 @Component({
   selector: 'app-dashboard-gp',
   standalone: true,
-  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent,NotificationsComponent],
+  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent, NotificationsComponent, ActivityLogComponent, RevenuTotalComponent,PoidsEnregistrerComponent, StatReservationComponent],
   templateUrl: './dashboard-gp.component.html',
   styleUrls: ['./dashboard-gp.component.css']
 })
@@ -48,6 +52,7 @@ export class DashboardGPComponent implements OnInit {
     poids_kg: 0,
 
   };
+
 
   annonce: any = null; // Initialisation à null pour éviter les erreurs d'accès
   nombreReservations: number = 0; // Pour stocker le nombre de réservations
@@ -92,7 +97,9 @@ userProfile: any;
       }
     });
   }
-
+  Menutoggle() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
   getAnnonces() {
     this.gpDashboardService.affichageAnnonces().subscribe({
       next: (data) => {
@@ -280,9 +287,9 @@ getPaginatedAnnonces() {
 
 isOpenMenu: boolean = false;
 
-Menutoggle() {
-  this.isMenuOpen = !this.isMenuOpen;
-}
+// Menutoggle() {
+//   this.isMenuOpen = !this.isMenuOpen;
+// }
 
   changerStatutReservation(reservationId: number | undefined, event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value; // Récupérer la valeur sélectionnée

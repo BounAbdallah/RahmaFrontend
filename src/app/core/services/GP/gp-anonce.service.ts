@@ -53,6 +53,37 @@ export class GpAnnonceService {
     return this.http.get(url).pipe(catchError(this.handleError));
   }
 
+  getEvolutionRevenu(): Observable<any> {
+    const url = `${this.apiUrl}/statistiques/revenu-total`;
+    return this.http.get(url).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la récupération du revenu total :', error);
+        throw error; //
+      })
+    );
+  }
+
+
+  getPoidsEnregistrer(): Observable<any> {
+    const url = `${this.apiUrl}/statistiques/poids-total`;
+    return this.http.get(url).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la récupération du poids total enregistre :', error);
+        throw error; //
+      })
+    );
+  }
+
+  getStatReservation(): Observable<any> {
+    const url = `${this.apiUrl}/statistiques/reservations`;
+    return this.http.get(url).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la récupération de statistique de réservation :', error);
+        throw error; //
+      })
+    );
+  }
+
   // Récupérer les colis liés aux réservations
   getColisLiensReservations(): Observable<any> {
     const url = `${this.apiUrl}/gp-annonces/colis`;

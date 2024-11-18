@@ -1,0 +1,18 @@
+<div class="revenu-total-container">
+  <h2>Revenu Total</h2>
+
+  <!-- Affichez un message de chargement si les données ne sont pas encore prêtes -->
+  <div *ngIf="revenuTotal === null && !errorMessage">
+    Chargement du revenu total...
+  </div>
+
+  <!-- Affichez une erreur si la récupération des données échoue -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Affichez le revenu total une fois qu'il est chargé -->
+  <div *ngIf="revenuTotal !== null" class="revenu-value">
+    <p>Revenu Total : <strong>{{ poids_total | currency:'XOF' }}</strong></p>
+  </div>
+</div>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { GpAnnonceService } from '../../../../../core/services/GP/gp-anonce.service';
+import { PoidsEnregistrerComponent } from '../../../poids-enregistrer/poids-enregistrer.component';
 
 @Component({
   selector: 'app-statistiques',
   standalone: true,
-  imports: [],
+  imports: [PoidsEnregistrerComponent],
   templateUrl: './statistiques.component.html',
   styleUrls: ['./statistiques.component.css'],
 })

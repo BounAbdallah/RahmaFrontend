@@ -65,6 +65,11 @@ body {
   display: flex;
   justify-content: space-between;
 }
+#changeStatut{
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+}
 
 .meta-item {
   display: flex;

@@ -25,6 +25,20 @@ export class ColisService {
       .pipe(catchError(this.handleError));
   }
 
+  createColisClient(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/colis`, formData, {
+      headers: this.getHeaders(),
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  getHistoriqueColis(): Observable<Colis[]> {
+    return this.http.get<Colis[]>(`${apiUrl}/historique/colis`, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
   // Obtenir un colis par son ID
   getColisById(id: number): Observable<Colis> {
     return this.http.get<Colis>(`${this.apiUrl}/colis/${id}`, { headers: this.getHeaders() })

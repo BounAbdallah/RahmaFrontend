@@ -49,6 +49,7 @@ export class ProfilComponent {
 
       if (data.photo_profil) {
         this.userProfile.photo_profil = `http://127.0.0.1:8000/storage/${data.photo_profil}`;
+        console.log(this.userProfile.photo_profil)
       }
 
       this.profilForm.patchValue({
@@ -68,7 +69,11 @@ export class ProfilComponent {
   onSubmit(): void {
     // Validation des mots de passe
     if (this.profilForm.get('password')?.value !== this.profilForm.get('password_confirmation')?.value) {
-      console.error('Les mots de passe ne correspondent pas');
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Les mots de passe ne correspondent pas.',
+      });
       return;
     }
 
@@ -88,12 +93,27 @@ export class ProfilComponent {
     this.profilService.modifierProfil(formData).subscribe(
       (response) => {
         console.log('Profil mis à jour avec succès', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Succès',
+          text: 'Votre profil a été mis à jour avec succès.',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          // Actualiser la page après la confirmation
+          window.location.reload();
+        });
       },
       (error) => {
         console.error('Erreur lors de la mise à jour du profil', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Une erreur est survenue lors de la mise à jour du profil. Veuillez réessayer.',
+        });
       }
     );
   }
+
 
   // Gestion de l'image de profil à partir d'un input type file
   onFileChange(event: any) {

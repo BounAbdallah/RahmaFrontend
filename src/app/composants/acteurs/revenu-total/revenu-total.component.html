@@ -1,0 +1,21 @@
+<div class="card rounded shadow-sm animate__animated animate__fadeInUp">
+  <div class="card-body">
+    <h4 class="card-title text-center">Revenu Total</h4>
+
+    <!-- Affichez un message de chargement si les données ne sont pas encore prêtes -->
+    <div *ngIf="revenuTotal === null && !errorMessage" class="text-center animate__animated animate__fadeIn">
+      <i class="fas fa-spinner fa-spin fa-lg"></i> Chargement du revenu total...
+    </div>
+
+    <!-- Affichez une erreur si la récupération des données échoue -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-2 text-center animate__animated animate__fadeIn animate__delay-1s">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Affichez le revenu total une fois qu'il est chargé -->
+    <div *ngIf="revenuTotal !== null" class="mt-2 text-center animate__animated animate__fadeInUp animate__delay-2s">
+      <p class="fs-6">Revenu Total :</p>
+      <h5 class="fs-4"><strong>{{ revenuTotal | currency:'XOF' }}</strong></h5>
+    </div>
+  </div>
+</div>

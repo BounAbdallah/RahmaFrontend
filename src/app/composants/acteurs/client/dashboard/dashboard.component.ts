@@ -9,13 +9,16 @@ import { AnnonceGPComponent } from '../annonce-gp/annonce-gp.component';
 import { ProfilComponent } from '../profil/profil.component';
 import { NotificationsComponent } from "../../notifications/notifications.component";
 import { AuthService } from '../../../../core/services/auth/auth.service';
+import { HistoriqueCoolisComponent } from "../historique-coolis/historique-coolis.component";
+import { ActivityLogComponent } from "../../activity-log/activity-log.component";
+
 
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, ProfilComponent, ColisComponent, AnnonceGPComponent, NotificationsComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink, ProfilComponent, ColisComponent, AnnonceGPComponent, NotificationsComponent, HistoriqueCoolisComponent, ActivityLogComponent, ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

@@ -1,0 +1,21 @@
+<div class="card rounded shadow-sm animate__animated animate__fadeInUp">
+  <div class="card-body">
+    <h4 class="card-title text-center">Réservations</h4>
+
+    <!-- Affichez un message de chargement si les données ne sont pas encore prêtes -->
+    <div *ngIf="statReservation === null && !errorMessage" class="text-center animate__animated animate__fadeIn">
+      <i class="fas fa-spinner fa-spin fa-lg"></i> Chargement des statistiques...
+    </div>
+
+    <!-- Affichez une erreur si la récupération des données échoue -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-2 text-center animate__animated animate__fadeIn animate__delay-1s">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Affichez les statistiques de réservation une fois qu'elles sont chargées -->
+    <div *ngIf="statReservation !== null" class="mt-2 text-center animate__animated animate__fadeInUp animate__delay-2s">
+      <p class="fs-6">Statistiques Réservation :</p>
+      <h5 class="fs-4"><strong>{{ statReservation }}</strong></h5>
+    </div>
+  </div>
+</div>

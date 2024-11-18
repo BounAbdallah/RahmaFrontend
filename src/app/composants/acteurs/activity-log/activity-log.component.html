@@ -1,0 +1,13 @@
+<div>
+  <h3>Activités Récentes</h3>
+  <ul *ngIf="activities.length; else noActivities">
+    <li *ngFor="let activity of activities">
+      <span>{{ activity.timestamp | date: 'short' }}</span>
+      <span>{{ activity.action }}</span>
+    </li>
+  </ul>
+  <ng-template #noActivities>
+    <p>Aucune activité enregistrée.</p>
+  </ng-template>
+  <button (click)="clear()">Effacer les activités</button>
+</div>

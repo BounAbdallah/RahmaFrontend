@@ -6,7 +6,7 @@
 
   <div class="product-details" *ngIf="annonceDetails">
     <div class="imagevoyagearrivage">
-     <span class="depart">{{ annonceDetails.pays_destination_voyage}}</span>      <i class="fas fa-arrow-right"></i> 
+     <span class="depart">{{ annonceDetails.pays_destination_voyage}}</span>      <i class="fas fa-arrow-right"></i>
       <span class="arriver">{{annonceDetails.pays_provenance_voyage}}</span>
     </div>
 
@@ -16,13 +16,13 @@
 
       <div class="product-meta">
         <div class="meta-item">
-          <i class="fas fa-map-marker-alt"></i> 
+          <i class="fas fa-map-marker-alt"></i>
           <span>Je quitte {{ annonceDetails.pays_provenance_voyage }} dans la region de {{ annonceDetails.region_provenance_voyage }} pour  {{ annonceDetails.pays_destination_voyage }} dans la region de {{ annonceDetails.region_destination_voyage }}</span>
-        </div> 
+        </div>
         <div class="meta-item">
           <i class="fas fa-calendar-alt"></i>
           <span>Voyage prevu pour </span>
-          <span>{{ annonceDetails.date_prevue_voyage | date:'shortDate' }}</span>
+          <!-- <span>{{ annonceDetails.date_prevue_voyage | date:'shortDate' }}</span> -->
         </div>
         <div class="meta-item">
           <i class="fas fa-clock"></i>
@@ -42,11 +42,11 @@
         </div>
         <div class="detail-item">
           <span class="detail-label">Début de réception des colis</span>
-          <span class="detail-value">{{ annonceDetails.date_debut_reception_colis | date:'short' }}</span>
+          <!-- <span class="detail-value">{{ annonceDetails.date_debut_reception_colis | date:'short' }}</span> -->
         </div>
         <div class="detail-item">
           <span class="detail-label">Fin de réception des colis</span>
-          <span class="detail-value">{{ annonceDetails.date_fin_reception_colis | date:'short' }}</span>
+          <!-- <span class="detail-value">{{ annonceDetails.date_fin_reception_colis | date:'short' }}</span> -->
         </div>
         <div class="detail-item">
           <span class="detail-label">Condition</span>

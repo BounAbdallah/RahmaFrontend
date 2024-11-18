@@ -1,64 +1,51 @@
-<div class="container mt-5">
-  <div class="d-flex justify-content-center justify-content-md-between mb-4">
+<div class="container py-5">
+  <!-- Barre de recherche -->
+  <div class="d-flex justify-content-center justify-content-md-between mb-5">
     <input
       type="text"
       [(ngModel)]="searchTerm"
       (ngModelChange)="filterColis()"
-      placeholder="Rechercher un colis"
-      class="form-control w-75 w-md-50 rounded-pill px-4 shadow-sm border-0 search-input"
+      placeholder="🔍 Rechercher un colis"
+      class="form-control form-control-lg rounded-pill px-4 shadow-sm border-primary search-input"
+      style="max-width: 600px;"
     />
   </div>
 
+  <!-- Liste des colis -->
   <div class="row">
-    <div class="col-md-6 col-lg-4 mb-4" *ngFor="let colis of paginatedColis">
-      <div
-        class="card h-100 overflow-hidden shadow border-0 transform-on-hover position-relative"
-        [ngClass]="{
-          'border-success': colis.statut === 'livré',
-          'border-warning': colis.statut === 'en transit',
-          'border-danger': colis.statut === 'retourné'
-        }"
-      >
-        <img
-          src="./../../../../assets/images/images_/colisImage.png"
-          alt="Image de colis"
-          class="card-img-top img-fluid"
-          style="height: 220px; object-fit: cover; filter: brightness(0.9); transition: transform 0.5s ease;"
-        />
-        <div
-          class="badge position-absolute top-0 start-0 m-3 py-2 px-3 shadow status-badge"
-          [ngClass]="{
-            'bg-gradient-success': colis.statut === 'livré',
-            'bg-gradient-warning': colis.statut === 'en transit',
-            'bg-gradient-danger': colis.statut === 'retourné'
-          }"
-        >
-          <i class="bi"
-             [ngClass]="{
-               'bi-check-circle-fill': colis.statut === 'livré',
-               'bi-truck': colis.statut === 'en transit',
-               'bi-x-circle-fill': colis.statut === 'retourné'
-             }"
-          ></i>
-          {{ colis.statut }}
+    <div class="col-md-4" *ngFor="let colis of paginatedColis">
+      <!-- Card -->
+      <div class="card h-100 shadow-sm transform-on-hover">
+        <div class="ratio ratio-4x3">
+          <img *ngIf="colis.image_1" [src]="colis.image_1" alt="Image du colis" class="colis-image" />
+          <ng-template #noImage>
+            <img src="assets/default-image.jpg" alt="Image par défaut" class="colis-image" />
+          </ng-template>
         </div>
-
-        <div class="card-body text-center p-4 bg-light-gradient">
-          <h5 class="card-title fw-bold mb-2 text-primary">{{ colis.titre }}</h5>
-          <p class="text-muted small mb-3">{{ colis.description }}</p>
-          <div class="d-flex justify-content-around mb-3 text-muted small fw-bold">
+        <div class="card-body bg-light-gradient">
+          <h4 class="card-title text-primary">{{ colis.titre }}</h4>
+          <p class="card-text">{{ colis.description || 'Pas de description disponible' }}</p>
+          <div class="d-flex justify-content-between text-muted small mb-3">
             <span><i class="bi bi-weight"></i> {{ colis.poids_kg }} kg</span>
             <span><i class="bi bi-geo-alt"></i> {{ colis.adresse_expediteur }}</span>
           </div>
-          <p class="card-text text-muted"><i class="bi bi-calendar"></i> {{ colis.date_envoi | date: 'dd/MM/yyyy' }}</p>
-        </div>
-        <!-- <div *ngFor="let reservation of annonce.reservations" class="col-md-4 mb-4"> -->
-
-        <div class="card-footer text-center border-0 py-3">
-
-          <button class="btn btn-primary btn-sm rounded-pill mx-2 shadow-sm btn-hover">Détails</button>
-          <!-- <a href="colis-details/{{reservation.colis.id}}">details de mon colis</a> -->
+          <p class="text-muted small"><i class="bi bi-calendar"></i> {{ colis.date_envoi | date: 'dd/MM/yyyy' }}</p>
+          <a
+            [routerLink]="'/mon-colis/' + colis.id"
+            class="btn btn-primary btn-sm btn-hover"
+          >
+            Détails du colis
+          </a>
         </div>
       </div>
+      <!-- Card -->
     </div>
   </div>
+
+  <!-- Pagination Controls -->
+  <div class="d-flex justify-content-center mt-4">
+    <button class="btn btn-outline-primary" (click)="previousPage()" [disabled]="currentPage === 1">Précédent</button>
+    <span class="mx-3">Page {{ currentPage }} sur {{ totalPages }}</span>
+    <button class="btn btn-outline-primary" (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
+  </div>
+</div>

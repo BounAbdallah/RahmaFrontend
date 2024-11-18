@@ -3,6 +3,7 @@ import { Country, State } from 'country-state-city';
 import { GpAnnonceService } from '../../../../../core/services/GP/gp-anonce.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-annonce-form',
@@ -30,11 +31,11 @@ export class AnnonceFormComponent {
       statut: ['', [Validators.required, Validators.pattern('active|expirée')]],
       poids_kg: ['', [Validators.required, Validators.min(0)]],
       image: [null],
-      pays_provenance_voyage: ['', Validators.required],
-      region_provenance_voyage: ['',  Validators.required],
-      pays_destination_voyage: ['',  Validators.required],
-      region_destination_voyage: ['',  Validators.required],
-      date_prevue_voyage: ['',  Validators.required],
+      pays_provenance_voyage: [''],
+      region_provenance_voyage: [''],
+      pays_destination_voyage: [''],
+      region_destination_voyage: [''],
+      date_prevue_voyage: [''],
       heure_prevue_voyage: ['', Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')],
       heure_debut_reception_colis: ['', Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')],
       heure_fin_reception_colis: ['', Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')],
@@ -103,14 +104,31 @@ export class AnnonceFormComponent {
     this.gpAnnonceService.createAnnonce(formData).subscribe(
       (response: any) => {
         console.log('Annonce ajoutée avec succès', response);
-        this.annonceForm.reset();
-        this.submitted = false;
-        this.loadAnnonces();
+
+        // Afficher SweetAlert
+        Swal.fire({
+          icon: 'success',
+          title: 'Annonce créée avec succès',
+          text: 'Votre annonce a été ajoutée avec succès!',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          // Réinitialiser le formulaire et recharger les annonces
+          this.annonceForm.reset();
+          this.submitted = false;
+          this.loadAnnonces(); // Recharge les annonces
+        });
       },
       (error: any) => {
         this.errorMessage = 'Erreur lors de l\'ajout de l\'annonce';
         console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Une erreur est survenue',
+          text: 'Il y a eu un problème lors de l\'ajout de l\'annonce, veuillez réessayer.',
+        });
       }
     );
   }
+
 }

@@ -13,7 +13,8 @@ import { GpDashboardService } from '../../../../core/services/GP/gp-dashboard.se
   templateUrl: './client-details-colis.component.html',
   styleUrls: ['./client-details-colis.component.css']
 })
-export class DetailsColisClientComponent implements OnInit {
+export class ClientDetailsColisComponent implements OnInit {
+  [x: string]: any;
   annonceId!: number;
   annonceDetails: Annonce | null = null;
   colisDetails: Colis | null = null; // Pour stocker les détails du colis
@@ -53,15 +54,35 @@ export class DetailsColisClientComponent implements OnInit {
   }
 
   getColisDetails(colisId: number): void {
-    console.log('Appel à getColisDetails avec colisId:', colisId); // Affiche l'ID du colis utilisé
+    console.log('Appel à getColisDetails avec colisId:', colisId);
+
+    // Vérifiez si l'ID est valide avant de faire l'appel
+    if (!colisId) {
+      console.error('ID de colis invalide');
+      return;
+    }
+
+    // Appel du service pour récupérer les détails du colis
     this.colisService.getColisById(colisId).subscribe(
       (data: Colis) => {
-        this.colisDetails = data; // Stockez les détails du colis
-        console.log('Détails du colis récupérés:', this.colisDetails); // Affiche les détails du colis récupérés
+        this.colisDetails = data; // Stocker les détails du colis
+        // Mise à jour de l'URL de l'image si l'image est disponible
+        if (this.colisDetails.image_1) {
+          this.colisDetails.image_1 = `http://127.0.0.1:8000/storage/${this.colisDetails.image_1}`;
+
+        }
+        console.log('URL de l\'image complète:', this.colisDetails.image_1);
+
+        console.log('Détails du colis récupérés:', this.colisDetails); // Afficher les détails du colis récupérés
       },
       error => {
         console.error('Erreur lors de la récupération des détails du colis', error);
       }
     );
   }
+
+
+
+
+
 }

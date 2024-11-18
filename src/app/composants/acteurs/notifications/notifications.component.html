@@ -2,33 +2,35 @@
   <div class="notifications-header">
     <h3>Notifications</h3>
     <div class="notifications-actions">
-      <span class="notification-count" *ngIf="unreadCount > 0">
-        {{ unreadCount }} non lue(s)
-      </span>
-      <button *ngIf="!allNotificationsRead" (click)="markAllAsRead()">Marquer tout comme lu</button>
+      <span *ngIf="unreadCount > 0">{{ unreadCount }} non lue(s)</span>
     </div>
   </div>
 
-  <div class="notifications-list" *ngIf="notifications.length > 0; else noNotifications">
-    <ng-container *ngFor="let notification of notifications">
-      <div
-        class="notification-item"
-        *ngIf="!notification.read"
-        (click)="markAsRead(notification.id)">
-        <div class="notification-content">
-          <p>{{ notification.message }}</p>
-          <span class="notification-date">
-            <!-- {{ notification.created_at | date:'dd/MM/yyyy HH:mm' }} -->
-          </span>
-        </div>
-        <span class="unread-dot"></span> <!-- Affiche le point uniquement si non lu -->
-      </div>
-    </ng-container>
+  <div class="notifications-list">
+    <div
+      class="notification-item"
+      *ngFor="let notification of notifications"
+      [class.unread]="!notification.read"
+      (click)="openModal(notification)"
+    >
+      <p>{{ notification.message }}</p>
+      <span>{{ notification.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+    </div>
   </div>
 
-  <ng-template #noNotifications>
-    <div class="no-notifications">
-      Aucune notification
+  <div *ngIf="notifications.length === 0" class="no-notifications">
+    Aucune notification
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>Détails de la Notification</h3>
+      <p><strong>Message :</strong> {{ selectedNotification?.message }}</p>
+      <p><strong>Détails :</strong> {{ selectedNotification?.details }}</p>
+      <p><strong>Date :</strong> {{ selectedNotification?.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+      <button (click)="markAsRead(selectedNotification?.id)">Marquer comme lu</button>
     </div>
-  </ng-template>
+  </div>
 </div>

@@ -1,0 +1,58 @@
+/* Appliquer une bordure et la couleur à la carte */
+.card {
+  border: 2px solid #FF9F02;
+  color: #FF9F02;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Définir une couleur de fond légère pour la carte */
+  background-color: #fff;
+}
+
+/* Effet d'agrandissement et d'ombre lors du survol */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles généraux d'animation */
+.animate__animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animate__fadeIn {
+  animation-name: fadeIn;
+}
+
+.animate__fadeInUp {
+  animation-name: fadeInUp;
+}
+
+.animate__delay-1s {
+  animation-delay: 1s;
+}
+
+.animate__delay-2s {
+  animation-delay: 2s;
+}
+
+/* Définir l'animation fadeIn */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Définir l'animation fadeInUp */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

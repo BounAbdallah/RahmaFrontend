@@ -1,38 +1,66 @@
 body {
   background-color: #f4f7fa;
   font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .diagrammes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
   padding: 20px;
+  margin: 0 auto;
 }
 
 .chart-card {
-  flex: 1 1 45%;
-  max-width: 600px;
-  margin: 15px;
   border-radius: 10px;
   background-color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .chart-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .chart-title {
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin-bottom: 15px;
-  color: #333;
+  color: #3a3a3a;
   text-align: center;
+  font-weight: bold;
 }
 
 canvas {
   width: 100% !important;
   height: auto;
+  margin-bottom: 15px;
+}
+
+.indicator {
+  font-size: 1em;
+  color: #5a5a5a;
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .chart-card {
+    padding: 15px;
+  }
+
+  .chart-title {
+    font-size: 1.4em;
+  }
+
+  .indicator {
+    font-size: 0.9em;
+  }
 }

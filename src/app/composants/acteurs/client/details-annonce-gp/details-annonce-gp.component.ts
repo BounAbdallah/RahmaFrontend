@@ -25,7 +25,7 @@ export class DetailsAnnonceGPComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private annoncesService: GpAnnoncesService,
-    private profilService: ProfilService,
+
     private colisService: ColisService,
     private reservationService: ReservationService,
     private fb: FormBuilder
@@ -83,109 +83,153 @@ export class DetailsAnnonceGPComponent implements OnInit {
 }
 
 
-  openColisForm() {
-    Swal.fire({
-      title: 'Créer un nouveau Colis',
-      html: this.getFormHtml(),
-      confirmButtonText: 'Créer Colis',
-      showCancelButton: true,
-      cancelButtonText: 'Annuler',
-
-      preConfirm: () => {
-        const formValues = this.extractFormValues();
-        if (this.validateFormValues(formValues)) {
-          return formValues;
-        } else {
-          Swal.showValidationMessage('Veuillez remplir tous les champs requis et vérifier le poids.');
-        }
+openColisForm() {
+  Swal.fire({
+    title: 'Créer un nouveau Colis',
+    html: this.getFormHtml(),
+    confirmButtonText: '<span style="width: 100%; max-width: 255px; height: 52px; border-radius: 10px; background-color: #074C72; color: #FFF; font-size: 14px; margin-top: 30px; padding: 10px 20px; display: inline-block; cursor: pointer; display: flex;justify-content: center;">Créer Colis</span>',
+    showCancelButton: true,
+    cancelButtonText: '<span style="width: 100%; max-width: 255px; height: 52px; border-radius: 10px; background-color: #FF9F02; color: #FFF; font-size: 14px; margin-top: 30px; padding: 10px 20px; display: inline-block; cursor: pointer; margin-left:20px; border: 1px solid  #074C72;  display: flex;justify-content: center; ">Annuler</span>',
+    buttonsStyling: false, // Disable SweetAlert default styling
+    preConfirm: () => {
+      const formValues = this.extractFormValues();
+      if (this.validateFormValues(formValues)) {
+        return formValues;
+      } else {
+        Swal.showValidationMessage('Veuillez remplir tous les champs requis et vérifier le poids.');
       }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.createColis(result.value);
-      }
-    });
-  }
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.createColis(result.value);
+    }
+  });
+}
 
-  getFormHtml(): string {
-    return `
-      <div class="form-group">
-        <label for="titre">Titre</label>
-        <input type="text" id="titre" class="form-control" placeholder="Titre" required>
-        <div class="invalid-feedback" style="display: none;">Veuillez entrer un titre.</div>
-      </div>
-      <div class="form-group">
-        <label for="image_1">Image</label>
-        <input type="file" id="image_1" class="form-control" required>
-        <div class="invalid-feedback" style="display: none;">Veuillez sélectionner une image.</div>
-      </div>
-      <div class="form-group">
-        <label for="poids_kg">Poids (kg)</label>
-        <input type="number" id="poids_kg" class="form-control" placeholder="Poids (kg)" required>
-        <div class="invalid-feedback" style="display: none;">Veuillez entrer un poids valide.</div>
-      </div>
-      <div class="form-group">
-        <label for="adresse_expediteur">Adresse Expéditeur</label>
-        <input type="text" id="adresse_expediteur" class="form-control" placeholder="Adresse Expéditeur" required>
-        <div class="invalid-feedback" style="display: none;">Veuillez entrer l'adresse de l'expéditeur.</div>
-      </div>
-      <div class="form-group">
-        <label for="adresse_destinataire">Adresse Destinataire</label>
-        <input type="text" id="adresse_destinataire" class="form-control" placeholder="Adresse Destinataire" required>
-        <div class="invalid-feedback" style="display: none;">Veuillez entrer l'adresse du destinataire.</div>
-      </div>
-      <div class="form-group">
-        <label for="contact_destinataire">Contact Destinataire</label>
-        <input type="text" id="contact_destinataire" class="form-control" placeholder="Contact Destinataire" required>
-        <div class="invalid-feedback" style="display: none;">Veuillez entrer un contact valide.</div>
-      </div>
-      <div class="form-group">
-        <label for="contact_expediteur">Contact Expéditeur</label>
-        <input type="text" id="contact_expediteur" class="form-control" placeholder="Contact Expéditeur" required>
-        <div class="invalid-feedback" style="display: none;">Veuillez entrer un contact valide.</div>
-      </div>
-    `;
-  }
 
-  extractFormValues(): any {
-    return {
-      titre: (document.getElementById('titre') as HTMLInputElement).value,
-      image_1: (document.getElementById('image_1') as HTMLInputElement).value,
-      poids_kg: +((document.getElementById('poids_kg') as HTMLInputElement).value), // Convert to number
-      adresse_expediteur: (document.getElementById('adresse_expediteur') as HTMLInputElement).value,
-      adresse_destinataire: (document.getElementById('adresse_destinataire') as HTMLInputElement).value,
-      contact_destinataire: (document.getElementById('contact_destinataire') as HTMLInputElement).value,
-      contact_expediteur: (document.getElementById('contact_expediteur') as HTMLInputElement).value,
-    };
-  }
+
+
+
+getFormHtml(): string {
+  return `
+    <div class="form-group mb-3">
+      <label for="titre" style="color: #074C72;">Titre</label>
+      <input type="text" id="titre" class="form-control" placeholder="Titre" required>
+      <div class="invalid-feedback" style="display: none;">Veuillez entrer un titre.</div>
+    </div>
+
+
+
+    <div class="form-group mb-3">
+      <label for="image_1" style="color: #074C72;">Image</label>
+      <input type="file" id="image_1" class="form-control" required>
+      <div class="invalid-feedback" style="display: none;">Veuillez sélectionner une image.</div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="poids_kg" style="color: #074C72;">Poids (kg)</label>
+      <input type="number" id="poids_kg" class="form-control" placeholder="Poids (kg)" required>
+      <div class="invalid-feedback" style="display: none;">Veuillez entrer un poids valide.</div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="adresse_expediteur" style="color: #074C72;">Adresse Expéditeur</label>
+      <input type="text" id="adresse_expediteur" class="form-control" placeholder="Adresse Expéditeur" required>
+      <div class="invalid-feedback" style="display: none;">Veuillez entrer l'adresse de l'expéditeur.</div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="adresse_destinataire" style="color: #074C72;">Adresse Destinataire</label>
+      <input type="text" id="adresse_destinataire" class="form-control" placeholder="Adresse Destinataire" required>
+      <div class="invalid-feedback" style="display: none;">Veuillez entrer l'adresse du destinataire.</div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="contact_destinataire" style="color: #074C72;">Contact Destinataire</label>
+      <input type="text" id="contact_destinataire" class="form-control" placeholder="Contact Destinataire" required>
+      <div class="invalid-feedback" style="display: none;">Veuillez entrer un contact valide.</div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="contact_expediteur" style="color: #074C72;">Contact Expéditeur</label>
+      <input type="text" id="contact_expediteur" class="form-control" placeholder="Contact Expéditeur" required>
+      <div class="invalid-feedback" style="display: none;">Veuillez entrer un contact valide.</div>
+    </div>
+
+
+  `;
+}
+
+
+
+
+
+extractFormValues(): any {
+  const titreElement = document.getElementById('titre') as HTMLInputElement;
+  const imageElement = document.getElementById('image_1') as HTMLInputElement;
+  const poidsElement = document.getElementById('poids_kg') as HTMLInputElement;
+  const adresseExpediteurElement = document.getElementById('adresse_expediteur') as HTMLInputElement;
+  const adresseDestinataireElement = document.getElementById('adresse_destinataire') as HTMLInputElement;
+  const contactDestinataireElement = document.getElementById('contact_destinataire') as HTMLInputElement;
+  const contactExpediteurElement = document.getElementById('contact_expediteur') as HTMLInputElement;
+
+  return {
+    titre: titreElement ? titreElement.value : '',
+    image_1: imageElement ? imageElement.value : '',
+    poids_kg: poidsElement ? +poidsElement.value : 0,
+    adresse_expediteur: adresseExpediteurElement ? adresseExpediteurElement.value : '',
+    adresse_destinataire: adresseDestinataireElement ? adresseDestinataireElement.value : '',
+    contact_destinataire: contactDestinataireElement ? contactDestinataireElement.value : '',
+    contact_expediteur: contactExpediteurElement ? contactExpediteurElement.value : ''
+  };
+}
+
+
 
   validateFormValues(values: any): boolean {
     const poidsValid = values.poids_kg > 0 && values.poids_kg <= (this.annonceDetails ? this.annonceDetails.available_weight : 0);
     return Object.values(values).every(value => value !== '') && poidsValid;
   }
 
-  createColis(colisData: Colis) {
-    if (!colisData.date_envoi) {
-      colisData.date_envoi = new Date().toISOString().slice(0, 10);
-    }
-    const dataToSend: Colis = {
-      ...colisData,
-      statut: 'en attente'
-    };
+  createColis(colisData: any) {
+    const formData = new FormData();
+    formData.append('titre', colisData.titre);
 
-    this.colisService.createColis(dataToSend).subscribe(
+    // Vérifier si un fichier a été sélectionné avant de l'ajouter à FormData
+    const fileInput = document.getElementById('image_1') as HTMLInputElement;
+    if (fileInput && fileInput.files && fileInput.files[0]) {
+      formData.append('image_1', fileInput.files[0]); // Ajout du fichier
+    } else {
+      console.error('Aucun fichier sélectionné.');
+      return; // Si aucun fichier n'est sélectionné, arrêtez l'exécution
+    }
+
+    formData.append('poids_kg', colisData.poids_kg);
+    formData.append('adresse_expediteur', colisData.adresse_expediteur);
+    formData.append('adresse_destinataire', colisData.adresse_destinataire);
+    formData.append('contact_destinataire', colisData.contact_destinataire);
+    formData.append('contact_expediteur', colisData.contact_expediteur);
+    formData.append('date_envoi', colisData.date_envoi || new Date().toISOString().slice(0, 10));
+    formData.append('statut', 'en attente');
+
+    this.colisService.createColisClient(formData).subscribe(
       (colis: Colis) => {
-        Swal.fire('Succès', 'Le colis a été créé avec succès', 'success');
-        if (colis.id !== undefined) {
+        Swal.fire('Colis créé avec succès!', '', 'success');
+        this.colisForm.reset();
+
+        // Créer une réservation après la création du colis
+        if (colis.id) {
           this.createReservation(colis.id);
-        } else {
-          Swal.fire('Erreur', 'Impossible de créer la réservation, colis.id est indéfini', 'error');
         }
       },
-      (error) => {
-        Swal.fire('Erreur', 'Échec de la création du colis', 'error');
+      error => {
+        Swal.fire('Erreur lors de la création du colis.', error.message, 'error');
       }
     );
   }
+
+
+
 
   createReservation(colisId: number) {
     const reservationData = {

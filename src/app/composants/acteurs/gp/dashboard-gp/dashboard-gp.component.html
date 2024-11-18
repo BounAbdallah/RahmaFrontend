@@ -32,6 +32,11 @@
               Paramètres profil
           </li>
 
+          <li [class.active]="activeTab === 'activite'" (click)="setActiveTab('activite')">
+            <i class="fas fa-cog"></i>
+           Activites
+        </li>
+
       </ul>
   </aside>
 
@@ -55,8 +60,13 @@
   <div class="main-content">
       <!-- Contenu des onglets -->
       <div class="tab-content">
-          <ng-container *ngIf="activeTab === 'dashboard'">
-              <h2>Statistiques du Dashboard</h2>
+          <ng-container class="chiffres" *ngIf="activeTab === 'dashboard'">
+            <div class="chiffre">
+              <app-revenu-total></app-revenu-total>
+              <app-poids-enregistrer></app-poids-enregistrer>
+              <app-stat-reservation></app-stat-reservation>
+            </div>
+
               <app-statistiques></app-statistiques>
 
           </ng-container>
@@ -160,6 +170,7 @@
                             <div *ngFor="let reservation of annonce.reservations" class="col-md-4 mb-4">
                               <div class="card mb-4" style="margin: 20px; gap: 40px;">
                                 <div class="card-body">
+                                  <img src="{{reservation.colis.image_1 }}" alt="{{reservation.colis.titre }}">
                                   <h5 class="card-title" style="color: #074C72;">Nom: {{ reservation.user.nom }} {{ reservation.user.prenom }}</h5>
                                   <p class="card-text"><strong>Email:</strong> {{ reservation.user.email }}</p>
                                   <p class="card-text"><strong>Téléphone:</strong> {{ reservation.user.telephone }}</p>
@@ -167,14 +178,14 @@
 
                                   <div class="form-group">
                                     <label for="statusSelect" style="color: #ffffff;">Statut:</label>
-                                    <select id="statusSelect" class="form-control" (change)="changerStatutReservation(reservation.id, $event)" style="background-color: #074C72; border-color: #B50302;">
+                                    <select id="statusSelect" class="form-control" (change)="changerStatutReservation(reservation.id, $event)" >
                                       <option style="color: #ffffff;" value="en attente" [selected]="reservation.status === 'en attente'">En attente</option>
                                       <option style="color: #ffffff;" value="confirmée" [selected]="reservation.status === 'confirmée'">Confirmée</option>
                                       <option style="color: #ffffff;" value="annulée" [selected]="reservation.status === 'annulée'">Annulée</option>
                                     </select>
                                   </div>
 
-                                  <a href="colis-details/{{reservation.colis.id}}" class="btn btn-primary mt-3" style="background-color: #B50302; border-color: #B50302;">Voir les détails</a>
+                                  <a href="colis-details/{{reservation.colis.id}}" class="btn btn-primary mt-3" style=" border-color: #B50302; color: #B50302;">Voir les détails</a>
                                 </div>
                               </div>
 
@@ -203,13 +214,13 @@
 
 
           <ng-container *ngIf="activeTab === 'ajouterAnnonce'">
-              <h2>Ajouter une Annonce</h2>
+
             <app-annonce-form></app-annonce-form>
           </ng-container>
 
           <ng-container *ngIf="activeTab === 'notifications'">
               <h2>Notifications</h2>
-              <app-notifications></app-notifications>
+
             </ng-container>
 
           <ng-container *ngIf="activeTab === 'parametres'">
@@ -218,7 +229,10 @@
             </ng-container>
 
 
-
+            <ng-container *ngIf="activeTab === 'activite'">
+              <h2>Mes activitées</h2>
+              <app-activity-log></app-activity-log>
+            </ng-container>
 
       </div>
   </div>

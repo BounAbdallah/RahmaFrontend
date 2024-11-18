@@ -1,0 +1,21 @@
+<div class="card rounded shadow-sm animate__animated animate__fadeInUp">
+  <div class="card-body">
+    <h4 class="card-title text-center">Poids enregistré</h4>
+
+    <!-- Affichez un message de chargement si les données ne sont pas encore prêtes -->
+    <div *ngIf="poidsEnregistrer === null && !errorMessage" class="text-center animate__animated animate__fadeIn">
+      <i class="fas fa-spinner fa-spin fa-lg"></i> Chargement du poids...
+    </div>
+
+    <!-- Affichez une erreur si la récupération des données échoue -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-2 text-center animate__animated animate__fadeIn animate__delay-1s">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Affichez le poids enregistré une fois qu'il est chargé -->
+    <div *ngIf="poidsEnregistrer !== null" class="mt-2 text-center animate__animated animate__fadeInUp animate__delay-2s">
+      <p class="fs-6">Poids total enregistré :</p>
+      <h5 class="fs-4"><strong>{{ poidsEnregistrer }} KG</strong></h5>
+    </div>
+  </div>
+</div>

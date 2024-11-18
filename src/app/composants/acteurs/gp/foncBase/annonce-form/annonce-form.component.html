@@ -6,7 +6,7 @@
     <label for="titre" class="form-label">Titre</label>
     <input id="titre" type="text" formControlName="titre" class="form-control" />
     <div *ngIf="annonceForm.get('titre')?.invalid && (annonceForm.get('titre')?.touched || submitted)" class="text-danger">
-      Le titre est requis et doit être d'au moins 3 caractères.
+      <div *ngIf="annonceForm.get('titre')?.hasError('required')">Le titre est requis.</div>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
     <label for="description" class="form-label">Description</label>
     <textarea id="description" formControlName="description" class="form-control"></textarea>
     <div *ngIf="annonceForm.get('description')?.invalid && (annonceForm.get('description')?.touched || submitted)" class="text-danger">
-      La description est requise et doit comporter au moins 10 caractères.
+      <div *ngIf="annonceForm.get('description')?.hasError('required')">La description est requise.</div>
     </div>
   </div>
 
@@ -24,7 +24,7 @@
     <label for="date_debut_reception_colis" class="form-label">Date début réception colis</label>
     <input id="date_debut_reception_colis" type="date" formControlName="date_debut_reception_colis" class="form-control" />
     <div *ngIf="annonceForm.get('date_debut_reception_colis')?.invalid && (annonceForm.get('date_debut_reception_colis')?.touched || submitted)" class="text-danger">
-      La date de début de réception est requise.
+      La date de début est requise.
     </div>
   </div>
 
@@ -32,33 +32,38 @@
     <label for="date_fin_reception_colis" class="form-label">Date fin réception colis</label>
     <input id="date_fin_reception_colis" type="date" formControlName="date_fin_reception_colis" class="form-control" />
     <div *ngIf="annonceForm.get('date_fin_reception_colis')?.invalid && (annonceForm.get('date_fin_reception_colis')?.touched || submitted)" class="text-danger">
-      La date de fin de réception est requise et doit être après la date de début.
+      La date de fin est requise.
     </div>
   </div>
 
   <!-- Heure début et fin réception colis -->
   <div class="mb-3">
     <label for="heure_debut_reception_colis" class="form-label">Heure début réception colis</label>
-    <input id="heure_debut_reception_colis" type="time" formControlName="heure_debut_reception_colis" class="form-control" placeholder="HH:mm" />
+    <input id="heure_debut_reception_colis" type="time" formControlName="heure_debut_reception_colis" class="form-control" />
+
     <div *ngIf="annonceForm.get('heure_debut_reception_colis')?.invalid && (annonceForm.get('heure_debut_reception_colis')?.touched || submitted)" class="text-danger">
-      L'heure de début de réception est requise.
+      Heure invalide.
     </div>
   </div>
 
   <div class="mb-3">
     <label for="heure_fin_reception_colis" class="form-label">Heure fin réception colis</label>
-    <input id="heure_fin_reception_colis" type="time" formControlName="heure_fin_reception_colis" class="form-control" placeholder="HH:mm" />
+    <input id="heure_fin_reception_colis" type="time" formControlName="heure_fin_reception_colis" class="form-control" />
     <div *ngIf="annonceForm.get('heure_fin_reception_colis')?.invalid && (annonceForm.get('heure_fin_reception_colis')?.touched || submitted)" class="text-danger">
-      L'heure de fin de réception est requise et doit être après l'heure de début.
+      Heure fin invalide.
     </div>
   </div>
 
   <!-- Statut -->
   <div class="mb-3">
     <label for="statut" class="form-label">Statut</label>
-    <input id="statut" type="text" formControlName="statut" class="form-control" placeholder="active ou expirée" />
+    <select id="statut" formControlName="statut" class="form-select">
+      <option value="" disabled selected>Choisissez un statut</option>
+      <option value="active">Active</option>
+      <option value="expirée">Expirée</option>
+    </select>
     <div *ngIf="annonceForm.get('statut')?.invalid && (annonceForm.get('statut')?.touched || submitted)" class="text-danger">
-      Le statut est requis et doit être "active" ou "expirée".
+      Le statut est requis.
     </div>
   </div>
 
@@ -67,18 +72,12 @@
     <label for="poids_kg" class="form-label">Poids (kg)</label>
     <input id="poids_kg" type="number" formControlName="poids_kg" class="form-control" min="0" />
     <div *ngIf="annonceForm.get('poids_kg')?.invalid && (annonceForm.get('poids_kg')?.touched || submitted)" class="text-danger">
-      Le poids est requis et doit être un nombre positif.
+      <div *ngIf="annonceForm.get('poids_kg')?.hasError('required')">Le poids est requis.</div>
+      <div *ngIf="annonceForm.get('poids_kg')?.hasError('min')">Le poids doit être positif.</div>
     </div>
   </div>
 
-  <!-- Image -->
-  <div class="mb-3">
-    <label for="image" class="form-label">Image</label>
-    <input id="image" type="file" (change)="onFileSelected($event)" class="form-control" />
-    <div *ngIf="annonceForm.get('image')?.invalid && (annonceForm.get('image')?.touched || submitted)" class="text-danger">
-      Une image est requise.
-    </div>
-  </div>
+
 
   <!-- Pays provenance -->
   <div class="mb-3">
@@ -88,7 +87,7 @@
       <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
     </select>
     <div *ngIf="annonceForm.get('pays_provenance_voyage')?.invalid && (annonceForm.get('pays_provenance_voyage')?.touched || submitted)" class="text-danger">
-      Le pays de provenance est requis.
+      Heure invalide.
     </div>
   </div>
 
@@ -100,31 +99,7 @@
       <option *ngFor="let region of regionsProvenance" [value]="region.name">{{ region.name }}</option>
     </select>
     <div *ngIf="annonceForm.get('region_provenance_voyage')?.invalid && (annonceForm.get('region_provenance_voyage')?.touched || submitted)" class="text-danger">
-      La région de provenance est requise.
-    </div>
-  </div>
-
-  <!-- Pays destination -->
-  <div class="mb-3">
-    <label for="pays_destination_voyage" class="form-label">Pays destination</label>
-    <select id="pays_destination_voyage" formControlName="pays_destination_voyage" (change)="onCountryChange($event, 'destination')" class="form-control">
-      <option value="">Sélectionnez un pays</option>
-      <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
-    </select>
-    <div *ngIf="annonceForm.get('pays_destination_voyage')?.invalid && (annonceForm.get('pays_destination_voyage')?.touched || submitted)" class="text-danger">
-      Le pays de destination est requis.
-    </div>
-  </div>
-
-  <!-- Région destination -->
-  <div class="mb-3">
-    <label for="region_destination_voyage" class="form-label">Région destination</label>
-    <select id="region_destination_voyage" formControlName="region_destination_voyage" class="form-control">
-      <option value="">Sélectionnez une région</option>
-      <option *ngFor="let region of regionsDestination" [value]="region.name">{{ region.name }}</option>
-    </select>
-    <div *ngIf="annonceForm.get('region_destination_voyage')?.invalid && (annonceForm.get('region_destination_voyage')?.touched || submitted)" class="text-danger">
-      La région de destination est requise.
+      Heure invalide.
     </div>
   </div>
 
@@ -133,10 +108,39 @@
     <label for="date_prevue_voyage" class="form-label">Date prévue de voyage</label>
     <input id="date_prevue_voyage" type="date" formControlName="date_prevue_voyage" class="form-control" />
     <div *ngIf="annonceForm.get('date_prevue_voyage')?.invalid && (annonceForm.get('date_prevue_voyage')?.touched || submitted)" class="text-danger">
-      La date prévue de voyage est requise.
+      Heure invalide.
     </div>
   </div>
 
-  <!-- Submit Button -->
-  <button type="submit" class="btn btn-primary" [disabled]="annonceForm.invalid">Créer l'annonce</button>
+  <!-- Heure prévue de voyage -->
+  <div class="mb-3">
+    <label for="heure_prevue_voyage" class="form-label">Heure prévue de voyage</label>
+    <input id="heure_prevue_voyage" type="time" formControlName="heure_prevue_voyage" class="form-control" />
+    <div *ngIf="annonceForm.get('heure_prevue_voyage')?.invalid && (annonceForm.get('heure_prevue_voyage')?.touched || submitted)" class="text-danger">
+      Heure invalide.
+    </div>
+  </div>
+
+  <!-- Prix par kg -->
+  <div class="mb-3">
+    <label for="prix_par_kg" class="form-label">Prix par kg</label>
+    <input id="prix_par_kg" type="number" formControlName="prix_par_kg" class="form-control" min="0" />
+    <div *ngIf="annonceForm.get('prix_par_kg')?.invalid && (annonceForm.get('prix_par_kg')?.touched || submitted)" class="text-danger">
+      <div *ngIf="annonceForm.get('prix_par_kg')?.hasError('required')">Le prix est requis.</div>
+      <div *ngIf="annonceForm.get('prix_par_kg')?.hasError('min')">Le prix doit être positif.</div>
+    </div>
+  </div>
+
+  <!-- Conditions -->
+  <div class="mb-3">
+    <label for="condition" class="form-label">Conditions</label>
+    <textarea id="condition" formControlName="condition" class="form-control"></textarea>
+    <div *ngIf="annonceForm.get('condition')?.invalid && (annonceForm.get('condition')?.touched || submitted)" class="text-danger">
+      <div *ngIf="annonceForm.get('condition')?.hasError('required')">Les conditions sont requises.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <button type="submit" [disabled]="annonceForm.invalid" class="btn btn-primary">Soumettre</button>
+  </div>
 </form>

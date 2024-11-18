@@ -233,3 +233,57 @@ color: #FFF;
     margin-bottom: 10px;
   }
 }
+
+@media (max-width: 770px) {
+  .body-content{
+    flex-direction: column;
+    justify-content: center;
+  }
+  .top-bare {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .profil-photo_profil img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profil-infos,
+  .profil-photo_profil {
+color: #FFF;
+    width: 75%;
+
+  }
+  .profil-photo_profil h3,
+  .profil-infos h3{
+    font-size: 14px;
+color: #FFF;
+
+  }
+  .profil_{
+    width: 100%;
+    justify-content:center;
+    align-items: center;
+    /* text-align: center; */
+  }
+
+  .container form input,
+  .container form .btn {
+    width: 100%;
+  }
+  form{
+    flex-direction: column;
+
+  }
+  .input{
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding-right: 30px;
+  }
+  .container{
+    height: 100%;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+  }
+}

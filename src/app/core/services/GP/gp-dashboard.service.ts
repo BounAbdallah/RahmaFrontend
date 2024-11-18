@@ -76,6 +76,21 @@ affichageListeColis(colisId: number): Observable<any> {
 
 
 
+changerStatutColis(colisId: number | undefined, status: string): Observable<any> {
+  const url = `${this.apiUrl}/colis/${colisId}/statut`;
+  console.log('URL appelée:', url);
+  console.log('Données envoyées:', { statut: status });
+
+  return this.http.patch(url, { statut: status }).pipe(
+      catchError((error) => {
+          console.error('Erreur lors de la mise à jour du statut :', error);
+          throw error;
+      })
+  );
+}
+
+
+
   // Supprimer une annonce
   deleteAnnonce(annonceId: number): Observable<any> {
     const url = `${this.apiUrl}/gp/annonces/${annonceId}`;
