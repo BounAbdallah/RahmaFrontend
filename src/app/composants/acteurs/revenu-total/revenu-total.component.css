@@ -3,8 +3,10 @@
   border: 2px solid #FF9F02;
   color: #FF9F02;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Définir une couleur de fond légère pour la carte */
   background-color: #fff;
+  max-width: 300px;
+  min-width: 300px;
+  width: 100%;
 }
 
 /* Effet d'agrandissement et d'ombre lors du survol */

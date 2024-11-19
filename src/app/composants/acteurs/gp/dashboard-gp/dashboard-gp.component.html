@@ -33,7 +33,7 @@
           </li>
 
           <li [class.active]="activeTab === 'activite'" (click)="setActiveTab('activite')">
-            <i class="fas fa-cog"></i>
+            <i class="fas fa-history"></i>
            Activites
         </li>
 
@@ -45,7 +45,11 @@
       <h5 class="tb">Tableau de bord GP</h5>
       <h5>Bienvenue sur votre tableau de bord</h5>
       <div>
+
          <div class="btn-top">
+          <div class="burger-menu" (click)="Menutoggle()">
+            <i class="fas fa-bars fa-8x"></i>
+          </div>
           <button>
             <i class="fas fa-bell"></i>
         </button>
@@ -72,8 +76,8 @@
           </ng-container>
 
           <ng-container *ngIf="activeTab === 'commandes'">
-              <h2>Mes annonces</h2>
-              <div class="main-content" id="mesAnnonces">
+              <!-- <h2>Mes annonces</h2> -->
+              <div class="main-conten" id="mesAnnonces">
 
 
 
@@ -116,7 +120,7 @@
                     <div class="card" *ngFor="let annonce of getPaginatedAnnonces()">
                       <img src="./../../../../../assets/images/images_/immageAnnonceGP.png" alt="Image de provenance">
                       <div class="card-body">
-                        <h5>{{ annonce.pays_destination }} le <span>{{ annonce.date_fin_reception_colis | date:'dd/MM/yyyy' }}</span></h5>
+                        <h5>{{ annonce.pays_destination_voyage }} le <span>{{ annonce.date_prevue_voyage | date:'dd/MM/yyyy' }}</span></h5>
                         <p>{{ annonce.poids_kg }} kg pour cet annonce</p>
                         <button class="btn" (click)="showAnnonces(annonce.id)">Voir les détails</button>
                       </div>
@@ -170,13 +174,20 @@
                             <div *ngFor="let reservation of annonce.reservations" class="col-md-4 mb-4">
                               <div class="card mb-4" style="margin: 20px; gap: 40px;">
                                 <div class="card-body">
-                                  <img src="{{reservation.colis.image_1 }}" alt="{{reservation.colis.titre }}">
+                                  <div *ngFor="let reservation of reservations">
+                                    <!-- Vérification de l'image -->
+                                    <img [src]="'http://127.0.0.1:8000/storage/' + reservation.colis.image_1"
+                                         [alt]="reservation.colis?.titre || 'Image non disponible'" />
+
+                                    <p>{{ reservation.colis?.titre }}</p>
+                                  </div>
+
+
                                   <h5 class="card-title" style="color: #074C72;">Nom: {{ reservation.user.nom }} {{ reservation.user.prenom }}</h5>
                                   <p class="card-text"><strong>Email:</strong> {{ reservation.user.email }}</p>
                                   <p class="card-text"><strong>Téléphone:</strong> {{ reservation.user.telephone }}</p>
                                   <p class="card-text"><strong>Colis:</strong> {{ reservation.colis.titre }} ({{ reservation.colis.poids_kg }} kg)</p>
-
-                                  <div class="form-group">
+                                                 <div class="form-group">
                                     <label for="statusSelect" style="color: #ffffff;">Statut:</label>
                                     <select id="statusSelect" class="form-control" (change)="changerStatutReservation(reservation.id, $event)" >
                                       <option style="color: #ffffff;" value="en attente" [selected]="reservation.status === 'en attente'">En attente</option>
@@ -224,13 +235,13 @@
             </ng-container>
 
           <ng-container *ngIf="activeTab === 'parametres'">
-              <h2>Paramètres</h2>
+              <h2>Paramètres profil</h2>
               <app-profil></app-profil>
             </ng-container>
 
 
             <ng-container *ngIf="activeTab === 'activite'">
-              <h2>Mes activitées</h2>
+
               <app-activity-log></app-activity-log>
             </ng-container>
 

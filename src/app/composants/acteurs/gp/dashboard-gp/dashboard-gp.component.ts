@@ -5,7 +5,7 @@ import { SideBareGPComponent } from '../side-bare-gp/side-bare-gp.component';
 import { CommonModule } from '@angular/common';
 import { ModalDetailsColisComponent } from '../modal-details-colis/modal-details-colis.component';
 import { log } from 'console';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AnnonceFormModalComponent } from '../annonce-form-modal/annonce-form-modal.component';
 import { Dialog } from '@angular/cdk/dialog';
@@ -31,7 +31,7 @@ import { StatReservationComponent } from '../../stat-reservation/stat-reservatio
 @Component({
   selector: 'app-dashboard-gp',
   standalone: true,
-  imports: [SideBareGPComponent, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent, NotificationsComponent, ActivityLogComponent, RevenuTotalComponent,PoidsEnregistrerComponent, StatReservationComponent],
+  imports: [SideBareGPComponent,RouterLink, GpReservationComponent, CommonModule, FormsModule, ModalDetailsColisComponent, StatistiquesComponent, AnnonceFormModalComponent, ProfilComponent, ReservationAnnonceComponent, AnnonceListComponent, AnnonceFormComponent, NotificationsComponent, ActivityLogComponent, RevenuTotalComponent,PoidsEnregistrerComponent, StatReservationComponent],
   templateUrl: './dashboard-gp.component.html',
   styleUrls: ['./dashboard-gp.component.css']
 })
@@ -150,18 +150,24 @@ getPaginatedAnnonces() {
   }
 
 
-
-
   getReservations() {
     this.gpDashboardService.affichageReservations().subscribe({
       next: (data) => {
-        this.reservations = data;
+        this.reservations = data.map((reservation: any) => {
+          if (reservation.colis && reservation.colis.image_1) {
+            // Générer l'URL complète pour l'image
+            reservation.colis.image_1 = `http://127.0.0.1:8000/storage/${reservation.colis.image_1}`;
+            console.log('Image URL:', reservation.colis.image_1);  // Vérification de l'URL
+          }
+          return reservation;
+        });
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des réservations :', error);
       }
     });
   }
+
 
   // Méthode pour soumettre le formulaire (créer ou mettre à jour)
   onSubmitAnnonce() {

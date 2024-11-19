@@ -65,10 +65,23 @@ body {
   display: flex;
   justify-content: space-between;
 }
-#changeStatut{
+
+#changeStatut {
   display: flex;
-  flex-direction: row-reverse;
-  gap: 20px;
+  flex-direction: row-reverse;  /* Pour aligner le bouton à droite */
+  gap: 20px;  /* Espacement entre les éléments */
+  align-items: center;  /* Centrer verticalement les éléments */
+}
+
+#changeStatut .btnCont {
+  display: flex;
+  flex-direction: row-reverse;  /* Aligner les éléments horizontalement de droite à gauche */
+  align-items: center;  /* Alignement vertical des éléments */
+  gap: 10px;  /* Espacement entre le select et le bouton */
+}
+
+#changeStatut label {
+  margin-right: 10px;  /* Espacement entre le label et le select */
 }
 
 .meta-item {
@@ -153,4 +166,69 @@ body {
 .btn-primary:hover,
 .btn-secondary:hover {
   opacity: 0.85;
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+
+  /* Adjust the product details grid for mobile */
+  .product-details-grid {
+    grid-template-columns: 1fr; /* Change to single column */
+  }
+
+  /* Stack elements vertically */
+  #changeStatut {
+    flex-direction: column;  /* Switch to column layout */
+    align-items: flex-start;  /* Align elements to the start */
+    gap: 10px;  /* Reduce the gap */
+  }
+
+  /* Adjust button container for mobile */
+  #changeStatut .btnCont {
+    flex-direction: column;  /* Switch to column layout */
+    align-items: flex-start;  /* Align elements to the start */
+    gap: 10px;
+  }
+
+  /* Image adjustments */
+  .product-images {
+    flex-direction: column;  /* Stack images vertically */
+    align-items: center;  /* Center images */
+  }
+
+  .main-image img {
+    width: 100%;  /* Make images responsive */
+    height: auto;
+  }
+
+  /* Adjust margins and padding for mobile */
+  .product-details-container {
+    padding: 20px;  /* Reduce padding for mobile */
+  }
+
+  .product-title {
+    font-size: 24px;  /* Smaller title for mobile */
+  }
+
+  .product-meta {
+    font-size: 14px;  /* Smaller meta text */
+  }
+
+  /* Reservations Table */
+  .reservations-table td {
+    font-size: 14px;  /* Adjust font size for mobile */
+  }
+
+  /* Adjust the buttons for mobile */
+  .btn {
+    width: 100%;  /* Make buttons full-width on mobile */
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  /* Section title font size adjustment for mobile */
+  .section-title {
+    font-size: 18px;  /* Smaller section titles */
+  }
+
 }

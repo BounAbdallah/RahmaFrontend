@@ -67,27 +67,22 @@
     <div class="main-image" *ngIf="colisDetails.image_1">
       <img [src]="colisDetails.image_1" alt="Image 1 du colis">
     </div>
-    <div class="secondary-image" *ngIf="colisDetails.image_2">
-      <img [src]="colisDetails.image_2" alt="Image 2 du colis">
-    </div>
-    <div class="secondary-image" *ngIf="colisDetails.image_3">
-      <img [src]="colisDetails.image_3" alt="Image 3 du colis">
+
+  </div>
+  <div class="form-group" id="changeStatut">
+    <div class="btnCont">
+      <label for="statusSelect" style="color: #ffffff;">Statut :</label>
+      <select
+        id="statusSelect"
+        class="form-control"
+        [(ngModel)]="colisDetails.statut"
+        (ngModelChange)="changerStatutColis(colisDetails.id, colisDetails.statut)">
+        <option style="color: #ffffff;" value="en transit">En transit</option>
+        <option style="color: #ffffff;" value="livré">Livré</option>
+        <option style="color: #ffffff;" value="en attente">En attente</option>
+        <option style="color: #ffffff;" value="retourné">Retourné</option>
+      </select>
+      <a href="dashboardGP" class="btn btn-secondary btn-lg">Retour</a>
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="statusSelect" style="color: #ffffff;">Statut :</label>
-    <select
-      id="statusSelect"
-      class="form-control"
-      [(ngModel)]="colisDetails.statut"
-      (ngModelChange)="changerStatutColis(colisDetails.id, colisDetails.statut)">
-      <option style="color: #ffffff;" value="en transit">En transit</option>
-      <option style="color: #ffffff;" value="livré">Livré</option>
-      <option style="color: #ffffff;" value="en attente">En attente</option>
-      <option style="color: #ffffff;" value="retourné">Retourné</option>
-    </select>
-  </div>
-
-
-  <a href="dashboardGP" class="btn btn-secondary btn-lg">Retour</a>

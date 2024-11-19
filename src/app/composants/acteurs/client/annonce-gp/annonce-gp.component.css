@@ -64,9 +64,14 @@ a {
   text-align: center;
   align-items: center;
   color: #F5F5F5;
-  font-size: 20px;
+  font-size: 40px;
 }
-
+.search-container{
+  width: 80%;
+  display: flex;
+align-items: center;
+margin-left: 20px;
+}
 .image-section .imagevoyagearrivage {
   width: 120px;
   height: 120px;
