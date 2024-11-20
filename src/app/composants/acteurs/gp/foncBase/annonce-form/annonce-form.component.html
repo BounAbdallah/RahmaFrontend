@@ -40,8 +40,10 @@
   <div class="mb-3">
     <label for="heure_debut_reception_colis" class="form-label">Heure début réception colis</label>
     <input id="heure_debut_reception_colis" type="time" formControlName="heure_debut_reception_colis" class="form-control" />
-
     <div *ngIf="annonceForm.get('heure_debut_reception_colis')?.invalid && (annonceForm.get('heure_debut_reception_colis')?.touched || submitted)" class="text-danger">
+      Heure début invalide.
+    </div>
+    <div *ngIf="annonceForm.get('pays_provenance_voyage')?.invalid && (annonceForm.get('pays_provenance_voyage')?.touched || submitted)" class="text-danger">
       Heure invalide.
     </div>
   </div>
@@ -102,6 +104,23 @@
       Heure invalide.
     </div>
   </div>
+    <!-- Pays destination -->
+    <div class="mb-3">
+      <label for="pays_destination_voyage" class="form-label">Pays destination</label>
+      <select id="pays_destination_voyage" formControlName="pays_destination_voyage" (change)="onCountryChange($event, 'destination')" class="form-control">
+        <option value="">Sélectionnez un pays</option>
+        <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+      </select>
+    </div>
+
+    <!-- Région destination -->
+    <div class="mb-3">
+      <label for="region_destination_voyage" class="form-label">Région destination</label>
+      <select id="region_destination_voyage" formControlName="region_destination_voyage" class="form-control">
+        <option value="">Sélectionnez une région</option>
+        <option *ngFor="let region of regionsDestination" [value]="region.name">{{ region.name }}</option>
+      </select>
+    </div>
 
   <!-- Date prévue de voyage -->
   <div class="mb-3">
