@@ -66,6 +66,8 @@
                   <th>Nationalite</th>
                   <th>Rôle</th>
                   <th>Inscription</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -78,6 +80,27 @@
                   <td>{{ user.nationalite }}</td>
                   <td>{{ user.roles }}</td>
                   <td>{{ user.created_at | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ user.etat }}</td>
+                  <td>
+                    <!-- Si l'utilisateur est actif, il peut être archivé -->
+                    <button
+                      *ngIf="user.etat === 'actif'"
+                      class="btn btn-warning"
+                      (click)="toggleEtat(user.id)"
+                    >
+                      Archiver
+                    </button>
+          
+                    <!-- Si l'utilisateur est archivé, il peut être réactivé -->
+                    <button
+                      *ngIf="user.etat === 'archivé'"
+                      class="btn btn-success"
+                      (click)="desarchiverUser(user.id)"
+                    >
+                      Réactiver
+                    </button>
+                  </td>
+          
                 </tr>
               </tbody>
             </table>

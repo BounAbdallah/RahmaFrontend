@@ -87,6 +87,20 @@ export class DashboardAdminService {
     );
   }
 
+    // Bascule entre 'actif' et 'archivé'
+    toggleEtat(id: number): Observable<any> {
+      return this.http.put(`${this.apiUrl}/users/${id}/toggle-etat`, {}, { headers: this.getHeaders() }).pipe(
+        catchError(this.handleError)
+      );
+    }
+  
+    // Réactiver un utilisateur archivé
+    desarchiverUser(id: number): Observable<any> {
+      return this.http.put(`${this.apiUrl}/users/${id}/activer`, {}, { headers: this.getHeaders() }).pipe(
+        catchError(this.handleError)
+      );
+    }
+
   // Gestion des erreurs
   private handleError(error: HttpErrorResponse) {
     console.error('Une erreur s\'est produite:', error);

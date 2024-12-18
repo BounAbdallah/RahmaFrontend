@@ -52,4 +52,30 @@ export class DashboardAdminComponent implements OnInit {
       bootstrapModal.hide();
     }
   }
+
+    // Archiver un utilisateur
+    toggleEtat(userId: number): void {
+      this.dashboardService.toggleEtat(userId).subscribe(
+        (response) => {
+          console.log(response.message);
+          // this.getUsers(); // Recharge la liste après modification
+        },
+        (error) => {
+          console.error('Erreur lors de l\'archivage de l\'utilisateur', error);
+        }
+      );
+    }
+  
+    // Réactiver un utilisateur
+    desarchiverUser(userId: number): void {
+      this.dashboardService.desarchiverUser(userId).subscribe(
+        (response) => {
+          console.log(response.message);
+          // this.getUsers(); // Recharge la liste après modification
+        },
+        (error) => {
+          console.error('Erreur lors de la réactivation de l\'utilisateur', error);
+        }
+      );
+    }
 }

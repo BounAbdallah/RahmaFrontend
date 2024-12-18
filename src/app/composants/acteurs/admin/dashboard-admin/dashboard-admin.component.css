@@ -70,3 +70,13 @@ h2 {
   background-color: #007bff;
   border-color: #007bff;
 }
+
+
+
+.container {
+  margin-top: 20px;
+}
+
+button {
+  margin-right: 10px;
+}
