@@ -40,12 +40,6 @@ export const routes: Routes = [
 
   // Routes protégées
   {
-    path: 'adminDashboard',
-    component: DashboardAdminComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Admin' }
-  },
-  {
     path: 'MesColis',
     component: ColisComponent,
     // canActivate: [RoleGuard],
@@ -108,6 +102,20 @@ export const routes: Routes = [
     component: DetailLivraisonGpComponent,
 
   },
+  // {
+  //   path: 'adminDashboard',
+  //   component: DashboardAdminComponent,
+  // },
+  {
+    path: 'xxxxx',
+    component: DashboardAdminComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'Admin' }
+  },
+
   // Route par défaut si aucune correspondance
-  { path: '**', redirectTo: 'accueil' }
+  { path: '**', redirectTo: 'accueil' 
+  }
+  
+
 ];
