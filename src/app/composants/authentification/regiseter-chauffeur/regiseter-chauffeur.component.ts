@@ -1,21 +1,18 @@
-// src/app/composants/authentification/register-livreur/register-livreur.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-register-livreur',
+  selector: 'app-regiseter-chauffeur',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
-  templateUrl: './register-livreur.component.html',
-  styleUrls: ['./register-livreur.component.css'] // Fixed typo from styleUrl to styleUrls
+  imports: [CommonModule, ReactiveFormsModule,RouterLink],
+  templateUrl: './regiseter-chauffeur.component.html',
+  styleUrls: ['./regiseter-chauffeur.component.css']
 })
-export class RegisterLivreurComponent implements OnInit {
+export class RegiseterChauffeurComponent {
   registerForm: FormGroup;
   errorMessages: { [key: string]: string } = {
     required: 'Ce champ est obligatoire.',
@@ -88,7 +85,7 @@ export class RegisterLivreurComponent implements OnInit {
         }
       });
 
-      this.authService.registerLivreur(formData).subscribe({
+      this.authService.registerChauffeur(formData).subscribe({
         next: (response: any) => {
           console.log('Inscription réussie', response);
           this.registerForm.reset();

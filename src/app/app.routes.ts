@@ -16,6 +16,7 @@ import { DashboardGPComponent } from './composants/acteurs/gp/dashboard-gp/dashb
 import { GpReservationComponent } from './composants/acteurs/gp/gp-reservation/gp-reservation.component';
 import { RoleGuard } from './core/guards/role.guard';
 import { RegiseterGPComponent } from './composants/authentification/regiseter-gp/regiseter-gp.component';
+import { RegiseterChauffeurComponent } from './composants/authentification/regiseter-chauffeur/regiseter-chauffeur.component';
 
 import { AnnonceFormModalComponent } from './composants/acteurs/gp/annonce-form-modal/annonce-form-modal.component';
 
@@ -37,6 +38,7 @@ export const routes: Routes = [
   { path: 'registerClient', component: RegisterClientComponent },
   { path: 'registerLivreur', component: RegisterLivreurComponent },
   { path: 'registerGp', component: RegiseterGPComponent },
+{path: 'registerChauffeur', component: RegiseterChauffeurComponent},
 
   // Routes protégées
   {

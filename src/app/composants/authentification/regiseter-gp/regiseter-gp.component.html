@@ -72,6 +72,15 @@
               {{ getErrorMessage('cni') }}
             </div>
           </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="cni_image">Photo de CNI</label>
+              <input type="file" id="cni_image" formControlName="cni_image" (change)="onFileChange($event)" class="form-control" />
+              <div *ngIf="isFieldInvalid('cni_image')" class="error-message">
+                {{ getErrorMessage('cni_image') }}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="row">

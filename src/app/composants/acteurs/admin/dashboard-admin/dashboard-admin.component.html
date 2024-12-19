@@ -1,80 +1,160 @@
-<div class="container mt-5">
-  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Accueil <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="users"></span>
+              Utilisateurs
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="dollar-sign"></span>
+              Tarifs
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="bar-chart-2"></span>
+              Statistiques
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="settings"></span>
+              Paramètres
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-  <div *ngIf="dashboardData">
-    <h2 class="mb-4">Dashboard Information</h2>
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
 
-    <!-- Section pour les Utilisateurs -->
-    <div class="mb-4">
-      <h3>Utilisateurs</h3>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>Email</th>
-            <th>Téléphone</th>
-            <th>Rôle</th>
-            <th>Date d'Inscription</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of dashboardData.users">
-            <td>{{ user.id }}</td>
-            <td>{{ user.prenom }}</td>
-            <td>{{ user.nom }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.telephone }}</td>
-            <td>{{ user.role }}</td>
-            <td>{{ user.dateInscription | date:'short' }}</td> <!-- Format de la date -->
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div *ngIf="dashboardData">
+        <h2 class="mb-4">Dashboard Information</h2>
+        <button (click)="openModal()" class="btn btn-primary mb-3">Ouvrir la Modale</button>
 
-    <!-- Section pour les Tarifs -->
-    <div class="mb-4">
-      <h3>Tarifs</h3>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Sommes</th>
-            <th>Description</th>
-            <th>Zone de Livraison ID</th>
-            <th>Date de Modification</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let tarif of dashboardData.tarifs">
-            <td>{{ tarif.id }}</td>
-            <td>{{ tarif.sommes | currency:'EUR':'symbol' }}</td> <!-- Format du prix -->
-            <td>{{ tarif.description }}</td>
-            <td>{{ tarif.zone_livraison_id }}</td>
-            <td>{{ tarif.dateModification | date:'short' }}</td> <!-- Format de la date -->
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <!-- Utilisateurs -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3 class="card-title">Utilisateurs</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Prénom</th>
+                  <th>Nom</th>
+                  <th>Email</th>
+                  <th>Téléphone</th>
+                  <th>Nationalite</th>
+                  <th>Rôle</th>
+                  <th>Inscription</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of dashboardData.users">
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.prenom }}</td>
+                  <td>{{ user.nom }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.telephone }}</td>
+                  <td>{{ user.nationalite }}</td>
+                  <td>{{ user.roles }}</td>
+                  <td>{{ user.created_at | date:'dd/MM/yyyy' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <!-- Section pour d'autres données (par exemple, les statistiques) -->
-    <div class="mb-4">
-      <h3>D'autres Informations</h3>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Statistique</th>
-            <th>Valeur</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let stat of dashboardData.otherStats">
-            <td>{{ stat.name }}</td>
-            <td>{{ stat.value }}</td>
-          </tr>
-        </tbody>
-      </table>
+        <!-- Tarifs -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3 class="card-title">Tarifs</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Sommes</th>
+                  <th>Description</th>
+                  <th>Zone Livraison</th>
+                  <th>Modification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tarif of dashboardData.tarifs">
+                  <td>{{ tarif.id }}</td>
+                  <td>{{ tarif.sommes | currency:'EUR':'symbol' }}</td>
+                  <td>{{ tarif.description }}</td>
+                  <td>{{ tarif.zone_livraison_id }}</td>
+                  <td>{{ tarif.dateModification | date:'dd/MM/yyyy' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Autres Informations -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3 class="card-title">D'autres Informations</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Statistique</th>
+                  <th>Valeur</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let stat of dashboardData.otherStats">
+                  <td>{{ stat.name }}</td>
+                  <td>{{ stat.value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="fullWidthModal" tabindex="-1" aria-labelledby="fullWidthModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content custom-modal-content">
+        <div class="modal-header custom-modal-header">
+          <h4 class="modal-title" id="fullWidthModalLabel">Titre de la Modale</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body custom-modal-body">
+          <!-- Modal content goes here -->
+        </div>
+        <div class="modal-footer custom-modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary">Enregistrer les changements</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

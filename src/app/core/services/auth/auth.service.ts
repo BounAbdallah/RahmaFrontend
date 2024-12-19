@@ -32,6 +32,12 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register/livreur`, userData).pipe(catchError(this.handleError));
   }
 
+
+
+    registerChauffeur(userData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register/chauffeur`, userData).pipe(catchError(this.handleError));
+  }
+
   // Connexion
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
