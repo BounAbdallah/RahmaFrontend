@@ -1,0 +1,62 @@
+
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: var(--BleuBase, #074C72);
+  padding: 10px 0;
+  color: #fff;
+}
+
+.sidebar a {
+  color: #adb5bd;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.sidebar a:hover {
+  color: #fff;
+}
+
+.sidebar .nav-item {
+  padding: 10px 15px;
+}
+
+.sidebar .nav-item .collapse {
+  background-color: #053a5b;
+  border-radius: 4px;
+}
+
+.sidebar .nav-item .collapse a {
+  font-size: 0.85rem;
+}
+
+.sidebar .logo img {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+li {
+  padding: 10px 15px;
+}
+/* sidebar.component.css */
+.sidebar .nav-link.active {
+  background-color: #FF9F02; /* Ou toute autre couleur de votre choix */
+  color: #fff;
+}
+
+.sidebar .nav-link {
+  color: #adb5bd;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.sidebar .nav-link:hover {
+  color: #fff;
+}
