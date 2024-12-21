@@ -4,7 +4,9 @@ main
   padding: 20px;
 }
 
-
+.cardGraphiqu {
+  min-height: 450px;
+}
 .cardGraphique {
   width: 400px;
   min-height: 450px;

@@ -3,6 +3,7 @@
   flex-direction: row;
   min-height: 100vh;
   overflow-x: hidden;
+
 }
 
 
@@ -34,10 +35,15 @@
 .profil i{
   margin-left: 20px;
 }
+.content{
+  margin-left: 16%;
 
+}
 .content-section
 {
   margin: 40px;
+  /* margin-left: 20%; */
+
 }
 * {
   box-sizing: border-box;
