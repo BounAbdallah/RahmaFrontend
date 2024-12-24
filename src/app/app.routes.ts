@@ -43,6 +43,7 @@ import { InactifsComponent } from './composants/acteurs/gestionnaire/sousMenus/L
 // Guard
 import { RoleGuard } from './core/guards/role.guard';
 import { AccueilGestionnaireComponent } from './composants/acteurs/gestionnaire/accueil/accueil-gestionnaire.component';
+<<<<<<< HEAD
 import { GestionGPComponent } from './composants/acteurs/gestionnaire/gestion-gp/gestion-gp.component';
 import { DetailsGPComponent } from './composants/acteurs/gestionnaire/details-gp/details-gp.component';
 import { GestionnnairDetailsAnnonceGPComponent } from './composants/acteurs/gestionnaire/gestionnaire-details-annonce-gp/gestionnaire-details-annonce-gp.component';
@@ -57,6 +58,8 @@ import { GestionVehiculesComponent } from './composants/acteurs/chauffeur/gestio
 import { RapportsPerformanceComponent } from './composants/acteurs/chauffeur/rapports-performance/rapports-performance.component';
 import { CalendrierTrajetsComponent } from './composants/acteurs/chauffeur/calendrier-trajets/calendrier-trajets.component';
 import { AccueilChauffeurComponent } from './composants/acteurs/chauffeur/accueil/accueil.component';
+=======
+>>>>>>> 4fb5e8a (Ajout de l'interface parametre pour gestionnaire)
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -207,6 +210,37 @@ export const routes: Routes = [
   //   component: DashboardAdminComponent,
   // },
 
+<<<<<<< HEAD
+=======
+  {
+    path: 'gestionnaire-space',
+    component: DashboardGestionnaireComponent,
+    children: [
+      { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+      { path: 'accueil', component: AccueilGestionnaireComponent  },
+
+      { path: 'vue-densemble', component: VueDensembleComponent },
+      { path: 'commandes', component: CommandesComponent, children: [
+          { path: 'toutes', component: ToutesComponent },
+          { path: 'en-attente', component: EnAttenteComponent },
+          { path: 'terminees', component: TermineesComponent },
+        ]
+      },
+      { path: 'reservations', component: ReservationsComponent, children: [
+          { path: 'nouvelles', component: NouvellesComponent },
+          { path: 'annulees', component: AnnuleesComponent },
+        ]
+      },
+      { path: 'livreurs', component: LivreursComponent, children: [
+          { path: 'actifs', component: ActifsComponent },
+          { path: 'inactifs', component: InactifsComponent },
+        ]
+      },
+      { path: 'parametres', component: ParametresComponent },
+    ]
+  },
+
+>>>>>>> 4fb5e8a (Ajout de l'interface parametre pour gestionnaire)
   // Route par défaut si aucune correspondance
   { path: '**', redirectTo: 'accueil' }
 ];

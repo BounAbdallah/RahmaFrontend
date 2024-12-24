@@ -12,8 +12,11 @@ import { FormsModule } from '@angular/forms';
 export class CommandesComponent {
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4fb5e8a (Ajout de l'interface parametre pour gestionnaire)
   commandes = [
     { id: 1, client: 'Cheikh Ndiaye', livreur: 'Mamadou Sow', statut: 'En attente', zone: 'Zone 1', date: '2024-12-20' },
     { id: 2, client: 'Awa Diop', livreur: 'Moussa Bâ', statut: 'Livrée', zone: 'Zone 2', date: '2024-12-19' },
