@@ -1,0 +1,66 @@
+<div class="container-fluid py-4">
+  <header class="bg-white p-4 rounded shadow-sm d-flex justify-content-between align-items-center mb-4">
+    <button class="btn btn-primary px-4">Ajouter une commande</button>
+    <div class="d-flex flex-grow-1 mx-3 align-items-center">
+      <input
+        type="text"
+        class="form-control me-2"
+        placeholder="Rechercher une commande"
+        [(ngModel)]="searchQuery"
+        (input)="filterCommandes()"
+      />
+      <select class="form-select me-2" [(ngModel)]="selectedStatut" (change)="filterCommandes()">
+        <option value="">Statut</option>
+        <option value="En attente">En attente</option>
+        <option value="En cours">En cours</option>
+        <option value="Livrée">Livrée</option>
+        <option value="Annulée">Annulée</option>
+      </select>
+      <select class="form-select me-2" [(ngModel)]="selectedZone" (change)="filterCommandes()">
+        <option value="">Zone</option>
+        <option value="Zone 1">Zone 1</option>
+        <option value="Zone 2">Zone 2</option>
+        <option value="Zone 3">Zone 3</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Client</th>
+          <th>Livreur</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commande of paginatedCommandes">
+          <td>#{{ commande.id }}</td>
+          <td>{{ commande.client }}</td>
+          <td>{{ commande.livreur }}</td>
+          <td><span class="badge" [ngClass]="getStatusClass(commande.statut)">{{ commande.statut }}</span></td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-1">Modifier</button>
+            <button class="btn btn-sm btn-outline-danger me-1">Annuler</button>
+            <button class="btn btn-sm btn-outline-success">Assigner</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-end mt-3">
+    <button
+      *ngFor="let page of [].constructor(Math.ceil(filteredCommandes.length / itemsPerPage)); let i = index"
+      class="btn btn-outline-primary mx-1"
+      [class.active]="i + 1 === currentPage"
+      (click)="changePage(i + 1)"
+    >
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>

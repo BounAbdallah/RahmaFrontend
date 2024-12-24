@@ -1,0 +1,26 @@
+body {
+  background-color: #f8f9fa;
+}
+.table thead {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  color: white;
+}
+.btn-primary {
+  background: linear-gradient(45deg, #007bff, #6610f2);
+  border: none;
+}
+.card-header {
+  font-weight: bold;
+}
+.status-pending {
+  color: orange;
+}
+.status-delivered {
+  color: green;
+}
+.status-canceled {
+  color: red;
+}
+.status-in-progress {
+  color: blue;
+}

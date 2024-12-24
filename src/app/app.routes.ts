@@ -42,6 +42,7 @@ import { InactifsComponent } from './composants/acteurs/gestionnaire/sousMenus/L
 
 // Guard
 import { RoleGuard } from './core/guards/role.guard';
+import { AccueilGestionnaireComponent } from './composants/acteurs/gestionnaire/accueil/accueil-gestionnaire.component';
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -73,9 +74,11 @@ export const routes: Routes = [
   // Routes gestionnaire
   {
     path: 'gestionnaire-space',
-    component: DashboardGestionnaireComponent, // Conteneur principal avec le <router-outlet>
+    component: DashboardGestionnaireComponent,
     children: [
-      { path: '', redirectTo: 'vue-densemble', pathMatch: 'full' },
+      { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+      { path: 'accueil', component: AccueilGestionnaireComponent  },
+
       { path: 'vue-densemble', component: VueDensembleComponent },
       { path: 'commandes', component: CommandesComponent, children: [
           { path: 'toutes', component: ToutesComponent },
