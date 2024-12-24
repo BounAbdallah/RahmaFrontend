@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 export class SideBarreGestionnaireComponent {
 
 
-  activeLink: string = 'accueil';
+  activeLink: string = '';
 
 
   setActive(link: string) {

@@ -1,104 +1,87 @@
-<main class="col-md-12 ms-sm-auto">
-  <!-- Header -->
+<div class="container-fluid py-4">
+  <!-- Header secondaire -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <button class="btn btn-primary" (click)="downloadReport()">
+      <i class="bi bi-download"></i> Télécharger les rapports
+    </button>
+    <div class="btn-group" role="group" aria-label="Sélection période">
+      <button type="button" class="btn btn-outline-secondary" (click)="setPeriod('semaine')">Semaine</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="setPeriod('mois')">Mois</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="setPeriod('annee')">Année</button>
+    </div>
+  </div>
 
-<div class="statistique">
+  <!-- Section principale -->
+  <div class="row">
+    <!-- Graphiques dynamiques -->
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-sm rounded">
+        <div class="card-header bg-primary text-white">
+          <h6 class="mb-0">Nombre de commandes par semaine</h6>
+        </div>
+        <div class="card-body">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-sm rounded">
+        <div class="card-header bg-success text-white">
+          <h6 class="mb-0">Répartition des revenus</h6>
+        </div>
+        <div class="card-body">
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-sm rounded">
+        <div class="card-header bg-info text-white">
+          <h6 class="mb-0">Évolution du volume de commandes</h6>
+        </div>
+        <div class="card-body">
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Statistics Section -->
-  <div class="row mt-4">
-    <div class="col-md-3">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5>Colis en transit</h5>
-          <p class="fs-4 text-primary">120</p>
-        </div>
-      </div>
+  <!-- Tableau synthétique -->
+  <div class="card shadow-sm rounded">
+    <div class="card-header bg-dark text-white">
+      <h6 class="mb-0">Revenus par zone géographique</h6>
     </div>
-    <div class="col-md-3">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5>Commandes livrées</h5>
-          <p class="fs-4 text-success">350</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5>Réservations actives</h5>
-          <p class="fs-4 text-warning">75</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5>Revenus totaux</h5>
-          <p class="fs-4 text-danger">450.000 Fcfa</p>
-        </div>
-      </div>
+    <div class="card-body">
+      <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Zone géographique</th>
+            <th>Revenus (FCFA)</th>
+            <th>Commandes</th>
+            <th>Réservations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dakar</td>
+            <td>1,200,000</td>
+            <td>300</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>Pikine</td>
+            <td>800,000</td>
+            <td>200</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>Keur Massar</td>
+            <td>400,000</td>
+            <td>100</td>
+            <td>20</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-<!-- Graph Section -->
-<div class="row mt-4">
-  <div class="col-md-6">
-    <div class="card shadow cardGraphiqu">
-      <div class="card-header text-white bg-primary">Commandes par statut</div>
-      <div class="card-body">
-        <!-- Graphique à barres -->
-        <canvas id="barChart"></canvas>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card shadow cardGraphique">
-      <div class="card-header text-white bg-success">Réservations Dakar AIDB</div>
-      <div class="card-body">
-        <!-- Graphique circulaire -->
-        <canvas id="pieChart"></canvas>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <!-- Recent Activity Section -->
-  <div class="row mt-4">
-    <div class="col-12">
-      <div class="card shadow">
-        <div class="card-header">Activités récentes</div>
-        <div class="card-body">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Type</th>
-                <th>Détails</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Commande</td>
-                <td>Livraison à Dakar</td>
-                <td>20/12/2024</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Réservation</td>
-                <td>Trajet vers AIBD</td>
-                <td>19/12/2024</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Commande</td>
-                <td>Livraison à Thiès</td>
-                <td>18/12/2024</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
