@@ -102,6 +102,9 @@ export const routes: Routes = [
         ]
       },
       { path: 'parametres', component: ParametresComponent },
+      { path: 'gestion-gp', component: GestionGPComponent },
+      { path: 'details-gp', component: DetailsGPComponent },
+      { path: 'details-annonce-gp', component: GestionnnairDetailsAnnonceGPComponent },
     ]
   },
 {
@@ -177,6 +180,74 @@ export const routes: Routes = [
     // canActivate: [RoleGuard],
     // data: { role: 'Admin' }
   },
+
+  {
+    path: 'MesColis',
+    component: ColisComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
+  },
+
+  {
+    path: 'DashboardClient',
+    component: DashboardComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
+  },
+  {
+    path: 'ProfilClient',
+    component: ProfilComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
+  },
+  {
+    path: 'Gpdisponible',
+    component: AnnonceGPComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
+  },
+  {
+    path: 'dashboardGP',
+    component: DashboardGPComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'GP' }
+  },
+  {
+    path: 'reservationGp',
+    component: GpReservationComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'GP' }
+  },
+
+
+  {
+    path: 'annonce-details/:id',
+    component: DetailsAnnonceGPComponent
+  },
+
+  {
+    path: 'colis-details/:id',
+    component: DetailsColisClientComponent
+  },
+  {
+    path: 'mon-colis/:id',
+    component: ClientDetailsColisComponent
+  },
+
+  {
+    path: 'statistiques',
+    component: StatistiquesComponent,
+
+  },
+  {
+    path: 'detailSeviceGp',
+    component: DetailLivraisonGpComponent,
+
+  },
+  // {
+  //   path: 'adminDashboard',
+  //   component: DashboardAdminComponent,
+  // },
 
   // Route par défaut si aucune correspondance
   { path: '**', redirectTo: 'accueil'
