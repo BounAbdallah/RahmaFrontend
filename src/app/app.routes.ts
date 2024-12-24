@@ -43,6 +43,8 @@ import { InactifsComponent } from './composants/acteurs/gestionnaire/sousMenus/L
 // Guard
 import { RoleGuard } from './core/guards/role.guard';
 import { AccueilGestionnaireComponent } from './composants/acteurs/gestionnaire/accueil/accueil-gestionnaire.component';
+import { ColisComponent } from './composants/colis/colis/colis.component';
+import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -72,18 +74,40 @@ export const routes: Routes = [
   { path: 'colis-details/:id', component: DetailsColisClientComponent },
 
   // Routes gestionnaire
-  // {
-  //   path: 'MesColis',
-  //   component: ColisComponent,
-  //   // canActivate: [RoleGuard],
-  //   // data: { role: 'Client' }
-  // },
-  // {
-  //   path: 'xxxxx',
-  //   component: DashboardAdminComponent,
-  //   // canActivate: [RoleGuard],
-  //   // data: { role: 'Admin' }
-  // },
+  {
+    path: 'gestionnaire-space',
+    component: DashboardGestionnaireComponent,
+    children: [
+      { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+      { path: 'accueil', component: AccueilGestionnaireComponent  },
+
+      { path: 'vue-densemble', component: VueDensembleComponent },
+      { path: 'commandes', component: CommandesComponent, children: [
+          { path: 'toutes', component: ToutesComponent },
+          { path: 'en-attente', component: EnAttenteComponent },
+          { path: 'terminees', component: TermineesComponent },
+        ]
+      },
+      { path: 'reservations', component: ReservationsComponent, children: [
+          { path: 'nouvelles', component: NouvellesComponent },
+          { path: 'annulees', component: AnnuleesComponent },
+        ]
+      },
+      { path: 'livreurs', component: LivreursComponent, children: [
+          { path: 'actifs', component: ActifsComponent },
+          { path: 'inactifs', component: InactifsComponent },
+        ]
+      },
+      { path: 'parametres', component: ParametresComponent },
+    ]
+  },
+{
+  path: 'MesColis',
+    component: ColisComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'Client' }
+  },
+
   {
     path: 'DashboardClient',
     component: DashboardComponent,
@@ -144,37 +168,16 @@ export const routes: Routes = [
   //   path: 'adminDashboard',
   //   component: DashboardAdminComponent,
   // },
-
   {
-    path: 'gestionnaire-space',
-    component: DashboardGestionnaireComponent,
-    children: [
-      { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-      { path: 'accueil', component: AccueilGestionnaireComponent  },
-
-      { path: 'vue-densemble', component: VueDensembleComponent },
-      { path: 'commandes', component: CommandesComponent, children: [
-          { path: 'toutes', component: ToutesComponent },
-          { path: 'en-attente', component: EnAttenteComponent },
-          { path: 'terminees', component: TermineesComponent },
-        ]
-      },
-      { path: 'reservations', component: ReservationsComponent, children: [
-          { path: 'nouvelles', component: NouvellesComponent },
-          { path: 'annulees', component: AnnuleesComponent },
-        ]
-      },
-      { path: 'livreurs', component: LivreursComponent, children: [
-          { path: 'actifs', component: ActifsComponent },
-          { path: 'inactifs', component: InactifsComponent },
-        ]
-      },
-      { path: 'parametres', component: ParametresComponent },
-    ]
+    path: 'xxxxx',
+    component: DashboardAdminComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'Admin' }
   },
 
   // Route par défaut si aucune correspondance
   { path: '**', redirectTo: 'accueil' 
   }
   
+
 ];
