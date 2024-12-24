@@ -43,23 +43,8 @@ import { InactifsComponent } from './composants/acteurs/gestionnaire/sousMenus/L
 // Guard
 import { RoleGuard } from './core/guards/role.guard';
 import { AccueilGestionnaireComponent } from './composants/acteurs/gestionnaire/accueil/accueil-gestionnaire.component';
-<<<<<<< HEAD
-import { GestionGPComponent } from './composants/acteurs/gestionnaire/gestion-gp/gestion-gp.component';
-import { DetailsGPComponent } from './composants/acteurs/gestionnaire/details-gp/details-gp.component';
-import { GestionnnairDetailsAnnonceGPComponent } from './composants/acteurs/gestionnaire/gestionnaire-details-annonce-gp/gestionnaire-details-annonce-gp.component';
 import { ColisComponent } from './composants/colis/colis/colis.component';
-import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
-import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
-import { HistoriqueTrajetsComponent } from './composants/acteurs/chauffeur/historique-trajets/historique-trajets.component';
-import { NotificationsComponent } from './composants/acteurs/notifications/notifications.component';
-import { ProfilChauffeurComponent } from './composants/acteurs/chauffeur/profil-chauffeur/profil-chauffeur.component';
-import { EvaluationsComponent } from './composants/acteurs/chauffeur/evaluations/evaluations.component';
-import { GestionVehiculesComponent } from './composants/acteurs/chauffeur/gestion-vehicules/gestion-vehicules.component';
-import { RapportsPerformanceComponent } from './composants/acteurs/chauffeur/rapports-performance/rapports-performance.component';
-import { CalendrierTrajetsComponent } from './composants/acteurs/chauffeur/calendrier-trajets/calendrier-trajets.component';
-import { AccueilChauffeurComponent } from './composants/acteurs/chauffeur/accueil/accueil.component';
-=======
->>>>>>> 4fb5e8a (Ajout de l'interface parametre pour gestionnaire)
+import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -114,36 +99,10 @@ export const routes: Routes = [
         ]
       },
       { path: 'parametres', component: ParametresComponent },
-      { path: 'gestion-gp', component: GestionGPComponent },
-      { path: 'details-gp', component: DetailsGPComponent },
-      { path: 'details-annonce-gp', component: GestionnnairDetailsAnnonceGPComponent },
     ]
   },
-
-
-
- // Routes chauffeur
- {
-  path: 'chauffeur-space',
-  component: DashboardChauffeurComponent,
-  children: [
-    { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-    { path: 'accueil', component: AccueilChauffeurComponent },
-    { path: 'trajets-a-venir', component: TrajetsAVenirComponent },
-    { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
-    { path: 'historique-trajets', component: HistoriqueTrajetsComponent },
-    { path: 'gestion-voiture', component: GestionVehiculesComponent },
-    { path: 'notifications', component: NotificationsComponent },
-    { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
-    { path: 'profil', component: ProfilChauffeurComponent },
-    { path: 'parametres', component: ParametresComponent },
-    { path: 'evaluation', component:EvaluationsComponent },
-  ]
-},
-
-
-  {
-    path: 'MesColis',
+{
+  path: 'MesColis',
     component: ColisComponent,
     // canActivate: [RoleGuard],
     // data: { role: 'Client' }
@@ -209,38 +168,16 @@ export const routes: Routes = [
   //   path: 'adminDashboard',
   //   component: DashboardAdminComponent,
   // },
-
-<<<<<<< HEAD
-=======
   {
-    path: 'gestionnaire-space',
-    component: DashboardGestionnaireComponent,
-    children: [
-      { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-      { path: 'accueil', component: AccueilGestionnaireComponent  },
-
-      { path: 'vue-densemble', component: VueDensembleComponent },
-      { path: 'commandes', component: CommandesComponent, children: [
-          { path: 'toutes', component: ToutesComponent },
-          { path: 'en-attente', component: EnAttenteComponent },
-          { path: 'terminees', component: TermineesComponent },
-        ]
-      },
-      { path: 'reservations', component: ReservationsComponent, children: [
-          { path: 'nouvelles', component: NouvellesComponent },
-          { path: 'annulees', component: AnnuleesComponent },
-        ]
-      },
-      { path: 'livreurs', component: LivreursComponent, children: [
-          { path: 'actifs', component: ActifsComponent },
-          { path: 'inactifs', component: InactifsComponent },
-        ]
-      },
-      { path: 'parametres', component: ParametresComponent },
-    ]
+    path: 'xxxxx',
+    component: DashboardAdminComponent,
+    // canActivate: [RoleGuard],
+    // data: { role: 'Admin' }
   },
 
->>>>>>> 4fb5e8a (Ajout de l'interface parametre pour gestionnaire)
   // Route par défaut si aucune correspondance
-  { path: '**', redirectTo: 'accueil' }
+  { path: '**', redirectTo: 'accueil'
+  }
+
+
 ];
