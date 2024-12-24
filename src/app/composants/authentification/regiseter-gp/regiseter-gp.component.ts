@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../core/services/auth/auth.service';
@@ -38,6 +38,7 @@ export class RegiseterGPComponent {
       commune: ['', [Validators.required, Validators.minLength(3)]],
       nationalite: ['', [Validators.required]],
       date_de_naissance: ['', Validators.required],
+      cni_image: [null] // Champ pour l'image de la CNI, maintenant nullable dans la validation
     }, { validators: this.passwordsMatchValidator });
   }
 
@@ -49,12 +50,38 @@ export class RegiseterGPComponent {
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        // Affichez un message d'erreur si ce n'est pas une image
+        Swal.fire({
+          title: 'Erreur',
+          text: 'Veuillez sélectionner un fichier image.',
+          icon: 'error',
+          timer: 3000,
+          showConfirmButton: false
+        });
+        return;
+      }
+
+      // Ici, on ne définit pas directement la valeur, on la stocke dans le formulaire
+      this.registerForm.get('cni_image')?.setValue(file);
+    }
+  }
   onRegister() {
     if (this.registerForm.valid) {
       const formData = new FormData();
 
       Object.keys(this.registerForm.controls).forEach(key => {
-        formData.append(key, this.registerForm.get(key)?.value);
+        const control = this.registerForm.get(key);
+        if (control?.value) {
+          if (key === 'cni_image' && control.value instanceof File) {
+            formData.append(key, control.value, control.value.name);
+          } else {
+            formData.append(key, control.value);
+          }
+        }
       });
 
       this.authService.registerGp(formData).subscribe({
@@ -93,7 +120,6 @@ export class RegiseterGPComponent {
       });
     }
   }
-
   isFieldInvalid(field: string): boolean {
     const control = this.registerForm.get(field);
     return control?.invalid && (control?.dirty || control?.touched) || false;
@@ -115,5 +141,4 @@ export class RegiseterGPComponent {
     }
     return null;
   }
-
 }

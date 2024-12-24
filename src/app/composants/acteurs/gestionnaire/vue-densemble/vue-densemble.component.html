@@ -1,0 +1,104 @@
+<main class="col-md-12 ms-sm-auto">
+  <!-- Header -->
+
+<div class="statistique">
+
+  <!-- Statistics Section -->
+  <div class="row mt-4">
+    <div class="col-md-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5>Colis en transit</h5>
+          <p class="fs-4 text-primary">120</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5>Commandes livrées</h5>
+          <p class="fs-4 text-success">350</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5>Réservations actives</h5>
+          <p class="fs-4 text-warning">75</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5>Revenus totaux</h5>
+          <p class="fs-4 text-danger">450.000 Fcfa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Graph Section -->
+<div class="row mt-4">
+  <div class="col-md-6">
+    <div class="card shadow cardGraphiqu">
+      <div class="card-header text-white bg-primary">Commandes par statut</div>
+      <div class="card-body">
+        <!-- Graphique à barres -->
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow cardGraphique">
+      <div class="card-header text-white bg-success">Réservations Dakar AIDB</div>
+      <div class="card-body">
+        <!-- Graphique circulaire -->
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Recent Activity Section -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card shadow">
+        <div class="card-header">Activités récentes</div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Détails</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Commande</td>
+                <td>Livraison à Dakar</td>
+                <td>20/12/2024</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Réservation</td>
+                <td>Trajet vers AIBD</td>
+                <td>19/12/2024</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Commande</td>
+                <td>Livraison à Thiès</td>
+                <td>18/12/2024</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

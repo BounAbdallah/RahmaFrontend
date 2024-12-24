@@ -1,0 +1,29 @@
+main
+{
+  margin: 20px;
+  padding: 20px;
+}
+
+.cardGraphiqu {
+  min-height: 450px;
+}
+.cardGraphique {
+  width: 400px;
+  min-height: 450px;
+  margin-bottom: 20px;
+}
+.card-header {
+  font-size: 1.2rem;
+}
+
+.profil{
+  gap: 10px;
+}
+
+.statistique
+{
+  width: 80;
+}
+* {
+  box-sizing: border-box;
+}

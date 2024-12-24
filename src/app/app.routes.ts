@@ -1,30 +1,47 @@
-
 import { Routes } from '@angular/router';
+
+// Composants publics
 import { AccueilComponent } from './composants/portail/accueil/accueil.component';
 import { DetailLivraisonComponent } from './composants/portail/detail-livraison/detail-livraison.component';
 import { LoginComponent } from './composants/authentification/login/login.component';
 import { RegisterClientComponent } from './composants/authentification/register-client/register-client.component';
 import { RegisterLivreurComponent } from './composants/authentification/register-livreur/register-livreur.component';
-import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
-import { ColisComponent } from './composants/colis/colis/colis.component';
+import { RegiseterGPComponent } from './composants/authentification/regiseter-gp/regiseter-gp.component';
+import { RegiseterChauffeurComponent } from './composants/authentification/regiseter-chauffeur/regiseter-chauffeur.component';
+
+// Composants clients
 import { DashboardComponent } from './composants/acteurs/client/dashboard/dashboard.component';
 import { ProfilComponent } from './composants/acteurs/client/profil/profil.component';
 import { AnnonceGPComponent } from './composants/acteurs/client/annonce-gp/annonce-gp.component';
-import { NavbarComponent } from './composants/acteurs/client/navbar/navbar.component';
 import { DetailsAnnonceGPComponent } from './composants/acteurs/client/details-annonce-gp/details-annonce-gp.component';
-import { DashboardGPComponent } from './composants/acteurs/gp/dashboard-gp/dashboard-gp.component';
-import { GpReservationComponent } from './composants/acteurs/gp/gp-reservation/gp-reservation.component';
-import { RoleGuard } from './core/guards/role.guard';
-import { RegiseterGPComponent } from './composants/authentification/regiseter-gp/regiseter-gp.component';
-
-import { AnnonceFormModalComponent } from './composants/acteurs/gp/annonce-form-modal/annonce-form-modal.component';
-
-import { StatistiquesComponent } from './composants/acteurs/gp/foncBase/statistiques/statistiques.component';
-import { DetailLivraisonGpComponent } from './composants/portail/detail-livraison-gp/detail-livraison-gp.component';
-import { ColisDetailsComponent } from './composants/acteurs/gp/foncBase/colis-details/colis-details.component';
-import { DetailsColisClientComponent } from './composants/acteurs/gp/details-colis-client/details-colis-client.component';
 import { ClientDetailsColisComponent } from './composants/acteurs/client/client-details-colis/client-details-colis.component';
 
+// Composants GP (Gratuité Partielle)
+import { DashboardGPComponent } from './composants/acteurs/gp/dashboard-gp/dashboard-gp.component';
+import { GpReservationComponent } from './composants/acteurs/gp/gp-reservation/gp-reservation.component';
+import { StatistiquesComponent } from './composants/acteurs/gp/foncBase/statistiques/statistiques.component';
+import { DetailLivraisonGpComponent } from './composants/portail/detail-livraison-gp/detail-livraison-gp.component';
+import { DetailsColisClientComponent } from './composants/acteurs/gp/details-colis-client/details-colis-client.component';
+
+// Composants gestionnaire
+import { DashboardGestionnaireComponent } from './composants/acteurs/gestionnaire/dashboard-gestionnaire/dashboard-gestionnaire.component';
+import { VueDensembleComponent } from './composants/acteurs/gestionnaire/vue-densemble/vue-densemble.component';
+import { CommandesComponent } from './composants/acteurs/gestionnaire/commandes/commandes.component';
+import { ReservationsComponent } from './composants/acteurs/gestionnaire/reservations/reservations.component';
+import { LivreursComponent } from './composants/acteurs/gestionnaire/livreurs/livreurs.component';
+import { ParametresComponent } from './composants/acteurs/gestionnaire/parametres/parametres.component';
+
+// Sous-menus gestionnaire
+import { ToutesComponent } from './composants/acteurs/gestionnaire/sousMenus/Commandes/toutes/toutes.component';
+import { EnAttenteComponent } from './composants/acteurs/gestionnaire/sousMenus/Commandes/en-attente/en-attente.component';
+import { TermineesComponent } from './composants/acteurs/gestionnaire/sousMenus/Commandes/terminees/terminees.component';
+import { NouvellesComponent } from './composants/acteurs/gestionnaire/sousMenus/Reservations/nouvelles/nouvelles.component';
+import { AnnuleesComponent } from './composants/acteurs/gestionnaire/sousMenus/Reservations/annulees/annulees.component';
+import { ActifsComponent } from './composants/acteurs/gestionnaire/sousMenus/Livreurs/actifs/actifs.component';
+import { InactifsComponent } from './composants/acteurs/gestionnaire/sousMenus/Livreurs/inactifs/inactifs.component';
+
+// Guard
+import { RoleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -32,20 +49,40 @@ export const routes: Routes = [
 
   // Routes publiques
   { path: 'accueil', component: AccueilComponent },
-  { path: 'DetailsTeste', component: DetailLivraisonComponent },
+  { path: 'details-teste', component: DetailLivraisonComponent },
   { path: 'connexion', component: LoginComponent },
-  { path: 'registerClient', component: RegisterClientComponent },
-  { path: 'registerLivreur', component: RegisterLivreurComponent },
-  { path: 'registerGp', component: RegiseterGPComponent },
+  { path: 'register-client', component: RegisterClientComponent },
+  { path: 'register-livreur', component: RegisterLivreurComponent },
+  { path: 'register-gp', component: RegiseterGPComponent },
+  { path: 'register-chauffeur', component: RegiseterChauffeurComponent },
 
-  // Routes protégées
-  {
-    path: 'MesColis',
-    component: ColisComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
-  },
+  // Routes clients
+  { path: 'dashboard-client', component: DashboardComponent },
+  { path: 'profil-client', component: ProfilComponent },
+  { path: 'gp-disponible', component: AnnonceGPComponent },
+  { path: 'annonce-details/:id', component: DetailsAnnonceGPComponent },
+  { path: 'mon-colis/:id', component: ClientDetailsColisComponent },
 
+  // Routes GP
+  { path: 'dashboard-gp', component: DashboardGPComponent },
+  { path: 'reservation-gp', component: GpReservationComponent },
+  { path: 'statistiques', component: StatistiquesComponent },
+  { path: 'detail-service-gp', component: DetailLivraisonGpComponent },
+  { path: 'colis-details/:id', component: DetailsColisClientComponent },
+
+  // Routes gestionnaire
+  // {
+  //   path: 'MesColis',
+  //   component: ColisComponent,
+  //   // canActivate: [RoleGuard],
+  //   // data: { role: 'Client' }
+  // },
+  // {
+  //   path: 'xxxxx',
+  //   component: DashboardAdminComponent,
+  //   // canActivate: [RoleGuard],
+  //   // data: { role: 'Admin' }
+  // },
   {
     path: 'DashboardClient',
     component: DashboardComponent,
@@ -106,16 +143,35 @@ export const routes: Routes = [
   //   path: 'adminDashboard',
   //   component: DashboardAdminComponent,
   // },
+
   {
-    path: 'xxxxx',
-    component: DashboardAdminComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Admin' }
+    path: 'gestionnaire-space',
+    component: DashboardGestionnaireComponent, // Conteneur principal avec le <router-outlet>
+    children: [
+      { path: '', redirectTo: 'vue-densemble', pathMatch: 'full' },
+      { path: 'vue-densemble', component: VueDensembleComponent },
+      { path: 'commandes', component: CommandesComponent, children: [
+          { path: 'toutes', component: ToutesComponent },
+          { path: 'en-attente', component: EnAttenteComponent },
+          { path: 'terminees', component: TermineesComponent },
+        ]
+      },
+      { path: 'reservations', component: ReservationsComponent, children: [
+          { path: 'nouvelles', component: NouvellesComponent },
+          { path: 'annulees', component: AnnuleesComponent },
+        ]
+      },
+      { path: 'livreurs', component: LivreursComponent, children: [
+          { path: 'actifs', component: ActifsComponent },
+          { path: 'inactifs', component: InactifsComponent },
+        ]
+      },
+      { path: 'parametres', component: ParametresComponent },
+    ]
   },
 
   // Route par défaut si aucune correspondance
   { path: '**', redirectTo: 'accueil' 
   }
   
-
 ];
