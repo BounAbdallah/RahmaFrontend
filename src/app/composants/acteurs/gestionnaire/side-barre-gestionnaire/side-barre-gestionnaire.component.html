@@ -68,6 +68,14 @@
       </ul>
     </li>
 
+      <!-- Gestion GP -->
+    <li class="nav-item">
+      <a href="/gestionnaire-space/gestion-gp" class="nav-link" [class.active]="activeLink === 'parametres'" (click)="setActive('parametres')">
+        <i class="fas fa-motorcycle"></i> Gestion GP
+      </a>
+    </li>
+
+
     <!-- Paramètres -->
     <li class="nav-item">
       <a href="/gestionnaire-space/parametres" class="nav-link" [class.active]="activeLink === 'parametres'" (click)="setActive('parametres')">
@@ -76,3 +84,5 @@
     </li>
   </ul>
 </div>
+
+
