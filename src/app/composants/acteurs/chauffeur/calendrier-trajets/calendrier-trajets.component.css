@@ -1,0 +1,110 @@
+#calendar {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.btn-group button {
+  margin-right: 5px;
+}
+
+
+/* Style global pour le calendrier */
+#calendar {
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #fff; /* Fond blanc pour le calendrier */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce autour du calendrier */
+}
+
+/* Style de l'en-tête du calendrier */
+.fc-header-toolbar {
+  background-color: #007bff; /* Couleur de fond bleue pour l'en-tête */
+  color: #fff; /* Texte blanc */
+  border-radius: 10px 10px 0 0; /* Coins arrondis en haut */
+  padding: 10px 15px;
+}
+
+.fc-header-toolbar .fc-button {
+  background-color: #0069d9;
+  border-color: #0062cc;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+.fc-header-toolbar .fc-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style des dates */
+.fc-daygrid-day-number {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333; /* Couleur sombre pour les jours */
+}
+
+/* Style des événements */
+.fc-event {
+  background-color: #28a745; /* Couleur verte pour les événements */
+  color: white;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+.fc-event:hover {
+  background-color: #218838; /* Couleur plus foncée au survol */
+  cursor: pointer;
+}
+
+/* Style des événements avec des détails */
+.fc-event-description {
+  font-size: 12px;
+  color: #fff;
+}
+
+/* Personnalisation des vues (jour, semaine, mois) */
+.fc-daygrid-day {
+  border: 1px solid #f0f0f0; /* Bordure claire entre les jours */
+}
+
+.fc-daygrid-day.fc-day-today {
+  background-color: #e9ecef; /* Fond différent pour le jour actuel */
+}
+
+.fc-daygrid-day.fc-day-other {
+  background-color: #f7f7f7; /* Fond légèrement différent pour les autres mois */
+}
+
+.fc-daygrid-day.fc-day-saturday,
+.fc-daygrid-day.fc-day-sunday {
+  background-color: #f0f8ff; /* Fond léger pour les week-ends */
+}
+
+/* Style des boutons de vue */
+.fc-button-group {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.fc-button-group button {
+  background-color: #007bff;
+  border: 1px solid #0069d9;
+  color: white;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.fc-button-group button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer - Navigation */
+.fc-toolbar-chunk {
+  margin-top: 15px;
+}

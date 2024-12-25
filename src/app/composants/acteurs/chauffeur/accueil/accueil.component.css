@@ -1,0 +1,25 @@
+canvas {
+  max-width: 100%;
+  height: 400px;
+}
+.equal-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-body {
+  flex-grow: 1;
+}
+
+.equal-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Si vous voulez une taille fixe pour les cartes, ajoutez ceci */
+.card {
+  height: 300px; /* Ajustez la taille de la carte selon vos besoins */
+}

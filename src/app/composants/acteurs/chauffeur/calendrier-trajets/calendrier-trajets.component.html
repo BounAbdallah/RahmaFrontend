@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <!-- En-tête -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2 class="text-primary">Calendrier des trajets</h2>
+      <!-- Sélection de la vue -->
+      <div class="d-flex justify-content-start">
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary" (click)="changeView('jour')">Jour</button>
+          <button type="button" class="btn btn-outline-primary" (click)="changeView('semaine')">Semaine</button>
+          <button type="button" class="btn btn-outline-primary" (click)="changeView('mois')">Mois</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section principale (Calendrier interactif) -->
+  <div class="row">
+    <div class="col-12">
+      <full-calendar [options]="calendarOptions"></full-calendar> <!-- Calendrier FullCalendar ici -->
+    </div>
+  </div>
+</div>

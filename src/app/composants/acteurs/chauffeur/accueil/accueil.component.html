@@ -1,0 +1,163 @@
+<div class="container py-5">
+  <div class="row">
+
+    <!-- Section principale -->
+    <div class="col-lg-8 mb-4">
+      <div class="row">
+
+        <!-- Carte des Revenus -->
+        <div class="col-md-6 mb-4">
+          <div class="card shadow-lg rounded border-primary">
+            <div class="card-body">
+              <h6 class="card-title text-uppercase text-muted">Revenus mensuels</h6>
+              <p class="display-6 text-primary mb-2">550.000 Fcfa</p>
+              <small class="text-muted">+10% par rapport au mois dernier</small>
+              <div class="mt-4" style="height: 150px;">
+                <canvas id="revenueChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carte des Trajets -->
+        <div class="col-md-6 mb-4">
+          <div class="card shadow-lg rounded border-success">
+            <div class="card-body">
+              <h6 class="card-title text-uppercase text-muted">Trajets effectués</h6>
+              <p class="display-6 mb-2 text-success">42</p>
+              <small class="text-muted">12 en cours, 15 terminés, 5 annulés</small>
+              <div class="mt-4">
+                <canvas id="tripsChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <!-- Carte des Avis Clients -->
+        <div class="col-md-6 mb-4">
+          <div class="card shadow-lg rounded border-warning">
+            <div class="card-body">
+              <h6 class="card-title text-uppercase text-muted">Avis clients</h6>
+              <p class="display-6 mb-2 text-warning">4.7 <i class="fas fa-star"></i></p>
+              <div class="mt-4">
+                <canvas id="ratingsChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carte des Prochains Trajets -->
+        <div class="col-md-6 mb-4">
+          <div class="card shadow-lg rounded border-danger">
+            <div class="card-body">
+              <h6 class="card-title text-uppercase text-muted">Prochain trajet</h6>
+              <p class="display-6 mb-2 text-danger">14:30</p>
+              <p><i class="fas fa-map-marker-alt me-1"></i> Dakar → Saly</p>
+              <small class="text-muted">Client : Mbaye Diouf</small> <br>
+              <small class="text-muted">Contact : 78 888 88 88</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section secondaire -->
+    <div class="col-lg-4">
+      <div class="row">
+
+        <!-- Carte Statistiques -->
+        <div class="col-12 mb-4">
+          <div class="card shadow-lg rounded border-dark">
+            <div class="card-body">
+              <h6 class="card-title text-uppercase text-muted">Statistiques globales</h6>
+              <div class="row">
+                <div class="col-6">
+                  <p class="display-6">85%</p>
+                  <small class="text-muted">Réservations réussies</small>
+                </div>
+                <div class="col-6">
+                  <p class="display-6">15%</p>
+                  <small class="text-muted">Réservations annulées</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carte des Réservations -->
+        <div class="col-12 mb-4">
+          <div class="card shadow-lg rounded border-info">
+            <div class="card-body">
+              <h6 class="card-title text-uppercase text-muted">Réservations en attente</h6>
+              <p class="display-6 mb-2 text-info">8</p>
+              <small class="text-muted">Réservations non confirmées</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Tableau des Dernières Activités -->
+  <div class="row">
+    <div class="col-12">
+      <h5 class="mb-3 text-primary">Dernières activités</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Trajet</th>
+              <th>Statut</th>
+              <th>Montant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>25/12/2024</td>
+              <td>Dakar → Saly</td>
+              <td><span class="badge bg-success">Terminé</span></td>
+              <td>35.000 Fcfa</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>24/12/2024</td>
+              <td>Saly → Mbour</td>
+              <td><span class="badge bg-warning">En cours</span></td>
+              <td>20.000 Fcfa</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>23/12/2024</td>
+              <td>Dakar → AIDB</td>
+              <td><span class="badge bg-danger">Annulé</span></td>
+              <td>0 Fcfa</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>22/12/2024</td>
+              <td>AIDB → Dakar</td>
+              <td><span class="badge bg-success">Terminé</span></td>
+              <td>45.000 Fcfa</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>21/12/2024</td>
+              <td>Saly → Dakar</td>
+              <td><span class="badge bg-warning">En cours</span></td>
+              <td>25.000 Fcfa</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container mt-4">
+  <div class="row">
+      <!-- En-tête -->
+      <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2 class="text-primary">Trajets à venir</h2>
+              <button class="btn btn-outline-primary" (click)="applyFilters()">Actualiser</button>
+          </div>
+          <div class="filter-container d-flex justify-content-between mb-4">
+              <!-- Filtre -->
+              <div class="d-flex gap-2">
+                  <select class="form-select" [(ngModel)]="selectedDate" (ngModelChange)="applyFilters()">
+                      <option value="">Filtrer par date</option>
+                      <option value="Aujourd'hui">Aujourd'hui</option>
+                      <option value="Cette semaine">Cette semaine</option>
+                      <option value="Ce mois-ci">Ce mois-ci</option>
+                  </select>
+                  <select class="form-select" [(ngModel)]="selectedRegion" (ngModelChange)="applyFilters()">
+                      <option value="">Filtrer par région</option>
+                      <option value="Dakar">Dakar</option>
+                      <option value="Thiès">Thiès</option>
+                      <option value="Saint-Louis">Saint-Louis</option>
+                  </select>
+                  <select class="form-select" [(ngModel)]="selectedStatus" (ngModelChange)="applyFilters()">
+                      <option value="">Filtrer par statut</option>
+                      <option value="Confirmé">Confirmé</option>
+                      <option value="En attente">En attente</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <!-- Liste des trajets -->
+      <div class="col-md-8">
+          <!-- Carte de trajet -->
+          <div *ngFor="let trajet of filteredTrajets" class="card mb-4">
+              <div class="card-body">
+                  <h5 class="card-title">{{ trajet.client }}</h5>
+                  <p class="card-text"><strong>Heure et Date :</strong> {{ trajet.date }}</p>
+                  <p class="card-text"><strong>Point de départ :</strong> {{ trajet.depart }}</p>
+                  <p class="card-text"><strong>Point d’arrivée :</strong> {{ trajet.arrivee }}</p>
+                  <p class="card-text"><strong>Nom du client :</strong> {{ trajet.client }}</p>
+                  <p class="card-text">
+                      <span class="badge" [ngClass]="{ 'bg-success': trajet.statut === 'Confirmé', 'bg-warning text-dark': trajet.statut === 'En attente' }">{{ trajet.statut }}</span>
+                  </p>
+              </div>
+          </div>
+      </div>
+
+      <!-- Sidebar (facultatif) -->
+      <div class="col-md-4">
+          <div class="card">
+              <div class="card-header">
+                  Récapitulatif des trajets du jour
+              </div>
+              <div class="card-body">
+                  <ul class="list-group">
+                      <li class="list-group-item" *ngFor="let trajet of filteredTrajets">
+                          {{ trajet.client }} - {{ trajet.statut }}
+                          <span class="badge" [ngClass]="{ 'bg-success': trajet.statut === 'Confirmé', 'bg-warning text-dark': trajet.statut === 'En attente' }">{{ trajet.statut }}</span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
