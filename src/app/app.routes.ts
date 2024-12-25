@@ -43,11 +43,35 @@ import { InactifsComponent } from './composants/acteurs/gestionnaire/sousMenus/L
 // Guard
 import { RoleGuard } from './core/guards/role.guard';
 import { AccueilGestionnaireComponent } from './composants/acteurs/gestionnaire/accueil/accueil-gestionnaire.component';
-<<<<<<< HEAD
+
 import { ColisComponent } from './composants/colis/colis/colis.component';
+
 import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
-=======
->>>>>>> 006e87b (Ajout de l'interface parametre pour gestionnaire)
+import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
+import { AccueilChauffeurComponent } from './composants/acteurs/chauffeur/accueil/accueil.component';
+import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
+import { CalendrierTrajetsComponent } from './composants/acteurs/chauffeur/calendrier-trajets/calendrier-trajets.component';
+import { HistoriqueTrajetsComponent } from './composants/acteurs/chauffeur/historique-trajets/historique-trajets.component';
+import { GestionVehiculesComponent } from './composants/acteurs/chauffeur/gestion-vehicules/gestion-vehicules.component';
+import { NotificationsComponent } from './composants/acteurs/notifications/notifications.component';
+import { RapportsPerformanceComponent } from './composants/acteurs/chauffeur/rapports-performance/rapports-performance.component';
+import { ProfilChauffeurComponent } from './composants/acteurs/chauffeur/profil-chauffeur/profil-chauffeur.component';
+import { EvaluationsComponent } from './composants/acteurs/chauffeur/evaluations/evaluations.component';
+import { GestionGPComponent } from './composants/acteurs/gestionnaire/gestion-gp/gestion-gp.component';
+import { DetailsGPComponent } from './composants/acteurs/gestionnaire/details-gp/details-gp.component';
+import { GestionnnairDetailsAnnonceGPComponent } from './composants/acteurs/gestionnaire/gestionnaire-details-annonce-gp/gestionnaire-details-annonce-gp.component';
+
+// import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
+// import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
+// import { HistoriqueTrajetsComponent } from './composants/acteurs/chauffeur/historique-trajets/historique-trajets.component';
+// import { NotificationsComponent } from './composants/acteurs/notifications/notifications.component';
+// import { ProfilChauffeurComponent } from './composants/acteurs/chauffeur/profil-chauffeur/profil-chauffeur.component';
+// import { EvaluationsComponent } from './composants/acteurs/chauffeur/evaluations/evaluations.component';
+// import { GestionVehiculesComponent } from './composants/acteurs/chauffeur/gestion-vehicules/gestion-vehicules.component';
+// import { RapportsPerformanceComponent } from './composants/acteurs/chauffeur/rapports-performance/rapports-performance.component';
+// import { CalendrierTrajetsComponent } from './composants/acteurs/chauffeur/calendrier-trajets/calendrier-trajets.component';
+// import { AccueilChauffeurComponent } from './composants/acteurs/chauffeur/accueil/accueil.component';
+
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -180,6 +204,28 @@ export const routes: Routes = [
     // canActivate: [RoleGuard],
     // data: { role: 'Admin' }
   },
+
+
+
+ // Routes chauffeur
+ {
+  path: 'chauffeur-space',
+  component: DashboardChauffeurComponent,
+  children: [
+    { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+    { path: 'accueil', component: AccueilChauffeurComponent },
+    { path: 'trajets-a-venir', component: TrajetsAVenirComponent },
+    { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
+    { path: 'historique-trajets', component: HistoriqueTrajetsComponent },
+    { path: 'gestion-voiture', component: GestionVehiculesComponent },
+    { path: 'notifications', component: NotificationsComponent },
+    { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
+    { path: 'profil', component: ProfilChauffeurComponent },
+    { path: 'parametres', component: ParametresComponent },
+    { path: 'evaluation', component:EvaluationsComponent },
+  ]
+},
+
 
   {
     path: 'MesColis',
