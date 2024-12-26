@@ -34,13 +34,6 @@ export class GestionnairesService {
         catchError(this.handleError)
       );
     }
-
-  // getCommandes(): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/commandes`, { headers: this.getHeaders() }).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-
   // getCommandes(): Observable<any> {
   //   return this.http.get<any>(`${this.apiUrl}/commandes`).pipe(
   //     catchError((error) => {
@@ -55,25 +48,6 @@ export class GestionnairesService {
     });
     return this.http.get<any>(`${this.apiUrl}/commandes`, { headers });
   }
-
-  // getCommandes(): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/commandes`).pipe(
-  //     catchError((error) => {
-  //       console.error('Erreur lors de la récupération des commandes :', error);
-  //       return throwError(() => new Error('Erreur lors de la récupération des commandes.'));
-  //     })
-  //   );
-  // }
-  
-
-  // getCommandes(): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/commandes`, { headers: this.getHeaders() }).pipe(
-  //     catchError((error) => {
-  //       console.error('Erreur lors de la récupération des commandes:', error);
-  //       return throwError(() => new Error('Erreur de serveur.'));
-  //     })
-  //   );
-  // }
 
     // Gestion des erreurs
     private handleError(error: HttpErrorResponse) {
