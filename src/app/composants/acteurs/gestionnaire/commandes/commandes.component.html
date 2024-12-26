@@ -1,7 +1,9 @@
 <div class="container-fluid py-4">
+
   <!-- Header avec barre de recherche et filtres -->
   <header class="bg-white p-4 rounded shadow-sm d-flex justify-content-between align-items-center mb-4">
     <button class="btn btn-primary px-4" aria-label="Ajouter une nouvelle commande">Ajouter une commande</button>
+
     <div class="d-flex flex-grow-1 mx-3 align-items-center">
       <input
         type="text"
@@ -9,6 +11,7 @@
         placeholder="Rechercher une commande"
         [(ngModel)]="searchQuery"
         (input)="filterCommandes()"
+
         aria-label="Rechercher une commande"
       />
       <select
@@ -29,6 +32,17 @@
         (change)="filterCommandes()"
         aria-label="Filtrer par zone"
       >
+
+      />
+      <select class="form-select me-2" [(ngModel)]="selectedStatut" (change)="filterCommandes()">
+        <option value="">Statut</option>
+        <option value="En attente">En attente</option>
+        <option value="En cours">En cours</option>
+        <option value="Livrée">Livrée</option>
+        <option value="Annulée">Annulée</option>
+      </select>
+      <select class="form-select me-2" [(ngModel)]="selectedZone" (change)="filterCommandes()">
+
         <option value="">Zone</option>
         <option value="Zone 1">Zone 1</option>
         <option value="Zone 2">Zone 2</option>
@@ -37,14 +51,19 @@
     </div>
   </header>
 
+
   <!-- Table des commandes -->
+
+
   <div class="table-responsive">
     <table class="table table-hover align-middle mb-0">
       <thead>
         <tr>
           <th>ID</th>
           <th>Client</th>
+
           <th>Colis</th>
+
           <th>Statut</th>
           <th>Actions</th>
         </tr>
@@ -52,6 +71,7 @@
       <tbody>
         <tr *ngFor="let commande of paginatedCommandes">
           <td>#{{ commande.id }}</td>
+
           <td>{{ commande.user_id || 'Non assigné' }}</td>
           <td>{{ commande.colis_id || 'Non assigné' }}</td>
           <td>
@@ -67,6 +87,7 @@
         </tr>
         <tr *ngIf="filteredCommandes.length === 0">
           <td colspan="5" class="text-center text-muted">Aucune commande trouvée.</td>
+
         </tr>
       </tbody>
     </table>
@@ -75,6 +96,7 @@
   <!-- Pagination -->
   <div class="d-flex justify-content-end mt-3">
     <button
+
     *ngFor="let page of [].constructor(Math.ceil(filteredCommandes.length / itemsPerPage)); let i = index"
     class="btn btn-outline-primary mx-1"
     [class.active]="i + 1 === currentPage"
@@ -83,6 +105,7 @@
   >
     {{ i + 1 }}
   </button>
+
 
   </div>
 </div>

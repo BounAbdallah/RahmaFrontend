@@ -43,8 +43,11 @@ import { InactifsComponent } from './composants/acteurs/gestionnaire/sousMenus/L
 // Guard
 import { RoleGuard } from './core/guards/role.guard';
 import { AccueilGestionnaireComponent } from './composants/acteurs/gestionnaire/accueil/accueil-gestionnaire.component';
+<<<<<<< HEAD
 import { ColisComponent } from './composants/colis/colis/colis.component';
 import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
+=======
+>>>>>>> 006e87b (Ajout de l'interface parametre pour gestionnaire)
 
 export const routes: Routes = [
   // Redirection par défaut
