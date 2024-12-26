@@ -2,7 +2,7 @@ import { apiUrl } from './../../apiUrl';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,11 @@ export class GestionnairesService {
 
   private apiUrl = apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Fonction pour récupérer les en-têtes avec le token d'authentification
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('auth_token');
-
     if (token) {
       return new HttpHeaders().set('Authorization', `Bearer ${token}`);
     } else {
@@ -25,26 +24,27 @@ export class GestionnairesService {
     }
   }
 
-    // Fonction pour récupérer les données du tableau de bord
-    getDashboardAdmin(): Observable<any> {
-      return this.http.get<any>(`${this.apiUrl}/dashboard`, { headers: this.getHeaders() }).pipe(
-        catchError(this.handleError)
-      );
-    }
-
-  getCommandes(): Observable<any> {
+  // Fonction pour récupérer les données du tableau de bord
+  getDashboardAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/dashboard`, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  getCommandes(): Observable<any[]> {
     return this.http.get<any>(`${this.apiUrl}/commandes`, { headers: this.getHeaders() }).pipe(
+      map((response) => Array.isArray(response.commandes) ? response.commandes : []), // Extraire le tableau commandes
       catchError(this.handleError)
     );
   }
 
-    // Gestion des erreurs
-    private handleError(error: HttpErrorResponse) {
-      console.error('Une erreur s\'est produite:', error);
-      if (error.status === 401) {
-        return throwError(() => new Error('Non authentifié, veuillez vérifier vos identifiants.'));
-      } else {
-        return throwError(() => new Error('Une erreur s\'est produite, veuillez réessayer plus tard.'));
-      }
+
+  // Gestion des erreurs
+  private handleError(error: HttpErrorResponse) {
+    console.error('Une erreur s\'est produite:', error);
+    if (error.status === 401) {
+      return throwError(() => new Error('Non authentifié, veuillez vérifier vos identifiants.'));
+    } else {
+      return throwError(() => new Error('Une erreur s\'est produite, veuillez réessayer plus tard.'));
     }
+  }
 }

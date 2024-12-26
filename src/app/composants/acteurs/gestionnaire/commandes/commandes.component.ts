@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GestionnairesService } from '../../../../core/services/GestionnaireService/gestionnaires.service';
 
 @Component({
   selector: 'app-commandes',
@@ -9,87 +10,90 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './commandes.component.html',
   styleUrls: ['./commandes.component.css']
 })
-export class CommandesComponent {
-
-
-  commandes = [
-    { id: 1, client: 'Cheikh Ndiaye', livreur: 'Mamadou Sow', statut: 'En attente', zone: 'Zone 1', date: '2024-12-20' },
-    { id: 2, client: 'Awa Diop', livreur: 'Moussa Bâ', statut: 'Livrée', zone: 'Zone 2', date: '2024-12-19' },
-    { id: 3, client: 'Amadou Thiam', livreur: 'Ousmane Fall', statut: 'Annulée', zone: 'Zone 1', date: '2024-12-18' },
-    { id: 4, client: 'Seynabou Gaye', livreur: 'Ibrahima Diagne', statut: 'En cours', zone: 'Zone 3', date: '2024-12-17' },
-    { id: 5, client: 'Khadija Ba', livreur: 'Alioune Ndour', statut: 'En attente', zone: 'Zone 2', date: '2024-12-16' },
-    { id: 6, client: 'Fatima Sylla', livreur: 'Mbaye Gueye', statut: 'Livrée', zone: 'Zone 1', date: '2024-12-15' },
-    { id: 7, client: 'Mame Diarra Faye', livreur: 'Souleymane Dia', statut: 'En cours', zone: 'Zone 3', date: '2024-12-14' },
-    { id: 8, client: 'Ibrahima Sarr', livreur: 'Adama Diagne', statut: 'En attente', zone: 'Zone 2', date: '2024-12-13' }
-  ];
-
-  filteredCommandes = [...this.commandes];
+export class CommandesComponent implements OnInit {
+  commandes: any[] = [];
+  filteredCommandes: any[] = [];
   currentPage = 1;
   itemsPerPage = 6;
 
   searchQuery = '';
   selectedStatut = '';
-  selectedDate = '';
   selectedZone = '';
   Math = Math;
 
-  filterCommandes() {
+  constructor(private gestionnairesService: GestionnairesService) {}
+
+  ngOnInit(): void {
+    this.loadCommandes();
+  }
+
+  loadCommandes(): void {
+    this.gestionnairesService.getCommandes().subscribe(
+      (data) => {
+        console.log('Données reçues :', data); // Vérifier la structure des données
+        if (Array.isArray(data)) {
+          this.commandes = data;
+          this.filteredCommandes = [...this.commandes];
+        } else {
+          console.error('Structure inattendue des données :', data);
+          this.commandes = [];
+          this.filteredCommandes = [];
+        }
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des commandes :', error);
+      }
+    );
+  }
+
+
+  filterCommandes(): void {
     this.filteredCommandes = this.commandes.filter((commande) => {
+      // Vérifiez chaque champ pour éviter les erreurs
+      const titre = commande?.titre?.toLowerCase() || '';
+      const status = commande?.status || '';
+      const zone = commande?.adresse_destinateur || '';
+
       return (
-        (!this.searchQuery || commande.client.toLowerCase().includes(this.searchQuery.toLowerCase())) &&
-        (!this.selectedStatut || commande.statut === this.selectedStatut) &&
-        (!this.selectedDate || new Date(commande.date).toISOString().slice(0, 10) === this.selectedDate) &&
-        (!this.selectedZone || commande.zone === this.selectedZone)
+        (!this.searchQuery || titre.includes(this.searchQuery.toLowerCase())) &&
+        (!this.selectedStatut || status === this.selectedStatut) &&
+        (!this.selectedZone || zone === this.selectedZone)
       );
     });
-    this.currentPage = 1; // Reset to first page after filter
+
+    // Réinitialiser à la première page après le filtrage
+    this.currentPage = 1;
   }
 
-  get paginatedCommandes() {
+  get paginatedCommandes(): any[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.filteredCommandes.slice(startIndex, startIndex + this.itemsPerPage);
+    const endIndex = startIndex + this.itemsPerPage;
+
+    return this.filteredCommandes.slice(startIndex, endIndex);
   }
 
-  changePage(page: number) {
-    this.currentPage = page;
-  }
-
-  getStatusClass(statut: string): string {
-    switch (statut) {
-      case 'En attente':
-        return 'status-pending'; // Définissez ces classes dans le CSS
-      case 'Livrée':
-        return 'status-delivered';
-      case 'Annulée':
-        return 'status-canceled';
-      case 'En cours':
-        return 'status-in-progress';
-      default:
-        return '';
+  changePage(page: number): void {
+    if (page >= 1 && page <= Math.ceil(this.filteredCommandes.length / this.itemsPerPage)) {
+      this.currentPage = page;
     }
+  }
 
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'en_attente':
+        return 'badge bg-warning text-dark';
+      case 'approuver':
+        return 'badge bg-success';
+      case 'desaprouver':
+        return 'badge bg-danger';
+      case 'attribuer_au_livreur':
+        return 'badge bg-primary';
+      case 'en_route':
+        return 'badge bg-info';
+      case 'livrer':
+        return 'badge bg-success';
+      default:
+        return 'badge bg-secondary';
+    }
+  }
 }
-}
-// commandes: any[] = [];
-// errorMessage: string | null = null;
-
-// constructor(private commandeService: CommandeService) {}
-
-// ngOnInit(): void {
-//   this.loadCommandes();
-// }
-
-// loadCommandes(): void {
-//   this.commandeService.getCommandes().subscribe(
-//     (response) => {
-//       if (response.success) {
-//         this.commandes = response.commandes;
-//       } else {
-//         this.errorMessage = 'Vous n\'avez pas les droits pour accéder à ces données.';
-//       }
-//     },
-//     (error) => {
-//       this.errorMessage = 'Erreur lors de la récupération des commandes.';
-//     }
-//   );
-// }
