@@ -37,11 +37,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let commande of paginatedCommandes">
+        <tr *ngFor="let commande of commandes">
           <td>#{{ commande.id }}</td>
-          <td>{{ commande.client }}</td>
-          <td>{{ commande.livreur }}</td>
-          <td><span class="badge" [ngClass]="getStatusClass(commande.statut)">{{ commande.statut }}</span></td>
+          <td>{{ commande.titre }}</td>
+          <td>{{ commande.type_livraison }}</td>
+          <td>{{ commande.status }}</td>
           <td>
             <button class="btn btn-sm btn-outline-primary me-1">Modifier</button>
             <button class="btn btn-sm btn-outline-danger me-1">Annuler</button>
@@ -51,6 +51,7 @@
       </tbody>
     </table>
   </div>
+  
 
   <!-- Pagination -->
   <div class="d-flex justify-content-end mt-3">

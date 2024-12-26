@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GestionnairesService } from '../../../../core/services/GestionnaireService/gestionnaires.service';
+import { Commande } from '../../../../core/services/commande.model';
 
 @Component({
   selector: 'app-commandes',
@@ -10,9 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./commandes.component.css']
 })
 export class CommandesComponent {
-
-
-  commandes = [
+  command = [
     { id: 1, client: 'Cheikh Ndiaye', livreur: 'Mamadou Sow', statut: 'En attente', zone: 'Zone 1', date: '2024-12-20' },
     { id: 2, client: 'Awa Diop', livreur: 'Moussa Bâ', statut: 'Livrée', zone: 'Zone 2', date: '2024-12-19' },
     { id: 3, client: 'Amadou Thiam', livreur: 'Ousmane Fall', statut: 'Annulée', zone: 'Zone 1', date: '2024-12-18' },
@@ -22,7 +22,8 @@ export class CommandesComponent {
     { id: 7, client: 'Mame Diarra Faye', livreur: 'Souleymane Dia', statut: 'En cours', zone: 'Zone 3', date: '2024-12-14' },
     { id: 8, client: 'Ibrahima Sarr', livreur: 'Adama Diagne', statut: 'En attente', zone: 'Zone 2', date: '2024-12-13' }
   ];
-
+ commandes: Commande[] = [];
+  errorMessage: string | null = null;
   filteredCommandes = [...this.commandes];
   currentPage = 1;
   itemsPerPage = 6;
@@ -33,13 +34,45 @@ export class CommandesComponent {
   selectedZone = '';
   Math = Math;
 
+    constructor(private GestionnairesService: GestionnairesService) {}
+
+  // fetchCommandes(): void {
+  //   this.GestionnairesService.getCommandes().subscribe({
+  //     next: (response) => {
+  //       if (response.success) {
+  //         this.commandes = response.commandes;
+  //       } else {
+  //         this.errorMessage = 'Impossible de récupérer les commandes.';
+  //       }
+  //     },
+  //     error: (error) => {
+  //       this.errorMessage = 'Une erreur s\'est produite lors de la récupération des commandes.';
+  //       console.error(error);
+  //     },
+  //   });
+  // }
+  fetchCommandes(): void {
+    this.GestionnairesService.getCommandes().subscribe(
+      (response) => {
+        if (response.success) {
+          this.commandes = response.commandes;
+        } else {
+          this.errorMessage = response.message;
+        }
+      },
+      (error) => {
+        this.errorMessage = 'Erreur lors du chargement des commandes.';
+      }
+    );
+  }
+
   filterCommandes() {
     this.filteredCommandes = this.commandes.filter((commande) => {
       return (
-        (!this.searchQuery || commande.client.toLowerCase().includes(this.searchQuery.toLowerCase())) &&
-        (!this.selectedStatut || commande.statut === this.selectedStatut) &&
-        (!this.selectedDate || new Date(commande.date).toISOString().slice(0, 10) === this.selectedDate) &&
-        (!this.selectedZone || commande.zone === this.selectedZone)
+        // (!this.searchQuery || commande.titre.toLowerCase().includes(this.searchQuery.toLowerCase())) &&
+        (!this.selectedStatut || commande.status === this.selectedStatut) 
+        // (!this.selectedDate || new Date(commande.date).toISOString().slice(0, 10) === this.selectedDate) &&
+        // (!this.selectedZone || commande.zone === this.selectedZone)
       );
     });
     this.currentPage = 1; // Reset to first page after filter
@@ -70,26 +103,3 @@ export class CommandesComponent {
 
 }
 }
-// commandes: any[] = [];
-// errorMessage: string | null = null;
-
-// constructor(private commandeService: CommandeService) {}
-
-// ngOnInit(): void {
-//   this.loadCommandes();
-// }
-
-// loadCommandes(): void {
-//   this.commandeService.getCommandes().subscribe(
-//     (response) => {
-//       if (response.success) {
-//         this.commandes = response.commandes;
-//       } else {
-//         this.errorMessage = 'Vous n\'avez pas les droits pour accéder à ces données.';
-//       }
-//     },
-//     (error) => {
-//       this.errorMessage = 'Erreur lors de la récupération des commandes.';
-//     }
-//   );
-// }

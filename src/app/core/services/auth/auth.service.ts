@@ -13,6 +13,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  
   // Enregistrement utilisateur
   register(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, userData).pipe(catchError(this.handleError));
