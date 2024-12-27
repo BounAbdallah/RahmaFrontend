@@ -1,6 +1,7 @@
 <div class="container-fluid py-4">
+  <!-- Header avec barre de recherche et filtres -->
   <header class="bg-white p-4 rounded shadow-sm d-flex justify-content-between align-items-center mb-4">
-    <button class="btn btn-primary px-4">Ajouter une commande</button>
+    <button class="btn btn-primary px-4" aria-label="Ajouter une nouvelle commande">Ajouter une commande</button>
     <div class="d-flex flex-grow-1 mx-3 align-items-center">
       <input
         type="text"
@@ -8,15 +9,26 @@
         placeholder="Rechercher une commande"
         [(ngModel)]="searchQuery"
         (input)="filterCommandes()"
+        aria-label="Rechercher une commande"
       />
-      <select class="form-select me-2" [(ngModel)]="selectedStatut" (change)="filterCommandes()">
+      <select
+        class="form-select me-2"
+        [(ngModel)]="selectedStatut"
+        (change)="filterCommandes()"
+        aria-label="Filtrer par statut"
+      >
         <option value="">Statut</option>
-        <option value="En attente">En attente</option>
-        <option value="En cours">En cours</option>
-        <option value="Livrée">Livrée</option>
-        <option value="Annulée">Annulée</option>
+        <option value="en_attente">En attente</option>
+        <option value="approuver">Approuvée</option>
+        <option value="desaprouver">Désapprouvée</option>
+        <option value="livrer">Livrée</option>
       </select>
-      <select class="form-select me-2" [(ngModel)]="selectedZone" (change)="filterCommandes()">
+      <select
+        class="form-select me-2"
+        [(ngModel)]="selectedZone"
+        (change)="filterCommandes()"
+        aria-label="Filtrer par zone"
+      >
         <option value="">Zone</option>
         <option value="Zone 1">Zone 1</option>
         <option value="Zone 2">Zone 2</option>
@@ -25,13 +37,14 @@
     </div>
   </header>
 
+  <!-- Table des commandes -->
   <div class="table-responsive">
     <table class="table table-hover align-middle mb-0">
       <thead>
         <tr>
           <th>ID</th>
           <th>Client</th>
-          <th>Livreur</th>
+          <th>Colis</th>
           <th>Statut</th>
           <th>Actions</th>
         </tr>
@@ -42,11 +55,21 @@
           <td>{{ commande.titre }}</td>
           <td>{{ commande.type_livraison }}</td>
           <td>{{ commande.status }}</td>
+          <td>{{ commande.user_id || 'Non assigné' }}</td>
+          <td>{{ commande.colis_id || 'Non assigné' }}</td>
           <td>
-            <button class="btn btn-sm btn-outline-primary me-1">Modifier</button>
-            <button class="btn btn-sm btn-outline-danger me-1">Annuler</button>
-            <button class="btn btn-sm btn-outline-success">Assigner</button>
+            <!-- <span class="badge" [ngClass]="getStatusClass(commande.status)">
+              {{ commande.status }}
+            </span> -->
           </td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-1" title="Modifier la commande">Modifier</button>
+            <button class="btn btn-sm btn-outline-danger me-1" title="Annuler la commande">Annuler</button>
+            <button class="btn btn-sm btn-outline-success" title="Assigner un livreur">Assigner</button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredCommandes.length === 0">
+          <td colspan="5" class="text-center text-muted">Aucune commande trouvée.</td>
         </tr>
       </tbody>
     </table>
@@ -56,12 +79,14 @@
   <!-- Pagination -->
   <div class="d-flex justify-content-end mt-3">
     <button
-      *ngFor="let page of [].constructor(Math.ceil(filteredCommandes.length / itemsPerPage)); let i = index"
-      class="btn btn-outline-primary mx-1"
-      [class.active]="i + 1 === currentPage"
-      (click)="changePage(i + 1)"
-    >
-      {{ i + 1 }}
-    </button>
+    *ngFor="let page of [].constructor(Math.ceil(filteredCommandes.length / itemsPerPage)); let i = index"
+    class="btn btn-outline-primary mx-1"
+    [class.active]="i + 1 === currentPage"
+    (click)="changePage(i + 1)"
+    [attr.aria-label]="'Page ' + (i + 1)"
+  >
+    {{ i + 1 }}
+  </button>
+
   </div>
 </div>
