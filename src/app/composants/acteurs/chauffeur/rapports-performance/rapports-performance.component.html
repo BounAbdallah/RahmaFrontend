@@ -1,1 +1,61 @@
-<p>rapports-performance works!</p>
+<div class="container-fluid py-4">
+  <!-- En-tête -->
+  <header class="bg-white p-4 rounded shadow-sm mb-4 d-flex justify-content-between align-items-center">
+    <h2>Rapports de Performance</h2>
+    <div>
+      <button class="btn btn-success me-2" (click)="downloadChart('chartRevenus')">Télécharger Revenus</button>
+      <button class="btn btn-info">Partager</button>
+    </div>
+  </header>
+
+  <!-- Section principale -->
+  <div class="row">
+    <!-- Graphiques -->
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-header">Graphiques de Performance</div>
+        <div class="card-body">
+          <div class="row">
+            <!-- Revenus par mois -->
+            <div class="col-md-4 mb-4">
+              <h5>Revenus par Mois</h5>
+              <div class="bg-light p-3 rounded">
+                <canvas id="chartRevenus"></canvas>
+              </div>
+            </div>
+            <!-- Trajets réussis/échoués -->
+            <div class="col-md-4 mb-4">
+              <h5>Trajets Réussis / Échoués</h5>
+              <div class="bg-light p-3 rounded">
+                <canvas id="chartTrajets"></canvas>
+              </div>
+            </div>
+            <!-- Évaluations Clients -->
+            <div class="col-md-4 mb-4">
+              <h5>Évaluations Clients</h5>
+              <div class="bg-light p-3 rounded">
+                <canvas id="chartEvaluations"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section secondaire -->
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-header">Statistiques Détaillées</div>
+        <div class="card-body">
+          <!-- Kilomètres parcourus -->
+          <h5>Kilomètres Parcourus</h5>
+          <p>1200 km</p>
+
+          <!-- Moyenne des trajets par jour -->
+          <h5>Moyenne des Trajets par Jour</h5>
+          <p>5 trajets</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

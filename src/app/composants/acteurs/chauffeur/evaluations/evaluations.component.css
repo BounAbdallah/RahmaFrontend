@@ -1,0 +1,22 @@
+.evaluation {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.evaluation:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.bi-star-fill {
+  font-size: 1.2rem;
+}
+
+.bi-star-half,
+.bi-star {
+  font-size: 1.2rem;
+}

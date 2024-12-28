@@ -1,1 +1,86 @@
-<p>profil-chauffeur works!</p>
+<div class="container-fluid py-4">
+  <!-- En-tête -->
+  <header class="bg-white p-4 rounded shadow-sm mb-4 d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <img src="assets/profile-pic.jpg" alt="Photo de Profil" class="rounded-circle" width="80" height="80">
+      <button class="btn btn-secondary ms-3">Modifier Photo</button>
+    </div>
+    <div class="ms-auto">
+      <h2>Nom Complet : John Doe</h2>
+      <p>Rôle : Chauffeur</p>
+    </div>
+  </header>
+
+  <!-- Section principale : Formulaire -->
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-header">Informations Personnelles</div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label for="nom" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="nom" placeholder="Nom" value="Doe">
+            </div>
+            <div class="mb-3">
+              <label for="prenom" class="form-label">Prénom</label>
+              <input type="text" class="form-control" id="prenom" placeholder="Prénom" value="John">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="email@exemple.com" value="john.doe@example.com">
+            </div>
+            <div class="mb-3">
+              <label for="telephone" class="form-label">Téléphone</label>
+              <input type="tel" class="form-control" id="telephone" placeholder="Téléphone" value="123-456-7890">
+            </div>
+            <div class="mb-3">
+              <label for="adresse" class="form-label">Adresse</label>
+              <input type="text" class="form-control" id="adresse" placeholder="Adresse" value="123 Rue Exemple, Ville">
+            </div>
+            <div class="mb-3">
+              <label for="date-naissance" class="form-label">Date de Naissance</label>
+              <input type="date" class="form-control" id="date-naissance" value="1990-01-01">
+            </div>
+            <div class="mb-3">
+              <label for="documents" class="form-label">Documents</label>
+              <input type="file" class="form-control" id="documents" multiple>
+            </div>
+            <button type="submit" class="btn btn-primary">Mettre à Jour</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section secondaire : Historique des évaluations -->
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-header">Historique des Évaluations Clients</div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              5 Étoiles
+              <span class="badge bg-success rounded-pill">Excellent</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              4 Étoiles
+              <span class="badge bg-warning text-dark rounded-pill">Bon</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              3 Étoiles
+              <span class="badge bg-info rounded-pill">Moyenne</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              2 Étoiles
+              <span class="badge bg-danger rounded-pill">Insatisfaisant</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              1 Étoile
+              <span class="badge bg-dark text-light rounded-pill">Très Insatisfaisant</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

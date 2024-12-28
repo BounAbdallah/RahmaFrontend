@@ -17,13 +17,14 @@ export class TrajetsAVenirComponent {
 
   // Liste des trajets
   trajets = [
-    { id: 1, date: '2024-12-25 14:00', depart: 'Dakar', arrivee: 'Aéroport', client: 'Monsieur X', statut: 'Confirmé' },
-    { id: 2, date: '2024-12-26 09:00', depart: 'Mbour', arrivee: 'Dakar', client: 'Madame Y', statut: 'En attente' },
-    { id: 3, date: '2024-12-27 08:30', depart: 'Thiès', arrivee: 'Saint-Louis', client: 'Monsieur Z', statut: 'Confirmé' },
-    { id: 4, date: '2024-12-28 15:00', depart: 'Dakar', arrivee: 'Mbour', client: 'Madame A', statut: 'En attente' },
-    { id: 5, date: '2024-12-29 10:45', depart: 'Dakar', arrivee: 'Thiès', client: 'Monsieur B', statut: 'Confirmé' },
-    { id: 6, date: '2024-12-30 17:30', depart: 'Saint-Louis', arrivee: 'Dakar', client: 'Madame C', statut: 'En attente' }
+    { id: 1, date: '2024-12-25 14:00', depart: 'Dakar', arrivee: 'AIBD', client: 'Mamadou Ndiaye', statut: 'Confirmé' },
+    { id: 2, date: '2024-12-26 09:00', depart: 'Mbour', arrivee: 'Dakar', client: 'Awa Diop', statut: 'En attente' },
+    { id: 3, date: '2024-12-27 08:30', depart: 'Thiès', arrivee: 'Saint-Louis', client: 'Ibrahima Sow', statut: 'Confirmé' },
+    { id: 4, date: '2024-12-28 15:00', depart: 'Dakar', arrivee: 'Kaolack', client: 'Mariama Faye', statut: 'En attente' },
+    { id: 5, date: '2024-12-29 10:45', depart: 'Ziguinchor', arrivee: 'Dakar', client: 'Ousmane Diallo', statut: 'Confirmé' },
+    { id: 6, date: '2024-12-30 17:30', depart: 'Saint-Louis', arrivee: 'Touba', client: 'Fatoumata Ba', statut: 'En attente' }
   ];
+
 
   // Trajets filtrés
   filteredTrajets = [...this.trajets];

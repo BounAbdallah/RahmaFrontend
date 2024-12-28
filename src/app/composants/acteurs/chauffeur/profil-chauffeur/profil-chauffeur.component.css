@@ -1,0 +1,16 @@
+/* Exemple de styles pour améliorer l'apparence */
+img {
+  border: 2px solid #ccc;
+}
+
+.card-header {
+  background-color: #f7f7f7;
+}
+
+.card-body {
+  background-color: #fff;
+}
+
+button[type="submit"] {
+  width: 100%;
+}

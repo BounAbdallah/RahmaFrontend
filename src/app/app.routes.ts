@@ -60,6 +60,8 @@ import { EvaluationsComponent } from './composants/acteurs/chauffeur/evaluations
 import { GestionGPComponent } from './composants/acteurs/gestionnaire/gestion-gp/gestion-gp.component';
 import { DetailsGPComponent } from './composants/acteurs/gestionnaire/details-gp/details-gp.component';
 import { GestionnnairDetailsAnnonceGPComponent } from './composants/acteurs/gestionnaire/gestionnaire-details-annonce-gp/gestionnaire-details-annonce-gp.component';
+import { NotificationChauffeurComponent } from './composants/acteurs/chauffeur/notification-chauffeur/notification-chauffeur.component';
+import { GestionPaiementChauffeurComponent } from './composants/acteurs/chauffeur/gestion-paiement-chauffeur/gestion-paiement-chauffeur.component';
 
 // import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
 // import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
@@ -218,10 +220,10 @@ export const routes: Routes = [
     { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
     { path: 'historique-trajets', component: HistoriqueTrajetsComponent },
     { path: 'gestion-voiture', component: GestionVehiculesComponent },
-    { path: 'notifications', component: NotificationsComponent },
+    { path: 'notifications', component: NotificationChauffeurComponent },
     { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
     { path: 'profil', component: ProfilChauffeurComponent },
-    { path: 'parametres', component: ParametresComponent },
+    { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
     { path: 'evaluation', component:EvaluationsComponent },
   ]
 },

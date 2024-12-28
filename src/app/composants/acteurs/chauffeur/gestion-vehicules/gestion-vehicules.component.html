@@ -1,1 +1,106 @@
-<p>gestion-vehicules works!</p>
+<div class="container mt-4">
+  <!-- En-tête -->
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-6">Gestion des véhicules</h1>
+      <h5 class="text-muted">Nom du véhicule : Toyota Corolla - Immatriculation : DK-1234-AB</h5>
+    </div>
+  </div>
+
+  <!-- Section principale -->
+  <div class="row">
+    <!-- Informations sur le véhicule -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>Informations sur le véhicule</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Marque :</strong> Toyota</p>
+          <p><strong>Modèle :</strong> Corolla</p>
+          <p><strong>Statut :</strong> <span class="badge bg-success">Actif</span></p>
+          <p><strong>Assurance :</strong> AXA Sénégal (Expire le : 15/02/2025)</p>
+          <p><strong>Date d'entretien à venir :</strong> 25/01/2025</p>
+          <p><strong>Kilométrage actuel :</strong> 45,200 km</p>
+        </div>
+      </div>
+
+      <!-- Alertes -->
+      <div class="card">
+        <div class="card-header bg-warning text-dark">
+          <h5>Alertes</h5>
+        </div>
+        <div class="card-body">
+          <p><i class="fas fa-exclamation-triangle text-danger"></i> <strong>Assurance :</strong> Renouvellement dans 2 mois.</p>
+          <p><i class="fas fa-exclamation-triangle text-danger"></i> <strong>Entretien :</strong> Prévu dans 30 jours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Historique et Formulaire -->
+    <div class="col-md-6">
+      <!-- Historique des trajets -->
+      <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+          <h5>Historique des trajets</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Trajet</th>
+                <th>Distance (km)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>19/12/2024</td>
+                <td>Dakar → AIDB</td>
+                <td>60 km</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>18/12/2024</td>
+                <td>AIDB → Dakar</td>
+                <td>60 km</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>17/12/2024</td>
+                <td>Dakar → Saint-Louis</td>
+                <td>180 km</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Formulaire de signalement -->
+      <div class="card">
+        <div class="card-header bg-danger text-white">
+          <h5>Signaler un problème technique</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label for="problemeDescription" class="form-label">Description du problème</label>
+              <textarea class="form-control" id="problemeDescription" rows="4" placeholder="Décrivez le problème ici..."></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="problemeUrgence" class="form-label">Niveau d'urgence</label>
+              <select class="form-select" id="problemeUrgence">
+                <option value="faible">Faible</option>
+                <option value="moyenne">Moyenne</option>
+                <option value="élevée">Élevée</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-danger">Soumettre</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
