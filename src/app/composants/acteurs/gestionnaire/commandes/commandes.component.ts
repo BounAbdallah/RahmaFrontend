@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GestionnairesService } from '../../../../core/services/GestionnaireService/gestionnaires.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-commandes',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink  ],
   templateUrl: './commandes.component.html',
   styleUrls: ['./commandes.component.css']
 })

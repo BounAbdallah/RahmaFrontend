@@ -1,0 +1,50 @@
+<div class="container-fluid py-4">
+    <!-- En-tête de la page -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="fw-bold text-secondary">Détails de la commande</h3>
+      <a href="/gestionnaire-space/gestion-commandes" class="btn btn-outline-secondary"  [routerLink]="['/gestionnaire-space/commandes/toutes']" >Retour à la liste</a>
+    </div>
+  
+    <!-- Détails de la commande -->
+    <div *ngIf="commande" class="card shadow-sm rounded">
+      <div class="card-header" style="background-color: #007bff; color: white;">
+        <h6 class="mb-0">Détails de la commande</h6>
+      </div>
+      <div class="card-body">
+        <p><strong>Titre :</strong> {{ commande.titre }}</p>
+        <p><strong>Description :</strong> {{ commande.description }}</p>
+        <p><strong>Type de livraison :</strong> {{ commande.type_livraison }}</p>
+        <p><strong>Statut :</strong>
+          <!-- <span class="badge" [ngClass]="getBadgeClass(commande.status)">{{ commande.status }}</span> -->
+        </p>
+        <p><strong>Adresse destinataire :</strong> {{ commande.adresse_destinateur }}</p>
+        <p><strong>Jour de livraison :</strong> {{ commande.jour_livraison }}</p>
+        <p><strong>Heure de livraison :</strong> {{ commande.heure_livraison }}</p>
+        <!-- <p><strong>Date de création :</strong> {{ commande.created_at | date: 'short' }}</p>
+        <p><strong>Dernière mise à jour :</strong> {{ commande.updated_at | date: 'short' }}</p> -->
+      </div>
+    </div>
+  
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-4">
+      {{ errorMessage }}
+    </div>
+  </div>
+  
+
+
+  <!-- <div *ngIf="commande" class="card shadow-sm rounded">
+    <div class="card-header" style="background-color: #007bff; color: white;">
+      <h6 class="mb-0">Détails de la commande</h6>
+    </div>
+    <div class="card-body">
+      <p><strong>Titre :</strong> {{ commande.titre }}</p>
+      <p><strong>Description :</strong> {{ commande.description }}</p>
+      <p><strong>Type de livraison :</strong> {{ commande.type_livraison }}</p>
+      <p><strong>Statut :</strong> {{ commande.status }}</p>
+      <p><strong>Adresse destinataire :</strong> {{ commande.adresse_destinateur }}</p>
+      <p><strong>Jour de livraison :</strong> {{ commande.jour_livraison }}</p>
+      <p><strong>Heure de livraison :</strong> {{ commande.heure_livraison }}</p>
+    </div>
+  </div>
+   -->

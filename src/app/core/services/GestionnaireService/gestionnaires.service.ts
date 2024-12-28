@@ -49,6 +49,14 @@ export class GestionnairesService {
     return this.http.get<any>(`${this.apiUrl}/commandes`, { headers });
   }
 
+
+  getCommandeDetails(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`, // Utilisez un token JWT si nécessaire
+    });
+    return this.http.get<any>(`${this.apiUrl}/commandes/${id}`, { headers });
+  }
+
     // Gestion des erreurs
     private handleError(error: HttpErrorResponse) {
       console.error('Une erreur s\'est produite:', error);

@@ -45,6 +45,7 @@ import { RoleGuard } from './core/guards/role.guard';
 import { AccueilGestionnaireComponent } from './composants/acteurs/gestionnaire/accueil/accueil-gestionnaire.component';
 import { ColisComponent } from './composants/colis/colis/colis.component';
 import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
+import { DetailCommandeComponent } from './composants/acteurs/gestionnaire/detail-commande/detail-commande.component';
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -72,6 +73,8 @@ export const routes: Routes = [
   { path: 'statistiques', component: StatistiquesComponent },
   { path: 'detail-service-gp', component: DetailLivraisonGpComponent },
   { path: 'colis-details/:id', component: DetailsColisClientComponent },
+  { path: 'detailCommande/:id', component: DetailCommandeComponent },
+
 
   // Routes gestionnaire
   {
@@ -99,7 +102,9 @@ export const routes: Routes = [
         ]
       },
       { path: 'parametres', component: ParametresComponent },
+
     ]
+    
   },
 {
   path: 'MesColis',

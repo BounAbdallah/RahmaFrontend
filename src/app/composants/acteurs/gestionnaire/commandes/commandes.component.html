@@ -66,6 +66,7 @@
             <button class="btn btn-sm btn-outline-primary me-1" title="Modifier la commande">Modifier</button>
             <button class="btn btn-sm btn-outline-danger me-1" title="Annuler la commande">Annuler</button>
             <button class="btn btn-sm btn-outline-success" title="Assigner un livreur">Assigner</button>
+            <button class="btn btn-sm btn-outline-success" title="Detail Commande"  [routerLink]="['/detailCommande', commande.id]">Detail</button>
           </td>
         </tr>
         <tr *ngIf="filteredCommandes.length === 0">
