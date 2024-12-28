@@ -97,7 +97,3 @@ export class CommandesComponent implements OnInit {
     }
   }
 }
-<<<<<<< HEAD
-}
-=======
->>>>>>> 9a3d91c (Recuperation des commandes via l'API)
