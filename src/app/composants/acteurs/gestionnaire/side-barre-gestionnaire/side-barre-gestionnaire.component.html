@@ -1,0 +1,88 @@
+<!-- sidebar.component.html -->
+<div class="sidebar d-flex flex-column">
+  <h4 class="text-center py-3 border-bottom">Dashboard</h4>
+  <div class="logo text-center mb-3">
+    <img src="./../../../../../assets/images/logos_icons/logoM2.png" alt="Logo" class="img-fluid">
+  </div>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a href="/gestionnaire-space"
+         class="nav-link"
+         [class.active]="activeLink === 'accueil'"
+         (click)="setActive('accueil')">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/gestionnaire-space/vue-densemble"
+         class="nav-link"
+         [class.active]="activeLink === 'vueDensemble'"
+         (click)="setActive('vueDensemble')">
+        <i class="fas fa-chart-line"></i> Vue d'ensemble
+      </a>
+    </li>
+
+    <!-- Commandes -->
+    <li class="nav-item">
+      <a href="#submenu-commandes"
+         data-bs-toggle="collapse"
+         class="nav-link"
+         [class.active]="activeLink === 'commandes'"
+         (click)="setActive('commandes')">
+        <i class="fas fa-box"></i> Commandes
+      </a>
+      <ul id="submenu-commandes" class="collapse nav flex-column ps-3">
+        <li class="nav-item"><a href="/gestionnaire-space/commandes/toutes" class="nav-link"><i class="fas fa-list"></i> Toutes les commandes</a></li>
+        <li class="nav-item"><a href="/gestionnaire-space/commandes/en-attente" class="nav-link"><i class="fas fa-clock"></i> En attente</a></li>
+        <li class="nav-item"><a href="/gestionnaire-space/commandes/terminees" class="nav-link"><i class="fas fa-check"></i> Terminées</a></li>
+      </ul>
+    </li>
+
+    <!-- Réservations -->
+    <li class="nav-item">
+      <a href="#submenu-reservations"
+         data-bs-toggle="collapse"
+         class="nav-link"
+         [class.active]="activeLink === 'reservations'"
+         (click)="setActive('reservations')">
+        <i class="fas fa-calendar-alt"></i> Réservations
+      </a>
+      <ul id="submenu-reservations" class="collapse nav flex-column ps-3">
+        <li class="nav-item"><a href="/gestionnaire-space/reservations/nouvelles" class="nav-link"><i class="fas fa-plus"></i> Nouvelles</a></li>
+        <li class="nav-item"><a href="/gestionnaire-space/reservations/annulees" class="nav-link"><i class="fas fa-times"></i> Annulées</a></li>
+      </ul>
+    </li>
+
+    <!-- Livreurs -->
+    <li class="nav-item">
+      <a href="#submenu-livreurs"
+         data-bs-toggle="collapse"
+         class="nav-link"
+         [class.active]="activeLink === 'livreurs'"
+         (click)="setActive('livreurs')">
+        <i class="fas fa-motorcycle"></i> Livreurs
+      </a>
+      <ul id="submenu-livreurs" class="collapse nav flex-column ps-3">
+        <li class="nav-item"><a href="/gestionnaire-space/livreurs/actifs" class="nav-link"><i class="fas fa-check-circle"></i> Actifs</a></li>
+        <li class="nav-item"><a href="/gestionnaire-space/livreurs/inactifs" class="nav-link"><i class="fas fa-minus-circle"></i> Inactifs</a></li>
+      </ul>
+    </li>
+
+      <!-- Gestion GP -->
+    <li class="nav-item">
+      <a href="/gestionnaire-space/gestion-gp" class="nav-link" [class.active]="activeLink === 'parametres'" (click)="setActive('parametres')">
+        <i class="fas fa-motorcycle"></i> Gestion GP
+      </a>
+    </li>
+
+
+    <!-- Paramètres -->
+    <li class="nav-item">
+      <a href="/gestionnaire-space/parametres" class="nav-link" [class.active]="activeLink === 'parametres'" (click)="setActive('parametres')">
+        <i class="fas fa-cogs"></i> Paramètres
+      </a>
+    </li>
+  </ul>
+</div>
+
+

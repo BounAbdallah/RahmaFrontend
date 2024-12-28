@@ -1,0 +1,8 @@
+card-body {
+  height: 400px; /* Assurez-vous que la carte a une hauteur suffisante */
+}
+
+#map {
+  width: 100%; /* Largeur de la carte */
+  height: 100%; /* Hauteur de la carte */
+}

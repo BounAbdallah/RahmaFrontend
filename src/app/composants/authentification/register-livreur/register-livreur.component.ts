@@ -1,7 +1,7 @@
 // src/app/composants/authentification/register-livreur/register-livreur.component.ts
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,8 +17,12 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 })
 export class RegisterLivreurComponent implements OnInit {
   registerForm: FormGroup;
-  currentStep: number = 1;
-  municipalites: any[] = [];
+  errorMessages: { [key: string]: string } = {
+    required: 'Ce champ est obligatoire.',
+    email: 'Veuillez entrer une adresse email valide.',
+    minlength: 'Le champ doit comporter au moins {minlength} caractères.',
+    passwordMismatch: 'Les mots de passe ne correspondent pas.'
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -26,34 +30,69 @@ export class RegisterLivreurComponent implements OnInit {
     private router: Router
   ) {
     this.registerForm = this.fb.group({
-      prenom: ['', Validators.required],
-      nom: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      telephone: ['', Validators.required],
+      prenom: ['', [Validators.required, Validators.minLength(4)]],
+      nom: ['', [Validators.required, Validators.minLength(4)]],
       cni: ['', [Validators.required, Validators.minLength(13)]],
       permis_conduire: ['', [Validators.required, Validators.minLength(13)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
+      telephone: ['', [Validators.required, Validators.minLength(9)]],
+      adress: ['', [Validators.required, Validators.minLength(3)]],
+      commune: ['', [Validators.required, Validators.minLength(3)]],
+      nationalite: ['', [Validators.required]],
       date_de_naissance: ['', Validators.required],
-      adress: ['', Validators.required],
-      commune: ['', Validators.required],
-    });
+      cni_image: [null] // Champ pour l'image de la CNI, maintenant nullable dans la validation
+    }, { validators: this.passwordsMatchValidator });
   }
 
-  ngOnInit(): void {
-    // Your initialization logic here
+  ngOnInit(): void {}
+
+  passwordsMatchValidator(group: AbstractControl): { [key: string]: boolean } | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        // Affichez un message d'erreur si ce n'est pas une image
+        Swal.fire({
+          title: 'Erreur',
+          text: 'Veuillez sélectionner un fichier image.',
+          icon: 'error',
+          timer: 3000,
+          showConfirmButton: false
+        });
+        return;
+      }
+
+      // Ici, on ne définit pas directement la valeur, on la stocke dans le formulaire
+      this.registerForm.get('cni_image')?.setValue(file);
+    }
+  }
   onRegister() {
     if (this.registerForm.valid) {
       const formData = new FormData();
 
       Object.keys(this.registerForm.controls).forEach(key => {
-        formData.append(key, this.registerForm.get(key)?.value);
+        const control = this.registerForm.get(key);
+        if (control?.value) {
+          if (key === 'cni_image' && control.value instanceof File) {
+            formData.append(key, control.value, control.value.name);
+          } else {
+            formData.append(key, control.value);
+          }
+        }
       });
 
       this.authService.registerLivreur(formData).subscribe({
-        next: (response: any) => { // Specify the type if known
+        next: (response: any) => {
           console.log('Inscription réussie', response);
+          this.registerForm.reset();
+
           Swal.fire({
             title: 'Inscription réussie !',
             text: 'Vous pouvez maintenant vous connecter.',
@@ -61,10 +100,10 @@ export class RegisterLivreurComponent implements OnInit {
             timer: 3000,
             showConfirmButton: false
           }).then(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/connexion']);
           });
         },
-        error: (error: any) => { // Specify the type if known
+        error: (error: any) => {
           console.error('Erreur lors de l\'inscription', error);
           Swal.fire({
             title: 'Erreur',
@@ -84,5 +123,26 @@ export class RegisterLivreurComponent implements OnInit {
         showConfirmButton: false
       });
     }
+  }
+  isFieldInvalid(field: string): boolean {
+    const control = this.registerForm.get(field);
+    return control?.invalid && (control?.dirty || control?.touched) || false;
+  }
+
+  getErrorMessage(field: string): string | null {
+    const control = this.registerForm.get(field);
+    if (control?.errors) {
+      const errorKey = Object.keys(control.errors)[0];
+      const errorMsg = this.errorMessages[errorKey];
+      if (errorKey === 'minlength') {
+        return errorMsg.replace('{minlength}', control.errors['minlength'].requiredLength);
+      }
+      // Check for custom error messages like password mismatch
+      if (errorKey === 'passwordMismatch') {
+        return 'Les mots de passe ne correspondent pas.';
+      }
+      return errorMsg;
+    }
+    return null;
   }
 }

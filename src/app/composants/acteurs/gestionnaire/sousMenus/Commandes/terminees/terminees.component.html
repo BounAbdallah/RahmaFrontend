@@ -1,0 +1,37 @@
+<!-- Page: Commandes terminées -->
+<div class="container-fluid">
+  <div class="row my-3">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <h4>Commandes terminées</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID commande</th>
+            <th>Client</th>
+            <th>Livreur assigné</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let commande of commandesTerminees">
+            <td>{{ commande.id }}</td>
+            <td>{{ commande.client }}</td>
+            <td>{{ commande.livreur }}</td>
+            <td>{{ commande.statut }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="modifierCommande(commande.id)">Modifier</button>
+              <button class="btn btn-danger btn-sm" (click)="annulerCommande(commande.id)">Annuler</button>
+              <button class="btn btn-info btn-sm" (click)="assignerLivreur(commande.id)">Assigner un livreur</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

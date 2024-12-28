@@ -52,4 +52,8 @@ export class DashboardAdminComponent implements OnInit {
       bootstrapModal.hide();
     }
   }
+
 }
+
+}
+

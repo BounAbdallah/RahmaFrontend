@@ -48,7 +48,11 @@ export class LoginComponent {
             this.router.navigate(['/dashboardGP']);
           } else if (userRole === 'Client') {
             this.router.navigate(['/DashboardClient']);
-          } else {
+          } else if (userRole === 'Gestionnaire') {
+            this.router.navigate(['/gestionnaireSpace']);
+          }
+
+          else {
             this.router.navigate(['/accueil']);
           }
         },
