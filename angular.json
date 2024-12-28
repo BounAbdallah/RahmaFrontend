@@ -31,7 +31,9 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/@popperjs/core/dist/umd/popper.min.js"
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+                "https://js.api.here.com/v3/3.1/mapsjs-core.js"
+
             ],
             "server": "src/main.server.ts",
             "prerender": true,
