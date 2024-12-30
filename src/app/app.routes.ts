@@ -62,6 +62,8 @@ import { DetailsGPComponent } from './composants/acteurs/gestionnaire/details-gp
 import { GestionnnairDetailsAnnonceGPComponent } from './composants/acteurs/gestionnaire/gestionnaire-details-annonce-gp/gestionnaire-details-annonce-gp.component';
 import { NotificationChauffeurComponent } from './composants/acteurs/chauffeur/notification-chauffeur/notification-chauffeur.component';
 import { GestionPaiementChauffeurComponent } from './composants/acteurs/chauffeur/gestion-paiement-chauffeur/gestion-paiement-chauffeur.component';
+import { DashboardLivreurComponent } from './composants/acteurs/livreur/dashboard-livreur/dashboard-livreur.component';
+import { AccueilLivreurComponent } from './composants/acteurs/livreur/accueil-livreur/accueil-livreur.component';
 
 // import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
 // import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
@@ -216,6 +218,26 @@ export const routes: Routes = [
   children: [
     { path: '', redirectTo: 'accueil', pathMatch: 'full' },
     { path: 'accueil', component: AccueilChauffeurComponent },
+    { path: 'trajets-a-venir', component: TrajetsAVenirComponent },
+    { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
+    { path: 'historique-trajets', component: HistoriqueTrajetsComponent },
+    { path: 'gestion-voiture', component: GestionVehiculesComponent },
+    { path: 'notifications', component: NotificationChauffeurComponent },
+    { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
+    { path: 'profil', component: ProfilChauffeurComponent },
+    { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
+    { path: 'evaluation', component:EvaluationsComponent },
+  ]
+},
+
+
+ // Routes Livreur
+ {
+  path: 'livreur-space',
+  component: DashboardLivreurComponent,
+  children: [
+    { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+    { path: 'accueil', component: AccueilLivreurComponent },
     { path: 'trajets-a-venir', component: TrajetsAVenirComponent },
     { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
     { path: 'historique-trajets', component: HistoriqueTrajetsComponent },
