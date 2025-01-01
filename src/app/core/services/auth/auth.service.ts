@@ -110,14 +110,24 @@ logout(): Observable<any> {
 
   // Stocker le token
   private storeToken(token: string): void {
-    localStorage.setItem('auth_token', token);
-    this.authSubject.next(token);
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('auth_token', token);
+      this.authSubject.next(token);
+    } else {
+      console.warn('localStorage is not available.');
+    }
   }
+
 
   // Obtenir le token
   private getToken(): string | null {
-    return localStorage.getItem('auth_token');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem('auth_token');
+    }
+    return null; // Retourne null si localStorage n'est pas disponible
   }
+
+
 
   // Supprimer le token
   private clearSession(): void {

@@ -15,13 +15,18 @@ export class GestionnairesService {
 
   // Fonction pour récupérer les en-têtes avec le token d'authentification
   private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('auth_token');
-    if (token) {
-      return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    let headers = new HttpHeaders();
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('auth_token');
+      if (token) {
+        headers = headers.set('Authorization', `Bearer ${token}`);
+      } else {
+        console.error('Token non trouvé');
+      }
     } else {
-      console.error('Token non trouvé');
-      return new HttpHeaders();
+      console.error('localStorage is not defined');
     }
+    return headers;
   }
 
   // Fonction pour récupérer les données du tableau de bord
@@ -30,13 +35,13 @@ export class GestionnairesService {
       catchError(this.handleError)
     );
   }
+
   getCommandes(): Observable<any[]> {
     return this.http.get<any>(`${this.apiUrl}/commandes`, { headers: this.getHeaders() }).pipe(
       map((response) => Array.isArray(response.commandes) ? response.commandes : []), // Extraire le tableau commandes
       catchError(this.handleError)
     );
   }
-
 
   // Gestion des erreurs
   private handleError(error: HttpErrorResponse) {
