@@ -2,7 +2,7 @@
   <button class="btn btn-primary d-md-none" (click)="toggleSidebar()">
     <i class="fas fa-bars"></i> Menu
   </button>
-  <h4 class="text-center py-3 border-bottom">Dashboard Chauffeur</h4>
+  <h4 class="text-center py-3 border-bottom">Espace Livreur</h4>
   <div class="logo text-center mb-3">
     <img src="./../../../../../assets/images/logos_icons/logoM2.png" alt="Logo" class="img-fluid">
   </div>
@@ -10,70 +10,70 @@
   <ul class="nav flex-column" [class.d-none]="isSidebarCollapsed">
     <!-- Accueil -->
     <li class="nav-item">
-      <a href="/chauffeur-space/accueil" class="nav-link" [class.active]="activeLink === 'accueil'" (click)="setActive('accueil')">
+      <a href="/livreur-space/accueil" class="nav-link" [class.active]="activeLink === 'accueil'" (click)="setActive('accueil')">
         <i class="fas fa-home"></i> Accueil
       </a>
     </li>
 
     <!-- Trajets à venir -->
     <li class="nav-item">
-      <a href="/chauffeur-space/trajets-a-venir" class="nav-link" [class.active]="activeLink === 'trajetsAVenir'" (click)="setActive('trajetsAVenir')">
+      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'trajetsAVenir'" (click)="setActive('trajetsAVenir')">
         <i class="fas fa-road"></i> Trajets à venir
       </a>
     </li>
 
     <!-- Calendrier des réservations -->
     <li class="nav-item">
-      <a href="/chauffeur-space/calendrier-reservations" class="nav-link" [class.active]="activeLink === 'calendrierReservations'" (click)="setActive('calendrierReservations')">
+      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'calendrierReservations'" (click)="setActive('calendrierReservations')">
         <i class="fas fa-calendar-alt"></i> Calendrier des réservations
       </a>
     </li>
 
     <!-- Historique des trajets -->
     <li class="nav-item">
-      <a href="/chauffeur-space/historique-trajets" class="nav-link" [class.active]="activeLink === 'historique'" (click)="setActive('historique')">
+      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'historique'" (click)="setActive('historique')">
         <i class="fas fa-history"></i> Historique des trajets
       </a>
     </li>
 
     <!-- Gestion de la voiture -->
     <li class="nav-item">
-      <a href="/chauffeur-space/gestion-voiture" class="nav-link" [class.active]="activeLink === 'gestionVoiture'" (click)="setActive('gestionVoiture')">
+      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'gestionVoiture'" (click)="setActive('gestionVoiture')">
         <i class="fas fa-car"></i> Gestion de la voiture
       </a>
     </li>
 
     <!-- Notifications -->
     <li class="nav-item">
-      <a href="/chauffeur-space/notifications" class="nav-link" [class.active]="activeLink === 'notifications'" (click)="setActive('notifications')">
+      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'notifications'" (click)="setActive('notifications')">
         <i class="fas fa-bell"></i> Notifications
       </a>
     </li>
 
     <!-- Rapports de performance -->
     <li class="nav-item">
-      <a href="/chauffeur-space/rapports-chauffeur" class="nav-link" [class.active]="activeLink === 'rapportsChauffeur'" (click)="setActive('rapportsChauffeur')">
+      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'rapportsChauffeur'" (click)="setActive('rapportsChauffeur')">
         <i class="fas fa-chart-line"></i> Rapports de performance
       </a>
     </li>
 
     <!-- Profil -->
     <li class="nav-item">
-      <a href="/chauffeur-space/profil" class="nav-link" [class.active]="activeLink === 'profil'" (click)="setActive('profil')">
+      <a href="/livreur-space/profil" class="nav-link" [class.active]="activeLink === 'profil'" (click)="setActive('profil')">
         <i class="fas fa-user"></i> Profil
       </a>
     </li>
 
     <!-- Paramètres -->
     <li class="nav-item">
-      <a href="/chauffeur-space/paiementChauffeur" class="nav-link" [class.active]="activeLink === 'paiementChauffeur'" (click)="setActive('paiementChauffeur')">
+      <a href="/livreur-space/paiementChauffeur" class="nav-link" [class.active]="activeLink === 'paiementChauffeur'" (click)="setActive('paiementChauffeur')">
         <i class="fas fa-coins"></i> Paiement
       </a>
     </li>
 
     <!-- Évaluations -->
     <li class="nav-item">
-      <a href="/chauffeur-space/evaluation" class="nav-link" [class.active]="activeLink === 'evaluation'" (click)="setActive('evaluation')">
+      <a href="/livreur-space/evaluation" class="nav-link" [class.active]="activeLink === 'evaluation'" (click)="setActive('evaluation')">
         <i class="fas fa-star"></i> Évaluations
       </a>
     </li>
