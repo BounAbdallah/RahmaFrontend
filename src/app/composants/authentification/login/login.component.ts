@@ -49,8 +49,15 @@ export class LoginComponent {
           } else if (userRole === 'Client') {
             this.router.navigate(['/DashboardClient']);
           } else if (userRole === 'Gestionnaire') {
-            this.router.navigate(['/gestionnaireSpace']);
+            this.router.navigate(['/gestionnaire-space']);
           }
+          else if (userRole === 'Chauffeur') {
+            this.router.navigate(['/chauffeur-space']);
+          }
+          else if (userRole === 'Livreur') {
+            this.router.navigate(['/chauffeur-space']);
+          }
+
 
           else {
             this.router.navigate(['/accueil']);
