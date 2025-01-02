@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <!-- Barre de filtre -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Livraisons Assignées</h3>
+    <div class="btn-group" role="group" aria-label="Filtres">
+      <button type="button" class="btn btn-outline-primary" (click)="filterLivraisons('En attente')">En attente</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="filterLivraisons('En cours')">En cours</button>
+      <button type="button" class="btn btn-outline-success" (click)="filterLivraisons('Terminée')">Terminées</button>
+      <button type="button" class="btn btn-outline-dark" (click)="filterLivraisons('')">Tous</button>
+    </div>
+  </div>
+
+  <!-- Liste des livraisons -->
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>ID/Code</th>
+        <th>Nom du Client</th>
+        <th>Adresse</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let livraison of filteredLivraisons">
+        <td><span class="badge bg-info">{{ livraison.id }}</span></td>
+        <td>{{ livraison.client }}</td>
+        <td>{{ livraison.adresse }}</td>
+        <td>
+          <span [ngClass]="{
+            'badge bg-warning text-dark': livraison.statut === 'En attente',
+            'badge bg-secondary': livraison.statut === 'En cours',
+            'badge bg-success': livraison.statut === 'Terminée'
+          }">{{ livraison.statut }}</span>
+        </td>
+        <td>
+          <a href="/livreur-space/details-livraison-assignees">Voir Détails</a>
+          <button class="btn btn-sm btn-success" [disabled]="livraison.statut !== 'En attente'">Commencer Livraison</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

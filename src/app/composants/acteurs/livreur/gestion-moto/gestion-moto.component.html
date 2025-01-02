@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <!-- En-tête -->
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-6">Gestion des Motos</h1>
+      <h5 class="text-muted">Nom du livreur : Ali Ndiaye - Moto : Yamaha MT-15 - Immatriculation : DK-5678-XY</h5>
+    </div>
+  </div>
+
+  <!-- Section principale -->
+  <div class="row">
+    <!-- Informations sur la moto -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5>Informations sur la Moto</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Marque :</strong> Yamaha</p>
+          <p><strong>Modèle :</strong> MT-15</p>
+          <p><strong>Statut :</strong> <span class="badge bg-success">Actif</span></p>
+          <p><strong>Assurance :</strong> SONAM Sénégal (Expire le : {{ insuranceExpiryDate | date:'dd/MM/yyyy' }})</p>
+          <p><strong>Date d'entretien à venir :</strong> {{ nextMaintenanceDate | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Kilométrage actuel :</strong> 12,300 km</p>
+        </div>
+      </div>
+
+      <!-- Alertes -->
+      <div class="card">
+        <div class="card-header bg-warning text-dark">
+          <h5>Alertes</h5>
+        </div>
+        <div class="card-body">
+          <p><i class="fas fa-exclamation-triangle text-danger"></i> <strong>Assurance :</strong> {{ insuranceRenewalAlert }}</p>
+          <p><i class="fas fa-exclamation-triangle text-danger"></i> <strong>Entretien :</strong> {{ maintenanceAlert }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire de signalement -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-danger text-white">
+          <h5>Signaler un problème technique</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label for="problemeDescription" class="form-label">Description du problème</label>
+              <textarea class="form-control" id="problemeDescription" rows="4" placeholder="Décrivez le problème ici..."></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="problemeUrgence" class="form-label">Niveau d'urgence</label>
+              <select class="form-select" id="problemeUrgence">
+                <option value="faible">Faible</option>
+                <option value="moyenne">Moyenne</option>
+                <option value="élevée">Élevée</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-danger">Soumettre</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

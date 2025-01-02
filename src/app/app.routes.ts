@@ -62,6 +62,13 @@ import { DetailsGPComponent } from './composants/acteurs/gestionnaire/details-gp
 import { GestionnnairDetailsAnnonceGPComponent } from './composants/acteurs/gestionnaire/gestionnaire-details-annonce-gp/gestionnaire-details-annonce-gp.component';
 import { NotificationChauffeurComponent } from './composants/acteurs/chauffeur/notification-chauffeur/notification-chauffeur.component';
 import { GestionPaiementChauffeurComponent } from './composants/acteurs/chauffeur/gestion-paiement-chauffeur/gestion-paiement-chauffeur.component';
+import { DashboardLivreurComponent } from './composants/acteurs/livreur/dashboard-livreur/dashboard-livreur.component';
+import { AccueilLivreurComponent } from './composants/acteurs/livreur/accueil-livreur/accueil-livreur.component';
+import { LivraisonsAssigneesComponent } from './composants/acteurs/livreur/livraisons-assignees/livraisons-assignees.component';
+import { DetailsLivraisonsAssigneesComponent } from './composants/acteurs/livreur/details-livraisons-assignees/details-livraisons-assignees.component';
+import { HistoriqueCoursesComponent } from './composants/acteurs/livreur/historique-courses/historique-courses.component';
+import { GestionMotoComponent } from './composants/acteurs/livreur/gestion-moto/gestion-moto.component';
+import { CalendrierCoursesComponent } from './composants/acteurs/livreur/calendrier-courses/calendrier-courses.component';
 
 // import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
 // import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
@@ -225,6 +232,31 @@ export const routes: Routes = [
     { path: 'profil', component: ProfilChauffeurComponent },
     { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
     { path: 'evaluation', component:EvaluationsComponent },
+  ]
+},
+
+
+ // Routes Livreur
+ {
+  path: 'livreur-space',
+  component: DashboardLivreurComponent,
+  children: [
+    { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+    { path: 'accueil', component: AccueilLivreurComponent },
+
+{ path: 'livraison-assignees', component: LivraisonsAssigneesComponent,},
+
+
+    { path: 'details-livraison-assignees', component: DetailsLivraisonsAssigneesComponent },
+    { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
+    { path: 'historique-courses', component: HistoriqueCoursesComponent },
+    { path: 'gestion-moto', component: GestionMotoComponent },
+    { path: 'notifications', component: NotificationChauffeurComponent },
+    { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
+    { path: 'profil', component: ProfilChauffeurComponent },
+    { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
+    { path: 'evaluation', component:EvaluationsComponent },
+    { path: 'calendrier-courses', component:CalendrierCoursesComponent },
   ]
 },
 

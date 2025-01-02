@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <h3>Historique des Livraisons</h3>
+
+  <!-- Barre de recherche et de filtrage -->
+  <div class="row mt-4">
+      <div class="col-md-4 mb-3">
+          <input type="date" class="form-control" placeholder="Filtrer par date">
+      </div>
+      <div class="col-md-4 mb-3">
+          <select class="form-select">
+              <option selected>Filtrer par statut</option>
+              <option value="1">En attente</option>
+              <option value="2">En cours</option>
+              <option value="3">Terminée</option>
+          </select>
+      </div>
+      <div class="col-md-4 mb-3">
+          <input type="text" class="form-control" placeholder="Rechercher par client">
+      </div>
+  </div>
+
+  <!-- Tableau des livraisons -->
+  <div class="table-responsive">
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Nom du Client</th>
+                  <th scope="col">Adresse</th>
+                  <th scope="col">Statut</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>2024-01-01</td>
+                  <td>John Doe</td>
+                  <td>Dakar, Plateau</td>
+                  <td><span class="badge bg-success">Terminée</span></td>
+              </tr>
+              <tr>
+                  <td>2024-01-02</td>
+                  <td>Jane Smith</td>
+                  <td>Thies, Mbour</td>
+                  <td><span class="badge bg-warning text-dark">En attente</span></td>
+              </tr>
+              <tr>
+                  <td>2024-01-03</td>
+                  <td>Ali Ndiaye</td>
+                  <td>Saint-Louis, Sor</td>
+                  <td><span class="badge bg-primary">En cours</span></td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
