@@ -64,6 +64,10 @@ import { NotificationChauffeurComponent } from './composants/acteurs/chauffeur/n
 import { GestionPaiementChauffeurComponent } from './composants/acteurs/chauffeur/gestion-paiement-chauffeur/gestion-paiement-chauffeur.component';
 import { DashboardLivreurComponent } from './composants/acteurs/livreur/dashboard-livreur/dashboard-livreur.component';
 import { AccueilLivreurComponent } from './composants/acteurs/livreur/accueil-livreur/accueil-livreur.component';
+import { LivraisonsAssigneesComponent } from './composants/acteurs/livreur/livraisons-assignees/livraisons-assignees.component';
+import { DetailsLivraisonsAssigneesComponent } from './composants/acteurs/livreur/details-livraisons-assignees/details-livraisons-assignees.component';
+import { HistoriqueCoursesComponent } from './composants/acteurs/livreur/historique-courses/historique-courses.component';
+import { GestionMotoComponent } from './composants/acteurs/livreur/gestion-moto/gestion-moto.component';
 
 // import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
 // import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
@@ -238,10 +242,14 @@ export const routes: Routes = [
   children: [
     { path: '', redirectTo: 'accueil', pathMatch: 'full' },
     { path: 'accueil', component: AccueilLivreurComponent },
-    { path: 'trajets-a-venir', component: TrajetsAVenirComponent },
+
+{ path: 'livraison-assignees', component: LivraisonsAssigneesComponent,},
+
+
+    { path: 'details-livraison-assignees', component: DetailsLivraisonsAssigneesComponent },
     { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
-    { path: 'historique-trajets', component: HistoriqueTrajetsComponent },
-    { path: 'gestion-voiture', component: GestionVehiculesComponent },
+    { path: 'historique-courses', component: HistoriqueCoursesComponent },
+    { path: 'gestion-moto', component: GestionMotoComponent },
     { path: 'notifications', component: NotificationChauffeurComponent },
     { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
     { path: 'profil', component: ProfilChauffeurComponent },

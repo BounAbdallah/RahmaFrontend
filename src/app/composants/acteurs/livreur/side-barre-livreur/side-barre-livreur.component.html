@@ -17,28 +17,29 @@
 
     <!-- Trajets à venir -->
     <li class="nav-item">
-      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'trajetsAVenir'" (click)="setActive('trajetsAVenir')">
-        <i class="fas fa-road"></i> Trajets à venir
+      <a href="/livreur-space/livraison-assignees" class="nav-link" [class.active]="activeLink === 'trajetsAVenir'" (click)="setActive('trajetsAVenir')">
+        <i class="fas fa-tasks"></i> Course assignée
       </a>
     </li>
+
 
     <!-- Calendrier des réservations -->
     <li class="nav-item">
       <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'calendrierReservations'" (click)="setActive('calendrierReservations')">
-        <i class="fas fa-calendar-alt"></i> Calendrier des réservations
+        <i class="fas fa-calendar-alt"></i> Courses à venir
       </a>
     </li>
 
     <!-- Historique des trajets -->
     <li class="nav-item">
-      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'historique'" (click)="setActive('historique')">
-        <i class="fas fa-history"></i> Historique des trajets
+      <a href="/livreur-space/historique-courses" class="nav-link" [class.active]="activeLink === 'historique'" (click)="setActive('historique')">
+        <i class="fas fa-history"></i> Historique des Courses
       </a>
     </li>
 
     <!-- Gestion de la voiture -->
     <li class="nav-item">
-      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'gestionVoiture'" (click)="setActive('gestionVoiture')">
+      <a href="/livreur-space/gestion-moto" class="nav-link" [class.active]="activeLink === 'gestionVoiture'" (click)="setActive('gestionVoiture')">
         <i class="fas fa-car"></i> Gestion de la voiture
       </a>
     </li>
