@@ -68,6 +68,7 @@ import { LivraisonsAssigneesComponent } from './composants/acteurs/livreur/livra
 import { DetailsLivraisonsAssigneesComponent } from './composants/acteurs/livreur/details-livraisons-assignees/details-livraisons-assignees.component';
 import { HistoriqueCoursesComponent } from './composants/acteurs/livreur/historique-courses/historique-courses.component';
 import { GestionMotoComponent } from './composants/acteurs/livreur/gestion-moto/gestion-moto.component';
+import { CalendrierCoursesComponent } from './composants/acteurs/livreur/calendrier-courses/calendrier-courses.component';
 
 // import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
 // import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
@@ -255,6 +256,7 @@ export const routes: Routes = [
     { path: 'profil', component: ProfilChauffeurComponent },
     { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
     { path: 'evaluation', component:EvaluationsComponent },
+    { path: 'calendrier-courses', component:CalendrierCoursesComponent },
   ]
 },
 
