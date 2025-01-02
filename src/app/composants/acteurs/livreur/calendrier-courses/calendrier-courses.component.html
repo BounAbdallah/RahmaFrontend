@@ -2,22 +2,40 @@
   <!-- En-tête -->
   <div class="row mb-4">
     <div class="col-12">
-      <h2 class="text-primary">Calendrier des trajets</h2>
+      <h2 class="text-primary">Calendrier de mes courses</h2>
       <!-- Sélection de la vue -->
-      <div class="d-flex justify-content-start">
+      <!-- <div class="d-flex justify-content-start">
         <div class="btn-group">
           <button type="button" class="btn btn-outline-primary" (click)="changeView('jour')">Jour</button>
           <button type="button" class="btn btn-outline-primary" (click)="changeView('semaine')">Semaine</button>
           <button type="button" class="btn btn-outline-primary" (click)="changeView('mois')">Mois</button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 
   <!-- Section principale (Calendrier interactif) -->
   <div class="row">
     <div class="col-12">
-      <full-calendar #calendar [options]="calendarOptions"></full-calendar> <!-- Calendrier FullCalendar ici -->
+      <full-calendar #calendar [options]="calendarOptions" class="full-calendar"></full-calendar> <!-- Calendrier FullCalendar ici -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">Détails du trajet</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        {{ eventDetails }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -15,15 +16,31 @@ import interactionPlugin from '@fullcalendar/interaction';  // Importer interact
 })
 export class CalendrierCoursesComponent implements OnInit, AfterViewInit {
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
+  eventDetails: string = '';
+  private bootstrap: any;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
+  async ngOnInit(): Promise<void> {
+    if (isPlatformBrowser(this.platformId)) {
+      this.bootstrap = await import('bootstrap');  // Importer Bootstrap uniquement dans le navigateur
+    }
+  }
 
   // Options du calendrier FullCalendar
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',  // Vue par défaut : Mois
     locale: 'fr',  // Langue du calendrier définie sur le français
     headerToolbar: {
-      left: 'prev,next today',
+      left: "prev,next today",
       center: 'title',
       right: 'dayGridMonth,dayGridWeek,dayGridDay'
+    },
+    buttonText: {
+      today: "Aujourd'hui",
+      month: 'Mois',
+      week: 'Semaine',
+      day: 'Jour'
     },
     plugins: [dayGridPlugin, interactionPlugin],  // Ajout des plugins nécessaires
     events: [
@@ -38,10 +55,6 @@ export class CalendrierCoursesComponent implements OnInit, AfterViewInit {
     ],
     eventClick: this.handleEventClick.bind(this),
   };
-
-  constructor() { }
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {}
 
@@ -61,7 +74,13 @@ export class CalendrierCoursesComponent implements OnInit, AfterViewInit {
   }
 
   handleEventClick(info: any): void {
-    const eventDetails = info.event.extendedProps.description;
-    alert('Détails du trajet : ' + eventDetails);
+    this.eventDetails = info.event.extendedProps.description;
+    if (isPlatformBrowser(this.platformId)) {
+      const modalElement = document.getElementById('eventModal');
+      if (modalElement) {
+        const modal = new this.bootstrap.Modal(modalElement);
+        modal.show();
+      }
+    }
   }
 }
