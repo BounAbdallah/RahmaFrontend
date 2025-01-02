@@ -46,8 +46,10 @@ export class LoginComponent {
           // Redirection basée sur le rôle
           if (userRole === 'GP') {
             this.router.navigate(['/dashboardGP']);
+
           } else if (userRole === 'Client') {
             this.router.navigate(['/DashboardClient']);
+
           } else if (userRole === 'Gestionnaire') {
             this.router.navigate(['/gestionnaire-space']);
           }
@@ -55,7 +57,10 @@ export class LoginComponent {
             this.router.navigate(['/chauffeur-space']);
           }
           else if (userRole === 'Livreur') {
-            this.router.navigate(['/chauffeur-space']);
+            this.router.navigate(['/livreur-space']);
+          }
+          else if (userRole === 'Admin') {
+            this.router.navigate(['/admin-space']);
           }
 
 

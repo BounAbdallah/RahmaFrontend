@@ -209,7 +209,7 @@ export const routes: Routes = [
   // },
 
   {
-    path: 'xxxxx',
+    path: 'admin-space',
     component: DashboardAdminComponent,
     // canActivate: [RoleGuard],
     // data: { role: 'Admin' }
