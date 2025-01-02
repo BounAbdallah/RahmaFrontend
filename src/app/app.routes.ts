@@ -30,8 +30,6 @@ import { CommandesComponent } from './composants/acteurs/gestionnaire/commandes/
 import { ReservationsComponent } from './composants/acteurs/gestionnaire/reservations/reservations.component';
 import { LivreursComponent } from './composants/acteurs/gestionnaire/livreurs/livreurs.component';
 import { ParametresComponent } from './composants/acteurs/gestionnaire/parametres/parametres.component';
-
-// Sous-menus gestionnaire
 import { ToutesComponent } from './composants/acteurs/gestionnaire/sousMenus/Commandes/toutes/toutes.component';
 import { EnAttenteComponent } from './composants/acteurs/gestionnaire/sousMenus/Commandes/en-attente/en-attente.component';
 import { TermineesComponent } from './composants/acteurs/gestionnaire/sousMenus/Commandes/terminees/terminees.component';
@@ -39,14 +37,12 @@ import { NouvellesComponent } from './composants/acteurs/gestionnaire/sousMenus/
 import { AnnuleesComponent } from './composants/acteurs/gestionnaire/sousMenus/Reservations/annulees/annulees.component';
 import { ActifsComponent } from './composants/acteurs/gestionnaire/sousMenus/Livreurs/actifs/actifs.component';
 import { InactifsComponent } from './composants/acteurs/gestionnaire/sousMenus/Livreurs/inactifs/inactifs.component';
-
-// Guard
-import { RoleGuard } from './core/guards/role.guard';
 import { AccueilGestionnaireComponent } from './composants/acteurs/gestionnaire/accueil/accueil-gestionnaire.component';
+import { GestionGPComponent } from './composants/acteurs/gestionnaire/gestion-gp/gestion-gp.component';
+import { DetailsGPComponent } from './composants/acteurs/gestionnaire/details-gp/details-gp.component';
+import { GestionnnairDetailsAnnonceGPComponent } from './composants/acteurs/gestionnaire/gestionnaire-details-annonce-gp/gestionnaire-details-annonce-gp.component';
 
-import { ColisComponent } from './composants/colis/colis/colis.component';
-
-import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
+// Composants chauffeur
 import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
 import { AccueilChauffeurComponent } from './composants/acteurs/chauffeur/accueil/accueil.component';
 import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
@@ -57,11 +53,10 @@ import { NotificationsComponent } from './composants/acteurs/notifications/notif
 import { RapportsPerformanceComponent } from './composants/acteurs/chauffeur/rapports-performance/rapports-performance.component';
 import { ProfilChauffeurComponent } from './composants/acteurs/chauffeur/profil-chauffeur/profil-chauffeur.component';
 import { EvaluationsComponent } from './composants/acteurs/chauffeur/evaluations/evaluations.component';
-import { GestionGPComponent } from './composants/acteurs/gestionnaire/gestion-gp/gestion-gp.component';
-import { DetailsGPComponent } from './composants/acteurs/gestionnaire/details-gp/details-gp.component';
-import { GestionnnairDetailsAnnonceGPComponent } from './composants/acteurs/gestionnaire/gestionnaire-details-annonce-gp/gestionnaire-details-annonce-gp.component';
 import { NotificationChauffeurComponent } from './composants/acteurs/chauffeur/notification-chauffeur/notification-chauffeur.component';
 import { GestionPaiementChauffeurComponent } from './composants/acteurs/chauffeur/gestion-paiement-chauffeur/gestion-paiement-chauffeur.component';
+
+// Composants livreur
 import { DashboardLivreurComponent } from './composants/acteurs/livreur/dashboard-livreur/dashboard-livreur.component';
 import { AccueilLivreurComponent } from './composants/acteurs/livreur/accueil-livreur/accueil-livreur.component';
 import { LivraisonsAssigneesComponent } from './composants/acteurs/livreur/livraisons-assignees/livraisons-assignees.component';
@@ -70,17 +65,11 @@ import { HistoriqueCoursesComponent } from './composants/acteurs/livreur/histori
 import { GestionMotoComponent } from './composants/acteurs/livreur/gestion-moto/gestion-moto.component';
 import { CalendrierCoursesComponent } from './composants/acteurs/livreur/calendrier-courses/calendrier-courses.component';
 
-// import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
-// import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
-// import { HistoriqueTrajetsComponent } from './composants/acteurs/chauffeur/historique-trajets/historique-trajets.component';
-// import { NotificationsComponent } from './composants/acteurs/notifications/notifications.component';
-// import { ProfilChauffeurComponent } from './composants/acteurs/chauffeur/profil-chauffeur/profil-chauffeur.component';
-// import { EvaluationsComponent } from './composants/acteurs/chauffeur/evaluations/evaluations.component';
-// import { GestionVehiculesComponent } from './composants/acteurs/chauffeur/gestion-vehicules/gestion-vehicules.component';
-// import { RapportsPerformanceComponent } from './composants/acteurs/chauffeur/rapports-performance/rapports-performance.component';
-// import { CalendrierTrajetsComponent } from './composants/acteurs/chauffeur/calendrier-trajets/calendrier-trajets.component';
-// import { AccueilChauffeurComponent } from './composants/acteurs/chauffeur/accueil/accueil.component';
+// Composants admin
+import { DashboardAdminComponent } from './composants/acteurs/admin/dashboard-admin/dashboard-admin.component';
 
+// Guard
+import { RoleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
   // Redirection par défaut
@@ -115,8 +104,7 @@ export const routes: Routes = [
     component: DashboardGestionnaireComponent,
     children: [
       { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-      { path: 'accueil', component: AccueilGestionnaireComponent  },
-
+      { path: 'accueil', component: AccueilGestionnaireComponent },
       { path: 'vue-densemble', component: VueDensembleComponent },
       { path: 'commandes', component: CommandesComponent, children: [
           { path: 'toutes', component: ToutesComponent },
@@ -140,199 +128,52 @@ export const routes: Routes = [
       { path: 'details-annonce-gp', component: GestionnnairDetailsAnnonceGPComponent },
     ]
   },
-{
-  path: 'MesColis',
-    component: ColisComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
+
+  // Routes chauffeur
+  {
+    path: 'chauffeur-space',
+    component: DashboardChauffeurComponent,
+    children: [
+      { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+      { path: 'accueil', component: AccueilChauffeurComponent },
+      { path: 'trajets-a-venir', component: TrajetsAVenirComponent },
+      { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
+      { path: 'historique-trajets', component: HistoriqueTrajetsComponent },
+      { path: 'gestion-voiture', component: GestionVehiculesComponent },
+      { path: 'notifications', component: NotificationChauffeurComponent },
+      { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
+      { path: 'profil', component: ProfilChauffeurComponent },
+      { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
+      { path: 'evaluation', component: EvaluationsComponent },
+    ]
   },
 
+  // Routes livreur
   {
-    path: 'DashboardClient',
-    component: DashboardComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
-  },
-  {
-    path: 'ProfilClient',
-    component: ProfilComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
-  },
-  {
-    path: 'Gpdisponible',
-    component: AnnonceGPComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
-  },
-  {
-    path: 'dashboardGP',
-    component: DashboardGPComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'GP' }
-  },
-  {
-    path: 'reservationGp',
-    component: GpReservationComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'GP' }
+    path: 'livreur-space',
+    component: DashboardLivreurComponent,
+    children: [
+      { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+      { path: 'accueil', component: AccueilLivreurComponent },
+      { path: 'livraison-assignees', component: LivraisonsAssigneesComponent },
+      { path: 'details-livraison-assignees', component: DetailsLivraisonsAssigneesComponent },
+      { path: 'calendrier-courses', component: CalendrierCoursesComponent },
+      { path: 'historique-courses', component: HistoriqueCoursesComponent },
+      { path: 'gestion-moto', component: GestionMotoComponent },
+      { path: 'notifications', component: NotificationChauffeurComponent },
+      { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
+      { path: 'profil', component: ProfilChauffeurComponent },
+      { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
+      { path: 'evaluation', component: EvaluationsComponent },
+    ]
   },
 
-
-  {
-    path: 'annonce-details/:id',
-    component: DetailsAnnonceGPComponent
-  },
-
-  {
-    path: 'colis-details/:id',
-    component: DetailsColisClientComponent
-  },
-  {
-    path: 'mon-colis/:id',
-    component: ClientDetailsColisComponent
-  },
-
-  {
-    path: 'statistiques',
-    component: StatistiquesComponent,
-
-  },
-  {
-    path: 'detailSeviceGp',
-    component: DetailLivraisonGpComponent,
-
-  },
-  // {
-  //   path: 'adminDashboard',
-  //   component: DashboardAdminComponent,
-  // },
-
+  // Routes admin
   {
     path: 'admin-space',
     component: DashboardAdminComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Admin' }
   },
-
-
-
- // Routes chauffeur
- {
-  path: 'chauffeur-space',
-  component: DashboardChauffeurComponent,
-  children: [
-    { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-    { path: 'accueil', component: AccueilChauffeurComponent },
-    { path: 'trajets-a-venir', component: TrajetsAVenirComponent },
-    { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
-    { path: 'historique-trajets', component: HistoriqueTrajetsComponent },
-    { path: 'gestion-voiture', component: GestionVehiculesComponent },
-    { path: 'notifications', component: NotificationChauffeurComponent },
-    { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
-    { path: 'profil', component: ProfilChauffeurComponent },
-    { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
-    { path: 'evaluation', component:EvaluationsComponent },
-  ]
-},
-
-
- // Routes Livreur
- {
-  path: 'livreur-space',
-  component: DashboardLivreurComponent,
-  children: [
-    { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-    { path: 'accueil', component: AccueilLivreurComponent },
-
-{ path: 'livraison-assignees', component: LivraisonsAssigneesComponent,},
-
-
-    { path: 'details-livraison-assignees', component: DetailsLivraisonsAssigneesComponent },
-    { path: 'calendrier-reservations', component: CalendrierTrajetsComponent },
-    { path: 'historique-courses', component: HistoriqueCoursesComponent },
-    { path: 'gestion-moto', component: GestionMotoComponent },
-    { path: 'notifications', component: NotificationChauffeurComponent },
-    { path: 'rapports-chauffeur', component: RapportsPerformanceComponent },
-    { path: 'profil', component: ProfilChauffeurComponent },
-    { path: 'paiementChauffeur', component: GestionPaiementChauffeurComponent },
-    { path: 'evaluation', component:EvaluationsComponent },
-    { path: 'calendrier-courses', component:CalendrierCoursesComponent },
-  ]
-},
-
-
-  {
-    path: 'MesColis',
-    component: ColisComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
-  },
-
-  {
-    path: 'DashboardClient',
-    component: DashboardComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
-  },
-  {
-    path: 'ProfilClient',
-    component: ProfilComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
-  },
-  {
-    path: 'Gpdisponible',
-    component: AnnonceGPComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'Client' }
-  },
-  {
-    path: 'dashboardGP',
-    component: DashboardGPComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'GP' }
-  },
-  {
-    path: 'reservationGp',
-    component: GpReservationComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'GP' }
-  },
-
-
-  {
-    path: 'annonce-details/:id',
-    component: DetailsAnnonceGPComponent
-  },
-
-  {
-    path: 'colis-details/:id',
-    component: DetailsColisClientComponent
-  },
-  {
-    path: 'mon-colis/:id',
-    component: ClientDetailsColisComponent
-  },
-
-  {
-    path: 'statistiques',
-    component: StatistiquesComponent,
-
-  },
-  {
-    path: 'detailSeviceGp',
-    component: DetailLivraisonGpComponent,
-
-  },
-  // {
-  //   path: 'adminDashboard',
-  //   component: DashboardAdminComponent,
-  // },
 
   // Route par défaut si aucune correspondance
-  { path: '**', redirectTo: 'accueil'
-  }
-
-
+  { path: '**', redirectTo: 'accueil' }
 ];
