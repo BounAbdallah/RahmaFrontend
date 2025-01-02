@@ -1,0 +1,89 @@
+<div class="sidebar d-flex flex-column">
+  <button class="btn btn-primary d-md-none" (click)="toggleSidebar()">
+    <i class="fas fa-bars"></i> Menu
+  </button>
+  <h4 class="text-center py-3 border-bottom">Espace Livreur</h4>
+  <div class="logo text-center mb-3">
+    <img src="./../../../../../assets/images/logos_icons/logoM2.png" alt="Logo" class="img-fluid">
+  </div>
+
+  <ul class="nav flex-column" [class.d-none]="isSidebarCollapsed">
+    <!-- Accueil -->
+    <li class="nav-item">
+      <a href="/livreur-space/accueil" class="nav-link" [class.active]="activeLink === 'accueil'" (click)="setActive('accueil')">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+    </li>
+
+    <!-- Trajets à venir -->
+    <li class="nav-item">
+      <a href="/livreur-space/livraison-assignees" class="nav-link" [class.active]="activeLink === 'trajetsAVenir'" (click)="setActive('trajetsAVenir')">
+        <i class="fas fa-tasks"></i> Course assignée
+      </a>
+    </li>
+
+
+    <!-- Calendrier des réservations -->
+    <li class="nav-item">
+      <a href="/livreur-space/calendrier-courses" class="nav-link" [class.active]="activeLink === 'calendrierReservations'" (click)="setActive('calendrierReservations')">
+        <i class="fas fa-calendar-alt"></i> Courses à venir
+      </a>
+    </li>
+
+    <!-- Historique des trajets -->
+    <li class="nav-item">
+      <a href="/livreur-space/historique-courses" class="nav-link" [class.active]="activeLink === 'historique'" (click)="setActive('historique')">
+        <i class="fas fa-history"></i> Historique des Courses
+      </a>
+    </li>
+
+    <!-- Gestion de la voiture -->
+    <li class="nav-item">
+      <a href="/livreur-space/gestion-moto" class="nav-link" [class.active]="activeLink === 'gestionVoiture'" (click)="setActive('gestionVoiture')">
+        <i class="fas fa-car"></i> Gestion de la voiture
+      </a>
+    </li>
+
+    <!-- Notifications -->
+    <li class="nav-item">
+      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'notifications'" (click)="setActive('notifications')">
+        <i class="fas fa-bell"></i> Notifications
+      </a>
+    </li>
+
+    <!-- Rapports de performance -->
+    <li class="nav-item">
+      <a href="/livreur-space/" class="nav-link" [class.active]="activeLink === 'rapportsChauffeur'" (click)="setActive('rapportsChauffeur')">
+        <i class="fas fa-chart-line"></i> Rapports de performance
+      </a>
+    </li>
+
+    <!-- Profil -->
+    <li class="nav-item">
+      <a href="/livreur-space/profil" class="nav-link" [class.active]="activeLink === 'profil'" (click)="setActive('profil')">
+        <i class="fas fa-user"></i> Profil
+      </a>
+    </li>
+
+    <!-- Paramètres -->
+    <li class="nav-item">
+      <a href="/livreur-space/paiementChauffeur" class="nav-link" [class.active]="activeLink === 'paiementChauffeur'" (click)="setActive('paiementChauffeur')">
+        <i class="fas fa-coins"></i> Paiement
+      </a>
+    </li>
+
+    <!-- Évaluations -->
+    <li class="nav-item">
+      <a href="/livreur-space/evaluation" class="nav-link" [class.active]="activeLink === 'evaluation'" (click)="setActive('evaluation')">
+        <i class="fas fa-star"></i> Évaluations
+      </a>
+    </li>
+
+    <!-- Déconnexion -->
+    <li class="nav-item">
+      <a href="/logout" class="nav-link">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </a>
+    </li>
+  </ul>
+</div>

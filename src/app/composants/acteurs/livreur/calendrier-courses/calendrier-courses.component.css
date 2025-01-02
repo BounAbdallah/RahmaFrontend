@@ -1,0 +1,29 @@
+/* Style pour le modal header */
+.modal-header {
+  background-color: #074C72;
+  color: white;
+}
+
+/* Style pour le modal footer */
+.modal-footer {
+  background-color: white;
+  color: #074C72;
+}
+
+/* Style pour le bouton de fermeture */
+.btn-close {
+  background-color: white;
+  border: none;
+}
+
+/* Style pour le bouton de fermeture dans le modal footer */
+.modal-footer .btn-secondary {
+  background-color: white;
+  color: #B50302;
+  border: 1px solid #B50302;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: white;
+  color: #B50302;
+}
