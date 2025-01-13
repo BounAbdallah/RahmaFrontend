@@ -36,6 +36,12 @@ export class GestionnairesService {
     );
   }
 
+  getListeLivreur(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/listes-livreurs`, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getCommandes(): Observable<any[]> {
     return this.http.get<any>(`${this.apiUrl}/commandes`, { headers: this.getHeaders() }).pipe(
       map((response) => Array.isArray(response.commandes) ? response.commandes : []), // Extraire le tableau commandes
