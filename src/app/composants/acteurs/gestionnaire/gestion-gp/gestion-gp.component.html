@@ -14,6 +14,37 @@
       <h6 class="mb-0">Liste des GP</h6>
     </div>
     <div class="card-body">
+      <!-- Recherche et Filtres -->
+      <div class="mb-3">
+        <div class="d-flex justify-content-between">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Rechercher par nom"
+            [(ngModel)]="searchText"
+            (input)="onSearchChange()"
+          />
+          <select
+            class="form-select"
+            [(ngModel)]="selectedStatut"
+            (change)="onSearchChange()"
+          >
+            <option value="">Statut</option>
+            <option value="Actif">Actif</option>
+            <option value="Inactif">Inactif</option>
+          </select>
+          <select
+            class="form-select"
+            [(ngModel)]="selectedDisponibilite"
+            (change)="onSearchChange()"
+          >
+            <option value="">Disponibilité</option>
+            <option value="Aujourd'hui">Aujourd'hui</option>
+            <option value="Cette semaine">Cette semaine</option>
+          </select>
+        </div>
+      </div>
+      <!-- Tableau -->
       <table class="table table-hover table-bordered">
         <thead class="table-dark">
           <tr>
@@ -25,21 +56,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Mamadou Ndiaye</td>
-            <td>mamnd&#64;gmail.com</td>
-            <td><span class="badge bg-success">Actif</span></td>
-            <td>15</td>
-            <td>
-              <a href="/gestionnaire-space/details-gp" class="btn btn-sm btn-info">Voir détails</a>
-              <a href="/gestionnaire-space/details-annonce-gp" class="btn btn-sm btn-secondary">Voir annonces</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Aminata Diop</td>
-            <td>aminatad&#64;gmail.com</td>
-            <td><span class="badge bg-danger">Inactif</span></td>
-            <td>5</td>
+          <tr *ngFor="let gp of filteredChauffeur">
+            <td>{{ gp.nom }}</td>
+            <td>{{ gp.email }}</td>
+            <td><span class="badge" [ngClass]="{'bg-success': gp.statut === 'actif', 'bg-danger': gp.statut === 'en attente'}">{{ gp.statut }}</span></td>
+            <td>{{ gp.reservations }}</td>
             <td>
               <a href="/gestionnaire-space/details-gp" class="btn btn-sm btn-info">Voir détails</a>
               <a href="/gestionnaire-space/details-annonce-gp" class="btn btn-sm btn-secondary">Voir annonces</a>

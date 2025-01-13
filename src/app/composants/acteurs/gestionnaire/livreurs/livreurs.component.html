@@ -69,8 +69,8 @@
                   <span
                     class="badge"
                     [ngClass]="{
-                      'bg-success': livreur.statut === 'Disponible',
-                      'bg-danger': livreur.statut === 'Occupé'
+                      'bg-success': livreur.statut === 'actif',
+                      'bg-danger': livreur.statut === 'en attente'
                     }"
                   >
                     {{ livreur.statut }}

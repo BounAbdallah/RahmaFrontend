@@ -36,11 +36,38 @@ export class GestionnairesService {
     );
   }
 
+
+  // Fonction pour récupérer la liste des livreurs
   getListeLivreur(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/listes-livreurs`, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
+
+
+
+  // Fonction pour récupérer la liste des chauffeurs
+  getListeChauffur(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/listes-chauffeurs`, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  // Fonction pour récupérer la liste des GP
+  getListeGP(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/listes-GP`, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  getDetailsUser(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/details/{id}`, { headers: this.getHeaders() }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   getCommandes(): Observable<any[]> {
     return this.http.get<any>(`${this.apiUrl}/commandes`, { headers: this.getHeaders() }).pipe(
