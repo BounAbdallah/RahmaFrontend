@@ -137,6 +137,10 @@ export const routes: Routes = [
       { path: 'parametres', component: ParametresComponent },
       { path: 'gestion-gp', component: GestionGPComponent },
       { path: 'details-gp', component: DetailsGPComponent },
+      {
+        path: 'details-gp/:id',
+        component: DetailsGPComponent
+      },
       { path: 'details-annonce-gp', component: GestionnnairDetailsAnnonceGPComponent },
     ]
   },

@@ -62,7 +62,7 @@
             <td><span class="badge" [ngClass]="{'bg-success': gp.statut === 'actif', 'bg-danger': gp.statut === 'en attente'}">{{ gp.statut }}</span></td>
             <td>{{ gp.reservations }}</td>
             <td>
-              <a href="/gestionnaire-space/details-gp" class="btn btn-sm btn-info">Voir détails</a>
+              <a href="/gestionnaire-space/details-gp/{{ gp.id }}" class="btn btn-sm btn-info">Voir détails</a>
               <a href="/gestionnaire-space/details-annonce-gp" class="btn btn-sm btn-secondary">Voir annonces</a>
             </td>
           </tr>

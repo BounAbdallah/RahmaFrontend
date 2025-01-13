@@ -62,8 +62,8 @@ export class GestionnairesService {
   }
 
 
-  getDetailsUser(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/details/{id}`, { headers: this.getHeaders() }).pipe(
+  getDetailsUser(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/details/${id}`).pipe(
       catchError(this.handleError)
     );
   }
