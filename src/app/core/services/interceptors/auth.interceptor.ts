@@ -1,6 +1,8 @@
-import { HttpEvent, HttpHandlerFn, HttpHeaders, HttpRequest } from "@angular/common/http";
+import { HttpEvent, HttpHandlerFn, HttpRequest } from "@angular/common/http";
+import { Router } from '@angular/router';
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { inject } from '@angular/core'; // Importer inject pour accéder au Router dans une fonction
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   let token = null;
@@ -22,11 +24,22 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
     }
   });
 
+  // Récupérer le Router pour la redirection
+  const router = inject(Router);  // Utilisation de `inject` pour obtenir une instance de Router
+
   return next(newRequete).pipe(
     catchError((error) => {
-      // Gestion basique des erreurs dans l'interceptor
+      // Si l'erreur est liée à un token expiré ou non autorisé (statut 401)
+      if (error.status === 401) {
+        console.error('Token expiré ou non autorisé');
+
+        // Redirection vers la page de connexion
+        router.navigate(['/connexion']);
+      }
+
+      // Gérer d'autres erreurs ou laisser le flux d'erreur se propager
       console.error('Erreur interceptée dans authInterceptor : ', error);
-      throw error;
+      throw error; // Propager l'erreur pour qu'elle soit traitée ailleurs si nécessaire
     })
   );
 }
