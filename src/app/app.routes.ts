@@ -69,6 +69,7 @@ import { DetailsLivraisonsAssigneesComponent } from './composants/acteurs/livreu
 import { HistoriqueCoursesComponent } from './composants/acteurs/livreur/historique-courses/historique-courses.component';
 import { GestionMotoComponent } from './composants/acteurs/livreur/gestion-moto/gestion-moto.component';
 import { CalendrierCoursesComponent } from './composants/acteurs/livreur/calendrier-courses/calendrier-courses.component';
+import { ChauffeurComponent } from './composants/acteurs/gestionnaire/chauffeur/chauffeur.component';
 
 // import { DashboardChauffeurComponent } from './composants/acteurs/chauffeur/dashboard-chauffeur/dashboard-chauffeur.component';
 // import { TrajetsAVenirComponent } from './composants/acteurs/chauffeur/trajets-avenir/trajets-avenir.component';
@@ -136,6 +137,7 @@ export const routes: Routes = [
       },
       { path: 'parametres', component: ParametresComponent },
       { path: 'gestion-gp', component: GestionGPComponent },
+      { path: 'gestion-chauffeur', component: ChauffeurComponent },
       { path: 'details-gp', component: DetailsGPComponent },
       {
         path: 'details-gp/:id',
